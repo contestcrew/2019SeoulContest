@@ -22,7 +22,7 @@ class SettingViewController: UIViewController {
   private func configure() {
     view.backgroundColor = .white
     
-    tableView.contentInsetAdjustmentBehavior = .never
+//    tableView.contentInsetAdjustmentBehavior = .never
     tableView.separatorStyle = .none
     tableView.dataSource = self
     view.addSubview(tableView)
