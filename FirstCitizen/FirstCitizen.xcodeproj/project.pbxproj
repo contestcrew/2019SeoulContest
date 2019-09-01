@@ -24,6 +24,14 @@
 		4FF966CE230C49AB00E869FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FF966CD230C49AB00E869FF /* Assets.xcassets */; };
 		4FF966D4230C706800E869FF /* SettingProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF966D3230C706800E869FF /* SettingProfileCell.swift */; };
 		4FF966D7230C7DA900E869FF /* SettingDocumentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF966D6230C7DA900E869FF /* SettingDocumentCell.swift */; };
+		6B36858508F29EBE5EFE4F77 /* Pods_FirstCitizen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50CCF6F72520B16B5901678A /* Pods_FirstCitizen.framework */; };
+		CF0CF5122313912D004DF6A5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0CF5112313912D004DF6A5 /* LoginViewController.swift */; };
+		CF0CF51423139137004DF6A5 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0CF51323139137004DF6A5 /* LoginView.swift */; };
+		CF0CF5192313B811004DF6A5 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF0CF5182313B811004DF6A5 /* KakaoOpenSDK.framework */; };
+		CF0CF51B2313C627004DF6A5 /* PreparedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0CF51A2313C627004DF6A5 /* PreparedViewController.swift */; };
+		CF0CF51D2313C635004DF6A5 /* PreparedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0CF51C2313C635004DF6A5 /* PreparedView.swift */; };
+		CF0CF51F23154028004DF6A5 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0CF51E23154028004DF6A5 /* SignupViewController.swift */; };
+		CF0CF52123154040004DF6A5 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0CF52023154040004DF6A5 /* SignupView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +54,17 @@
 		4FF966CD230C49AB00E869FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4FF966D3230C706800E869FF /* SettingProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfileCell.swift; sourceTree = "<group>"; };
 		4FF966D6230C7DA900E869FF /* SettingDocumentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDocumentCell.swift; sourceTree = "<group>"; };
+		50CCF6F72520B16B5901678A /* Pods_FirstCitizen.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirstCitizen.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		80EA8319B751197666F7ABE9 /* Pods-FirstCitizen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstCitizen.release.xcconfig"; path = "Target Support Files/Pods-FirstCitizen/Pods-FirstCitizen.release.xcconfig"; sourceTree = "<group>"; };
+		A49A9086C3D192F57DEDDDD6 /* Pods-FirstCitizen.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstCitizen.debug.xcconfig"; path = "Target Support Files/Pods-FirstCitizen/Pods-FirstCitizen.debug.xcconfig"; sourceTree = "<group>"; };
+		CF0CF5112313912D004DF6A5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		CF0CF51323139137004DF6A5 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		CF0CF5152313B5C3004DF6A5 /* KakaoOpenSDK-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KakaoOpenSDK-Bridging-Header.h"; sourceTree = "<group>"; };
+		CF0CF5182313B811004DF6A5 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoOpenSDK.framework; sourceTree = "<group>"; };
+		CF0CF51A2313C627004DF6A5 /* PreparedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreparedViewController.swift; sourceTree = "<group>"; };
+		CF0CF51C2313C635004DF6A5 /* PreparedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreparedView.swift; sourceTree = "<group>"; };
+		CF0CF51E23154028004DF6A5 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		CF0CF52023154040004DF6A5 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +72,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B36858508F29EBE5EFE4F77 /* Pods_FirstCitizen.framework in Frameworks */,
+				CF0CF5192313B811004DF6A5 /* KakaoOpenSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,8 +83,11 @@
 		4FF9668F230C032600E869FF = {
 			isa = PBXGroup;
 			children = (
+				CF0CF5152313B5C3004DF6A5 /* KakaoOpenSDK-Bridging-Header.h */,
 				4FF9669A230C032600E869FF /* FirstCitizen */,
 				4FF96699230C032600E869FF /* Products */,
+				8F1FFCC2FF97A93ECE0D65C7 /* Pods */,
+				6BF0C2A65BCA8FC5FB2A8439 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -95,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				4FF966AE230C043B00E869FF /* MainTabBarController.swift */,
+				CF0CF5102313911E004DF6A5 /* Login */,
 				4FF966B2230C07A400E869FF /* Point */,
 				4FF966B0230C074F00E869FF /* MapList */,
 				4FF966B1230C079D00E869FF /* Setting */,
@@ -131,6 +156,9 @@
 			isa = PBXGroup;
 			children = (
 				4FF966BC230C087400E869FF /* TabBarButtonView.swift */,
+				CF0CF51323139137004DF6A5 /* LoginView.swift */,
+				CF0CF52023154040004DF6A5 /* SignupView.swift */,
+				CF0CF51C2313C635004DF6A5 /* PreparedView.swift */,
 				4FF966C3230C28E800E869FF /* PointView.swift */,
 				4FF966BE230C1B5B00E869FF /* MapView.swift */,
 			);
@@ -164,6 +192,34 @@
 			path = Setting;
 			sourceTree = "<group>";
 		};
+		6BF0C2A65BCA8FC5FB2A8439 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CF0CF5182313B811004DF6A5 /* KakaoOpenSDK.framework */,
+				50CCF6F72520B16B5901678A /* Pods_FirstCitizen.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8F1FFCC2FF97A93ECE0D65C7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A49A9086C3D192F57DEDDDD6 /* Pods-FirstCitizen.debug.xcconfig */,
+				80EA8319B751197666F7ABE9 /* Pods-FirstCitizen.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		CF0CF5102313911E004DF6A5 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				CF0CF5112313912D004DF6A5 /* LoginViewController.swift */,
+				CF0CF51E23154028004DF6A5 /* SignupViewController.swift */,
+				CF0CF51A2313C627004DF6A5 /* PreparedViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -171,9 +227,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4FF966AA230C032700E869FF /* Build configuration list for PBXNativeTarget "FirstCitizen" */;
 			buildPhases = (
+				DDC6A5134CE50D5C332C5149 /* [CP] Check Pods Manifest.lock */,
 				4FF96694230C032600E869FF /* Sources */,
 				4FF96695230C032600E869FF /* Frameworks */,
 				4FF96696230C032600E869FF /* Resources */,
+				C92F58F4F941E61AA3369014 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -230,6 +288,57 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		C92F58F4F941E61AA3369014 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FirstCitizen/Pods-FirstCitizen-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FirstCitizen/Pods-FirstCitizen-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DDC6A5134CE50D5C332C5149 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FirstCitizen-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4FF96694230C032600E869FF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -237,10 +346,14 @@
 			files = (
 				4FF966BD230C087400E869FF /* TabBarButtonView.swift in Sources */,
 				4FF966BF230C1B5B00E869FF /* MapView.swift in Sources */,
+				CF0CF51B2313C627004DF6A5 /* PreparedViewController.swift in Sources */,
 				4FF966B4230C07E300E869FF /* PointViewController.swift in Sources */,
+				CF0CF52123154040004DF6A5 /* SignupView.swift in Sources */,
+				CF0CF5122313912D004DF6A5 /* LoginViewController.swift in Sources */,
 				4FF966C6230C31AE00E869FF /* ExtensionColor.swift in Sources */,
 				4FF966AF230C043B00E869FF /* MainTabBarController.swift in Sources */,
 				4FF9669C230C032600E869FF /* AppDelegate.swift in Sources */,
+				CF0CF51F23154028004DF6A5 /* SignupViewController.swift in Sources */,
 				4FF966C4230C28E800E869FF /* PointView.swift in Sources */,
 				4FF966B8230C07F200E869FF /* ListViewController.swift in Sources */,
 				4FF966C2230C25FE00E869FF /* ExtensionFont.swift in Sources */,
@@ -248,6 +361,8 @@
 				4FF966D4230C706800E869FF /* SettingProfileCell.swift in Sources */,
 				4FF966B6230C07EB00E869FF /* MapViewController.swift in Sources */,
 				4FF966C8230C345E00E869FF /* ExtensionView.swift in Sources */,
+				CF0CF51D2313C635004DF6A5 /* PreparedView.swift in Sources */,
+				CF0CF51423139137004DF6A5 /* LoginView.swift in Sources */,
 				4FF966BA230C07F900E869FF /* SettingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -392,17 +507,53 @@
 		};
 		4FF966AB230C032700E869FF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A49A9086C3D192F57DEDDDD6 /* Pods-FirstCitizen.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZLN97H98PA;
+				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = FirstCitizen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"Kingfisher\"",
+					"-framework",
+					"\"NaverThirdPartyLogin\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SnapKit\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-all_load",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "github.com-kira1021.FirstCitizen";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "KakaoOpenSDK-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -410,17 +561,53 @@
 		};
 		4FF966AC230C032700E869FF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 80EA8319B751197666F7ABE9 /* Pods-FirstCitizen.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZLN97H98PA;
+				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = FirstCitizen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"Kingfisher\"",
+					"-framework",
+					"\"NaverThirdPartyLogin\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SnapKit\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-all_load",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "github.com-kira1021.FirstCitizen";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "KakaoOpenSDK-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
