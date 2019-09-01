@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class PointView: UIView {
   
@@ -46,17 +47,17 @@ class PointView: UIView {
   private func configure() {
     cardView.layer.cornerRadius = 16
     cardView.layer.masksToBounds = true
-    self.addSubview(cardView)
+//    self.addSubview(cardView)
     
     
     titleLabel.text = "업's"
     titleLabel.textColor = .white
     titleLabel.upsFontHeavy(ofSize: 25)
-    self.addSubview(titleLabel)
+//    self.addSubview(titleLabel)
     
     subLabel.text = "kira1021@gmail.com"
     subLabel.textColor = .white
-    self.addSubview(subLabel)
+//    self.addSubview(subLabel)
     
     
   }
@@ -70,18 +71,36 @@ class PointView: UIView {
   }
   
   private func autoLayout() {
-    cardView.translatesAutoresizingMaskIntoConstraints = false
-    cardView.topAnchor.constraint(equalTo: self.topAnchor, constant: Standard.cardSpace).isActive = true
-    cardView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Standard.cardSpace).isActive = true
-    cardView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -Standard.cardSpace).isActive = true
-    cardView.heightAnchor.constraint(equalToConstant: Standard.cardHeight).isActive = true
     
-    titleLabel.translatesAutoresizingMaskIntoConstraints = false
-    titleLabel.topAnchor.constraint(equalTo: cardView.topAnchor, constant: Standard.cardContentSpace).isActive = true
-    titleLabel.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: Standard.cardContentSpace).isActive = true
+    [cardView, titleLabel, subLabel].forEach { self.addSubview($0) }
     
-    subLabel.translatesAutoresizingMaskIntoConstraints = false
-    subLabel.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: Standard.cardContentSpace).isActive = true
-    subLabel.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -Standard.cardContentSpace).isActive = true
+    cardView.snp.makeConstraints {
+      $0.top.leading.equalTo(self).offset(Standard.cardSpace)
+      $0.trailing.equalTo(self).offset(-Standard.cardSpace)
+      $0.height.equalTo(Standard.cardHeight)
+    }
+    
+    titleLabel.snp.makeConstraints {
+      $0.top.leading.equalTo(cardView).offset(Standard.cardContentSpace)
+    }
+    
+    subLabel.snp.makeConstraints {
+      $0.leading.equalTo(cardView).offset(Standard.cardContentSpace)
+      $0.bottom.equalTo(cardView).offset(-Standard.cardContentSpace)
+    }
+    
+//    cardView.translatesAutoresizingMaskIntoConstraints = false
+//    cardView.topAnchor.constraint(equalTo: self.topAnchor, constant: Standard.cardSpace).isActive = true
+//    cardView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Standard.cardSpace).isActive = true
+//    cardView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -Standard.cardSpace).isActive = true
+//    cardView.heightAnchor.constraint(equalToConstant: Standard.cardHeight).isActive = true
+//    
+//    titleLabel.translatesAutoresizingMaskIntoConstraints = false
+//    titleLabel.topAnchor.constraint(equalTo: cardView.topAnchor, constant: Standard.cardContentSpace).isActive = true
+//    titleLabel.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: Standard.cardContentSpace).isActive = true
+//    
+//    subLabel.translatesAutoresizingMaskIntoConstraints = false
+//    subLabel.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: Standard.cardContentSpace).isActive = true
+//    subLabel.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -Standard.cardContentSpace).isActive = true
   }
 }

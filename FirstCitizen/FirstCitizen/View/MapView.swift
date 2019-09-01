@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import SnapKit
 
 class MapView: UIView {
   
@@ -38,32 +39,32 @@ class MapView: UIView {
   
   
   private func configure() {
-    self.addSubview(mapView)
+//    self.addSubview(mapView)
     
     gradientView.image = UIImage(named: "Gradient")
     gradientView.contentMode = .scaleToFill
-    self.addSubview(gradientView)
+//    self.addSubview(gradientView)
     
     imageView.backgroundColor = .red
     imageView.isHidden = true
     imageView.contentMode = .scaleAspectFit
     imageView.layer.cornerRadius = Standard.imageSize / 2
-    self.addSubview(imageView)
+//    self.addSubview(imageView)
     
     titleLabel.upsFontHeavy(ofSize: 35)
-    self.addSubview(titleLabel)
+//    self.addSubview(titleLabel)
     
     guideLabel.isHidden = true
     guideLabel.backgroundColor = .black
-    self.addSubview(guideLabel)
+//    self.addSubview(guideLabel)
     
     dateLabel.upsFontHeavy(ofSize: 15)
-    self.addSubview(dateLabel)
+//    self.addSubview(dateLabel)
     
     subLabel.upsFont(ofSize: 15)
     subLabel.textColor = .lightGray
     subLabel.numberOfLines = 0
-    self.addSubview(subLabel)
+//    self.addSubview(subLabel)
   }
   
   private func mapSetting() {
@@ -110,16 +111,30 @@ class MapView: UIView {
   }
   
   private func autoLayout() {
-    mapView.translatesAutoresizingMaskIntoConstraints = false
-    mapView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-    mapView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-    mapView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-    mapView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.75).isActive = true
     
-    gradientView.translatesAutoresizingMaskIntoConstraints = false
-    gradientView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-    gradientView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-    gradientView.bottomAnchor.constraint(equalTo: mapView.bottomAnchor).isActive = true
+    [mapView, gradientView, imageView, titleLabel, guideLabel, dateLabel, subLabel]
+      .forEach { self.addSubview($0) }
+    
+    mapView.snp.makeConstraints {
+      $0.top.leading.trailing.equalTo(self)
+      $0.height.equalTo(self).multipliedBy(0.75)
+    }
+    
+    gradientView.snp.makeConstraints {
+      $0.leading.trailing.equalTo(self)
+      $0.bottom.equalTo(mapView)
+    }
+    
+//    mapView.translatesAutoresizingMaskIntoConstraints = false
+//    mapView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+//    mapView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+//    mapView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+//    mapView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.75).isActive = true
+//    
+//    gradientView.translatesAutoresizingMaskIntoConstraints = false
+//    gradientView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+//    gradientView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+//    gradientView.bottomAnchor.constraint(equalTo: mapView.bottomAnchor).isActive = true
   }
   
   

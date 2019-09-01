@@ -116,19 +116,21 @@ class SignupView: UIView {
   }
   
   private func layout() {
-    self.addSubview(signupTitleLabel)
-    self.addSubview(backButton)
-    self.addSubview(emailLabel)
-    self.addSubview(emailTextField)
-    self.addSubview(passwordLabel)
-    self.addSubview(passwordTextField)
-    self.addSubview(rePasswordTextField)
-    self.addSubview(phoneNumberLabel)
-    self.addSubview(phoneNumberTextField)
-    self.addSubview(phoneNumberCheckButton)
-    self.addSubview(certificationNumberTextField)
-    self.addSubview(certificationButton)
-    self.addSubview(signUpButton)
+//    self.addSubview(signupTitleLabel)
+//    self.addSubview(backButton)
+//    self.addSubview(emailLabel)
+//    self.addSubview(emailTextField)
+//    self.addSubview(passwordLabel)
+//    self.addSubview(passwordTextField)
+//    self.addSubview(rePasswordTextField)
+//    self.addSubview(phoneNumberLabel)
+//    self.addSubview(phoneNumberTextField)
+//    self.addSubview(phoneNumberCheckButton)
+//    self.addSubview(certificationNumberTextField)
+//    self.addSubview(certificationButton)
+//    self.addSubview(signUpButton)
+    
+    [signupTitleLabel, backButton, emailLabel, emailTextField, passwordLabel, passwordTextField, rePasswordTextField, phoneNumberLabel, phoneNumberTextField, phoneNumberCheckButton, certificationNumberTextField, certificationButton, signUpButton].forEach { self.addSubview($0) }
     
     signupTitleLabel.snp.makeConstraints {
       $0.top.leading.trailing.equalToSuperview()

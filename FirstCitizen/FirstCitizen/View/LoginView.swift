@@ -113,17 +113,19 @@ class LoginView: UIView {
   
   
   private func layout() {
-    self.addSubview(logoImage)
-    self.addSubview(emailTextField)
-    self.addSubview(validEmailLabel)
-    self.addSubview(passwordTextField)
-    self.addSubview(validPasswordLabel)
-    self.addSubview(forgetInfoButton)
-    self.addSubview(signInButton)
-    self.addSubview(naverSignInButton)
-    self.addSubview(kakaoSignInButton)
-    self.addSubview(signUpStackView)
-    self.addSubview(copyrightLabel)
+//    self.addSubview(logoImage)
+//    self.addSubview(emailTextField)
+//    self.addSubview(validEmailLabel)
+//    self.addSubview(passwordTextField)
+//    self.addSubview(validPasswordLabel)
+//    self.addSubview(forgetInfoButton)
+//    self.addSubview(signInButton)
+//    self.addSubview(naverSignInButton)
+//    self.addSubview(kakaoSignInButton)
+//    self.addSubview(signUpStackView)
+//    self.addSubview(copyrightLabel)
+    
+    [logoImage, emailTextField, validEmailLabel, passwordTextField, validPasswordLabel, forgetInfoButton, signInButton, naverSignInButton, kakaoSignInButton, signUpStackView, copyrightLabel].forEach { self.addSubview($0) }
     
     logoImage.snp.makeConstraints {
       $0.top.equalToSuperview().offset(80)

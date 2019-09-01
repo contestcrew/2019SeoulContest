@@ -42,47 +42,47 @@ class SettingProfileCell: UITableViewCell {
     topImageView.alpha = 0.3
     topImageView.contentMode = .scaleAspectFill
     topImageView.layer.masksToBounds = true
-    contentView.addSubview(topImageView)
+//    contentView.addSubview(topImageView)
     
     profileBaseView.shadow()
     profileBaseView.layer.cornerRadius = 15
     profileBaseView.backgroundColor = .white
-    contentView.addSubview(profileBaseView)
+//    contentView.addSubview(profileBaseView)
     
     profileImageView.image = UIImage(named: "ups")
     profileImageView.contentMode = .scaleAspectFill
     profileImageView.layer.cornerRadius = Standard.profileSize / 2
     profileImageView.layer.masksToBounds = true
-    contentView.addSubview(profileImageView)
+//    contentView.addSubview(profileImageView)
     
     profileImageEditButton.setImage(UIImage(named: "change"), for: .normal)
     profileImageEditButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
     profileImageEditButton.backgroundColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
     profileImageEditButton.layer.cornerRadius = Standard.buttonSize / 2
-    contentView.addSubview(profileImageEditButton)
+//    contentView.addSubview(profileImageEditButton)
     
     nickNameLabel.text = "닉네임 : 업's"
     nickNameLabel.textColor = .darkGray
     nickNameLabel.upsFontBold(ofSize: 15)
-    contentView.addSubview(nickNameLabel)
+//    contentView.addSubview(nickNameLabel)
     
     nickNameEditButton.setImage(UIImage(named: "pencil"), for: .normal)
-    contentView.addSubview(nickNameEditButton)
+//    contentView.addSubview(nickNameEditButton)
     
     emailLabel.text = "이메일 : kria1021@gmail.com"
     emailLabel.textColor = .darkGray
     emailLabel.upsFontBold(ofSize: 15)
-    contentView.addSubview(emailLabel)
+//    contentView.addSubview(emailLabel)
     
     phoneNumberLabel.text = "휴대폰 번호 : 010-1111-1111"
     phoneNumberLabel.textColor = .darkGray
     phoneNumberLabel.upsFontBold(ofSize: 15)
-    contentView.addSubview(phoneNumberLabel)
+//    contentView.addSubview(phoneNumberLabel)
     
     phoneNumberCheckButton.setTitle("인증하기", for: .normal)
     phoneNumberCheckButton.setTitleColor(.blue, for: .normal)
     phoneNumberCheckButton.titleLabel?.upsFontBold(ofSize: 15)
-    contentView.addSubview(phoneNumberCheckButton)
+//    contentView.addSubview(phoneNumberCheckButton)
 
   }
   
@@ -94,6 +94,8 @@ class SettingProfileCell: UITableViewCell {
   }
   
   private func autoLayout() {
+    
+    [topImageView, profileBaseView, profileImageView, profileImageEditButton, nickNameLabel, nickNameEditButton, emailLabel, phoneNumberLabel, phoneNumberCheckButton].forEach { contentView.addSubview($0) }
     
     topImageView.snp.makeConstraints {
       $0.top.leading.trailing.equalToSuperview()
