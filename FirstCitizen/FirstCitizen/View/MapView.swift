@@ -10,7 +10,10 @@ import UIKit
 import MapKit
 
 class MapView: UIView {
+  
+  private let locationManager = CLLocationManager()
 
+  let camera = MKMapCamera()
   let mapView = MKMapView()
   private let gradientView = UIImageView()
   
@@ -64,11 +67,40 @@ class MapView: UIView {
   }
   
   private func mapSetting() {
-    let camera = MKMapCamera()
-    camera.centerCoordinate = CLLocationCoordinate2D(latitude: 37.543952, longitude: 127.061270)
+    locationManager.delegate = self
+    checkAuthorizationStatus()
+    
+    
+//    camera.centerCoordinate = CLLocationCoordinate2D(latitude: 37.543952, longitude: 127.061270)
     camera.altitude = 300 // 고도 (미터단위)
     camera.pitch = 70.0 // 각도 (0일 때 수직)
     mapView.setCamera(camera, animated: true)
+    mapView.showsUserLocation = true
+  }
+  
+  func checkAuthorizationStatus() {
+    switch CLLocationManager.authorizationStatus() {
+    case .notDetermined:
+      locationManager.requestWhenInUseAuthorization()
+    //             locationManager.requestAlwaysAuthorization()
+    case .restricted, .denied:
+      // Disable location features
+      break
+    case .authorizedWhenInUse:
+      fallthrough
+    case .authorizedAlways:
+      startUpdatingLocation()
+    @unknown default:
+      break
+    }
+  }
+  
+  func startUpdatingLocation() {
+    let status = CLLocationManager.authorizationStatus()
+    guard status == .authorizedAlways || status == .authorizedWhenInUse, CLLocationManager.locationServicesEnabled() else { return }
+    locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation // 정확도
+    locationManager.distanceFilter = 5.0 // x 미터마다 체크
+    locationManager.startUpdatingLocation()
   }
   
   private struct Standard {
@@ -93,4 +125,50 @@ class MapView: UIView {
   
   
   
+  
+  
+}
+
+
+extension MapView: CLLocationManagerDelegate {
+  func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    print("\n----- [ status ] -----\n")
+    switch status {
+    case .authorizedAlways, .authorizedWhenInUse:
+      print("Authorized")
+    default:
+      print("Unauthorized")
+    }
+  }
+  
+  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    let current = locations.last! // 반드시 하나의 값은 들어오기 때문에 강제 바인딩
+    
+    if (abs(current.timestamp.timeIntervalSinceNow) < 10) {
+      let coordinate = current.coordinate
+      // span 단위는 1도, 경도 1도는 약 111킬로미터
+      // 위도 1도는 위도에 따라 변함, 적도 (약 111km) ~ 극지방 (0km)
+      let span = MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)
+      // param의 수가 클수록 지도가 멀어짐
+      
+      let region = MKCoordinateRegion(center: coordinate, span: span)
+      mapView.setRegion(region, animated: true)
+      
+//      addAnotation(location: current)
+      camera.centerCoordinate = coordinate
+//      camera.pitch = 70.0
+//      camera.altitude = 300 // 고도 (미터단위)
+      mapView.setCamera(camera, animated: true)
+    }
+  }
+  
+  func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    if let error = error as? CLError, error.code == .denied {
+      // Location updates are no authorized.
+      print("Location updates are no authorized.")
+      return
+    }
+    // Notify the user of any error.
+    print("Error reason: ", error.localizedDescription)
+  }
 }

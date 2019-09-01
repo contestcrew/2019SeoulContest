@@ -2,16 +2,17 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-  <key>KAKAO_APP_KEY</key>
-  <string>640d1b6d7df7e4564541ebc4ab8ccb22</string>
-  <key>LSApplicationQueriesSchemes</key>
-  <array>
-    <!-- 공통 -->
-    <string>kakao640d1b6d7df7e4564541ebc4ab8ccb22</string>
-    <!-- 간편로그인 -->
-    <string>kakaokompassauth</string>
-    <string>storykompassauth</string>
-  </array>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Always and When In Use</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>When In Use</string>
+	<key>KAKAO_APP_KEY</key>
+	<string>640d1b6d7df7e4564541ebc4ab8ccb22</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>naversearchapp</string>
+		<string>naversearchthirdlogin</string>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -53,11 +54,6 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>naversearchapp</string>
-		<string>naversearchthirdlogin</string>
-	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

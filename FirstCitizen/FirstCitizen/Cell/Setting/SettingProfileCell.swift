@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class SettingProfileCell: UITableViewCell {
 
@@ -93,52 +94,105 @@ class SettingProfileCell: UITableViewCell {
   }
   
   private func autoLayout() {
-    topImageView.translatesAutoresizingMaskIntoConstraints = false
-    topImageView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-    topImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-    topImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-    topImageView.heightAnchor.constraint(equalToConstant: 240).isActive = true
     
-    profileBaseView.translatesAutoresizingMaskIntoConstraints = false
-    profileBaseView.centerYAnchor.constraint(equalTo: topImageView.bottomAnchor).isActive = true
-    profileBaseView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 40).isActive = true
-    profileBaseView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -40).isActive = true
-    profileBaseView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16).isActive = true
-    profileBaseView.heightAnchor.constraint(equalToConstant: 160).isActive = true
+    topImageView.snp.makeConstraints {
+      $0.top.leading.trailing.equalToSuperview()
+      $0.height.equalTo(240)
+    }
     
-    profileImageView.translatesAutoresizingMaskIntoConstraints = false
-    profileImageView.centerXAnchor.constraint(equalTo: profileBaseView.centerXAnchor).isActive = true
-    profileImageView.centerYAnchor.constraint(equalTo: profileBaseView.topAnchor).isActive = true
-    profileImageView.widthAnchor.constraint(equalToConstant: Standard.profileSize).isActive = true
-    profileImageView.heightAnchor.constraint(equalToConstant: Standard.profileSize).isActive = true
+    profileBaseView.snp.makeConstraints {
+      $0.centerY.equalTo(topImageView.snp.bottom)
+      $0.leading.equalToSuperview().offset(40)
+      $0.trailing.equalToSuperview().offset(-40)
+      $0.bottom.equalToSuperview().offset(-16)
+      $0.height.equalTo(160)
+    }
     
-    profileImageEditButton.translatesAutoresizingMaskIntoConstraints = false
-    profileImageEditButton.trailingAnchor.constraint(equalTo: profileImageView.trailingAnchor).isActive = true
-    profileImageEditButton.bottomAnchor.constraint(equalTo: profileImageView.bottomAnchor).isActive = true
-    profileImageEditButton.widthAnchor.constraint(equalToConstant: Standard.buttonSize).isActive = true
-    profileImageEditButton.heightAnchor.constraint(equalToConstant: Standard.buttonSize).isActive = true
+    profileImageView.snp.makeConstraints {
+      $0.centerX.equalTo(profileBaseView.snp.centerX)
+      $0.centerY.equalTo(profileBaseView.snp.top)
+      $0.width.height.equalTo(Standard.profileSize)
+    }
     
-    nickNameLabel.translatesAutoresizingMaskIntoConstraints = false
-    nickNameLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 16).isActive = true
-    nickNameLabel.leadingAnchor.constraint(equalTo: profileBaseView.leadingAnchor, constant: Standard.space).isActive = true
+    profileImageEditButton.snp.makeConstraints {
+      $0.trailing.bottom.equalTo(profileImageView)
+      $0.width.height.equalTo(Standard.buttonSize)
+    }
     
-    nickNameEditButton.translatesAutoresizingMaskIntoConstraints = false
-    nickNameEditButton.centerYAnchor.constraint(equalTo: nickNameLabel.centerYAnchor).isActive = true
-    nickNameEditButton.trailingAnchor.constraint(equalTo: profileBaseView.trailingAnchor, constant: -Standard.space).isActive = true
-    nickNameEditButton.widthAnchor.constraint(equalToConstant: 16).isActive = true
-    nickNameEditButton.heightAnchor.constraint(equalToConstant: 16).isActive = true
+    nickNameLabel.snp.makeConstraints {
+      $0.top.equalTo(profileImageView.snp.bottom).offset(16)
+      $0.leading.equalTo(profileBaseView.snp.leading).offset(Standard.space)
+    }
     
-    emailLabel.translatesAutoresizingMaskIntoConstraints = false
-    emailLabel.topAnchor.constraint(equalTo: nickNameLabel.bottomAnchor, constant: Standard.space).isActive = true
-    emailLabel.leadingAnchor.constraint(equalTo: profileBaseView.leadingAnchor, constant: Standard.space).isActive = true
+    nickNameEditButton.snp.makeConstraints {
+      $0.centerY.equalTo(nickNameLabel.snp.centerY)
+      $0.trailing.equalTo(profileBaseView.snp.trailing).offset(-Standard.space)
+      $0.height.width.equalTo(16)
+    }
     
-    phoneNumberLabel.translatesAutoresizingMaskIntoConstraints = false
-    phoneNumberLabel.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: Standard.space).isActive = true
-    phoneNumberLabel.leadingAnchor.constraint(equalTo: profileBaseView.leadingAnchor, constant: Standard.space).isActive = true
+    emailLabel.snp.makeConstraints {
+      $0.top.equalTo(nickNameLabel.snp.bottom).offset(Standard.space)
+      $0.leading.equalTo(profileBaseView.snp.leading).offset(Standard.space)
+    }
     
-    phoneNumberCheckButton.translatesAutoresizingMaskIntoConstraints = false
-    phoneNumberCheckButton.centerYAnchor.constraint(equalTo: phoneNumberLabel.centerYAnchor).isActive = true
-    phoneNumberCheckButton.trailingAnchor.constraint(equalTo: profileBaseView.trailingAnchor, constant: -Standard.space).isActive = true
+    phoneNumberLabel.snp.makeConstraints {
+      $0.top.equalTo(emailLabel.snp.bottom).offset(Standard.space)
+      $0.leading.equalTo(profileBaseView.snp.leading).offset(Standard.space)
+    }
+    
+    phoneNumberCheckButton.snp.makeConstraints {
+      $0.centerY.equalTo(phoneNumberLabel.snp.centerY)
+      $0.trailing.equalTo(profileBaseView.snp.trailing).offset(-Standard.space)
+    }
+    
+    
+    
+//    topImageView.translatesAutoresizingMaskIntoConstraints = false
+//    topImageView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+//    topImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+//    topImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+//    topImageView.heightAnchor.constraint(equalToConstant: 240).isActive = true
+//
+//    profileBaseView.translatesAutoresizingMaskIntoConstraints = false
+//    profileBaseView.centerYAnchor.constraint(equalTo: topImageView.bottomAnchor).isActive = true
+//    profileBaseView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 40).isActive = true
+//    profileBaseView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -40).isActive = true
+//    profileBaseView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16).isActive = true
+//    profileBaseView.heightAnchor.constraint(equalToConstant: 160).isActive = true
+//
+//    profileImageView.translatesAutoresizingMaskIntoConstraints = false
+//    profileImageView.centerXAnchor.constraint(equalTo: profileBaseView.centerXAnchor).isActive = true
+//    profileImageView.centerYAnchor.constraint(equalTo: profileBaseView.topAnchor).isActive = true
+//    profileImageView.widthAnchor.constraint(equalToConstant: Standard.profileSize).isActive = true
+//    profileImageView.heightAnchor.constraint(equalToConstant: Standard.profileSize).isActive = true
+//
+//    profileImageEditButton.translatesAutoresizingMaskIntoConstraints = false
+//    profileImageEditButton.trailingAnchor.constraint(equalTo: profileImageView.trailingAnchor).isActive = true
+//    profileImageEditButton.bottomAnchor.constraint(equalTo: profileImageView.bottomAnchor).isActive = true
+//    profileImageEditButton.widthAnchor.constraint(equalToConstant: Standard.buttonSize).isActive = true
+//    profileImageEditButton.heightAnchor.constraint(equalToConstant: Standard.buttonSize).isActive = true
+//
+//    nickNameLabel.translatesAutoresizingMaskIntoConstraints = false
+//    nickNameLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 16).isActive = true
+//    nickNameLabel.leadingAnchor.constraint(equalTo: profileBaseView.leadingAnchor, constant: Standard.space).isActive = true
+//
+//    nickNameEditButton.translatesAutoresizingMaskIntoConstraints = false
+//    nickNameEditButton.centerYAnchor.constraint(equalTo: nickNameLabel.centerYAnchor).isActive = true
+//    nickNameEditButton.trailingAnchor.constraint(equalTo: profileBaseView.trailingAnchor, constant: -Standard.space).isActive = true
+//    nickNameEditButton.widthAnchor.constraint(equalToConstant: 16).isActive = true
+//    nickNameEditButton.heightAnchor.constraint(equalToConstant: 16).isActive = true
+//
+//    emailLabel.translatesAutoresizingMaskIntoConstraints = false
+//    emailLabel.topAnchor.constraint(equalTo: nickNameLabel.bottomAnchor, constant: Standard.space).isActive = true
+//    emailLabel.leadingAnchor.constraint(equalTo: profileBaseView.leadingAnchor, constant: Standard.space).isActive = true
+//
+//    phoneNumberLabel.translatesAutoresizingMaskIntoConstraints = false
+//    phoneNumberLabel.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: Standard.space).isActive = true
+//    phoneNumberLabel.leadingAnchor.constraint(equalTo: profileBaseView.leadingAnchor, constant: Standard.space).isActive = true
+//
+//    phoneNumberCheckButton.translatesAutoresizingMaskIntoConstraints = false
+//    phoneNumberCheckButton.centerYAnchor.constraint(equalTo: phoneNumberLabel.centerYAnchor).isActive = true
+//    phoneNumberCheckButton.trailingAnchor.constraint(equalTo: profileBaseView.trailingAnchor, constant: -Standard.space).isActive = true
   }
 
 }
