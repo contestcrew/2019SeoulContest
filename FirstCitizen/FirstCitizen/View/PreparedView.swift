@@ -102,14 +102,16 @@ class PreparedView: UIView {
   private func layout() {
     let guide = self.safeAreaLayoutGuide
     
-    self.addSubview(backButton)
-    self.addSubview(nicknameExplainLabel)
-    self.addSubview(nicknametextLabel)
-    self.addSubview(nicknameTextField)
-    self.addSubview(nicknameValidCheckImageView)
-    self.addSubview(textFieldUnderlineView)
-    self.addSubview(nicknameLimitShowLabel)
-    self.addSubview(nextButton)
+//    self.addSubview(backButton)
+//    self.addSubview(nicknameExplainLabel)
+//    self.addSubview(nicknametextLabel)
+//    self.addSubview(nicknameTextField)
+//    self.addSubview(nicknameValidCheckImageView)
+//    self.addSubview(textFieldUnderlineView)
+//    self.addSubview(nicknameLimitShowLabel)
+//    self.addSubview(nextButton)
+    
+    [backButton, nicknameExplainLabel, nicknametextLabel, nicknameTextField, nicknameValidCheckImageView, textFieldUnderlineView, nicknameLimitShowLabel, nextButton].forEach { self.addSubview($0) }
     
     backButton.snp.makeConstraints {
       $0.top.equalTo(guide.snp.top).offset(10)
