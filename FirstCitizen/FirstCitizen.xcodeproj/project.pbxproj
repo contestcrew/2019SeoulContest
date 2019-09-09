@@ -32,6 +32,8 @@
 		CF0CF51D2313C635004DF6A5 /* PreparedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0CF51C2313C635004DF6A5 /* PreparedView.swift */; };
 		CF0CF51F23154028004DF6A5 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0CF51E23154028004DF6A5 /* SignupViewController.swift */; };
 		CF0CF52123154040004DF6A5 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0CF52023154040004DF6A5 /* SignupView.swift */; };
+		CF1E09CE23261979006E9537 /* RestroomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1E09CD23261979006E9537 /* RestroomView.swift */; };
+		CF1E09D12326199E006E9537 /* RestroomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1E09D02326199E006E9537 /* RestroomViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +67,8 @@
 		CF0CF51C2313C635004DF6A5 /* PreparedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreparedView.swift; sourceTree = "<group>"; };
 		CF0CF51E23154028004DF6A5 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		CF0CF52023154040004DF6A5 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
+		CF1E09CD23261979006E9537 /* RestroomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestroomView.swift; sourceTree = "<group>"; };
+		CF1E09D02326199E006E9537 /* RestroomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestroomViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +126,7 @@
 				CF0CF5102313911E004DF6A5 /* Login */,
 				4FF966B2230C07A400E869FF /* Point */,
 				4FF966B0230C074F00E869FF /* MapList */,
+				CF1E09CF2326198A006E9537 /* Restroom */,
 				4FF966B1230C079D00E869FF /* Setting */,
 			);
 			path = Controller;
@@ -161,6 +166,7 @@
 				CF0CF51C2313C635004DF6A5 /* PreparedView.swift */,
 				4FF966C3230C28E800E869FF /* PointView.swift */,
 				4FF966BE230C1B5B00E869FF /* MapView.swift */,
+				CF1E09CD23261979006E9537 /* RestroomView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -218,6 +224,14 @@
 				CF0CF51A2313C627004DF6A5 /* PreparedViewController.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		CF1E09CF2326198A006E9537 /* Restroom */ = {
+			isa = PBXGroup;
+			children = (
+				CF1E09D02326199E006E9537 /* RestroomViewController.swift */,
+			);
+			path = Restroom;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -357,6 +371,8 @@
 				4FF966C6230C31AE00E869FF /* ExtensionColor.swift in Sources */,
 				4FF966AF230C043B00E869FF /* MainTabBarController.swift in Sources */,
 				4FF9669C230C032600E869FF /* AppDelegate.swift in Sources */,
+				CF1E09D12326199E006E9537 /* RestroomViewController.swift in Sources */,
+				CF1E09CE23261979006E9537 /* RestroomView.swift in Sources */,
 				CF0CF51F23154028004DF6A5 /* SignupViewController.swift in Sources */,
 				4FF966C4230C28E800E869FF /* PointView.swift in Sources */,
 				4FF966B8230C07F200E869FF /* ListViewController.swift in Sources */,
