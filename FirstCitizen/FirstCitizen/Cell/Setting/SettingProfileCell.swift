@@ -44,7 +44,7 @@ class SettingProfileCell: UITableViewCell {
     
     nickNameLabel.text = "닉네임 : 업's"
     nickNameLabel.textColor = .darkGray
-    nickNameLabel.upsFontBold(ofSize: 20)
+    nickNameLabel.upsFontBold(ofSize: 17)
     contentView.addSubview(nickNameLabel)
     
     nickNameEditButton.setTitle("수정", for: .normal)
@@ -58,17 +58,17 @@ class SettingProfileCell: UITableViewCell {
     contentView.addSubview(mannerLabel)
     
     pointLabel.text = "Point: 420"
-    pointLabel.textColor = .brown
+    pointLabel.textColor = .black
     pointLabel.upsFontBold(ofSize: 17)
     contentView.addSubview(pointLabel)
     
     emailLabel.text = "이메일 : dldbdjq@gmail.com"
-    emailLabel.textColor = .lightGray
+    emailLabel.textColor = .darkGray
     emailLabel.upsFontBold(ofSize: 15)
     contentView.addSubview(emailLabel)
     
     phoneNumberLabel.text = "휴대폰 번호 : 010-1111-1111"
-    phoneNumberLabel.textColor = .lightGray
+    phoneNumberLabel.textColor = .darkGray
     phoneNumberLabel.upsFontBold(ofSize: 15)
     contentView.addSubview(phoneNumberLabel)
     
@@ -90,7 +90,7 @@ class SettingProfileCell: UITableViewCell {
   private func autoLayout() {
     topImageView.translatesAutoresizingMaskIntoConstraints = false
     topImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-    topImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 40).isActive = true
+    topImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16).isActive = true
     topImageView.widthAnchor.constraint(equalToConstant: Standard.topImageSize).isActive = true
     topImageView.heightAnchor.constraint(equalToConstant: Standard.topImageSize).isActive = true
     
@@ -101,8 +101,6 @@ class SettingProfileCell: UITableViewCell {
     nickNameEditButton.translatesAutoresizingMaskIntoConstraints = false
     nickNameEditButton.centerYAnchor.constraint(equalTo: nickNameLabel.centerYAnchor).isActive = true
     nickNameEditButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Standard.xSpace).isActive = true
-//    nickNameEditButton.widthAnchor.constraint(equalToConstant: Standard.buttonSize).isActive = true
-//    nickNameEditButton.heightAnchor.constraint(equalToConstant: Standard.buttonSize).isActive = true
     
     mannerLabel.translatesAutoresizingMaskIntoConstraints = false
     mannerLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
@@ -119,7 +117,7 @@ class SettingProfileCell: UITableViewCell {
     phoneNumberLabel.translatesAutoresizingMaskIntoConstraints = false
     phoneNumberLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
     phoneNumberLabel.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: Standard.ySpace).isActive = true
-    phoneNumberLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Standard.ySpace).isActive = true
+    phoneNumberLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16).isActive = true
 
     phoneNumberCheckButton.translatesAutoresizingMaskIntoConstraints = false
     phoneNumberCheckButton.centerYAnchor.constraint(equalTo: phoneNumberLabel.centerYAnchor).isActive = true
