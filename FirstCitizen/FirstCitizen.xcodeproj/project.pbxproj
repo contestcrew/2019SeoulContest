@@ -3,10 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F87FFCA232891C00094CCD0 /* SettingListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87FFC9232891C00094CCD0 /* SettingListCell.swift */; };
+		4F87FFCC2328936D0094CCD0 /* SettingItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87FFCB2328936D0094CCD0 /* SettingItemCell.swift */; };
+		4F87FFCF232896D20094CCD0 /* SettingGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87FFCE232896D20094CCD0 /* SettingGuideView.swift */; };
+		4F87FFD5232899C80094CCD0 /* SettingItemAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87FFD4232899C80094CCD0 /* SettingItemAddCell.swift */; };
 		4FF9669C230C032600E869FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF9669B230C032600E869FF /* AppDelegate.swift */; };
 		4FF966A1230C032600E869FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FF9669F230C032600E869FF /* Main.storyboard */; };
 		4FF966A6230C032700E869FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FF966A4230C032700E869FF /* LaunchScreen.storyboard */; };
@@ -37,6 +41,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4F87FFC9232891C00094CCD0 /* SettingListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingListCell.swift; sourceTree = "<group>"; };
+		4F87FFCB2328936D0094CCD0 /* SettingItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingItemCell.swift; sourceTree = "<group>"; };
+		4F87FFCE232896D20094CCD0 /* SettingGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingGuideView.swift; sourceTree = "<group>"; };
+		4F87FFD4232899C80094CCD0 /* SettingItemAddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingItemAddCell.swift; sourceTree = "<group>"; };
 		4FF96698230C032600E869FF /* FirstCitizen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirstCitizen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FF9669B230C032600E869FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4FF966A0230C032600E869FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -84,6 +92,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F87FFCD232896BB0094CCD0 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				4F87FFCE232896D20094CCD0 /* SettingGuideView.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
 		4FF9668F230C032600E869FF = {
 			isa = PBXGroup;
 			children = (
@@ -167,6 +183,7 @@
 				4FF966C3230C28E800E869FF /* PointView.swift */,
 				4FF966BE230C1B5B00E869FF /* MapView.swift */,
 				CF1E09CD23261979006E9537 /* RestroomView.swift */,
+				4F87FFCD232896BB0094CCD0 /* Setting */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -193,6 +210,9 @@
 			isa = PBXGroup;
 			children = (
 				4FF966D3230C706800E869FF /* SettingProfileCell.swift */,
+				4F87FFC9232891C00094CCD0 /* SettingListCell.swift */,
+				4F87FFCB2328936D0094CCD0 /* SettingItemCell.swift */,
+				4F87FFD4232899C80094CCD0 /* SettingItemAddCell.swift */,
 				4FF966D6230C7DA900E869FF /* SettingDocumentCell.swift */,
 			);
 			path = Setting;
@@ -309,24 +329,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FirstCitizen/Pods-FirstCitizen-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
-				"${PODS_ROOT}/NMapsMap/framework/NMapsMap.framework",
-				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
-				"${PODS_ROOT}/naveridlogin-sdk-ios/NaverThirdPartyLogin.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-FirstCitizen/Pods-FirstCitizen-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NMapsMap.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NaverThirdPartyLogin.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-FirstCitizen/Pods-FirstCitizen-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -375,15 +382,19 @@
 				CF1E09CE23261979006E9537 /* RestroomView.swift in Sources */,
 				CF0CF51F23154028004DF6A5 /* SignupViewController.swift in Sources */,
 				4FF966C4230C28E800E869FF /* PointView.swift in Sources */,
+				4F87FFCC2328936D0094CCD0 /* SettingItemCell.swift in Sources */,
 				4FF966B8230C07F200E869FF /* ListViewController.swift in Sources */,
 				4FF966C2230C25FE00E869FF /* ExtensionFont.swift in Sources */,
+				4F87FFCF232896D20094CCD0 /* SettingGuideView.swift in Sources */,
 				4FF966D7230C7DA900E869FF /* SettingDocumentCell.swift in Sources */,
+				4F87FFCA232891C00094CCD0 /* SettingListCell.swift in Sources */,
 				4FF966D4230C706800E869FF /* SettingProfileCell.swift in Sources */,
 				4FF966B6230C07EB00E869FF /* MapViewController.swift in Sources */,
 				4FF966C8230C345E00E869FF /* ExtensionView.swift in Sources */,
 				CF0CF51D2313C635004DF6A5 /* PreparedView.swift in Sources */,
 				CF0CF51423139137004DF6A5 /* LoginView.swift in Sources */,
 				4FF966BA230C07F900E869FF /* SettingViewController.swift in Sources */,
+				4F87FFD5232899C80094CCD0 /* SettingItemAddCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -531,7 +542,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = ZLN97H98PA;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -585,7 +596,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = ZLN97H98PA;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
