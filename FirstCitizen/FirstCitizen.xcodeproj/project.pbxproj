@@ -32,8 +32,9 @@
 		CF0CF51D2313C635004DF6A5 /* PreparedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0CF51C2313C635004DF6A5 /* PreparedView.swift */; };
 		CF0CF51F23154028004DF6A5 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0CF51E23154028004DF6A5 /* SignupViewController.swift */; };
 		CF0CF52123154040004DF6A5 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0CF52023154040004DF6A5 /* SignupView.swift */; };
-		CF1E09CE23261979006E9537 /* RestroomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1E09CD23261979006E9537 /* RestroomView.swift */; };
-		CF1E09D12326199E006E9537 /* RestroomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1E09D02326199E006E9537 /* RestroomViewController.swift */; };
+		CF1E09D323275860006E9537 /* IncidentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1E09D223275860006E9537 /* IncidentViewController.swift */; };
+		CF1E09D523275891006E9537 /* IncidentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1E09D423275891006E9537 /* IncidentView.swift */; };
+		CF1E09D823275F33006E9537 /* IncidentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1E09D723275F33006E9537 /* IncidentCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,8 +68,9 @@
 		CF0CF51C2313C635004DF6A5 /* PreparedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreparedView.swift; sourceTree = "<group>"; };
 		CF0CF51E23154028004DF6A5 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		CF0CF52023154040004DF6A5 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
-		CF1E09CD23261979006E9537 /* RestroomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestroomView.swift; sourceTree = "<group>"; };
-		CF1E09D02326199E006E9537 /* RestroomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestroomViewController.swift; sourceTree = "<group>"; };
+		CF1E09D223275860006E9537 /* IncidentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncidentViewController.swift; sourceTree = "<group>"; };
+		CF1E09D423275891006E9537 /* IncidentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncidentView.swift; sourceTree = "<group>"; };
+		CF1E09D723275F33006E9537 /* IncidentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncidentCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,7 +128,7 @@
 				CF0CF5102313911E004DF6A5 /* Login */,
 				4FF966B2230C07A400E869FF /* Point */,
 				4FF966B0230C074F00E869FF /* MapList */,
-				CF1E09CF2326198A006E9537 /* Restroom */,
+				CF1E09CF2326198A006E9537 /* Incident */,
 				4FF966B1230C079D00E869FF /* Setting */,
 			);
 			path = Controller;
@@ -166,7 +168,7 @@
 				CF0CF51C2313C635004DF6A5 /* PreparedView.swift */,
 				4FF966C3230C28E800E869FF /* PointView.swift */,
 				4FF966BE230C1B5B00E869FF /* MapView.swift */,
-				CF1E09CD23261979006E9537 /* RestroomView.swift */,
+				CF1E09D423275891006E9537 /* IncidentView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -184,6 +186,7 @@
 		4FF966D1230C700C00E869FF /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				CF1E09D623275F1D006E9537 /* Incident */,
 				4FF966D5230C706C00E869FF /* Setting */,
 			);
 			path = Cell;
@@ -226,12 +229,20 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
-		CF1E09CF2326198A006E9537 /* Restroom */ = {
+		CF1E09CF2326198A006E9537 /* Incident */ = {
 			isa = PBXGroup;
 			children = (
-				CF1E09D02326199E006E9537 /* RestroomViewController.swift */,
+				CF1E09D223275860006E9537 /* IncidentViewController.swift */,
 			);
-			path = Restroom;
+			path = Incident;
+			sourceTree = "<group>";
+		};
+		CF1E09D623275F1D006E9537 /* Incident */ = {
+			isa = PBXGroup;
+			children = (
+				CF1E09D723275F33006E9537 /* IncidentCell.swift */,
+			);
+			path = Incident;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -368,16 +379,17 @@
 				4FF966B4230C07E300E869FF /* PointViewController.swift in Sources */,
 				CF0CF52123154040004DF6A5 /* SignupView.swift in Sources */,
 				CF0CF5122313912D004DF6A5 /* LoginViewController.swift in Sources */,
+				CF1E09D523275891006E9537 /* IncidentView.swift in Sources */,
 				4FF966C6230C31AE00E869FF /* ExtensionColor.swift in Sources */,
 				4FF966AF230C043B00E869FF /* MainTabBarController.swift in Sources */,
 				4FF9669C230C032600E869FF /* AppDelegate.swift in Sources */,
-				CF1E09D12326199E006E9537 /* RestroomViewController.swift in Sources */,
-				CF1E09CE23261979006E9537 /* RestroomView.swift in Sources */,
 				CF0CF51F23154028004DF6A5 /* SignupViewController.swift in Sources */,
 				4FF966C4230C28E800E869FF /* PointView.swift in Sources */,
 				4FF966B8230C07F200E869FF /* ListViewController.swift in Sources */,
+				CF1E09D323275860006E9537 /* IncidentViewController.swift in Sources */,
 				4FF966C2230C25FE00E869FF /* ExtensionFont.swift in Sources */,
 				4FF966D7230C7DA900E869FF /* SettingDocumentCell.swift in Sources */,
+				CF1E09D823275F33006E9537 /* IncidentCell.swift in Sources */,
 				4FF966D4230C706800E869FF /* SettingProfileCell.swift in Sources */,
 				4FF966B6230C07EB00E869FF /* MapViewController.swift in Sources */,
 				4FF966C8230C345E00E869FF /* ExtensionView.swift in Sources */,
