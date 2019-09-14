@@ -104,9 +104,10 @@ extension LoginViewController: LoginViewDelegate {
 extension LoginViewController: NaverThirdPartyLoginConnectionDelegate {
   // 로그인 버튼을 눌렀을 경우 열게 될 브라우저
   func oauth20ConnectionDidOpenInAppBrowser(forOAuth request: URLRequest!) {
-    let naverSignInVC = NLoginThirdPartyOAuth20InAppBrowserViewController(request: request)!
-    naverSignInVC.parentOrientation = UIInterfaceOrientation(rawValue: UIDevice.current.orientation.rawValue)!
-    present(naverSignInVC, animated: false, completion: nil)
+    
+//    let naverSignInVC = NLoginThirdPartyOAuth20InAppBrowserViewController(request: request)!
+//    naverSignInVC.parentOrientation = UIInterfaceOrientation(rawValue: UIDevice.current.orientation.rawValue)!
+//    present(naverSignInVC, animated: false, completion: nil)
   }
   
   // 로그인에 성공했을 경우 호출
