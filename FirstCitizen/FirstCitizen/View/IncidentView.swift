@@ -9,13 +9,22 @@
 import UIKit
 import NMapsMap
 
+protocol IncidentViewDelegate: class {
+  func touchUpBackButton()
+  func touchUpHelpButton()
+}
+
 class IncidentView: UIView {
   var category: String = ""
+  
+  weak var delegate: IncidentViewDelegate?
   
   private let locationManager = CLLocationManager()
   
   private let nmapView = NMFMapView()
   private let gradientView = UIImageView()
+  
+  private let backButton = UIButton()
   
   private let bodyScrollView = UIScrollView()
   private let bodyView = UIView()
@@ -41,16 +50,28 @@ class IncidentView: UIView {
   
   private let helpButton = UIButton(type: .custom)
   
-  override init(frame: CGRect) {
+  init(frame: CGRect, category: String) {
     super.init(frame: frame)
     
+    self.category = category
     attribute()
     layout()
+  }
+  
+  @objc private func touchUpBackButton() {
+    delegate?.touchUpBackButton()
+  }
+  
+  @objc private func touchUpHelpButton() {
+    delegate?.touchUpHelpButton()
   }
   
   private func attribute() {
     gradientView.image = UIImage(named: "Gradient")
     gradientView.contentMode = .scaleToFill
+    
+    backButton.setImage(#imageLiteral(resourceName: "Back_Button"), for: .normal)
+    backButton.addTarget(self, action: #selector(touchUpBackButton), for: .touchUpInside)
     
     titleLabel.text = "하늘에서 날개를 잃어버렸어요..."
     titleLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -94,10 +115,11 @@ class IncidentView: UIView {
     helpButton.titleLabel?.font = UIFont.systemFont(ofSize: 26, weight: .bold)
     helpButton.layer.cornerRadius = 5
     helpButton.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+    helpButton.addTarget(self, action: #selector(touchUpHelpButton), for: .touchUpInside)
   }
   
   private func layout() {
-    [nmapView, gradientView, helpButton, bodyScrollView].forEach { self.addSubview($0) }
+    [nmapView, gradientView, backButton, helpButton, bodyScrollView].forEach { self.addSubview($0) }
     [bodyView].forEach { bodyScrollView.addSubview($0) }
     
     if category == "Restroom" {
@@ -118,6 +140,12 @@ class IncidentView: UIView {
     gradientView.snp.makeConstraints {
       $0.leading.trailing.equalTo(self)
       $0.bottom.equalTo(nmapView.snp.bottom)
+    }
+    
+    backButton.snp.makeConstraints {
+      $0.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(10)
+      $0.leading.equalTo(self.safeAreaLayoutGuide.snp.leading).offset(10)
+      $0.width.height.equalTo(35)
     }
     
     bodyScrollView.snp.makeConstraints {
