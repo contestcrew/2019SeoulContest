@@ -32,7 +32,7 @@ class IncidentView: UIView {
   private let titleUnderLineView = UIView()
   private let regionLabel = UILabel()
   private let pointLabel = UILabel()
-  private let occurredTimeLabel = UILabel()
+  private let uploadTimeLabel = UILabel()
   private let pictureLabel = UILabel()
   private let pictureUnderLineView = UIView()
   private let pictureCollectionView: UICollectionView = {
@@ -45,8 +45,8 @@ class IncidentView: UIView {
   private let messageLabel = UILabel()
   private let messageUnderLineView = UIView()
   private let contentsLabel = UILabel()
-  private let timeLineLabel = UILabel()
-  private let timeLineUnderLineView = UIView()
+  private let occurredTimeLabel = UILabel()
+  private let occurredTimeUnderLineView = UIView()
   
   private let helpButton = UIButton(type: .custom)
   
@@ -64,6 +64,16 @@ class IncidentView: UIView {
   
   @objc private func touchUpHelpButton() {
     delegate?.touchUpHelpButton()
+  }
+  
+  func changeAttribute(detailIncidentData: DetailIncidentData) {
+    print("[Log] :", detailIncidentData.occurredTime)
+    titleLabel.text = detailIncidentData.title
+    regionLabel.text = "\(detailIncidentData.mainAddress), \(detailIncidentData.detailAddress)"
+    pointLabel.text = "Point \(detailIncidentData.servicePoint) + Bonus \(detailIncidentData.userPoint)"
+    uploadTimeLabel.text = detailIncidentData.uploadTime
+    contentsLabel.text = detailIncidentData.contents
+    occurredTimeLabel.text = detailIncidentData.occurredTime
   }
   
   private func attribute() {
@@ -86,8 +96,8 @@ class IncidentView: UIView {
     pointLabel.text = "1000"
     pointLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     
-    occurredTimeLabel.text = "2019-06-04 목요일"
-    occurredTimeLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    uploadTimeLabel.text = "2019-06-04 목요일"
+    uploadTimeLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     
     pictureLabel.text = "사진"
     pictureLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -123,11 +133,11 @@ class IncidentView: UIView {
     [bodyView].forEach { bodyScrollView.addSubview($0) }
     
     if category == "Restroom" {
-      [titleLabel, titleUnderLineView, regionLabel, pointLabel, occurredTimeLabel, messageLabel, messageUnderLineView, contentsLabel].forEach {
+      [titleLabel, titleUnderLineView, regionLabel, pointLabel, uploadTimeLabel, messageLabel, messageUnderLineView, contentsLabel].forEach {
         bodyView.addSubview($0)
       }
     } else {
-      [titleLabel, titleUnderLineView, regionLabel, pointLabel, occurredTimeLabel, pictureLabel, pictureUnderLineView, pictureCollectionView, messageLabel, messageUnderLineView, contentsLabel].forEach {
+      [titleLabel, titleUnderLineView, regionLabel, pointLabel, uploadTimeLabel, pictureLabel, pictureUnderLineView, pictureCollectionView, messageLabel, messageUnderLineView, contentsLabel].forEach {
         bodyView.addSubview($0)
       }
     }
@@ -180,19 +190,19 @@ class IncidentView: UIView {
       $0.trailing.equalTo(bodyView)
     }
     
-    occurredTimeLabel.snp.makeConstraints {
+    uploadTimeLabel.snp.makeConstraints {
       $0.top.equalTo(pointLabel.snp.bottom).offset(10)
       $0.trailing.equalTo(bodyView)
     }
     
     if category == "Restroom" {
       messageLabel.snp.makeConstraints {
-        $0.top.equalTo(occurredTimeLabel.snp.bottom).offset(20)
+        $0.top.equalTo(uploadTimeLabel.snp.bottom).offset(20)
         $0.leading.equalTo(bodyView)
       }
     } else {
       pictureLabel.snp.makeConstraints {
-        $0.top.equalTo(occurredTimeLabel.snp.bottom).offset(20)
+        $0.top.equalTo(uploadTimeLabel.snp.bottom).offset(20)
         $0.leading.equalTo(bodyView)
       }
       

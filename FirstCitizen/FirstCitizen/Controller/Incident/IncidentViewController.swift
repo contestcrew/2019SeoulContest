@@ -9,6 +9,25 @@
 import UIKit
 
 class IncidentViewController: UIViewController {
+  let sampleJsonDetailData1 = """
+{
+"category": "Restroom",
+"id": 1,
+"coordinate": [37.555429, 126.859272],
+"main_address": "서울특별시 강서구 등촌동",
+"detail_address": "증미역 남자화장실 첫번째 칸",
+"upload_time": "2019-05-06 목요일",
+"service_point": 100,
+"user_point": 50,
+"title": "화장실 휴지좀..",
+"contents": "어디 화장실인데 화장실 휴지가 너무 필요해요!! 빨리 부탁드려요!!",
+"occurred_time": "",
+"content_image": ""
+}
+""".data(using: .utf8)!
+  
+  
+  
   var category: String = ""
   
   lazy var incidentView = IncidentView(frame: .zero, category: category)
@@ -20,6 +39,21 @@ class IncidentViewController: UIViewController {
     
     attribute()
     layout()
+  }
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    
+    testFunc()
+  }
+  
+  private func testFunc() {
+    let decoder = JSONDecoder()
+    if let data = try? decoder.decode(DetailIncidentData.self, from: sampleJsonDetailData1) {
+      incidentView.changeAttribute(detailIncidentData: data)
+    } else {
+      print("[Log] : error")
+    }
   }
   
   private func attribute() {

@@ -41,6 +41,7 @@
 		CF1E09D823275F33006E9537 /* IncidentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1E09D723275F33006E9537 /* IncidentCell.swift */; };
 		CF388F7E232FAE5900DA6A1C /* HomeIncidentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF388F7D232FAE5900DA6A1C /* HomeIncidentData.swift */; };
 		CF388F81232FCD0000DA6A1C /* ApiUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF388F80232FCD0000DA6A1C /* ApiUrl.swift */; };
+		CF388F8323306EE700DA6A1C /* DetailIncidentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF388F8223306EE700DA6A1C /* DetailIncidentData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +84,7 @@
 		CF1E09D723275F33006E9537 /* IncidentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncidentCell.swift; sourceTree = "<group>"; };
 		CF388F7D232FAE5900DA6A1C /* HomeIncidentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeIncidentData.swift; sourceTree = "<group>"; };
 		CF388F80232FCD0000DA6A1C /* ApiUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiUrl.swift; sourceTree = "<group>"; };
+		CF388F8223306EE700DA6A1C /* DetailIncidentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailIncidentData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -275,6 +277,7 @@
 			isa = PBXGroup;
 			children = (
 				CF388F7D232FAE5900DA6A1C /* HomeIncidentData.swift */,
+				CF388F8223306EE700DA6A1C /* DetailIncidentData.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -421,6 +424,7 @@
 				4FF966B4230C07E300E869FF /* PointViewController.swift in Sources */,
 				CF0CF52123154040004DF6A5 /* SignupView.swift in Sources */,
 				CF0CF5122313912D004DF6A5 /* LoginViewController.swift in Sources */,
+				CF388F8323306EE700DA6A1C /* DetailIncidentData.swift in Sources */,
 				CF1E09D523275891006E9537 /* IncidentView.swift in Sources */,
 				4FF966C6230C31AE00E869FF /* ExtensionColor.swift in Sources */,
 				4FF966AF230C043B00E869FF /* MainTabBarController.swift in Sources */,

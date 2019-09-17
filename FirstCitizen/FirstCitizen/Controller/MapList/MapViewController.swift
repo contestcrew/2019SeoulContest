@@ -92,6 +92,7 @@ extension MapViewController: MapViewDelegate {
     let incidentVC = IncidentViewController()
     
     //TODO: Category 동적으로 넣어줘야 함
+    //TODO: Incident Detail Data 호출해야함!!
     incidentVC.category = "Restroom"
     self.present(incidentVC, animated: true, completion: nil)
   }
