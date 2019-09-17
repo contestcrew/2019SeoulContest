@@ -39,6 +39,9 @@
 		CF1E09D323275860006E9537 /* IncidentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1E09D223275860006E9537 /* IncidentViewController.swift */; };
 		CF1E09D523275891006E9537 /* IncidentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1E09D423275891006E9537 /* IncidentView.swift */; };
 		CF1E09D823275F33006E9537 /* IncidentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1E09D723275F33006E9537 /* IncidentCell.swift */; };
+		CF388F7E232FAE5900DA6A1C /* HomeIncidentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF388F7D232FAE5900DA6A1C /* HomeIncidentData.swift */; };
+		CF388F81232FCD0000DA6A1C /* ApiUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF388F80232FCD0000DA6A1C /* ApiUrl.swift */; };
+		CF388F8323306EE700DA6A1C /* DetailIncidentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF388F8223306EE700DA6A1C /* DetailIncidentData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +82,9 @@
 		CF1E09D223275860006E9537 /* IncidentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncidentViewController.swift; sourceTree = "<group>"; };
 		CF1E09D423275891006E9537 /* IncidentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncidentView.swift; sourceTree = "<group>"; };
 		CF1E09D723275F33006E9537 /* IncidentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncidentCell.swift; sourceTree = "<group>"; };
+		CF388F7D232FAE5900DA6A1C /* HomeIncidentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeIncidentData.swift; sourceTree = "<group>"; };
+		CF388F80232FCD0000DA6A1C /* ApiUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiUrl.swift; sourceTree = "<group>"; };
+		CF388F8223306EE700DA6A1C /* DetailIncidentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailIncidentData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +132,8 @@
 			children = (
 				4FF9669B230C032600E869FF /* AppDelegate.swift */,
 				4FF966C0230C25EA00E869FF /* Extension */,
+				CF388F7F232FCCEC00DA6A1C /* Network */,
+				CF388F7C232FAE3800DA6A1C /* Data */,
 				4FF966D1230C700C00E869FF /* Cell */,
 				4FF966BB230C085F00E869FF /* View */,
 				4FF966AD230C041500E869FF /* Controller */,
@@ -265,6 +273,23 @@
 			path = Incident;
 			sourceTree = "<group>";
 		};
+		CF388F7C232FAE3800DA6A1C /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				CF388F7D232FAE5900DA6A1C /* HomeIncidentData.swift */,
+				CF388F8223306EE700DA6A1C /* DetailIncidentData.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		CF388F7F232FCCEC00DA6A1C /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				CF388F80232FCD0000DA6A1C /* ApiUrl.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -399,6 +424,7 @@
 				4FF966B4230C07E300E869FF /* PointViewController.swift in Sources */,
 				CF0CF52123154040004DF6A5 /* SignupView.swift in Sources */,
 				CF0CF5122313912D004DF6A5 /* LoginViewController.swift in Sources */,
+				CF388F8323306EE700DA6A1C /* DetailIncidentData.swift in Sources */,
 				CF1E09D523275891006E9537 /* IncidentView.swift in Sources */,
 				4FF966C6230C31AE00E869FF /* ExtensionColor.swift in Sources */,
 				4FF966AF230C043B00E869FF /* MainTabBarController.swift in Sources */,
@@ -406,11 +432,13 @@
 				CF0CF51F23154028004DF6A5 /* SignupViewController.swift in Sources */,
 				4FF966C4230C28E800E869FF /* PointView.swift in Sources */,
 				4F87FFCC2328936D0094CCD0 /* SettingItemCell.swift in Sources */,
+				CF388F81232FCD0000DA6A1C /* ApiUrl.swift in Sources */,
 				4FF966B8230C07F200E869FF /* ListViewController.swift in Sources */,
 				CF1E09D323275860006E9537 /* IncidentViewController.swift in Sources */,
 				4FF966C2230C25FE00E869FF /* ExtensionFont.swift in Sources */,
 				4F87FFCF232896D20094CCD0 /* SettingGuideView.swift in Sources */,
 				4FF966D7230C7DA900E869FF /* SettingDocumentCell.swift in Sources */,
+				CF388F7E232FAE5900DA6A1C /* HomeIncidentData.swift in Sources */,
 				CF1E09D823275F33006E9537 /* IncidentCell.swift in Sources */,
 				4F87FFCA232891C00094CCD0 /* SettingListCell.swift in Sources */,
 				4FF966D4230C706800E869FF /* SettingProfileCell.swift in Sources */,
