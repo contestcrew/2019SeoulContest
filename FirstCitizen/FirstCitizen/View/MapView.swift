@@ -57,6 +57,12 @@ class MapView: UIView {
     attribute()
   }
   
+  func changePreviewContainer(_ homeIncidentData: HomeIncidentData) {
+    titleLabel.text = homeIncidentData.title
+    dateLabel.text = homeIncidentData.uploadTime
+    contentsLabel.text = homeIncidentData.contents
+  }
+  
   // 현재 위치로 지도 이동하는 메서드
   @objc private func touchUpLocationButton() {
     guard let currentCoordinateValue = currentCoordinateValue else { return }
@@ -133,6 +139,7 @@ class MapView: UIView {
     
     progressLabel.upsFontHeavy(ofSize: 22)
     progressLabel.text = "도움요청중"
+    progressLabel.textAlignment = .center
     progressLabel.textColor = #colorLiteral(red: 0.03933401406, green: 0.7532997727, blue: 0.2689341307, alpha: 1)
   }
   
@@ -202,13 +209,14 @@ class MapView: UIView {
     }
     
     previewContainer.snp.makeConstraints {
-      $0.top.equalTo(nMapView.snp.bottom)
-      $0.leading.equalTo(self).offset(20)
+      $0.top.equalTo(gradientView.snp.bottom).offset(-10)
+      $0.leading.equalTo(self).offset(10)
       $0.trailing.bottom.equalTo(self).offset(-10)
     }
     
     titleLabel.snp.makeConstraints {
-      $0.top.leading.equalToSuperview().offset(20)
+      $0.top.equalToSuperview().offset(20)
+      $0.leading.equalToSuperview().offset(10)
     }
     
     imageView.snp.makeConstraints {
@@ -238,6 +246,7 @@ class MapView: UIView {
       $0.leading.equalTo(contentsLabel.snp.trailing)
       $0.centerY.equalTo(contentsLabel.snp.centerY)
       $0.trailing.equalToSuperview().offset(-20)
+      $0.width.equalTo(contentsLabel.snp.width).multipliedBy(0.5)
     }
   }
   
