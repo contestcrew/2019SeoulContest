@@ -31,9 +31,10 @@ class MapViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    testFunc()
+//    testFunc()
     configure()
-    testFunc()
+//    testFunc()
+    resizeIcons()
   }
   
   override func viewDidLayoutSubviews() {
@@ -79,6 +80,39 @@ class MapViewController: UIViewController {
       $0.bottom.equalToSuperview().offset(-TabBarButtonView.height - safeBottmHeight)
     }
   }
+  
+  private func resizeIcons() {
+    let iconImg = UIImage(named: "Restroom")
+    iconImg?.resize(scale: 0.2, completion: {
+      self.showMarkers(img: $0!)
+    })
+  }
+  
+  private func showMarkers(img: UIImage) {
+    
+    let nOverlayImg = NMFOverlayImage(image: img, reuseIdentifier: "Restroom")
+    
+    let marker = NMFMarker(position: NMGLatLng(lat: 36.1234, lng: 127.1234), iconImage: nOverlayImg)
+    
+    let handler: NMFOverlayTouchHandler = { [weak self] layout in
+      
+      let cameraUpdate = NMFCameraUpdate(scrollTo: marker.position)
+      cameraUpdate.animation = .easeIn
+      self?.vMap.nMapView.mapView.moveCamera(cameraUpdate)
+      
+      return true
+    }
+    
+    marker.captionPerspectiveEnabled = true
+    marker.iconPerspectiveEnabled = true
+    marker.isHideCollidedSymbols = true
+    
+    marker.tag = 1
+    
+    marker.mapView = vMap.nMapView.mapView
+    marker.touchHandler = handler
+  }
+  
 }
 
 extension MapViewController: MKMapViewDelegate {
