@@ -34,7 +34,7 @@ class MapViewController: UIViewController {
 //    testFunc()
     configure()
 //    testFunc()
-    resizeIcons()
+    dataParsing(datas: sampleDatas)
   }
   
   override func viewDidLayoutSubviews() {
@@ -81,20 +81,36 @@ class MapViewController: UIViewController {
     }
   }
   
-  private func resizeIcons() {
-    let iconImg = UIImage(named: "Restroom")
+  private func dataParsing(datas: [Data]) {
+    var tag = 0
+    datas.forEach {
+      if let incidentData = try? JSONDecoder().decode(HomeIncidentData.self, from: $0) {
+        resizeIcons(data: incidentData, tag: tag)
+      }
+      tag += 1
+    }
+  }
+  
+  private func resizeIcons(data: HomeIncidentData, tag: Int) {
+    // ToDo 이미지 캐시처리가 필요함
+    let iconImg = UIImage(named: data.category)
     iconImg?.resize(scale: 0.2, completion: {
-      self.showMarkers(img: $0!)
+      self.showMarkers(img: $0 ?? UIImage(named: "Missing")!, data: data, tag: tag)
     })
   }
   
-  private func showMarkers(img: UIImage) {
+  private func showMarkers(img: UIImage, data: HomeIncidentData, tag: Int) {
     
-    let nOverlayImg = NMFOverlayImage(image: img, reuseIdentifier: "Restroom")
+    let nOverlayImg = NMFOverlayImage(image: img, reuseIdentifier: data.category)
     
-    let marker = NMFMarker(position: NMGLatLng(lat: 36.1234, lng: 127.1234), iconImage: nOverlayImg)
+    let lat = Double(data.coordinate.first ?? 0)
+    let lng = Double(data.coordinate.last ?? 0)
     
-    let handler: NMFOverlayTouchHandler = { [weak self] layout in
+    let marker = NMFMarker(position: NMGLatLng(lat: lat, lng: lng), iconImage: nOverlayImg)
+    
+    let handler: NMFOverlayTouchHandler = { [weak self] overlay in
+      
+      self?.vMap.changePreviewContainer(data)
       
       let cameraUpdate = NMFCameraUpdate(scrollTo: marker.position)
       cameraUpdate.animation = .easeIn
@@ -107,7 +123,7 @@ class MapViewController: UIViewController {
     marker.iconPerspectiveEnabled = true
     marker.isHideCollidedSymbols = true
     
-    marker.tag = 1
+    marker.userInfo = ["tag": tag]
     
     marker.mapView = vMap.nMapView.mapView
     marker.touchHandler = handler
