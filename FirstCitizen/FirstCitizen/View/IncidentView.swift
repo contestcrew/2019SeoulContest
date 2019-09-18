@@ -123,6 +123,12 @@ class IncidentView: UIView {
     contentsLabel.font = UIFont.systemFont(ofSize: 20, weight: .regular)
     contentsLabel.numberOfLines = 0
     
+    let style = NSMutableParagraphStyle()
+    style.lineSpacing = 10.0
+    let attrString = NSMutableAttributedString()
+    attrString.addAttributes([.paragraphStyle : style], range: NSMakeRange(0, contentsLabel.text!.count))
+    contentsLabel.attributedText = attrString
+    
     helpButton.setTitle("도와주기", for: .normal)
     helpButton.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
     helpButton.titleLabel?.font = UIFont.systemFont(ofSize: 26, weight: .bold)
