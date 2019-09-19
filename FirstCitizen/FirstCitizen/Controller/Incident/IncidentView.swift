@@ -11,7 +11,7 @@ import NMapsMap
 
 protocol IncidentViewDelegate: class {
   func touchUpBackButton()
-  func touchUpHelpButton()
+  func touchUpHelpButton(category: String)
 }
 
 class IncidentView: UIView {
@@ -63,14 +63,20 @@ class IncidentView: UIView {
   }
   
   @objc private func touchUpHelpButton() {
-    delegate?.touchUpHelpButton()
+    delegate?.touchUpHelpButton(category: category)
   }
   
   func changeAttribute(detailIncidentData: DetailIncidentData) {
-    print("[Log] :", detailIncidentData.occurredTime)
     titleLabel.text = detailIncidentData.title
     regionLabel.text = "\(detailIncidentData.mainAddress), \(detailIncidentData.detailAddress)"
     pointLabel.text = "Point \(detailIncidentData.servicePoint) + Bonus \(detailIncidentData.userPoint)"
+    
+    let attributedStr = NSMutableAttributedString(string: pointLabel.text!)
+    attributedStr.addAttribute(.foregroundColor, value: UIColor.blue, range: (pointLabel.text! as NSString).range(of: "Bonus"))
+    attributedStr.addAttribute(.foregroundColor, value: UIColor.orange, range: (pointLabel.text! as NSString).range(of: "Point"))
+    pointLabel.attributedText = attributedStr
+    
+    
     uploadTimeLabel.text = detailIncidentData.uploadTime
     contentsLabel.text = detailIncidentData.contents
     occurredTimeLabel.text = detailIncidentData.occurredTime
@@ -91,13 +97,16 @@ class IncidentView: UIView {
     
     regionLabel.text = "서울특별시 성동구 성수22길 37, 사거리"
     regionLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    regionLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
     regionLabel.numberOfLines = 0
     
     pointLabel.text = "1000"
     pointLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    pointLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
     
     uploadTimeLabel.text = "2019-06-04 목요일"
     uploadTimeLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    uploadTimeLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
     
     pictureLabel.text = "사진"
     pictureLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -117,7 +126,7 @@ class IncidentView: UIView {
     
     contentsLabel.text = "내 날개좀.. 찾아주세요.. 부탁드려요 ㅠㅠㅠㅠ"
     contentsLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    contentsLabel.font = UIFont.systemFont(ofSize: 22, weight: .regular)
+    contentsLabel.font = UIFont.systemFont(ofSize: 20, weight: .regular)
     contentsLabel.numberOfLines = 0
     
     helpButton.setTitle("도와주기", for: .normal)

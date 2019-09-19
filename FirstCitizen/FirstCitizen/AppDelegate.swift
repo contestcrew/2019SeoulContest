@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     window = UIWindow(frame: UIScreen.main.bounds)
     
-    window?.rootViewController = LoginViewController()
+    window?.rootViewController = MainTabBarController()
     window?.makeKeyAndVisible()
     
     return true
