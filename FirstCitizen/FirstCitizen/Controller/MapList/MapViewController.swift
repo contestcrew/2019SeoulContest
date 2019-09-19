@@ -141,9 +141,9 @@ extension MapViewController: MapViewDelegate {
   func touchUpPreview() {
     let incidentVC = IncidentViewController()
     
-    //TODO: Category 동적으로 넣어줘야 함
-    //TODO: Incident Detail Data 호출해야함!!
-    incidentVC.category = "Restroom"
+    //TODO: Category 동적으로 넣어줘야 함 -> 뷰 생성을 위한 Category 입력임(카테고리별로 뷰가 다름)
+    //TODO: Incident Detail Data 호출해야함!! -> 호출한 데이터의 category를 넣어주면 됌
+    incidentVC.category = "Missing"
     self.present(incidentVC, animated: true, completion: nil)
   }
   
