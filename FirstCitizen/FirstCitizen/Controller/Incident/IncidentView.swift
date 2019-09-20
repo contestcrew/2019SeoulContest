@@ -29,19 +29,27 @@ class IncidentView: UIView {
   private let bodyScrollView = UIScrollView()
   private let bodyView = UIView()
   private let titleLabel = UILabel()
+  private let imageView = UIImageView()
   private let titleUnderLineView = UIView()
   private let regionLabel = UILabel()
   private let pointLabel = UILabel()
   private let uploadTimeLabel = UILabel()
   private let pictureLabel = UILabel()
   private let pictureUnderLineView = UIView()
+  
   private let pictureCollectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .horizontal
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     collectionView.showsHorizontalScrollIndicator = false
+    collectionView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+//    collectionView.isPagingEnabled = true
     return collectionView
   }()
+  
+  private let pageControl = UIPageControl()
+  
+  
   private let messageLabel = UILabel()
   private let messageUnderLineView = UIView()
   private let contentsLabel = UILabel()
@@ -67,6 +75,12 @@ class IncidentView: UIView {
   }
   
   func changeAttribute(detailIncidentData: DetailIncidentData) {
+    
+    // 카메라 위치 이동
+    let coordinate = detailIncidentData.coordinate
+    let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: Double(coordinate[0]), lng: Double(coordinate[1])))
+    nmapView.moveCamera(cameraUpdate)
+    
     titleLabel.text = detailIncidentData.title
     regionLabel.text = "\(detailIncidentData.mainAddress), \(detailIncidentData.detailAddress)"
     pointLabel.text = "Point \(detailIncidentData.servicePoint) + Bonus \(detailIncidentData.userPoint)"
@@ -75,7 +89,6 @@ class IncidentView: UIView {
     attributedStr.addAttribute(.foregroundColor, value: UIColor.blue, range: (pointLabel.text! as NSString).range(of: "Bonus"))
     attributedStr.addAttribute(.foregroundColor, value: UIColor.orange, range: (pointLabel.text! as NSString).range(of: "Point"))
     pointLabel.attributedText = attributedStr
-    
     
     uploadTimeLabel.text = detailIncidentData.uploadTime
     contentsLabel.text = detailIncidentData.contents
@@ -92,6 +105,9 @@ class IncidentView: UIView {
     titleLabel.text = "하늘에서 날개를 잃어버렸어요..."
     titleLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     titleLabel.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+    
+    imageView.contentMode = .scaleAspectFit
+    imageView.image = #imageLiteral(resourceName: "Restroom")
     
     titleUnderLineView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     
@@ -118,6 +134,11 @@ class IncidentView: UIView {
     pictureCollectionView.delegate = self
     pictureCollectionView.register(IncidentCell.self, forCellWithReuseIdentifier: IncidentCell.identifier)
     
+    pageControl.hidesForSinglePage = true
+    // numberOfPages 갯수는 서버에서 받아온 사진의 갯수
+    pageControl.numberOfPages = 5
+    pageControl.pageIndicatorTintColor = #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
+    
     messageLabel.text = "메세지"
     messageLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     messageLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
@@ -126,7 +147,8 @@ class IncidentView: UIView {
     
     contentsLabel.text = "내 날개좀.. 찾아주세요.. 부탁드려요 ㅠㅠㅠㅠ"
     contentsLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    contentsLabel.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+    contentsLabel.textAlignment = .justified
+    contentsLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
     contentsLabel.numberOfLines = 0
     
     helpButton.setTitle("도와주기", for: .normal)
@@ -142,11 +164,11 @@ class IncidentView: UIView {
     [bodyView].forEach { bodyScrollView.addSubview($0) }
     
     if category == "Restroom" {
-      [titleLabel, titleUnderLineView, regionLabel, pointLabel, uploadTimeLabel, messageLabel, messageUnderLineView, contentsLabel].forEach {
+      [titleLabel, imageView, titleUnderLineView, regionLabel, pointLabel, uploadTimeLabel, messageLabel, messageUnderLineView, contentsLabel].forEach {
         bodyView.addSubview($0)
       }
     } else {
-      [titleLabel, titleUnderLineView, regionLabel, pointLabel, uploadTimeLabel, pictureLabel, pictureUnderLineView, pictureCollectionView, messageLabel, messageUnderLineView, contentsLabel].forEach {
+      [titleLabel, imageView, titleUnderLineView, regionLabel, pointLabel, uploadTimeLabel, pictureLabel, pictureUnderLineView, pictureCollectionView, pageControl, messageLabel, messageUnderLineView, contentsLabel].forEach {
         bodyView.addSubview($0)
       }
     }
@@ -159,6 +181,7 @@ class IncidentView: UIView {
     gradientView.snp.makeConstraints {
       $0.leading.trailing.equalTo(self)
       $0.bottom.equalTo(nmapView.snp.bottom)
+      $0.height.equalTo(100)
     }
     
     backButton.snp.makeConstraints {
@@ -181,6 +204,12 @@ class IncidentView: UIView {
     
     titleLabel.snp.makeConstraints {
       $0.top.leading.trailing.equalTo(bodyView)
+    }
+    
+    imageView.snp.makeConstraints {
+      $0.centerY.equalTo(titleLabel.snp.centerY)
+      $0.trailing.equalTo(self).offset(-20)
+      $0.width.height.equalTo(40)
     }
     
     titleUnderLineView.snp.makeConstraints {
@@ -221,11 +250,20 @@ class IncidentView: UIView {
         $0.height.equalTo(1)
       }
       
+      // TODO: 한 곳에서 width, height 처리할 것
+      let width = UIScreen.main.bounds.width - 40
+      let height = (width * 3) / 4
+      
       pictureCollectionView.snp.makeConstraints {
         $0.top.equalTo(pictureUnderLineView.snp.bottom).offset(20)
         $0.leading.equalTo(bodyView)
         $0.trailing.equalTo(bodyView)
-        $0.height.equalTo(300)
+        $0.height.equalTo(height)
+      }
+      
+      pageControl.snp.makeConstraints {
+        $0.centerX.equalTo(self)
+        $0.bottom.equalTo(pictureCollectionView.snp.bottom).offset(-20)
       }
       
       messageLabel.snp.makeConstraints {
@@ -248,7 +286,8 @@ class IncidentView: UIView {
     
     helpButton.snp.makeConstraints {
       $0.leading.equalTo(self).offset(20)
-      $0.trailing.bottom.equalTo(self).offset(-20)
+      $0.trailing.equalTo(self).offset(-20)
+      $0.bottom.equalTo(self).offset(-40)
       $0.height.equalTo(50)
     }
   }
@@ -272,10 +311,18 @@ extension IncidentView: UICollectionViewDataSource {
 
 extension IncidentView: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: 400, height: 300)
+    let width = UIScreen.main.bounds.width - 40
+    let height = (width * 3) / 4
+    return CGSize(width: width, height: height)
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    return 10
+    return 0
+  }
+}
+
+extension IncidentView: UICollectionViewDelegate {
+  func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    self.pageControl.currentPage = indexPath.row
   }
 }

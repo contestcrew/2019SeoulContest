@@ -76,7 +76,7 @@ class MapViewController: UIViewController {
     view.addSubview(vMap)
     let safeBottmHeight = view.safeAreaInsets.bottom
     vMap.snp.makeConstraints {
-      $0.top.leading.trailing.bottom.equalToSuperview()
+      $0.top.leading.trailing.equalToSuperview()
       $0.bottom.equalToSuperview().offset(-TabBarButtonView.height - safeBottmHeight)
     }
   }
@@ -94,23 +94,28 @@ class MapViewController: UIViewController {
   private func resizeIcons(data: HomeIncidentData, tag: Int) {
     // ToDo 이미지 캐시처리가 필요함
     let iconImg = UIImage(named: data.category)
-    iconImg?.resize(scale: 0.2, completion: {
+    iconImg?.resize(scale: 0.3, completion: {
       self.showMarkers(img: $0 ?? UIImage(named: "Missing")!, data: data, tag: tag)
     })
   }
   
   private func showMarkers(img: UIImage, data: HomeIncidentData, tag: Int) {
     
-    let nOverlayImg = NMFOverlayImage(image: img, reuseIdentifier: data.category)
+//    let nOverlayImg = NMFOverlayImage(image: img, reuseIdentifier: data.category)
     
     let lat = Double(data.coordinate.first ?? 0)
     let lng = Double(data.coordinate.last ?? 0)
     
-    let marker = NMFMarker(position: NMGLatLng(lat: lat, lng: lng), iconImage: nOverlayImg)
+//    let marker = NMFMarker(position: NMGLatLng(lat: lat, lng: lng), iconImage: nOverlayImg)
+    
+    let marker = NMFMarker()
+    marker.position = NMGLatLng(lat: lat, lng: lng)
+    marker.iconImage = NMFOverlayImage(name: "Pin\(data.category)")
     
     let handler: NMFOverlayTouchHandler = { [weak self] overlay in
       
       self?.vMap.changePreviewContainer(data)
+      self!.pinClickAnimation()
       
       let cameraUpdate = NMFCameraUpdate(scrollTo: marker.position)
       cameraUpdate.animation = .easeIn
@@ -129,6 +134,14 @@ class MapViewController: UIViewController {
     marker.touchHandler = handler
   }
   
+  private func pinClickAnimation() {
+    let rotation: CABasicAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
+    rotation.toValue = Double.pi * 2
+    rotation.duration = 0.25 // or however long you want ...
+    rotation.isCumulative = true
+    rotation.repeatCount = 1
+    vMap.previewContainer.layer.add(rotation, forKey: "rotationAnimation")
+  }
 }
 
 extension MapViewController: MKMapViewDelegate {
@@ -138,6 +151,10 @@ extension MapViewController: MKMapViewDelegate {
 }
 
 extension MapViewController: MapViewDelegate {
+  func touchUpRegisterButton() {
+    
+  }
+  
   func touchUpPreview() {
     let incidentVC = IncidentViewController()
     

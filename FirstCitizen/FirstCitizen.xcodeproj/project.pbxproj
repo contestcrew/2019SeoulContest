@@ -46,6 +46,8 @@
 		CF388F8323306EE700DA6A1C /* DetailIncidentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF388F8223306EE700DA6A1C /* DetailIncidentData.swift */; };
 		CF5467D1233349BC00F75DDB /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5467D0233349BC00F75DDB /* ReportViewController.swift */; };
 		CF5467D3233349C700F75DDB /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5467D2233349C700F75DDB /* ReportView.swift */; };
+		CF54686523346E6A00F75DDB /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54686423346E6A00F75DDB /* ListView.swift */; };
+		CF5468682334DD3800F75DDB /* ListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5468672334DD3800F75DDB /* ListViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +95,8 @@
 		CF388F8223306EE700DA6A1C /* DetailIncidentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailIncidentData.swift; sourceTree = "<group>"; };
 		CF5467D0233349BC00F75DDB /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
 		CF5467D2233349C700F75DDB /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
+		CF54686423346E6A00F75DDB /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		CF5468672334DD3800F75DDB /* ListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +205,7 @@
 				CF0CF51C2313C635004DF6A5 /* PreparedView.swift */,
 				4FF966C3230C28E800E869FF /* PointView.swift */,
 				4FF966BE230C1B5B00E869FF /* MapView.swift */,
+				CF54686423346E6A00F75DDB /* ListView.swift */,
 				4F87FFCD232896BB0094CCD0 /* Setting */,
 			);
 			path = View;
@@ -220,6 +225,7 @@
 		4FF966D1230C700C00E869FF /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				CF5468662334DD1C00F75DDB /* MapList */,
 				CF1E09D623275F1D006E9537 /* Incident */,
 				4FF966D5230C706C00E869FF /* Setting */,
 			);
@@ -308,6 +314,14 @@
 				CF5467D2233349C700F75DDB /* ReportView.swift */,
 			);
 			path = Report;
+			sourceTree = "<group>";
+		};
+		CF5468662334DD1C00F75DDB /* MapList */ = {
+			isa = PBXGroup;
+			children = (
+				CF5468672334DD3800F75DDB /* ListViewCell.swift */,
+			);
+			path = MapList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -454,7 +468,9 @@
 				4FF966C4230C28E800E869FF /* PointView.swift in Sources */,
 				4F87FFCC2328936D0094CCD0 /* SettingItemCell.swift in Sources */,
 				CF388F81232FCD0000DA6A1C /* ApiUrl.swift in Sources */,
+				CF5468682334DD3800F75DDB /* ListViewCell.swift in Sources */,
 				4FF966B8230C07F200E869FF /* ListViewController.swift in Sources */,
+				CF54686523346E6A00F75DDB /* ListView.swift in Sources */,
 				CF1E09D323275860006E9537 /* IncidentViewController.swift in Sources */,
 				4FF966C2230C25FE00E869FF /* ExtensionFont.swift in Sources */,
 				527E38F423321C1000C01EC7 /* ExtensionUIImage.swift in Sources */,

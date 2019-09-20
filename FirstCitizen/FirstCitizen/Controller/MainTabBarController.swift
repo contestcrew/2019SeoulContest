@@ -49,11 +49,11 @@ class MainTabBarController: UITabBarController {
     
     switch isPosition {
     case true:
-      vTabBarButton.mapListButton.setImage(UIImage(named: "MainTabBar_Center_List"), for: .normal)
+      vTabBarButton.mapListButton.setImage(UIImage(named: "TabBarList"), for: .normal)
       self.selectedViewController = vcMap
       
     case false:
-      vTabBarButton.mapListButton.setImage(UIImage(named: "MainTabBar_Center_Map"), for: .normal)
+      vTabBarButton.mapListButton.setImage(UIImage(named: "TabBarMap"), for: .normal)
       self.selectedViewController = vcList
     }
   }

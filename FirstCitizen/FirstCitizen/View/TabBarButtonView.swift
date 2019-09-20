@@ -32,18 +32,14 @@ class TabBarButtonView: UIView {
     super.layoutSubviews()
     
     TabBarButtonView.height = self.frame.height
-    print(self.frame.height)
   }
   
   private func configure() {
-    pointButton.setImage(UIImage(named: "MainTabBar_Left_Point"), for: .normal)
-//    self.addSubview(pointButton)
+    pointButton.setImage(UIImage(named: "TabBarPoint"), for: .normal)
     
-    mapListButton.setImage(UIImage(named: "MainTabBar_Center_List"), for: .normal)
-//    self.addSubview(mapListButton)
+    mapListButton.setImage(UIImage(named: "TabBarMap"), for: .normal)
     
-    settingButton.setImage(UIImage(named: "MainTabBar_Right_Setting"), for: .normal)
-//    self.addSubview(settingButton)
+    settingButton.setImage(UIImage(named: "TabBarSetting"), for: .normal)
   }
   
   private struct Standard {
@@ -51,7 +47,7 @@ class TabBarButtonView: UIView {
     static let sideSpace: CGFloat = 8
     
     static let centerSize: CGFloat = 72
-    static let sideSize: CGFloat = 64
+    static let sideSize: CGFloat = 54
   }
   
   private func autoLayout() {
@@ -60,19 +56,19 @@ class TabBarButtonView: UIView {
     
     pointButton.snp.makeConstraints {
       $0.centerY.equalTo(self.snp.centerY)
-      $0.trailing.equalTo(mapListButton.snp.leading).offset(-Standard.sideSpace)
-      $0.width.height.equalTo(Standard.sideSize)
+      $0.trailing.equalTo(mapListButton.snp.leading).offset(-Standard.sideSpace * 3)
+      $0.width.height.equalTo(Standard.sideSize - 10)
     }
-    
+
     mapListButton.snp.makeConstraints {
       $0.centerX.top.bottom.equalTo(self)
       $0.width.height.equalTo(Standard.centerSize)
     }
-    
+
     settingButton.snp.makeConstraints {
       $0.centerY.equalTo(self)
-      $0.leading.equalTo(mapListButton.snp.trailing).offset(Standard.sideSpace)
-      $0.width.height.equalTo(Standard.sideSize)
+      $0.leading.equalTo(mapListButton.snp.trailing).offset(Standard.sideSpace * 3)
+      $0.width.height.equalTo(Standard.sideSize - 10)
     }
     
 //    pointButton.translatesAutoresizingMaskIntoConstraints = false

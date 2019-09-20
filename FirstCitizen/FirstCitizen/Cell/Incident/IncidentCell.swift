@@ -22,11 +22,15 @@ class IncidentCell: UICollectionViewCell {
   }
   
   func incidentCellConfigure(reportImage: UIImage) {
-    imageView.image = reportImage
+
+    imageView.image = #imageLiteral(resourceName: "sample_image_2")
+//    imageView.image?.resize(scale: 1, completion: { image in
+//      imageView.image = image
+//    })
   }
   
   private func attribute() {
-    imageView.contentMode = .scaleAspectFit
+    imageView.contentMode = .scaleAspectFill
   }
   
   private func layout() {

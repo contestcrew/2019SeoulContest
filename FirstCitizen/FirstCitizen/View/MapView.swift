@@ -15,6 +15,7 @@ protocol MapViewDelegate: class {
   func setNMGLatLng(coordinate: CLLocationCoordinate2D)
   func touchUpLocationButton(coordinate: CLLocationCoordinate2D)
   func touchUpPreview()
+  func touchUpRegisterButton()
 }
 
 class MapView: UIView {
@@ -30,16 +31,18 @@ class MapView: UIView {
   
   private let gradientView = UIImageView()
   
-  private let previewContainer = UIView()
+  let previewContainer = UIView()
   private let imageView = UIImageView()
   private let titleLabel = UILabel()
   private let guideLabel = UILabel()
   private let dateLabel = UILabel()
+  private let pointLabel = UILabel()
   private let contentsLabel = UILabel()
   private let progressLabel = UILabel()
   
   private let locationButton = UIButton(type: .custom)
   private let refreshButton = UIButton(type: .custom)
+  private let registerButton = UIButton(type: .custom)
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -47,20 +50,25 @@ class MapView: UIView {
     getCurrentLocation()
     autoLayout()
     mapSetting()
-    
+    nMapConfigure()
   }
   
   override func layoutSubviews() {
     super.layoutSubviews()
     
-    nMapConfigure()
     attribute()
   }
   
   func changePreviewContainer(_ homeIncidentData: HomeIncidentData) {
     titleLabel.text = homeIncidentData.title
+    imageView.image = UIImage(named: homeIncidentData.category)
     dateLabel.text = homeIncidentData.uploadTime
     contentsLabel.text = homeIncidentData.contents
+    pointLabel.text = "Point \(homeIncidentData.servicePoint) + Bonus \(homeIncidentData.userPoint)"
+    let attributedStr = NSMutableAttributedString(string: pointLabel.text!)
+    attributedStr.addAttribute(.foregroundColor, value: UIColor.blue, range: (pointLabel.text! as NSString).range(of: "Bonus"))
+    attributedStr.addAttribute(.foregroundColor, value: UIColor.orange, range: (pointLabel.text! as NSString).range(of: "Point"))
+    pointLabel.attributedText = attributedStr
   }
   
   // 현재 위치로 지도 이동하는 메서드
@@ -71,7 +79,11 @@ class MapView: UIView {
   
   // 새로고침 버튼 메서드
   @objc private func touchUpRefreshButton() {
-    
+  }
+  
+  // 등록 버튼 메서드
+  @objc private func touchUpRegisterButton() {
+    delegate?.touchUpRegisterButton()
   }
   
   @objc private func touchUpPreview() {
@@ -91,7 +103,7 @@ class MapView: UIView {
     nMapView.mapView.mapType = .basic
     nMapView.mapView.logoAlign = .leftTop
     nMapView.positionMode = .compass
-    nMapView.showLocationButton = true
+    nMapView.showLocationButton = false
     nMapView.showZoomControls = false
     
     nMapView.showCompass = false
@@ -102,12 +114,21 @@ class MapView: UIView {
     locationButton.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     locationButton.layer.cornerRadius = locationButton.frame.width / 2
     locationButton.addTarget(self, action: #selector(touchUpLocationButton), for: .touchUpInside)
+    locationButton.shadow()
     
     refreshButton.setImage(#imageLiteral(resourceName: "refresh_icon"), for: .normal)
     refreshButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     refreshButton.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     refreshButton.layer.cornerRadius = refreshButton.frame.width / 2
     refreshButton.addTarget(self, action: #selector(touchUpRefreshButton), for: .touchUpInside)
+    refreshButton.shadow()
+    
+    registerButton.setImage(#imageLiteral(resourceName: "icons8-plus-math-30 (1)"), for: .normal)
+    registerButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    registerButton.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+    registerButton.layer.cornerRadius = registerButton.frame.width / 2
+    registerButton.addTarget(self, action: #selector(touchUpRegisterButton), for: .touchUpInside)
+    registerButton.shadow()
   }
   
   private func attribute() {
@@ -119,11 +140,11 @@ class MapView: UIView {
     previewContainer.layer.cornerRadius = 10
     let tap = UITapGestureRecognizer(target: self, action: #selector(touchUpPreview))
     previewContainer.addGestureRecognizer(tap)
+    previewContainer.shadow()
     
-    imageView.backgroundColor = .red
-    imageView.isHidden = true
     imageView.contentMode = .scaleAspectFit
     imageView.layer.cornerRadius = Standard.imageSize / 2
+    imageView.image = #imageLiteral(resourceName: "Restroom")
     
     titleLabel.upsFontHeavy(ofSize: 26)
     titleLabel.text = "굳어가고 있어요 헬프미"
@@ -133,14 +154,22 @@ class MapView: UIView {
     dateLabel.upsFontHeavy(ofSize: 13)
     dateLabel.text = "2019-08-14 목요일"
     
-    contentsLabel.upsFont(ofSize: 15)
-    contentsLabel.textColor = .lightGray
+    pointLabel.text = "Point 100 + Bonus 350"
+    pointLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    pointLabel.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
+    let attributedStr = NSMutableAttributedString(string: pointLabel.text!)
+    attributedStr.addAttribute(.foregroundColor, value: UIColor.blue, range: (pointLabel.text! as NSString).range(of: "Bonus"))
+    attributedStr.addAttribute(.foregroundColor, value: UIColor.orange, range: (pointLabel.text! as NSString).range(of: "Point"))
+    pointLabel.attributedText = attributedStr
+    
+    contentsLabel.upsFontBold(ofSize: 15)
+    contentsLabel.textColor = .darkGray
     contentsLabel.text = "굳어가고 있어요.. 헬퓨ㅡ미.."
     
     progressLabel.upsFontHeavy(ofSize: 22)
     progressLabel.text = "도움요청중"
     progressLabel.textAlignment = .center
-    progressLabel.textColor = #colorLiteral(red: 0.03933401406, green: 0.7532997727, blue: 0.2689341307, alpha: 1)
+    progressLabel.textColor = UIColor.appColor(.appGreenColor)
   }
   
   private func mapSetting() {
@@ -179,69 +208,80 @@ class MapView: UIView {
   }
   
   private func autoLayout() {
-    
-    [nMapView, gradientView, previewContainer, locationButton, refreshButton]
+    [nMapView, gradientView, previewContainer, locationButton, refreshButton, registerButton]
       .forEach { self.addSubview($0) }
-    
-    [imageView, titleLabel, guideLabel, dateLabel, contentsLabel, progressLabel]
+
+    [titleLabel, imageView, guideLabel, dateLabel, pointLabel, contentsLabel, progressLabel]
       .forEach { previewContainer.addSubview($0) }
     
     nMapView.snp.makeConstraints {
       $0.top.leading.trailing.equalTo(self)
-      $0.height.equalToSuperview().multipliedBy(0.75)
+      $0.height.equalTo(self).multipliedBy(0.75)
     }
-    
+
     gradientView.snp.makeConstraints {
       $0.leading.trailing.equalTo(self)
       $0.bottom.equalTo(nMapView)
+      $0.height.equalTo(100)
     }
-    
+
     locationButton.snp.makeConstraints {
       $0.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(10)
       $0.trailing.equalTo(self).offset(-10)
       $0.width.height.equalTo(40)
     }
-    
+
     refreshButton.snp.makeConstraints {
       $0.top.equalTo(locationButton.snp.bottom).offset(20)
       $0.trailing.equalTo(self).offset(-10)
       $0.width.height.equalTo(40)
     }
-    
+
+    registerButton.snp.makeConstraints {
+      $0.top.equalTo(gradientView.snp.top)
+      $0.trailing.equalTo(self).offset(-10)
+      $0.width.height.equalTo(40)
+    }
+
     previewContainer.snp.makeConstraints {
       $0.top.equalTo(gradientView.snp.bottom).offset(-10)
       $0.leading.equalTo(self).offset(10)
       $0.trailing.bottom.equalTo(self).offset(-10)
     }
-    
+
     titleLabel.snp.makeConstraints {
       $0.top.equalToSuperview().offset(20)
       $0.leading.equalToSuperview().offset(10)
     }
-    
+
     imageView.snp.makeConstraints {
-      $0.top.equalToSuperview().offset(10)
+      $0.centerY.equalTo(titleLabel.snp.centerY)
       $0.trailing.equalToSuperview().offset(-10)
-      $0.width.height.equalTo(30)
+      $0.width.height.equalTo(40)
     }
-    
+
     guideLabel.snp.makeConstraints {
       $0.top.equalTo(titleLabel.snp.bottom).offset(20)
       $0.leading.equalToSuperview().offset(10)
       $0.trailing.equalToSuperview().offset(-10)
       $0.height.equalTo(2)
     }
-    
+
     dateLabel.snp.makeConstraints {
       $0.top.equalTo(guideLabel.snp.bottom).offset(10)
       $0.leading.equalToSuperview().offset(10)
     }
-    
+
+    pointLabel.snp.makeConstraints {
+      $0.top.equalTo(guideLabel.snp.bottom).offset(10)
+      $0.trailing.equalToSuperview().offset(-10)
+    }
+
     contentsLabel.snp.makeConstraints {
       $0.top.equalTo(dateLabel.snp.bottom).offset(20)
       $0.leading.equalToSuperview().offset(10)
     }
-    
+
     progressLabel.snp.makeConstraints {
       $0.leading.equalTo(contentsLabel.snp.trailing)
       $0.centerY.equalTo(contentsLabel.snp.centerY)
