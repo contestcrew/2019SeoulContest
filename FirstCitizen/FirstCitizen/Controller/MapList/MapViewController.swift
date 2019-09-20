@@ -93,24 +93,17 @@ class MapViewController: UIViewController {
   
   private func resizeIcons(data: HomeIncidentData, tag: Int) {
     // ToDo 이미지 캐시처리가 필요함
-    let iconImg = UIImage(named: data.category)
+    let iconImg = UIImage(named: "Pin\(data.category)")
     iconImg?.resize(scale: 0.3, completion: {
       self.showMarkers(img: $0 ?? UIImage(named: "Missing")!, data: data, tag: tag)
     })
   }
   
   private func showMarkers(img: UIImage, data: HomeIncidentData, tag: Int) {
-    
-//    let nOverlayImg = NMFOverlayImage(image: img, reuseIdentifier: data.category)
-    
     let lat = Double(data.coordinate.first ?? 0)
     let lng = Double(data.coordinate.last ?? 0)
     
-//    let marker = NMFMarker(position: NMGLatLng(lat: lat, lng: lng), iconImage: nOverlayImg)
-    
-    let marker = NMFMarker()
-    marker.position = NMGLatLng(lat: lat, lng: lng)
-    marker.iconImage = NMFOverlayImage(name: "Pin\(data.category)")
+    let marker = NMFMarker(position: NMGLatLng(lat: lat, lng: lng), iconImage: NMFOverlayImage(image: img))
     
     let handler: NMFOverlayTouchHandler = { [weak self] overlay in
       
@@ -135,9 +128,9 @@ class MapViewController: UIViewController {
   }
   
   private func pinClickAnimation() {
-    let rotation: CABasicAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
+    let rotation: CABasicAnimation = CABasicAnimation(keyPath: "transform.rotation.y")
     rotation.toValue = Double.pi * 2
-    rotation.duration = 0.25 // or however long you want ...
+    rotation.duration = 0.5 // or however long you want ...
     rotation.isCumulative = true
     rotation.repeatCount = 1
     vMap.previewContainer.layer.add(rotation, forKey: "rotationAnimation")
