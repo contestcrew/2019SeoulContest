@@ -8,7 +8,25 @@
 
 import UIKit
 
+enum AssetsColor {
+  // AppColor Green
+  case appGreenColor
+  case appYellowColor
+  case appRedColor
+}
+
 extension UIColor {
+  static func appColor(_ colorName: AssetsColor) -> UIColor {
+    switch colorName {
+    case .appGreenColor:
+      return #colorLiteral(red: 0, green: 0.8023447394, blue: 0.1060600653, alpha: 1)
+    case .appYellowColor:
+      return #colorLiteral(red: 1, green: 0.6457151771, blue: 0, alpha: 1)
+    case .appRedColor:
+      return #colorLiteral(red: 0.9267777205, green: 0, blue: 0, alpha: 1)
+    }
+  }
+  
   class var random: UIColor {
     get {
       let nim: CGFloat = 0.3

@@ -8,17 +8,24 @@
 
 import UIKit
 
+protocol ReportViewDelegate: class {
+  func touchUpReportButton()
+  func touchUpBackButton()
+}
+
 class ReportView: UIView {
+  
+  weak var delegate: ReportViewDelegate?
   
   private let backButton = UIButton()
   private let reportHedaerTitleLabel = UILabel()
   private let reportButton = UIButton()
   
   private let titleLabel = UILabel()
-  private let titleTextField = UITextField()
+  let titleTextField = UITextField()
   
   private let contentsLabel = UILabel()
-  private let contentsTextField = UITextField()
+  let contentsTextField = UITextField()
   
   private let attachFileLabel = UILabel()
   private let attachFileButton = UIButton()
@@ -26,12 +33,21 @@ class ReportView: UIView {
   override init(frame: CGRect) {
     super.init(frame: frame)
     
-    attribute()
     layout()
   }
   
-  @objc private func touchUpBackButton() {
+  override func layoutSubviews() {
+    super.layoutSubviews()
     
+    attribute()
+  }
+  
+  @objc private func touchUpReportButton() {
+    delegate?.touchUpReportButton()
+  }
+  
+  @objc private func touchUpBackButton() {
+    delegate?.touchUpBackButton()
   }
   
   private func attribute() {
@@ -48,6 +64,7 @@ class ReportView: UIView {
     reportButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
     reportButton.backgroundColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
     reportButton.layer.cornerRadius = 5
+    reportButton.addTarget(self, action: #selector(touchUpReportButton), for: .touchUpInside)
     
     titleLabel.text = "타이틀 (필수)"
     titleLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -61,6 +78,9 @@ class ReportView: UIView {
     titleTextField.layer.borderWidth = 2
     titleTextField.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
     titleTextField.layer.cornerRadius = 5
+    titleTextField.clearButtonMode = .whileEditing
+    titleTextField.keyboardType = .default
+    titleTextField.returnKeyType = .continue
     
     contentsLabel.text = "메세지 (필수)"
     contentsLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -74,6 +94,10 @@ class ReportView: UIView {
     contentsTextField.layer.borderWidth = 2
     contentsTextField.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
     contentsTextField.layer.cornerRadius = 5
+    contentsTextField.textAlignment = .justified
+    contentsTextField.clearButtonMode = .whileEditing
+    contentsTextField.keyboardType = .default
+    contentsTextField.returnKeyType = .done
     
     attachFileLabel.text = "파일 첨부 (선택)"
     attachFileLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -82,6 +106,11 @@ class ReportView: UIView {
     attachFileAttributedStr.addAttribute(.foregroundColor, value: UIColor.red, range: (attachFileLabel.text! as NSString).range(of: "(선택)"))
     attachFileAttributedStr.addAttribute(.font, value: UIFont.systemFont(ofSize: 16, weight: .heavy), range: (attachFileLabel.text! as NSString).range(of: "(선택)"))
     attachFileLabel.attributedText = attachFileAttributedStr
+    
+    attachFileButton.setImage(#imageLiteral(resourceName: "icons8-plus-math-30"), for: .normal)
+    attachFileButton.contentMode = .scaleAspectFit
+    attachFileButton.backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
+    attachFileButton.layer.cornerRadius = 5
   }
   
   private func layout() {
@@ -105,7 +134,7 @@ class ReportView: UIView {
     }
     
     titleLabel.snp.makeConstraints {
-      $0.top.equalTo(backButton.snp.bottom).offset(20)
+      $0.top.equalTo(backButton.snp.bottom).offset(40)
       $0.leading.equalToSuperview().offset(20)
     }
     
