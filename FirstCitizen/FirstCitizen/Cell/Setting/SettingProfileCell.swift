@@ -15,12 +15,8 @@ class SettingProfileCell: UITableViewCell {
   
   private let topImageView = UIImageView()
   private let nickNameLabel = UILabel()
-  private let nickNameEditButton = UIButton()
-  private let mannerLabel = UILabel()
+  private let creditLabel = UILabel()
   private let pointLabel = UILabel()
-  private let emailLabel = UILabel()
-  private let phoneNumberLabel = UILabel()
-  private let phoneNumberCheckButton = UIButton()
   
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -47,35 +43,15 @@ class SettingProfileCell: UITableViewCell {
     nickNameLabel.upsFontBold(ofSize: 17)
     contentView.addSubview(nickNameLabel)
     
-    nickNameEditButton.setTitle("수정", for: .normal)
-    nickNameEditButton.setTitleColor(self.tintColor, for: .normal)
-    nickNameEditButton.titleLabel?.upsFont(ofSize: 15)
-    contentView.addSubview(nickNameEditButton)
-    
-    mannerLabel.text = "매너점수: 1200"
-    mannerLabel.upsFontBold(ofSize: 17)
-    mannerLabel.textColor = .black
-    contentView.addSubview(mannerLabel)
+    creditLabel.text = "매너점수: 1200"
+    creditLabel.upsFontBold(ofSize: 17)
+    creditLabel.textColor = .black
+    contentView.addSubview(creditLabel)
     
     pointLabel.text = "Point: 420"
     pointLabel.textColor = .black
     pointLabel.upsFontBold(ofSize: 17)
     contentView.addSubview(pointLabel)
-    
-    emailLabel.text = "이메일 : dldbdjq@gmail.com"
-    emailLabel.textColor = .darkGray
-    emailLabel.upsFontBold(ofSize: 15)
-    contentView.addSubview(emailLabel)
-    
-    phoneNumberLabel.text = "휴대폰 번호 : 010-1111-1111"
-    phoneNumberLabel.textColor = .darkGray
-    phoneNumberLabel.upsFontBold(ofSize: 15)
-    contentView.addSubview(phoneNumberLabel)
-    
-    phoneNumberCheckButton.setTitle("인증하기", for: .normal)
-    phoneNumberCheckButton.setTitleColor(self.tintColor, for: .normal)
-    phoneNumberCheckButton.titleLabel?.upsFont(ofSize: 15)
-    contentView.addSubview(phoneNumberCheckButton)
   }
   
   private struct Standard {
@@ -97,30 +73,14 @@ class SettingProfileCell: UITableViewCell {
     nickNameLabel.translatesAutoresizingMaskIntoConstraints = false
     nickNameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
     nickNameLabel.topAnchor.constraint(equalTo: topImageView.bottomAnchor, constant: Standard.xSpace).isActive = true
-
-    nickNameEditButton.translatesAutoresizingMaskIntoConstraints = false
-    nickNameEditButton.centerYAnchor.constraint(equalTo: nickNameLabel.centerYAnchor).isActive = true
-    nickNameEditButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Standard.xSpace).isActive = true
     
-    mannerLabel.translatesAutoresizingMaskIntoConstraints = false
-    mannerLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-    mannerLabel.topAnchor.constraint(equalTo: nickNameLabel.bottomAnchor, constant: Standard.ySpace).isActive = true
+    creditLabel.translatesAutoresizingMaskIntoConstraints = false
+    creditLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+    creditLabel.topAnchor.constraint(equalTo: nickNameLabel.bottomAnchor, constant: Standard.ySpace).isActive = true
     
     pointLabel.translatesAutoresizingMaskIntoConstraints = false
     pointLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-    pointLabel.topAnchor.constraint(equalTo: mannerLabel.bottomAnchor, constant: Standard.ySpace).isActive = true
-
-    emailLabel.translatesAutoresizingMaskIntoConstraints = false
-    emailLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-    emailLabel.topAnchor.constraint(equalTo: pointLabel.bottomAnchor, constant: Standard.ySpace).isActive = true
-
-    phoneNumberLabel.translatesAutoresizingMaskIntoConstraints = false
-    phoneNumberLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-    phoneNumberLabel.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: Standard.ySpace).isActive = true
-    phoneNumberLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16).isActive = true
-
-    phoneNumberCheckButton.translatesAutoresizingMaskIntoConstraints = false
-    phoneNumberCheckButton.centerYAnchor.constraint(equalTo: phoneNumberLabel.centerYAnchor).isActive = true
-    phoneNumberCheckButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Standard.xSpace).isActive = true
+    pointLabel.topAnchor.constraint(equalTo: creditLabel.bottomAnchor, constant: Standard.ySpace).isActive = true
+    pointLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16).isActive = true
   }
 }
