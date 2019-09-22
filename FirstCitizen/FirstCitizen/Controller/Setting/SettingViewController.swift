@@ -8,26 +8,14 @@
 
 import UIKit
 
-enum ListType {
-  case request
-  case report
-}
-
-enum CategoryType: String {
-  case type1 = "긴급 똥휴지"
-  case type2 = "분실"
-  case type3 = "접촉사고"
-  case type4 = "뺑소니"
-}
-
 class SettingViewController: UIViewController {
   
   private let tableView = UITableView()
   
-  private var requestList = [String]()  // 의뢰 목록
-  private var reportList = [String]()   // 제보 목록
+//  private var requestList = [String]()  // 의뢰 목록
+//  private var helpList = [String]()   // 도움 목록
   
-  private let categoryList = ["긴급 똥휴지", "분실", "접촉사고", "뺑소니"]
+  private let document = ["의뢰", "도움", "공지사항", "이용약관", "내 정보"]
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -46,32 +34,6 @@ class SettingViewController: UIViewController {
     view.addSubview(tableView)
   }
   
-  private func alertAction() {
-    let alert = UIAlertController(title: "의뢰하기", message: "아래 목록 중 하나를 선택하세요", preferredStyle: .alert)
-    
-    categoryList.forEach { item in
-      let action = UIAlertAction(title: item, style: .default, handler: { action in
-//        guard let `self` = self, let type = CategoryType.init(rawValue: item) else { return }
-        guard let type = CategoryType.init(rawValue: item) else { return }
-        
-        switch type {
-        case .type1:
-          print(type.rawValue)
-          
-        default:
-          print(type.rawValue)
-        }
-      })
-      
-      alert.addAction(action)
-    }
-    
-    
-    let cancel = UIAlertAction(title: "취소", style: .cancel)
-    alert.addAction(cancel)
-    present(alert, animated: true)
-  }
-  
   private func autoLayout() {
     let guide = view.safeAreaLayoutGuide
     
@@ -81,44 +43,41 @@ class SettingViewController: UIViewController {
     tableView.trailingAnchor.constraint(equalTo: guide.trailingAnchor).isActive = true
     tableView.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -TabBarButtonView.height).isActive = true
   }
-  
 }
 
 extension SettingViewController: UITableViewDataSource {
-  func numberOfSections(in tableView: UITableView) -> Int {
-    return 3
-  }
-  
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 1
+    return 7
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    switch indexPath.section {
+    switch indexPath.row {
     case 0:
       let cell = SettingProfileCell()
       
       return cell
       
-    case 1:
-      let cell = SettingListCell()
+    case 1...5:
+      let cell = SettingDocumentCell()
       
-      cell.delegate = self
-      cell.setting(type: .request, list: [String]())
+      cell.titleLabel.text = document[indexPath.row - 1]
       
-      return cell
-      
-      
-    case 2:
-      let cell = SettingListCell()
-      
-      cell.delegate = self
-      cell.setting(type: .report, list: [String]())
+      if indexPath.row == 1 {
+        cell.countLabel.isHidden = false
+        cell.countLabel.text = "0"
+      }
       
       return cell
+      
       
     default:
       let cell = UITableViewCell()
+      
+      cell.textLabel?.text = "로그아웃"
+      cell.textLabel?.upsFontBold(ofSize: 20)
+      cell.textLabel?.textColor = .red
+      cell.textLabel?.textAlignment = .center
+      cell.selectionStyle = .none
       
       return cell
     }
@@ -127,46 +86,13 @@ extension SettingViewController: UITableViewDataSource {
 
 
 extension SettingViewController: UITableViewDelegate {
-  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    switch section {
-    case 1:
-      let vGuide = SettingGuideLineView()
-      
-      vGuide.title.text = "  의 뢰  "
-      
-      return vGuide
-      
-    case 2:
-      let vGuide = SettingGuideLineView()
-      
-      vGuide.title.text = "  제 보  "
-      
-      return vGuide
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    switch indexPath.row {
+    case 1...5:
+      print(indexPath.row)
       
     default:
-      return UIView()
-    }
-  }
-}
-
-extension SettingViewController: SettingListCellDelegate {
-  func addDidTap(type: ListType) {
-    switch type {
-    case .request:
-      alertAction()
-      
-    case .report:
-      print("report add")
-    }
-  }
-  
-  func noneDidTap(type: ListType) {
-    switch type {
-    case .request:
-      print("request none")
-      
-    case .report:
-      print("report none")
+      break
     }
   }
 }
