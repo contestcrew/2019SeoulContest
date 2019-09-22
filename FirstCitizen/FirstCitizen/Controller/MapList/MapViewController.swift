@@ -31,15 +31,16 @@ class MapViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    dataParsing(datas: sampleDatas)
 //    testFunc()
     configure()
 //    testFunc()
-    dataParsing(datas: sampleDatas)
+    
   }
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
-    
+
     autoLayout()
   }
   

@@ -109,24 +109,15 @@ class MapView: UIView {
     nMapView.showCompass = false
     nMapView.showScaleBar = false
     
-    locationButton.setImage(#imageLiteral(resourceName: "lcation_icon"), for: .normal)
-    locationButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-    locationButton.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-    locationButton.layer.cornerRadius = locationButton.frame.width / 2
+    locationButton.setImage(#imageLiteral(resourceName: "MapCurrent"), for: .normal)
     locationButton.addTarget(self, action: #selector(touchUpLocationButton), for: .touchUpInside)
     locationButton.shadow()
     
-    refreshButton.setImage(#imageLiteral(resourceName: "refresh_icon"), for: .normal)
-    refreshButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-    refreshButton.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-    refreshButton.layer.cornerRadius = refreshButton.frame.width / 2
+    refreshButton.setImage(#imageLiteral(resourceName: "MapReset"), for: .normal)
     refreshButton.addTarget(self, action: #selector(touchUpRefreshButton), for: .touchUpInside)
     refreshButton.shadow()
     
-    registerButton.setImage(#imageLiteral(resourceName: "icons8-plus-math-30 (1)"), for: .normal)
-    registerButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-    registerButton.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-    registerButton.layer.cornerRadius = registerButton.frame.width / 2
+    registerButton.setImage(#imageLiteral(resourceName: "MapAdd"), for: .normal)
     registerButton.addTarget(self, action: #selector(touchUpRegisterButton), for: .touchUpInside)
     registerButton.shadow()
   }
@@ -136,7 +127,7 @@ class MapView: UIView {
     gradientView.contentMode = .scaleToFill
     
     previewContainer.layer.borderWidth = 2
-    previewContainer.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+    previewContainer.layer.borderColor = UIColor.appColor(.appLayerBorderColor).cgColor
     previewContainer.layer.cornerRadius = 10
     let tap = UITapGestureRecognizer(target: self, action: #selector(touchUpPreview))
     previewContainer.addGestureRecognizer(tap)
@@ -148,14 +139,20 @@ class MapView: UIView {
     
     titleLabel.upsFontHeavy(ofSize: 26)
     titleLabel.text = "굳어가고 있어요 헬프미"
+    titleLabel.adjustsFontSizeToFitWidth = true
+    titleLabel.minimumScaleFactor = 0.4
     
     guideLabel.backgroundColor = .black
     
     dateLabel.upsFontHeavy(ofSize: 13)
     dateLabel.text = "2019-08-14 목요일"
+    dateLabel.adjustsFontSizeToFitWidth = true
+    dateLabel.minimumScaleFactor = 0.5
     
     pointLabel.text = "Point 100 + Bonus 350"
     pointLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    pointLabel.adjustsFontSizeToFitWidth = true
+    pointLabel.minimumScaleFactor = 0.5
     pointLabel.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
     let attributedStr = NSMutableAttributedString(string: pointLabel.text!)
     attributedStr.addAttribute(.foregroundColor, value: UIColor.blue, range: (pointLabel.text! as NSString).range(of: "Bonus"))
@@ -165,10 +162,14 @@ class MapView: UIView {
     contentsLabel.upsFontBold(ofSize: 15)
     contentsLabel.textColor = .darkGray
     contentsLabel.text = "굳어가고 있어요.. 헬퓨ㅡ미.."
+    contentsLabel.adjustsFontSizeToFitWidth = true
+    contentsLabel.minimumScaleFactor = 0.5
     
     progressLabel.upsFontHeavy(ofSize: 22)
     progressLabel.text = "도움요청중"
     progressLabel.textAlignment = .center
+    progressLabel.adjustsFontSizeToFitWidth = true
+    progressLabel.minimumScaleFactor = 0.5
     progressLabel.textColor = UIColor.appColor(.appGreenColor)
   }
   

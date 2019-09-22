@@ -34,6 +34,11 @@ class IncidentView: UIView {
   private let regionLabel = UILabel()
   private let pointLabel = UILabel()
   private let uploadTimeLabel = UILabel()
+  
+  private let occurredTimeLabel = UILabel()
+  private let occurredTimeUnderLineView = UIView()
+  private let occurredTimeText = UILabel()
+  
   private let pictureLabel = UILabel()
   private let pictureUnderLineView = UIView()
   
@@ -47,14 +52,9 @@ class IncidentView: UIView {
     return collectionView
   }()
   
-  private let pageControl = UIPageControl()
-  
-  
   private let messageLabel = UILabel()
   private let messageUnderLineView = UIView()
   private let contentsLabel = UILabel()
-  private let occurredTimeLabel = UILabel()
-  private let occurredTimeUnderLineView = UIView()
   
   private let helpButton = UIButton(type: .custom)
   
@@ -81,7 +81,9 @@ class IncidentView: UIView {
     let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: Double(coordinate[0]), lng: Double(coordinate[1])))
     nmapView.moveCamera(cameraUpdate)
     
+    
     titleLabel.text = detailIncidentData.title
+    imageView.image = UIImage(named: detailIncidentData.category)
     regionLabel.text = "\(detailIncidentData.mainAddress), \(detailIncidentData.detailAddress)"
     pointLabel.text = "Point \(detailIncidentData.servicePoint) + Bonus \(detailIncidentData.userPoint)"
     
@@ -92,7 +94,7 @@ class IncidentView: UIView {
     
     uploadTimeLabel.text = detailIncidentData.uploadTime
     contentsLabel.text = detailIncidentData.contents
-    occurredTimeLabel.text = detailIncidentData.occurredTime
+    occurredTimeText.text = detailIncidentData.occurredTime
   }
   
   private func attribute() {
@@ -124,6 +126,16 @@ class IncidentView: UIView {
     uploadTimeLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     uploadTimeLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
     
+    occurredTimeLabel.text = "발생시각"
+    occurredTimeLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    occurredTimeLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+    
+    occurredTimeUnderLineView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    
+    occurredTimeText.text = "09:10"
+    occurredTimeText.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    occurredTimeText.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+    
     pictureLabel.text = "사진"
     pictureLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     pictureLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
@@ -133,11 +145,6 @@ class IncidentView: UIView {
     pictureCollectionView.dataSource = self
     pictureCollectionView.delegate = self
     pictureCollectionView.register(IncidentCell.self, forCellWithReuseIdentifier: IncidentCell.identifier)
-    
-    pageControl.hidesForSinglePage = true
-    // numberOfPages 갯수는 서버에서 받아온 사진의 갯수
-    pageControl.numberOfPages = 5
-    pageControl.pageIndicatorTintColor = #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
     
     messageLabel.text = "메세지"
     messageLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -154,35 +161,27 @@ class IncidentView: UIView {
     helpButton.setTitle("도와주기", for: .normal)
     helpButton.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
     helpButton.titleLabel?.font = UIFont.systemFont(ofSize: 26, weight: .bold)
-    helpButton.layer.cornerRadius = 5
-    helpButton.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+    helpButton.layer.cornerRadius = 10
+    helpButton.backgroundColor = UIColor.appColor(.appButtonColor)
     helpButton.addTarget(self, action: #selector(touchUpHelpButton), for: .touchUpInside)
   }
   
   private func layout() {
-    [nmapView, gradientView, backButton, helpButton, bodyScrollView].forEach { self.addSubview($0) }
-    [bodyView].forEach { bodyScrollView.addSubview($0) }
+    [helpButton, bodyScrollView].forEach { self.addSubview($0) }
+    
+    [nmapView, gradientView, bodyView].forEach { bodyScrollView.addSubview($0) }
     
     if category == "Restroom" {
       [titleLabel, imageView, titleUnderLineView, regionLabel, pointLabel, uploadTimeLabel, messageLabel, messageUnderLineView, contentsLabel].forEach {
         bodyView.addSubview($0)
       }
     } else {
-      [titleLabel, imageView, titleUnderLineView, regionLabel, pointLabel, uploadTimeLabel, pictureLabel, pictureUnderLineView, pictureCollectionView, pageControl, messageLabel, messageUnderLineView, contentsLabel].forEach {
+      [titleLabel, imageView, titleUnderLineView, regionLabel, pointLabel, uploadTimeLabel, occurredTimeLabel, occurredTimeUnderLineView, occurredTimeText, pictureLabel, pictureUnderLineView, pictureCollectionView, messageLabel, messageUnderLineView, contentsLabel].forEach {
         bodyView.addSubview($0)
       }
     }
     
-    nmapView.snp.makeConstraints {
-      $0.top.leading.trailing.equalTo(self)
-      $0.height.equalToSuperview().multipliedBy(0.5)
-    }
-    
-    gradientView.snp.makeConstraints {
-      $0.leading.trailing.equalTo(self)
-      $0.bottom.equalTo(nmapView.snp.bottom)
-      $0.height.equalTo(100)
-    }
+    self.addSubview(backButton)
     
     backButton.snp.makeConstraints {
       $0.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(10)
@@ -191,13 +190,24 @@ class IncidentView: UIView {
     }
     
     bodyScrollView.snp.makeConstraints {
-      $0.top.equalTo(gradientView.snp.bottom)
-      $0.leading.trailing.equalTo(self)
+      $0.top.leading.trailing.equalTo(self)
       $0.bottom.equalTo(helpButton.snp.top).offset(-20)
     }
     
+    nmapView.snp.makeConstraints {
+      $0.top.leading.trailing.equalTo(bodyScrollView)
+      $0.height.equalTo(self).multipliedBy(0.5)
+    }
+    
+    gradientView.snp.makeConstraints {
+      $0.leading.trailing.equalTo(bodyScrollView)
+      $0.bottom.equalTo(nmapView.snp.bottom)
+      $0.height.equalTo(100)
+    }
+    
     bodyView.snp.makeConstraints {
-      $0.top.bottom.equalTo(bodyScrollView)
+      $0.top.equalTo(nmapView.snp.bottom)
+      $0.bottom.equalTo(bodyScrollView)
       $0.leading.equalTo(self).offset(20)
       $0.trailing.equalTo(self).offset(-20)
     }
@@ -209,7 +219,7 @@ class IncidentView: UIView {
     imageView.snp.makeConstraints {
       $0.centerY.equalTo(titleLabel.snp.centerY)
       $0.trailing.equalTo(self).offset(-20)
-      $0.width.height.equalTo(40)
+      $0.width.height.equalTo(35)
     }
     
     titleUnderLineView.snp.makeConstraints {
@@ -239,8 +249,24 @@ class IncidentView: UIView {
         $0.leading.equalTo(bodyView)
       }
     } else {
-      pictureLabel.snp.makeConstraints {
+      occurredTimeLabel.snp.makeConstraints {
         $0.top.equalTo(uploadTimeLabel.snp.bottom).offset(20)
+        $0.leading.equalTo(bodyView)
+      }
+      
+      occurredTimeUnderLineView.snp.makeConstraints {
+        $0.top.equalTo(occurredTimeLabel.snp.bottom).offset(10)
+        $0.leading.trailing.equalTo(bodyView)
+        $0.height.equalTo(1)
+      }
+      
+      occurredTimeText.snp.makeConstraints {
+        $0.top.equalTo(occurredTimeUnderLineView.snp.bottom).offset(10)
+        $0.leading.trailing.equalTo(bodyView)
+      }
+      
+      pictureLabel.snp.makeConstraints {
+        $0.top.equalTo(occurredTimeText.snp.bottom).offset(20)
         $0.leading.equalTo(bodyView)
       }
       
@@ -251,19 +277,14 @@ class IncidentView: UIView {
       }
       
       // TODO: 한 곳에서 width, height 처리할 것
-      let width = UIScreen.main.bounds.width - 40
+      let width = UIScreen.main.bounds.width - 60
       let height = (width * 3) / 4
       
       pictureCollectionView.snp.makeConstraints {
         $0.top.equalTo(pictureUnderLineView.snp.bottom).offset(20)
-        $0.leading.equalTo(bodyView)
-        $0.trailing.equalTo(bodyView)
+        $0.leading.equalTo(self)
+        $0.trailing.equalTo(self)
         $0.height.equalTo(height)
-      }
-      
-      pageControl.snp.makeConstraints {
-        $0.centerX.equalTo(self)
-        $0.bottom.equalTo(pictureCollectionView.snp.bottom).offset(-20)
       }
       
       messageLabel.snp.makeConstraints {
@@ -281,13 +302,13 @@ class IncidentView: UIView {
     contentsLabel.snp.makeConstraints {
       $0.top.equalTo(messageUnderLineView.snp.bottom).offset(10)
       $0.leading.trailing.equalTo(bodyView)
-      $0.bottom.equalTo(bodyView)
+      $0.bottom.equalTo(bodyView).offset(-20)
     }
     
     helpButton.snp.makeConstraints {
       $0.leading.equalTo(self).offset(20)
       $0.trailing.equalTo(self).offset(-20)
-      $0.bottom.equalTo(self).offset(-40)
+      $0.bottom.equalTo(self).offset(-20)
       $0.height.equalTo(50)
     }
   }
@@ -311,18 +332,16 @@ extension IncidentView: UICollectionViewDataSource {
 
 extension IncidentView: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    let width = UIScreen.main.bounds.width - 40
+    let width = UIScreen.main.bounds.width - 60
     let height = (width * 3) / 4
     return CGSize(width: width, height: height)
   }
   
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    return 0
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
   }
-}
-
-extension IncidentView: UICollectionViewDelegate {
-  func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-    self.pageControl.currentPage = indexPath.row
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    return 20
   }
 }

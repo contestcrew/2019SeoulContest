@@ -13,6 +13,8 @@ enum AssetsColor {
   case appGreenColor
   case appYellowColor
   case appRedColor
+  case appLayerBorderColor
+  case appButtonColor
 }
 
 extension UIColor {
@@ -24,6 +26,10 @@ extension UIColor {
       return #colorLiteral(red: 1, green: 0.6457151771, blue: 0, alpha: 1)
     case .appRedColor:
       return #colorLiteral(red: 0.9267777205, green: 0, blue: 0, alpha: 1)
+    case .appLayerBorderColor:
+      return #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+    case .appButtonColor:
+      return #colorLiteral(red: 0.1899392903, green: 0.5782373548, blue: 0.695736587, alpha: 1)
     }
   }
   

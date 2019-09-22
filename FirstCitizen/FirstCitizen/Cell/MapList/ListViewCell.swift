@@ -30,12 +30,17 @@ class ListViewCell: UITableViewCell {
   
   override func layoutSubviews() {
     super.layoutSubviews()
-    
+    contentView.layer.borderColor = UIColor.appColor(.appLayerBorderColor).cgColor
+    contentView.layer.borderWidth = 2
     contentView.layer.cornerRadius = 10
+    
+    contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0))
+    contentView.layoutIfNeeded()
   }
   
   func changePreviewContainer(_ homeIncidentData: HomeIncidentData) {
     titleLabel.text = homeIncidentData.title
+    iconImage.image = UIImage(named: "\(homeIncidentData.category)")
     dateLabel.text = homeIncidentData.uploadTime
     contentsLabel.text = homeIncidentData.contents
     pointLabel.text = "Point \(homeIncidentData.servicePoint) + Bonus \(homeIncidentData.userPoint)"
@@ -110,6 +115,7 @@ class ListViewCell: UITableViewCell {
     contentsLabel.snp.makeConstraints {
       $0.top.equalTo(dateLabel.snp.bottom).offset(20)
       $0.leading.equalToSuperview().offset(10)
+      $0.bottom.equalToSuperview().offset(-20)
     }
     
     progressLabel.snp.makeConstraints {
