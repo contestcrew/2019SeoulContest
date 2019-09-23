@@ -352,8 +352,14 @@ extension IncidentView: UICollectionViewDelegateFlowLayout {
 
 extension IncidentView: UIScrollViewDelegate {
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    let mapMaxY: CGFloat = nmapView.frame.maxY
+    if scrollView.bounds.minY < 0 {
+      scrollView.contentOffset.y = 0
+    }
     
-    print("[Log] :", scrollView.bounds.minY)
+    if scrollView.bounds.minY < nmapView.frame.maxY - gradientView.frame.height {
+      backButton.isHidden = false
+    } else {
+      backButton.isHidden = true
+    }
   }
 }

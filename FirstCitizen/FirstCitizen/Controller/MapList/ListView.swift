@@ -107,8 +107,8 @@ extension ListView: UICollectionViewDelegateFlowLayout {
     
     // categoryNmae Label의 font 속성을 참조하여 width 설정
     let fontWidthSize: CGFloat = (sampleCategoryList[indexPath.row] as NSString).size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 24) as Any]).width
-    
-    return CGSize(width: fontWidthSize + 20, height: height.dynamic(1))
+    let dynamicWidthSize = (fontWidthSize + 30).dynamic(1)
+    return CGSize(width: dynamicWidthSize, height: height.dynamic(1))
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
