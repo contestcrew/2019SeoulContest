@@ -31,6 +31,7 @@ class IncidentCell: UICollectionViewCell {
   
   private func attribute() {
     imageView.contentMode = .scaleAspectFill
+    imageView.clipsToBounds = true
   }
   
   private func layout() {

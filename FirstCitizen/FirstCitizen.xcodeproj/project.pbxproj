@@ -45,6 +45,13 @@
 		CF5467D3233349C700F75DDB /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5467D2233349C700F75DDB /* ReportView.swift */; };
 		CF54686523346E6A00F75DDB /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54686423346E6A00F75DDB /* ListView.swift */; };
 		CF5468682334DD3800F75DDB /* ListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5468672334DD3800F75DDB /* ListViewCell.swift */; };
+		CF5E7EE023376BB40069235C /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5E7EDF23376BB40069235C /* CategoryCell.swift */; };
+		CF5E7EE2233789AC0069235C /* ExtensionUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5E7EE1233789AC0069235C /* ExtensionUILabel.swift */; };
+		CF5E7EE42337DC010069235C /* ExtensionAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5E7EE32337DC010069235C /* ExtensionAlertController.swift */; };
+		CF5E7EE72337E1A20069235C /* RequestDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5E7EE62337E1A20069235C /* RequestDetailViewController.swift */; };
+		CF5E7EE92337E1AC0069235C /* RequestDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5E7EE82337E1AC0069235C /* RequestDetailView.swift */; };
+		CF5E7EEB23385B080069235C /* RequestDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5E7EEA23385B080069235C /* RequestDetailCell.swift */; };
+		CF5E7EED233863A80069235C /* ExtensionCGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5E7EEC233863A80069235C /* ExtensionCGFloat.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +98,13 @@
 		CF5467D2233349C700F75DDB /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		CF54686423346E6A00F75DDB /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		CF5468672334DD3800F75DDB /* ListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewCell.swift; sourceTree = "<group>"; };
+		CF5E7EDF23376BB40069235C /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		CF5E7EE1233789AC0069235C /* ExtensionUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUILabel.swift; sourceTree = "<group>"; };
+		CF5E7EE32337DC010069235C /* ExtensionAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionAlertController.swift; sourceTree = "<group>"; };
+		CF5E7EE62337E1A20069235C /* RequestDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailViewController.swift; sourceTree = "<group>"; };
+		CF5E7EE82337E1AC0069235C /* RequestDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailView.swift; sourceTree = "<group>"; };
+		CF5E7EEA23385B080069235C /* RequestDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailCell.swift; sourceTree = "<group>"; };
+		CF5E7EEC233863A80069235C /* ExtensionCGFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionCGFloat.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +173,7 @@
 				4FF966B2230C07A400E869FF /* Point */,
 				4FF966B0230C074F00E869FF /* MapList */,
 				CF1E09CF2326198A006E9537 /* Incident */,
+				CF5E7EE52337E16A0069235C /* RequestDetail */,
 				CF5467CF233349A600F75DDB /* Report */,
 				4FF966B1230C079D00E869FF /* Setting */,
 			);
@@ -169,7 +184,10 @@
 			isa = PBXGroup;
 			children = (
 				4FF966B5230C07EB00E869FF /* MapViewController.swift */,
+				4FF966BE230C1B5B00E869FF /* MapView.swift */,
 				4FF966B7230C07F200E869FF /* ListViewController.swift */,
+				CF54686423346E6A00F75DDB /* ListView.swift */,
+				CF5E7EDF23376BB40069235C /* CategoryCell.swift */,
 			);
 			path = MapList;
 			sourceTree = "<group>";
@@ -198,8 +216,6 @@
 				CF0CF52023154040004DF6A5 /* SignupView.swift */,
 				CF0CF51C2313C635004DF6A5 /* PreparedView.swift */,
 				4FF966C3230C28E800E869FF /* PointView.swift */,
-				4FF966BE230C1B5B00E869FF /* MapView.swift */,
-				CF54686423346E6A00F75DDB /* ListView.swift */,
 				4F87FFCD232896BB0094CCD0 /* Setting */,
 			);
 			path = View;
@@ -212,6 +228,9 @@
 				527E38F323321C1000C01EC7 /* ExtensionUIImage.swift */,
 				4FF966C5230C31AE00E869FF /* ExtensionColor.swift */,
 				4FF966C7230C345E00E869FF /* ExtensionView.swift */,
+				CF5E7EE1233789AC0069235C /* ExtensionUILabel.swift */,
+				CF5E7EE32337DC010069235C /* ExtensionAlertController.swift */,
+				CF5E7EEC233863A80069235C /* ExtensionCGFloat.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -313,6 +332,16 @@
 				CF5468672334DD3800F75DDB /* ListViewCell.swift */,
 			);
 			path = MapList;
+			sourceTree = "<group>";
+		};
+		CF5E7EE52337E16A0069235C /* RequestDetail */ = {
+			isa = PBXGroup;
+			children = (
+				CF5E7EE62337E1A20069235C /* RequestDetailViewController.swift */,
+				CF5E7EE82337E1AC0069235C /* RequestDetailView.swift */,
+				CF5E7EEA23385B080069235C /* RequestDetailCell.swift */,
+			);
+			path = RequestDetail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -445,13 +474,17 @@
 			files = (
 				4FF966BD230C087400E869FF /* TabBarButtonView.swift in Sources */,
 				4FF966BF230C1B5B00E869FF /* MapView.swift in Sources */,
+				CF5E7EE023376BB40069235C /* CategoryCell.swift in Sources */,
 				CF0CF51B2313C627004DF6A5 /* PreparedViewController.swift in Sources */,
 				527E38F62332958700C01EC7 /* TestData.swift in Sources */,
 				4FF966B4230C07E300E869FF /* PointViewController.swift in Sources */,
 				CF0CF52123154040004DF6A5 /* SignupView.swift in Sources */,
+				CF5E7EE92337E1AC0069235C /* RequestDetailView.swift in Sources */,
 				CF0CF5122313912D004DF6A5 /* LoginViewController.swift in Sources */,
+				CF5E7EE2233789AC0069235C /* ExtensionUILabel.swift in Sources */,
 				CF388F8323306EE700DA6A1C /* DetailIncidentData.swift in Sources */,
 				CF1E09D523275891006E9537 /* IncidentView.swift in Sources */,
+				CF5E7EE72337E1A20069235C /* RequestDetailViewController.swift in Sources */,
 				4FF966C6230C31AE00E869FF /* ExtensionColor.swift in Sources */,
 				4FF966AF230C043B00E869FF /* MainTabBarController.swift in Sources */,
 				4FF9669C230C032600E869FF /* AppDelegate.swift in Sources */,
@@ -469,12 +502,15 @@
 				CF388F7E232FAE5900DA6A1C /* HomeIncidentData.swift in Sources */,
 				CF1E09D823275F33006E9537 /* IncidentCell.swift in Sources */,
 				CF5467D3233349C700F75DDB /* ReportView.swift in Sources */,
+				CF5E7EE42337DC010069235C /* ExtensionAlertController.swift in Sources */,
 				4FF966D4230C706800E869FF /* SettingProfileCell.swift in Sources */,
 				CF5467D1233349BC00F75DDB /* ReportViewController.swift in Sources */,
+				CF5E7EEB23385B080069235C /* RequestDetailCell.swift in Sources */,
 				4FF966B6230C07EB00E869FF /* MapViewController.swift in Sources */,
 				4FF966C8230C345E00E869FF /* ExtensionView.swift in Sources */,
 				CF0CF51D2313C635004DF6A5 /* PreparedView.swift in Sources */,
 				CF0CF51423139137004DF6A5 /* LoginView.swift in Sources */,
+				CF5E7EED233863A80069235C /* ExtensionCGFloat.swift in Sources */,
 				4FF966BA230C07F900E869FF /* SettingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

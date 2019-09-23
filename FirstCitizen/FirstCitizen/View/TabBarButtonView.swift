@@ -36,8 +36,8 @@ class TabBarButtonView: UIView {
   
   private func configure() {
     pointButton.setImage(UIImage(named: "TabBarPoint"), for: .normal)
-    
-    mapListButton.setImage(UIImage(named: "TabBarMap"), for: .normal)
+ 
+    mapListButton.setImage(UIImage(named: "TabBarList"), for: .normal)
     
     settingButton.setImage(UIImage(named: "TabBarSetting"), for: .normal)
   }
@@ -56,41 +56,19 @@ class TabBarButtonView: UIView {
     
     pointButton.snp.makeConstraints {
       $0.centerY.equalTo(self.snp.centerY)
-      $0.trailing.equalTo(mapListButton.snp.leading).offset(-Standard.sideSpace * 3)
-      $0.width.height.equalTo(Standard.sideSize - 10)
+      $0.trailing.equalTo(mapListButton.snp.leading).offset(-Standard.sideSpace.dynamic(3))
+      $0.width.height.equalTo(Standard.sideSize.dynamic(1) - 10)
     }
 
     mapListButton.snp.makeConstraints {
       $0.centerX.top.bottom.equalTo(self)
-      $0.width.height.equalTo(Standard.centerSize)
+      $0.width.height.equalTo(Standard.centerSize.dynamic(1))
     }
 
     settingButton.snp.makeConstraints {
       $0.centerY.equalTo(self)
-      $0.leading.equalTo(mapListButton.snp.trailing).offset(Standard.sideSpace * 3)
-      $0.width.height.equalTo(Standard.sideSize - 10)
+      $0.leading.equalTo(mapListButton.snp.trailing).offset(Standard.sideSpace.dynamic(3))
+      $0.width.height.equalTo(Standard.sideSize.dynamic(1) - 10)
     }
-    
-//    pointButton.translatesAutoresizingMaskIntoConstraints = false
-//    pointButton.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-////    pointButton.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-//    pointButton.trailingAnchor.constraint(equalTo: mapListButton.leadingAnchor, constant: -Standard.sideSpace).isActive = true
-//    pointButton.widthAnchor.constraint(equalToConstant: Standard.sideSize).isActive = true
-//    pointButton.heightAnchor.constraint(equalToConstant: Standard.sideSize).isActive = true
-//
-//    mapListButton.translatesAutoresizingMaskIntoConstraints = false
-//    mapListButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-////    mapListButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-//    mapListButton.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-//    mapListButton.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-//    mapListButton.widthAnchor.constraint(equalToConstant: Standard.centerSize).isActive = true
-//    mapListButton.heightAnchor.constraint(equalToConstant: Standard.centerSize).isActive = true
-//
-//    settingButton.translatesAutoresizingMaskIntoConstraints = false
-//    settingButton.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-////    settingButton.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-//    settingButton.leadingAnchor.constraint(equalTo: mapListButton.trailingAnchor, constant: Standard.sideSpace).isActive = true
-//    settingButton.widthAnchor.constraint(equalToConstant: Standard.sideSize).isActive = true
-//    settingButton.heightAnchor.constraint(equalToConstant: Standard.sideSize).isActive = true
   }
 }
