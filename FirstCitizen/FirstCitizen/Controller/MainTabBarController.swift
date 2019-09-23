@@ -64,15 +64,15 @@ class MainTabBarController: UITabBarController {
   
   private struct Standard {
     static let space: CGFloat = 8
-    
+    static let margin: CGFloat = 10
   }
   
   private func autoLayout() {
     let guide = view.safeAreaLayoutGuide
     
-    vTabBarButton.translatesAutoresizingMaskIntoConstraints = false
-    vTabBarButton.leadingAnchor.constraint(equalTo: guide.leadingAnchor).isActive = true
-    vTabBarButton.trailingAnchor.constraint(equalTo: guide.trailingAnchor).isActive = true
-    vTabBarButton.bottomAnchor.constraint(equalTo: guide.bottomAnchor).isActive = true
+    vTabBarButton.snp.makeConstraints {
+      $0.leading.trailing.equalToSuperview()
+      $0.bottom.equalTo(guide.snp.bottom).offset(-Standard.margin.dynamic(1))
+    }
   }
 }

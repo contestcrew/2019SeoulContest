@@ -1,25 +1,18 @@
+
 //
-//  IncidentView.swift
+//  RequestDetailView.swift
 //  FirstCitizen
 //
-//  Created by Fury on 10/09/2019.
+//  Created by Fury on 23/09/2019.
 //  Copyright © 2019 Kira. All rights reserved.
 //
 
 import UIKit
 import NMapsMap
 
-protocol IncidentViewDelegate: class {
-  func touchUpBackButton()
-  func touchUpHelpButton(category: String)
-}
-
-class IncidentView: UIView {
+class RequestDetailView: UIView {
+  
   var category: String = ""
-  
-  weak var delegate: IncidentViewDelegate?
-  
-  private let locationManager = CLLocationManager()
   
   private let nmapView = NMFMapView()
   private let gradientView = UIImageView()
@@ -55,7 +48,9 @@ class IncidentView: UIView {
   private let messageUnderLineView = UIView()
   private let contentsLabel = UILabel()
   
-  private let helpButton = UIButton(type: .custom)
+  private let helpLabel = UILabel()
+  private let helpUnderLineView = UIView()
+  private let helpListTableView = UITableView()
   
   init(frame: CGRect, category: String) {
     super.init(frame: frame)
@@ -66,33 +61,7 @@ class IncidentView: UIView {
   }
   
   @objc private func touchUpBackButton() {
-    delegate?.touchUpBackButton()
-  }
-  
-  @objc private func touchUpHelpButton() {
-    delegate?.touchUpHelpButton(category: category)
-  }
-  
-  func changeAttribute(detailIncidentData: DetailIncidentData) {
-    
-    // 카메라 위치 이동
-    let coordinate = detailIncidentData.coordinate
-    let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: Double(coordinate[0]), lng: Double(coordinate[1])))
-    nmapView.moveCamera(cameraUpdate)
-    
-    titleLabel.text = detailIncidentData.title
-    imageView.image = UIImage(named: detailIncidentData.category)
-    regionLabel.text = "\(detailIncidentData.mainAddress), \(detailIncidentData.detailAddress)"
-    pointLabel.text = "Point \(detailIncidentData.servicePoint) + Bonus \(detailIncidentData.userPoint)"
-    
-    let attributedStr = NSMutableAttributedString(string: pointLabel.text!)
-    attributedStr.addAttribute(.foregroundColor, value: UIColor.blue, range: (pointLabel.text! as NSString).range(of: "Bonus"))
-    attributedStr.addAttribute(.foregroundColor, value: UIColor.orange, range: (pointLabel.text! as NSString).range(of: "Point"))
-    pointLabel.attributedText = attributedStr
-    
-    uploadTimeLabel.text = detailIncidentData.uploadTime
-    contentsLabel.text = detailIncidentData.contents
-    occurredTimeText.text = detailIncidentData.occurredTime
+//    delegate?.touchUpBackButton()
   }
   
   private func attribute() {
@@ -102,12 +71,9 @@ class IncidentView: UIView {
     backButton.setImage(#imageLiteral(resourceName: "Back_Button"), for: .normal)
     backButton.addTarget(self, action: #selector(touchUpBackButton), for: .touchUpInside)
     
-    bodyScrollView.showsHorizontalScrollIndicator = false
-    bodyScrollView.delegate = self
-    
     titleLabel.text = "하늘에서 날개를 잃어버렸어요..."
     titleLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    titleLabel.dynamicFont(fontSize: 28, weight: .bold)
+    titleLabel.font = UIFont.systemFont(ofSize: 28, weight: .bold)
     
     imageView.contentMode = .scaleAspectFit
     imageView.image = #imageLiteral(resourceName: "Restroom")
@@ -116,30 +82,30 @@ class IncidentView: UIView {
     
     regionLabel.text = "서울특별시 성동구 성수22길 37, 사거리"
     regionLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    regionLabel.dynamicFont(fontSize: 14, weight: .semibold)
+    regionLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
     regionLabel.numberOfLines = 0
     
     pointLabel.text = "1000"
     pointLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    pointLabel.dynamicFont(fontSize: 14, weight: .semibold)
+    pointLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
     
     uploadTimeLabel.text = "2019-06-04 목요일"
     uploadTimeLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    uploadTimeLabel.dynamicFont(fontSize: 14, weight: .semibold)
+    uploadTimeLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
     
     occurredTimeLabel.text = "발생시각"
     occurredTimeLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    occurredTimeLabel.dynamicFont(fontSize: 24, weight: .bold)
+    occurredTimeLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
     
     occurredTimeUnderLineView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     
     occurredTimeText.text = "09:10"
     occurredTimeText.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    occurredTimeText.dynamicFont(fontSize: 16, weight: .bold)
+    occurredTimeText.font = UIFont.systemFont(ofSize: 16, weight: .bold)
     
     pictureLabel.text = "사진"
     pictureLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    pictureLabel.dynamicFont(fontSize: 24, weight: .bold)
+    pictureLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
     
     pictureUnderLineView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     
@@ -149,37 +115,37 @@ class IncidentView: UIView {
     
     messageLabel.text = "메세지"
     messageLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    messageLabel.dynamicFont(fontSize: 24, weight: .bold)
+    messageLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
     
     messageUnderLineView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     
     contentsLabel.text = "내 날개좀.. 찾아주세요.. 부탁드려요 ㅠㅠㅠㅠ"
     contentsLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     contentsLabel.textAlignment = .justified
-    contentsLabel.dynamicFont(fontSize: 16, weight: .bold)
+    contentsLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
     contentsLabel.numberOfLines = 0
     
-    helpButton.setTitle("도와주기", for: .normal)
-    helpButton.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
-    helpButton.titleLabel?.dynamicFont(fontSize: 26, weight: .bold)
-    helpButton.layer.cornerRadius = 10
-    helpButton.backgroundColor = UIColor.appColor(.appButtonColor)
-    helpButton.addTarget(self, action: #selector(touchUpHelpButton), for: .touchUpInside)
+    helpLabel.text = "메세지"
+    helpLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    helpLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+    
+    helpUnderLineView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    
+    helpListTableView.dataSource = self
+    helpListTableView.register(RequestDetailCell.self, forCellReuseIdentifier: RequestDetailCell.identifier)
   }
   
   private func layout() {
-    let margin: CGFloat = 10
-    
-    [helpButton, bodyScrollView].forEach { self.addSubview($0) }
+    [bodyScrollView].forEach { self.addSubview($0) }
     
     [nmapView, gradientView, bodyView].forEach { bodyScrollView.addSubview($0) }
     
     if category == "Restroom" {
-      [titleLabel, imageView, titleUnderLineView, regionLabel, pointLabel, uploadTimeLabel, messageLabel, messageUnderLineView, contentsLabel].forEach {
+      [titleLabel, imageView, titleUnderLineView, regionLabel, pointLabel, uploadTimeLabel, messageLabel, messageUnderLineView, contentsLabel, helpLabel, helpUnderLineView, helpListTableView].forEach {
         bodyView.addSubview($0)
       }
     } else {
-      [titleLabel, imageView, titleUnderLineView, regionLabel, pointLabel, uploadTimeLabel, occurredTimeLabel, occurredTimeUnderLineView, occurredTimeText, pictureLabel, pictureUnderLineView, pictureCollectionView, messageLabel, messageUnderLineView, contentsLabel].forEach {
+      [titleLabel, imageView, titleUnderLineView, regionLabel, pointLabel, uploadTimeLabel, occurredTimeLabel, occurredTimeUnderLineView, occurredTimeText, pictureLabel, pictureUnderLineView, pictureCollectionView, messageLabel, messageUnderLineView, contentsLabel, helpLabel, helpUnderLineView, helpListTableView].forEach {
         bodyView.addSubview($0)
       }
     }
@@ -187,14 +153,14 @@ class IncidentView: UIView {
     self.addSubview(backButton)
     
     backButton.snp.makeConstraints {
-      $0.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(margin.dynamic(1))
-      $0.leading.equalTo(self.safeAreaLayoutGuide.snp.leading).offset(margin.dynamic(1))
-      $0.width.height.equalTo(margin.dynamic(3) + 5)
+      $0.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(10)
+      $0.leading.equalTo(self.safeAreaLayoutGuide.snp.leading).offset(10)
+      $0.width.height.equalTo(35)
     }
     
     bodyScrollView.snp.makeConstraints {
       $0.top.leading.trailing.equalTo(self)
-      $0.bottom.equalTo(helpButton.snp.top).offset(-margin.dynamic(2))
+      $0.bottom.equalTo(helpListTableView.snp.bottom)
     }
     
     nmapView.snp.makeConstraints {
@@ -205,14 +171,14 @@ class IncidentView: UIView {
     gradientView.snp.makeConstraints {
       $0.leading.trailing.equalTo(bodyScrollView)
       $0.bottom.equalTo(nmapView.snp.bottom)
-      $0.height.equalTo(margin.dynamic(10))
+      $0.height.equalTo(100)
     }
     
     bodyView.snp.makeConstraints {
       $0.top.equalTo(nmapView.snp.bottom)
       $0.bottom.equalTo(bodyScrollView)
-      $0.leading.equalTo(self).offset(margin.dynamic(2))
-      $0.trailing.equalTo(self).offset(-margin.dynamic(2))
+      $0.leading.equalTo(self).offset(20)
+      $0.trailing.equalTo(self).offset(-20)
     }
     
     titleLabel.snp.makeConstraints {
@@ -221,62 +187,62 @@ class IncidentView: UIView {
     
     imageView.snp.makeConstraints {
       $0.centerY.equalTo(titleLabel.snp.centerY)
-      $0.trailing.equalTo(self).offset(-margin.dynamic(2))
-      $0.width.height.equalTo(margin.dynamic(3) + 5)
+      $0.trailing.equalTo(self).offset(-20)
+      $0.width.height.equalTo(35)
     }
     
     titleUnderLineView.snp.makeConstraints {
-      $0.top.equalTo(titleLabel.snp.bottom).offset(margin.dynamic(1))
+      $0.top.equalTo(titleLabel.snp.bottom).offset(10)
       $0.leading.trailing.equalTo(bodyView)
-      $0.height.equalTo(margin.dynamic(0.1))
+      $0.height.equalTo(1)
     }
     
     regionLabel.snp.makeConstraints {
-      $0.top.equalTo(titleUnderLineView.snp.bottom).offset(margin.dynamic(1))
+      $0.top.equalTo(titleUnderLineView.snp.bottom).offset(10)
       $0.trailing.equalTo(bodyView)
     }
     
     pointLabel.snp.makeConstraints {
-      $0.top.equalTo(regionLabel.snp.bottom).offset(margin.dynamic(1))
+      $0.top.equalTo(regionLabel.snp.bottom).offset(10)
       $0.trailing.equalTo(bodyView)
     }
     
     uploadTimeLabel.snp.makeConstraints {
-      $0.top.equalTo(pointLabel.snp.bottom).offset(margin.dynamic(1))
+      $0.top.equalTo(pointLabel.snp.bottom).offset(10)
       $0.trailing.equalTo(bodyView)
     }
     
     if category == "Restroom" {
       messageLabel.snp.makeConstraints {
-        $0.top.equalTo(uploadTimeLabel.snp.bottom).offset(margin.dynamic(2))
+        $0.top.equalTo(uploadTimeLabel.snp.bottom).offset(20)
         $0.leading.equalTo(bodyView)
       }
     } else {
       occurredTimeLabel.snp.makeConstraints {
-        $0.top.equalTo(uploadTimeLabel.snp.bottom).offset(margin.dynamic(2))
+        $0.top.equalTo(uploadTimeLabel.snp.bottom).offset(20)
         $0.leading.equalTo(bodyView)
       }
       
       occurredTimeUnderLineView.snp.makeConstraints {
-        $0.top.equalTo(occurredTimeLabel.snp.bottom).offset(margin.dynamic(2))
+        $0.top.equalTo(occurredTimeLabel.snp.bottom).offset(10)
         $0.leading.trailing.equalTo(bodyView)
-        $0.height.equalTo(margin.dynamic(0.1))
+        $0.height.equalTo(1)
       }
       
       occurredTimeText.snp.makeConstraints {
-        $0.top.equalTo(occurredTimeUnderLineView.snp.bottom).offset(margin.dynamic(1))
+        $0.top.equalTo(occurredTimeUnderLineView.snp.bottom).offset(10)
         $0.leading.trailing.equalTo(bodyView)
       }
       
       pictureLabel.snp.makeConstraints {
-        $0.top.equalTo(occurredTimeText.snp.bottom).offset(margin.dynamic(2))
+        $0.top.equalTo(occurredTimeText.snp.bottom).offset(20)
         $0.leading.equalTo(bodyView)
       }
       
       pictureUnderLineView.snp.makeConstraints {
-        $0.top.equalTo(pictureLabel.snp.bottom).offset(margin.dynamic(1))
+        $0.top.equalTo(pictureLabel.snp.bottom).offset(10)
         $0.leading.trailing.equalTo(bodyView)
-        $0.height.equalTo(margin.dynamic(0.1))
+        $0.height.equalTo(1)
       }
       
       // TODO: 한 곳에서 width, height 처리할 것
@@ -284,35 +250,45 @@ class IncidentView: UIView {
       let height = (width * 3) / 4
       
       pictureCollectionView.snp.makeConstraints {
-        $0.top.equalTo(pictureUnderLineView.snp.bottom).offset(margin.dynamic(2))
+        $0.top.equalTo(pictureUnderLineView.snp.bottom).offset(20)
         $0.leading.equalTo(self)
         $0.trailing.equalTo(self)
         $0.height.equalTo(height)
       }
       
       messageLabel.snp.makeConstraints {
-        $0.top.equalTo(pictureCollectionView.snp.bottom).offset(margin.dynamic(2))
+        $0.top.equalTo(pictureCollectionView.snp.bottom).offset(20)
         $0.leading.equalTo(bodyView)
       }
     }
     
     messageUnderLineView.snp.makeConstraints {
-      $0.top.equalTo(messageLabel.snp.bottom).offset(margin.dynamic(1))
+      $0.top.equalTo(messageLabel.snp.bottom).offset(10)
       $0.leading.trailing.equalTo(bodyView)
-      $0.height.equalTo(margin.dynamic(0.1))
+      $0.height.equalTo(1)
     }
     
     contentsLabel.snp.makeConstraints {
-      $0.top.equalTo(messageUnderLineView.snp.bottom).offset(margin.dynamic(1))
+      $0.top.equalTo(messageUnderLineView.snp.bottom).offset(10)
       $0.leading.trailing.equalTo(bodyView)
-      $0.bottom.equalTo(bodyView).offset(-margin.dynamic(2))
+      $0.bottom.equalTo(bodyView).offset(-20)
     }
     
-    helpButton.snp.makeConstraints {
-      $0.leading.equalTo(self).offset(margin.dynamic(2))
-      $0.trailing.equalTo(self).offset(-margin.dynamic(2))
-      $0.bottom.equalTo(self).offset(-margin.dynamic(2))
-      $0.height.equalTo(margin.dynamic(5))
+    helpLabel.snp.makeConstraints {
+      $0.top.equalTo(contentsLabel.snp.bottom).offset(20)
+      $0.leading.equalTo(bodyView)
+    }
+    
+    messageUnderLineView.snp.makeConstraints {
+      $0.top.equalTo(helpLabel.snp.bottom).offset(10)
+      $0.leading.trailing.equalTo(bodyView)
+      $0.height.equalTo(1)
+    }
+    
+    helpListTableView.snp.makeConstraints {
+      $0.top.equalTo(messageUnderLineView.snp.bottom).offset(10)
+      $0.leading.trailing.equalTo(bodyView)
+      $0.bottom.equalTo(bodyView).offset(-20)
     }
   }
   
@@ -321,7 +297,7 @@ class IncidentView: UIView {
   }
 }
 
-extension IncidentView: UICollectionViewDataSource {
+extension RequestDetailView: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return 5
   }
@@ -333,7 +309,7 @@ extension IncidentView: UICollectionViewDataSource {
   }
 }
 
-extension IncidentView: UICollectionViewDelegateFlowLayout {
+extension RequestDetailView: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     let width = UIScreen.main.bounds.width - 60
     let height = (width * 3) / 4
@@ -345,15 +321,18 @@ extension IncidentView: UICollectionViewDelegateFlowLayout {
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    let spacing: CGFloat = 20
-    return spacing.dynamic(1)
+    return 20
   }
 }
 
-extension IncidentView: UIScrollViewDelegate {
-  func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    let mapMaxY: CGFloat = nmapView.frame.maxY
+extension RequestDetailView: UITableViewDataSource {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return 5
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: RequestDetailCell.identifier, for: indexPath) as! RequestDetailCell
     
-    print("[Log] :", scrollView.bounds.minY)
+    return cell
   }
 }
