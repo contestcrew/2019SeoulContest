@@ -56,21 +56,21 @@ class ReportView: UIView {
     
     reportHedaerTitleLabel.text = "제보하기"
     reportHedaerTitleLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    reportHedaerTitleLabel.upsFontHeavy(ofSize: 26)
+    reportHedaerTitleLabel.dynamicFont(fontSize: 26, weight: .heavy)
     
     reportButton.setTitle("제보", for: .normal)
     reportButton.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
-    reportButton.titleLabel?.font = UIFont.systemFont(ofSize: 22, weight: .heavy)
+    reportButton.titleLabel?.dynamicFont(fontSize: 22, weight: .heavy)
     reportButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
-    reportButton.backgroundColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
+    reportButton.backgroundColor = UIColor.appColor(.appButtonColor)
     reportButton.layer.cornerRadius = 5
     reportButton.addTarget(self, action: #selector(touchUpReportButton), for: .touchUpInside)
     
     titleLabel.text = "타이틀 (필수)"
     titleLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    titleLabel.upsFontHeavy(ofSize: 24)
+    titleLabel.dynamicFont(fontSize: 24, weight: .heavy)
     let titleAttributedStr = NSMutableAttributedString(string: titleLabel.text!)
-    titleAttributedStr.addAttribute(.foregroundColor, value: UIColor.green, range: (titleLabel.text! as NSString).range(of: "(필수)"))
+    titleAttributedStr.addAttribute(.foregroundColor, value: UIColor.appColor(.appGreenColor), range: (titleLabel.text! as NSString).range(of: "(필수)"))
     titleAttributedStr.addAttribute(.font, value: UIFont.systemFont(ofSize: 16, weight: .heavy), range: (titleLabel.text! as NSString).range(of: "(필수)"))
     titleLabel.attributedText = titleAttributedStr
     
@@ -84,7 +84,7 @@ class ReportView: UIView {
     
     contentsLabel.text = "메세지 (필수)"
     contentsLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    contentsLabel.upsFontHeavy(ofSize: 24)
+    contentsLabel.dynamicFont(fontSize: 24, weight: .heavy)
     let contentsAttributedStr = NSMutableAttributedString(string: contentsLabel.text!)
     contentsAttributedStr.addAttribute(.foregroundColor, value: UIColor.green, range: (contentsLabel.text! as NSString).range(of: "(필수)"))
     contentsAttributedStr.addAttribute(.font, value: UIFont.systemFont(ofSize: 16, weight: .heavy), range: (contentsLabel.text! as NSString).range(of: "(필수)"))
@@ -101,7 +101,7 @@ class ReportView: UIView {
     
     attachFileLabel.text = "파일 첨부 (선택)"
     attachFileLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    attachFileLabel.upsFontHeavy(ofSize: 24)
+    attachFileLabel.dynamicFont(fontSize: 24, weight: .heavy)
     let attachFileAttributedStr = NSMutableAttributedString(string: attachFileLabel.text!)
     attachFileAttributedStr.addAttribute(.foregroundColor, value: UIColor.red, range: (attachFileLabel.text! as NSString).range(of: "(선택)"))
     attachFileAttributedStr.addAttribute(.font, value: UIFont.systemFont(ofSize: 16, weight: .heavy), range: (attachFileLabel.text! as NSString).range(of: "(선택)"))
@@ -114,12 +114,14 @@ class ReportView: UIView {
   }
   
   private func layout() {
+    let margin: CGFloat = 10
+    
     [backButton, reportHedaerTitleLabel, reportButton, titleLabel, titleTextField, contentsLabel, contentsTextField, attachFileLabel, attachFileButton].forEach { self.addSubview($0) }
     
     backButton.snp.makeConstraints {
-      $0.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(10)
-      $0.leading.equalTo(self.safeAreaLayoutGuide.snp.leading).offset(10)
-      $0.width.height.equalTo(35)
+      $0.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(margin.dynamic(1))
+      $0.leading.equalTo(self.safeAreaLayoutGuide.snp.leading).offset(margin.dynamic(1))
+      $0.width.height.equalTo(margin.dynamic(3) + 5)
     }
     
     reportHedaerTitleLabel.snp.makeConstraints {
@@ -129,43 +131,43 @@ class ReportView: UIView {
     
     reportButton.snp.makeConstraints {
       $0.centerY.equalTo(reportHedaerTitleLabel.snp.centerY)
-      $0.trailing.equalTo(self.safeAreaLayoutGuide.snp.trailing).offset(-20)
-      $0.height.equalTo(35)
+      $0.trailing.equalTo(self.safeAreaLayoutGuide.snp.trailing).offset(-margin.dynamic(2))
+      $0.height.equalTo(margin.dynamic(3) + 5)
     }
     
     titleLabel.snp.makeConstraints {
-      $0.top.equalTo(backButton.snp.bottom).offset(40)
-      $0.leading.equalToSuperview().offset(20)
+      $0.top.equalTo(backButton.snp.bottom).offset(margin.dynamic(4))
+      $0.leading.equalToSuperview().offset(margin.dynamic(2))
     }
     
     titleTextField.snp.makeConstraints {
-      $0.top.equalTo(titleLabel.snp.bottom).offset(20)
-      $0.leading.equalToSuperview().offset(20)
-      $0.trailing.equalToSuperview().offset(-20)
-      $0.height.equalTo(40)
+      $0.top.equalTo(titleLabel.snp.bottom).offset(margin.dynamic(2))
+      $0.leading.equalToSuperview().offset(margin.dynamic(2))
+      $0.trailing.equalToSuperview().offset(-margin.dynamic(2))
+      $0.height.equalTo(margin.dynamic(4))
     }
     
     contentsLabel.snp.makeConstraints {
-      $0.top.equalTo(titleTextField.snp.bottom).offset(20)
-      $0.leading.equalToSuperview().offset(20)
+      $0.top.equalTo(titleTextField.snp.bottom).offset(margin.dynamic(2))
+      $0.leading.equalToSuperview().offset(margin.dynamic(2))
     }
     
     contentsTextField.snp.makeConstraints {
-      $0.top.equalTo(contentsLabel.snp.bottom).offset(20)
-      $0.leading.equalToSuperview().offset(20)
-      $0.trailing.equalToSuperview().offset(-20)
-      $0.height.equalTo(150)
+      $0.top.equalTo(contentsLabel.snp.bottom).offset(margin.dynamic(2))
+      $0.leading.equalToSuperview().offset(margin.dynamic(2))
+      $0.trailing.equalToSuperview().offset(-margin.dynamic(2))
+      $0.height.equalTo(margin.dynamic(15))
     }
     
     attachFileLabel.snp.makeConstraints {
-      $0.top.equalTo(contentsTextField.snp.bottom).offset(20)
-      $0.leading.equalToSuperview().offset(20)
+      $0.top.equalTo(contentsTextField.snp.bottom).offset(margin.dynamic(2))
+      $0.leading.equalToSuperview().offset(margin.dynamic(2))
     }
     
     attachFileButton.snp.makeConstraints {
-      $0.top.equalTo(contentsTextField.snp.bottom).offset(20)
-      $0.trailing.equalToSuperview().offset(-20)
-      $0.width.height.equalTo(35)
+      $0.top.equalTo(contentsTextField.snp.bottom).offset(margin.dynamic(2))
+      $0.trailing.equalToSuperview().offset(-margin.dynamic(2))
+      $0.width.height.equalTo(margin.dynamic(3) + 5)
     }
   }
   

@@ -51,18 +51,20 @@ class ListView: UIView {
   }
   
   private func layout() {
+    let margin: CGFloat = 10
+    
     [searchTextField, categoryCollectionView].forEach { self.addSubview($0) }
     
     searchTextField.snp.makeConstraints {
-      $0.top.leading.equalToSuperview().offset(10)
-      $0.trailing.equalToSuperview().offset(-10)
-      $0.height.equalTo(50)
+      $0.top.leading.equalToSuperview().offset(margin.dynamic(1))
+      $0.trailing.equalToSuperview().offset(-margin.dynamic(1))
+      $0.height.equalTo(margin.dynamic(5))
     }
     
     categoryCollectionView.snp.makeConstraints {
-      $0.top.equalTo(searchTextField.snp.bottom).offset(10)
+      $0.top.equalTo(searchTextField.snp.bottom).offset(margin.dynamic(1))
       $0.leading.trailing.equalToSuperview()
-      $0.height.equalTo(50)
+      $0.height.equalTo(margin.dynamic(5))
     }
   }
   
@@ -90,9 +92,9 @@ extension ListView: UICollectionViewDataSource {
     cell.cellConfigure(sampleCategoryList[indexPath.row])
     
     if indexPath.row == selectedItemIndex {
-      cell.categoryName.upsFontBold(ofSize: 26)
+      cell.categoryName.dynamicFont(fontSize: 26, weight: .bold)
     } else {
-      cell.categoryName.upsFont(ofSize: 22)
+      cell.categoryName.dynamicFont(fontSize: 22, weight: .medium)
     }
     
     return cell
@@ -101,15 +103,17 @@ extension ListView: UICollectionViewDataSource {
 
 extension ListView: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    let height: CGFloat = 50
     
     // categoryNmae Label의 font 속성을 참조하여 width 설정
     let fontWidthSize: CGFloat = (sampleCategoryList[indexPath.row] as NSString).size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 24) as Any]).width
     
-    return CGSize(width: fontWidthSize + 20, height: 50)
+    return CGSize(width: fontWidthSize + 20, height: height.dynamic(1))
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    return 20
+    let spacing: CGFloat = 20
+    return spacing.dynamic(1)
   }
 }
 

@@ -26,8 +26,15 @@ class MapViewController: UIViewController {
 }
 """.data(using: .utf8)!
   
-  private let vMap = MapView()
+  // MARK:- Properties
+  //TODO: Api를 통해서 카테고리 리스트를 가저올 예정
+  private let sampleCategoryList = ["전체", "똥휴지", "사고", "실종", "분실"]
   
+  private let vMap = MapView()
+  private var selectedDataID = 0
+  private var selectedDataCategory = ""
+  
+  // MARK:- LifeCycles
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -44,6 +51,7 @@ class MapViewController: UIViewController {
     autoLayout()
   }
   
+  // MARK:- Methods
   private func testFunc() {
     let decoder = JSONDecoder()
     if let sampleData1 = try? decoder.decode(HomeIncidentData.self, from: sampleJsonData1) {
@@ -76,12 +84,15 @@ class MapViewController: UIViewController {
   private func autoLayout() {
     view.addSubview(vMap)
     let safeBottmHeight = view.safeAreaInsets.bottom
+    let margin: CGFloat = 10
+    
     vMap.snp.makeConstraints {
       $0.top.leading.trailing.equalToSuperview()
-      $0.bottom.equalToSuperview().offset(-TabBarButtonView.height - safeBottmHeight)
+      $0.bottom.equalToSuperview().offset(-TabBarButtonView.height - safeBottmHeight - margin.dynamic(1))
     }
   }
   
+  // MapViewController의 뿌려줄 Data를 파싱하는 역할을 함
   private func dataParsing(datas: [Data]) {
     var tag = 0
     datas.forEach {
@@ -92,6 +103,7 @@ class MapViewController: UIViewController {
     }
   }
   
+  // 파싱한 데이터들 중 Pin Icon의 사이즈를 조정하는 역할을 함
   private func resizeIcons(data: HomeIncidentData, tag: Int) {
     // ToDo 이미지 캐시처리가 필요함
     let iconImg = UIImage(named: "Pin\(data.category)")
@@ -100,17 +112,22 @@ class MapViewController: UIViewController {
     })
   }
   
+  // 파싱한 데이터들의 Marker를 찍는 역할을 함
   private func showMarkers(img: UIImage, data: HomeIncidentData, tag: Int) {
     let lat = Double(data.coordinate.first ?? 0)
     let lng = Double(data.coordinate.last ?? 0)
     
     let marker = NMFMarker(position: NMGLatLng(lat: lat, lng: lng), iconImage: NMFOverlayImage(image: img))
     
+    // NMFOverlayTouchHandler를 설정함 (Pin Touch 이벤트를 작성)
     let handler: NMFOverlayTouchHandler = { [weak self] overlay in
       
+      self?.pinClickAnimation()
       self?.vMap.changePreviewContainer(data)
-      self!.pinClickAnimation()
+      self?.selectedDataID = data.id
+      self?.selectedDataCategory = data.category
       
+      // 핀을 누른 위치로 카메라를 이동
       let cameraUpdate = NMFCameraUpdate(scrollTo: marker.position)
       cameraUpdate.animation = .easeIn
       self?.vMap.nMapView.mapView.moveCamera(cameraUpdate)
@@ -128,36 +145,37 @@ class MapViewController: UIViewController {
     marker.touchHandler = handler
   }
   
+  // 핀을 클릭했을 때 동작하는 애니메이션
   private func pinClickAnimation() {
-    let rotation: CABasicAnimation = CABasicAnimation(keyPath: "transform.rotation.y")
-    rotation.toValue = Double.pi * 2
-    rotation.duration = 0.5 // or however long you want ...
-    rotation.isCumulative = true
-    rotation.repeatCount = 1
-    vMap.previewContainer.layer.add(rotation, forKey: "rotationAnimation")
+    
   }
 }
 
+// MARK:- MKMapVieDelegate Extension
 extension MapViewController: MKMapViewDelegate {
   func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
     
   }
 }
 
+// MARK:- MapViewDelegate Extension
 extension MapViewController: MapViewDelegate {
+  // 의뢰하기 버튼을 눌렀을 때 의뢰하기 VC를 띄우는 역할을 함
   func touchUpRegisterButton() {
-    
+    UIAlertController.registerShow(categoryList: sampleCategoryList, title: "의뢰하기", message: "아래 목록중 하나를 선택하세요", from: self)
   }
   
+  // Preview를 클릭했을 때, 상세 화면으로 이동하는 역할을 함
   func touchUpPreview() {
     let incidentVC = IncidentViewController()
     
     //TODO: Category 동적으로 넣어줘야 함 -> 뷰 생성을 위한 Category 입력임(카테고리별로 뷰가 다름)
-    //TODO: Incident Detail Data 호출해야함!! -> 호출한 데이터의 category를 넣어주면 됌
-    incidentVC.category = "Missing"
+    //TODO: Incident Detail Data 호출해야함!! (selectedID 값 이용) -> 호출한 데이터의 category를 넣어주면 됌
+    incidentVC.category = selectedDataCategory
     self.present(incidentVC, animated: true, completion: nil)
   }
   
+  // 현재 위치로 이동하는 역할을 함
   func touchUpLocationButton(coordinate: CLLocationCoordinate2D) {
     let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: coordinate.latitude, lng: coordinate.longitude))
     cameraUpdate.animation = .easeIn

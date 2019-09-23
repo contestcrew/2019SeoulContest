@@ -27,15 +27,17 @@ class CategoryCell: UICollectionViewCell {
   
   private func attribute() {
     categoryName.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    categoryName.upsFont(ofSize: 22)
+    categoryName.dynamicFont(fontSize: 22, weight: .medium)
     categoryName.textAlignment = .center
   }
   
   private func layout() {
+    let margin: CGFloat = 10
+    
     contentView.addSubview(categoryName)
     categoryName.snp.makeConstraints {
       $0.top.trailing.bottom.equalToSuperview()
-      $0.leading.equalToSuperview().offset(10)
+      $0.leading.equalToSuperview().offset(margin.dynamic(1))
     }
   }
   

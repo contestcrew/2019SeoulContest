@@ -9,7 +9,5 @@
 import Foundation
 
 extension UILabel {
-//  func resolutionFontSize(size: CGFloat) -> CGFloat {
-//    let sizeFomatter = size / 375
-//  }
+  
 }

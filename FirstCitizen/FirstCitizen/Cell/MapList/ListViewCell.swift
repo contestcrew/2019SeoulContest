@@ -54,74 +54,76 @@ class ListViewCell: UITableViewCell {
     iconImage.contentMode = .scaleAspectFit
     iconImage.image = #imageLiteral(resourceName: "Restroom")
     
-    titleLabel.upsFontHeavy(ofSize: 26)
     titleLabel.text = "굳어가고 있어요 헬프미"
+    titleLabel.dynamicFont(fontSize: 26, weight: .heavy)
     
-    guideLabel.backgroundColor = .black
+    guideLabel.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     
-    dateLabel.upsFontHeavy(ofSize: 13)
     dateLabel.text = "2019-08-14 목요일"
+    dateLabel.dynamicFont(fontSize: 13, weight: .semibold)
     
     pointLabel.text = "Point 100 + Bonus 350"
     pointLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    pointLabel.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
+    pointLabel.dynamicFont(fontSize: 13, weight: .semibold)
     let attributedStr = NSMutableAttributedString(string: pointLabel.text!)
     attributedStr.addAttribute(.foregroundColor, value: UIColor.blue, range: (pointLabel.text! as NSString).range(of: "Bonus"))
     attributedStr.addAttribute(.foregroundColor, value: UIColor.orange, range: (pointLabel.text! as NSString).range(of: "Point"))
     pointLabel.attributedText = attributedStr
     
-    contentsLabel.upsFontBold(ofSize: 15)
-    contentsLabel.textColor = .darkGray
     contentsLabel.text = "굳어가고 있어요.. 헬퓨ㅡ미.."
+    contentsLabel.textColor = .darkGray
+    contentsLabel.dynamicFont(fontSize: 15, weight: .bold)
     
-    progressLabel.upsFontHeavy(ofSize: 22)
     progressLabel.text = "도움요청중"
     progressLabel.textAlignment = .center
     progressLabel.textColor = #colorLiteral(red: 0.03933401406, green: 0.7532997727, blue: 0.2689341307, alpha: 1)
+    progressLabel.dynamicFont(fontSize: 22, weight: .heavy)
   }
   
   private func layout() {
+    let margin: CGFloat = 10
+    
     [titleLabel, iconImage, guideLabel, dateLabel, pointLabel, contentsLabel, progressLabel]
       .forEach { contentView.addSubview($0) }
     
     titleLabel.snp.makeConstraints {
-      $0.top.equalToSuperview().offset(20)
-      $0.leading.equalToSuperview().offset(10)
+      $0.top.equalToSuperview().offset(margin.dynamic(2))
+      $0.leading.equalToSuperview().offset(margin.dynamic(1))
     }
     
     iconImage.snp.makeConstraints {
       $0.centerY.equalTo(titleLabel.snp.centerY)
-      $0.trailing.equalToSuperview().offset(-10)
-      $0.width.height.equalTo(40)
+      $0.trailing.equalToSuperview().offset(-margin.dynamic(1))
+      $0.width.height.equalTo(margin.dynamic(4))
     }
     
     guideLabel.snp.makeConstraints {
-      $0.top.equalTo(titleLabel.snp.bottom).offset(20)
-      $0.leading.equalToSuperview().offset(10)
-      $0.trailing.equalToSuperview().offset(-10)
-      $0.height.equalTo(2)
+      $0.top.equalTo(titleLabel.snp.bottom).offset(margin.dynamic(2))
+      $0.leading.equalToSuperview().offset(margin.dynamic(1))
+      $0.trailing.equalToSuperview().offset(-margin.dynamic(1))
+      $0.height.equalTo(margin.dynamic(0.2))
     }
     
     dateLabel.snp.makeConstraints {
-      $0.top.equalTo(guideLabel.snp.bottom).offset(10)
-      $0.leading.equalToSuperview().offset(10)
+      $0.top.equalTo(guideLabel.snp.bottom).offset(margin.dynamic(1))
+      $0.leading.equalToSuperview().offset(margin.dynamic(1))
     }
     
     pointLabel.snp.makeConstraints {
-      $0.top.equalTo(guideLabel.snp.bottom).offset(10)
-      $0.trailing.equalToSuperview().offset(-10)
+      $0.top.equalTo(guideLabel.snp.bottom).offset(margin.dynamic(1))
+      $0.trailing.equalToSuperview().offset(-margin.dynamic(1))
     }
     
     contentsLabel.snp.makeConstraints {
-      $0.top.equalTo(dateLabel.snp.bottom).offset(20)
-      $0.leading.equalToSuperview().offset(10)
-      $0.bottom.equalToSuperview().offset(-20)
+      $0.top.equalTo(dateLabel.snp.bottom).offset(margin.dynamic(2))
+      $0.leading.equalToSuperview().offset(margin.dynamic(1))
+      $0.bottom.equalToSuperview().offset(-margin.dynamic(2))
     }
     
     progressLabel.snp.makeConstraints {
       $0.leading.equalTo(contentsLabel.snp.trailing)
       $0.centerY.equalTo(contentsLabel.snp.centerY)
-      $0.trailing.equalToSuperview().offset(-20)
+      $0.trailing.equalToSuperview().offset(-margin.dynamic(2))
       $0.width.equalTo(contentsLabel.snp.width).multipliedBy(0.5)
     }
   }
