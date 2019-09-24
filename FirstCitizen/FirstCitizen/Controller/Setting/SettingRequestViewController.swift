@@ -21,9 +21,19 @@ class SettingRequestViewController: UIViewController {
     autoLayout()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(true)
+    
+    navigationController?.navigationBar.isHidden = false
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewDidDisappear(true)
+    
+  }
+  
   private func navigationSet() {
     navigationItem.title = "의 뢰"
-    navigationController?.navigationBar.prefersLargeTitles = true
     navigationController?.navigationBar.shadowImage = UIImage()
     navigationController?.navigationBar.barTintColor = .white
   }
@@ -58,6 +68,33 @@ extension SettingRequestViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-    return UITableViewCell()
+    switch indexPath.row {
+    case 0:
+      let cell = UITableViewCell()
+      
+      let label = UILabel()
+      label.text = "의뢰하기"
+      label.upsFontBold(ofSize: 25)
+      label.textColor = .white
+      label.textAlignment = .center
+      label.backgroundColor = .blue
+      label.layer.cornerRadius = 16
+      label.layer.masksToBounds = true
+      cell.contentView.addSubview(label)
+      
+      label.translatesAutoresizingMaskIntoConstraints = false
+      label.topAnchor.constraint(equalTo: cell.contentView.topAnchor, constant: 16).isActive = true
+      label.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 16).isActive = true
+      label.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -16).isActive = true
+      label.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: -16).isActive = true
+      label.heightAnchor.constraint(equalToConstant: 64).isActive = true
+      
+      return cell
+      
+    default:
+      return ListViewCell()
+    }
+    
+    
   }
 }
