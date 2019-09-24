@@ -15,7 +15,7 @@ class MainTabBarController: UITabBarController {
   private let vcPoint = PointViewController()
   private let vcMap = MapViewController()
   private let vcList = ListViewController()
-  private let vcSetting = SettingViewController()
+  private let vcSetting = UINavigationController(rootViewController: SettingViewController())
   
   private var isPosition = true
   

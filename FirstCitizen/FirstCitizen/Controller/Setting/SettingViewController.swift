@@ -24,10 +24,15 @@ class SettingViewController: UIViewController {
     autoLayout()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(true)
+    
+    navigationController?.navigationBar.isHidden = true
+  }
+  
   private func configure() {
     view.backgroundColor = .white
     
-//    tableView.contentInsetAdjustmentBehavior = .never
     tableView.separatorStyle = .none
     tableView.dataSource = self
     tableView.delegate = self
@@ -88,7 +93,12 @@ extension SettingViewController: UITableViewDataSource {
 extension SettingViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     switch indexPath.row {
-    case 1...5:
+    case 1:
+      let vcSettingRequest = SettingRequestViewController()
+
+      navigationController?.pushViewController(vcSettingRequest, animated: true)
+      
+    case 2...5:
       print(indexPath.row)
       
     default:
