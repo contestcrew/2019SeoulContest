@@ -25,11 +25,12 @@ class SettingRequestViewController: UIViewController {
     super.viewWillAppear(true)
     
     navigationController?.navigationBar.isHidden = false
+    MainTabBarController.vTabBarButton.isHidden = true
   }
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewDidDisappear(true)
-    
+    MainTabBarController.vTabBarButton.isHidden = false
   }
   
   private func navigationSet() {

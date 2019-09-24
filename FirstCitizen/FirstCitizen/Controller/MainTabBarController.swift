@@ -10,7 +10,7 @@ import UIKit
 
 class MainTabBarController: UITabBarController {
   
-  let vTabBarButton = TabBarButtonView()
+  static let vTabBarButton = TabBarButtonView()
   
   private let vcPoint = PointViewController()
   private let vcMap = MapViewController()
@@ -30,10 +30,10 @@ class MainTabBarController: UITabBarController {
   private func configure() {
     self.tabBar.isHidden = true
     
-    vTabBarButton.pointButton.addTarget(self, action: #selector(pointDidTap(_:)), for: .touchUpInside)
-    vTabBarButton.mapListButton.addTarget(self, action: #selector(mapListDidTap(_:)), for: .touchUpInside)
-    vTabBarButton.settingButton.addTarget(self, action: #selector(settingDidTap(_:)), for: .touchUpInside)
-    view.addSubview(vTabBarButton)
+    MainTabBarController.vTabBarButton.pointButton.addTarget(self, action: #selector(pointDidTap(_:)), for: .touchUpInside)
+    MainTabBarController.vTabBarButton.mapListButton.addTarget(self, action: #selector(mapListDidTap(_:)), for: .touchUpInside)
+    MainTabBarController.vTabBarButton.settingButton.addTarget(self, action: #selector(settingDidTap(_:)), for: .touchUpInside)
+    view.addSubview(MainTabBarController.vTabBarButton)
     
     viewControllers = [vcMap, vcList, vcPoint, vcSetting]
     
@@ -49,11 +49,11 @@ class MainTabBarController: UITabBarController {
     
     switch isPosition {
     case true:
-      vTabBarButton.mapListButton.setImage(UIImage(named: "TabBarList"), for: .normal)
+      MainTabBarController.vTabBarButton.mapListButton.setImage(UIImage(named: "TabBarList"), for: .normal)
       self.selectedViewController = vcMap
       
     case false:
-      vTabBarButton.mapListButton.setImage(UIImage(named: "TabBarMap"), for: .normal)
+      MainTabBarController.vTabBarButton.mapListButton.setImage(UIImage(named: "TabBarMap"), for: .normal)
       self.selectedViewController = vcList
     }
   }
@@ -70,7 +70,7 @@ class MainTabBarController: UITabBarController {
   private func autoLayout() {
     let guide = view.safeAreaLayoutGuide
     
-    vTabBarButton.snp.makeConstraints {
+    MainTabBarController.vTabBarButton.snp.makeConstraints {
       $0.leading.trailing.equalToSuperview()
       $0.bottom.equalTo(guide.snp.bottom).offset(-Standard.margin.dynamic(1))
     }

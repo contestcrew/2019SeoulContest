@@ -30,25 +30,28 @@ class SettingProfileCell: UITableViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
+  func setting(imageName: String, nickName: String, creditPoint: Int, point: Int) {
+    topImageView.image = UIImage(named: imageName)
+    nickNameLabel.text = "닉네임 : " + nickName
+    creditLabel.text = "매너점수 : \(creditPoint)"
+    pointLabel.text = "Point : \(point)"
+  }
+  
   private func configure() {
     self.selectionStyle = .none
     
-    topImageView.image = UIImage(named: "leaf")
     topImageView.contentMode = .scaleAspectFill
     topImageView.layer.masksToBounds = true
     contentView.addSubview(topImageView)
     
-    nickNameLabel.text = "닉네임 : 업's"
     nickNameLabel.textColor = .darkGray
     nickNameLabel.upsFontBold(ofSize: 17)
     contentView.addSubview(nickNameLabel)
     
-    creditLabel.text = "매너점수: 1200"
     creditLabel.upsFontBold(ofSize: 17)
     creditLabel.textColor = .black
     contentView.addSubview(creditLabel)
     
-    pointLabel.text = "Point: 420"
     pointLabel.textColor = .black
     pointLabel.upsFontBold(ofSize: 17)
     contentView.addSubview(pointLabel)
