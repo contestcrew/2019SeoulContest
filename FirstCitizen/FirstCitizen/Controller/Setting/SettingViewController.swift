@@ -15,7 +15,10 @@ class SettingViewController: UIViewController {
 //  private var requestList = [String]()  // 의뢰 목록
 //  private var helpList = [String]()   // 도움 목록
   
-  private let document = ["의뢰", "도움", "공지사항", "이용약관", "내 정보"]
+  private let inDocument = ["의뢰", "도움", "공지사항", "이용약관", "내 정보"]
+  private let outDocument = ["공지사항", "이용약관"]
+  
+  private var isSign = true
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -52,57 +55,123 @@ class SettingViewController: UIViewController {
 
 extension SettingViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 7
+    switch isSign {
+    case true:
+      return 2 + inDocument.count
+      
+    case false:
+      return 2 + outDocument.count
+    }
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    switch indexPath.row {
-    case 0:
-      let cell = SettingProfileCell()
-      
-      return cell
-      
-    case 1...5:
-      let cell = SettingDocumentCell()
-      
-      cell.titleLabel.text = document[indexPath.row - 1]
-      
-      if indexPath.row == 1 {
-        cell.countLabel.isHidden = false
-        cell.countLabel.text = "0"
+    switch isSign {
+    case true:
+      switch indexPath.row {
+      case 0:
+        let cell = SettingProfileCell()
+        
+        cell.setting(imageName: "leaf", nickName: "Up's", creditPoint: 1200, point: 200)
+        
+        return cell
+        
+      case 1...5:
+        let cell = SettingDocumentCell()
+        
+        cell.titleLabel.text = inDocument[indexPath.row - 1]
+        
+        if indexPath.row == 1 {
+          cell.countLabel.isHidden = false
+          cell.countLabel.text = "0"
+        }
+        
+        return cell
+        
+        
+      default:
+        let cell = UITableViewCell()
+        
+        cell.textLabel?.text = "로그아웃"
+        cell.textLabel?.upsFontBold(ofSize: 20)
+        cell.textLabel?.textColor = .red
+        cell.textLabel?.textAlignment = .center
+        cell.selectionStyle = .none
+        
+        return cell
       }
       
-      return cell
-      
-      
-    default:
-      let cell = UITableViewCell()
-      
-      cell.textLabel?.text = "로그아웃"
-      cell.textLabel?.upsFontBold(ofSize: 20)
-      cell.textLabel?.textColor = .red
-      cell.textLabel?.textAlignment = .center
-      cell.selectionStyle = .none
-      
-      return cell
+    case false:
+      switch indexPath.row {
+      case 0:
+        let cell = SettingProfileCell()
+        
+        cell.setting(imageName: "", nickName: "-", creditPoint: 0, point: 0)
+        
+        return cell
+        
+      case 1...2:
+        let cell = SettingDocumentCell()
+        
+        cell.titleLabel.text = inDocument[indexPath.row - 1]
+        
+        return cell
+        
+        
+      default:
+        let cell = UITableViewCell()
+        
+        cell.textLabel?.text = "로그인"
+        cell.textLabel?.upsFontBold(ofSize: 20)
+        cell.textLabel?.textColor = .red
+        cell.textLabel?.textAlignment = .center
+        cell.selectionStyle = .none
+        
+        return cell
+      }
     }
+    
+    
+    
+    
   }
 }
 
 
 extension SettingViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    switch indexPath.row {
-    case 1:
-      let vcSettingRequest = SettingRequestViewController()
-
-      navigationController?.pushViewController(vcSettingRequest, animated: true)
+    switch isSign {
+    case true:
+      switch indexPath.row {
+      case 0:
+        break
+        
+      case 1:
+        let vcSettingRequest = SettingRequestViewController()
+        
+        navigationController?.pushViewController(vcSettingRequest, animated: true)
+        
+      case 2...5:
+        print(indexPath.row)
+        
+      default:
+        isSign = false
+        tableView.reloadData()
+      }
       
-    case 2...5:
-      print(indexPath.row)
+    case false:
       
-    default:
-      break
+      switch indexPath.row {
+      case 0...2:
+        print(indexPath.row)
+        
+      default:
+        isSign = true
+        tableView.reloadData()
+      }
     }
+    
+    
+    
+    
   }
 }
