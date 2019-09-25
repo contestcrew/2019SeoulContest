@@ -13,6 +13,7 @@ import NMapsMap
 class RequestDetailView: UIView {
   
   var category: String = ""
+  private var pictureDatas: [String] = []
   
   private let nmapView = NMFMapView()
   private let gradientView = UIImageView()
@@ -299,12 +300,12 @@ class RequestDetailView: UIView {
 
 extension RequestDetailView: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 5
+    return pictureDatas.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IncidentCell.identifier, for: indexPath) as! IncidentCell
-    cell.incidentCellConfigure(reportImage: #imageLiteral(resourceName: "sample_image_2"))
+    cell.incidentCellConfigure(imageStr: pictureDatas[indexPath.row])
     return cell
   }
 }

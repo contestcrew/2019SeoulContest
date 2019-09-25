@@ -13,9 +13,9 @@ import SnapKit
 
 // MARK:- MapViewDelegate Protocol 선언부
 protocol MapViewDelegate: class {
-  func setNMGLatLng(coordinate: CLLocationCoordinate2D)
   func touchUpLocationButton(coordinate: CLLocationCoordinate2D)
   func touchUpPreview()
+  func touchUpRefreshButton(coordinate: CLLocationCoordinate2D)
   func touchUpRegisterButton()
 }
 
@@ -64,9 +64,11 @@ class MapView: UIView {
   }
   
   // MARK:- Methods
-  func changePreviewContainer(_ homeIncidentData: IncidentData) {
+  func changePreviewContainer(_ homeIncidentData: IncidentData, _ iconUrlStr: String) {
     titleLabel.text = homeIncidentData.title
-    //    imageView.image = UIImage(named: homeIncidentData.category)
+    let iconURL: URL = URL(string: iconUrlStr)!
+    print("[Log8] :", iconUrlStr)
+    imageView.kf.setImage(with: iconURL)
     dateLabel.text = homeIncidentData.createdAt
     contentsLabel.text = homeIncidentData.content
     pointLabel.text = "Point \(homeIncidentData.categoryScore) + Bonus \(homeIncidentData.score)"
@@ -84,6 +86,7 @@ class MapView: UIView {
   
   // 새로고침 버튼 메서드
   @objc private func touchUpRefreshButton() {
+    delegate?.touchUpRefreshButton(coordinate: currentCoordinateValue!)
   }
   
   // 등록 버튼 메서드
@@ -97,14 +100,9 @@ class MapView: UIView {
   
   private func getCurrentLocation() {
     locationManager.delegate = self
-    // 권한 요청
-    locationManager.requestWhenInUseAuthorization()
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest
-    locationManager.startUpdatingLocation()
   }
   
   private func nMapConfigure() {
-    nMapView.mapView.buildingHeight = 0.5
     nMapView.mapView.mapType = .basic
     nMapView.mapView.logoAlign = .leftTop
     nMapView.positionMode = .direction
@@ -180,7 +178,6 @@ class MapView: UIView {
     switch CLLocationManager.authorizationStatus() {
     case .notDetermined:
       locationManager.requestWhenInUseAuthorization()
-    //             locationManager.requestAlwaysAuthorization()
     case .restricted, .denied:
       // Disable location features
       break

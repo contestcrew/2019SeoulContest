@@ -23,6 +23,16 @@ class ExtraInfomaitionCell: UITableViewCell {
     layout()
   }
   
+  func modifyProperties(_ regionName: String, _ point: String, _ uploadTime: String) {
+    regionLabel.text = regionName
+    pointLabel.text = point
+    let attributedStr = NSMutableAttributedString(string: pointLabel.text!)
+    attributedStr.addAttribute(.foregroundColor, value: UIColor.blue, range: (pointLabel.text! as NSString).range(of: "Bonus"))
+    attributedStr.addAttribute(.foregroundColor, value: UIColor.orange, range: (pointLabel.text! as NSString).range(of: "Point"))
+    pointLabel.attributedText = attributedStr
+    uploadTimeLabel.text = uploadTime
+  }
+  
   private func attribute() {
     regionLabel.text = "서울특별시 성동구 성수22길 37, 사거리"
     regionLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -32,11 +42,6 @@ class ExtraInfomaitionCell: UITableViewCell {
     pointLabel.text = "Point 1000 + Bonus 50"
     pointLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     pointLabel.dynamicFont(fontSize: 14, weight: .semibold)
-    
-    let attributedStr = NSMutableAttributedString(string: pointLabel.text!)
-    attributedStr.addAttribute(.foregroundColor, value: UIColor.blue, range: (pointLabel.text! as NSString).range(of: "Bonus"))
-    attributedStr.addAttribute(.foregroundColor, value: UIColor.orange, range: (pointLabel.text! as NSString).range(of: "Point"))
-    pointLabel.attributedText = attributedStr
     
     uploadTimeLabel.text = "2019-06-04 목요일"
     uploadTimeLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)

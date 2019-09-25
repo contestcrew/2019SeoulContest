@@ -23,6 +23,10 @@ class ContentsCell: UITableViewCell {
     layout()
   }
   
+  func modifyProperties(_ contents: String) {
+    contentsLabel.text = contents
+  }
+  
   private func attribute() {
     contentsTitleLabel.text = "내용"
     contentsTitleLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)

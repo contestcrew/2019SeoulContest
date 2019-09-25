@@ -84,6 +84,8 @@ extension ListView: UITextFieldDelegate {
 
 extension ListView: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    print("[Log] :", categoryList.count)
+    print("[Log] :", categoryList.count)
     return categoryList.count
   }
   

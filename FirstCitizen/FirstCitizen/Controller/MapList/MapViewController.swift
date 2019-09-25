@@ -18,25 +18,24 @@ class MapViewController: UIViewController {
   let categoryShared = CategoryDataManager.shared
   
   private var categoryList: [String] = []
+  private var selectedIncidentData: IncidentData?
   
   private let vMap = MapView()
-  private var selectedDataID = 0
-  private var selectedDataCategory = ""
   
   // MARK:- LifeCycles
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     attribute()
     extractCategory()
-    
+    displayDatasInMap()
+    showFirstData()
   }
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     
     layout()
-    displayDatasInMap()
   }
   
   // MARK:- Methods
@@ -47,43 +46,52 @@ class MapViewController: UIViewController {
     categoryList = categoryData.map { $0.name }
   }
   
+  private func showFirstData() {
+    let categoryImg = categoryShared.categoryData[selectedIncidentData!.category - 1].image
+    DispatchQueue.main.async {
+      self.vMap.changePreviewContainer(self.selectedIncidentData!, categoryImg)
+    }
+  }
+  
   private func displayDatasInMap() {
     guard let homeIncidentDatas = homeIncidentShared.incidentDatas else { return }
-    
     if homeIncidentDatas.count != 0 {
-      vMap.changePreviewContainer(homeIncidentDatas[0])
+      selectedIncidentData = homeIncidentDatas[0]
     }
     
     var tag = 0
     homeIncidentDatas.forEach {
-      resizeIcons(incidentData: $0, tag: tag)
+      getIconImage(incidentData: $0, tag: tag)
       tag += 1
     }
   }
   
-  // 파싱한 데이터들 중 Pin Icon의 사이즈를 조정하는 역할을 함
-  private func resizeIcons(incidentData: IncidentData, tag: Int) {
+  // icon image url로 이미지를 가져오는 함수
+  private func getIconImage(incidentData: IncidentData, tag: Int) {
     // ToDo 이미지 캐시처리가 필요함
-    //    print("[Log] data.category :", incidentData.category)
-    //    print("[Log] categoryList :", categoryShared.categoryData[incidentData.category])
-    //    print("")
-    //    print("")
     
+    var imageUrlStr: String = ""
     
-    //    let imageUrlStr: String = categoryShared.categoryData[incidentData.category].image
-    //    let imageURL: URL = URL(string: imageUrlStr)!
-    //
-    //    URLSession.shared.dataTask(with: imageURL) { (data, resonse, error) in
-    //      let iconImg = UIImage(data: data!)
-    //      iconImg?.resize(scale: 0.3, completion: {
-    //        self.showMarkers(img: $0 ?? UIImage(named: "Missing")!, data: incidentData, tag: tag)
-    //      })
-    //    }
+    categoryShared.categoryData.forEach {
+      if $0.id == incidentData.category {
+        imageUrlStr = $0.pinImage
+      }
+    }
     
-    let iconImg = UIImage(named: "PinMissing")
-    iconImg?.resize(scale: 0.3, completion: {
-      self.showMarkers(img: $0 ?? UIImage(named: "Missing")!, data: incidentData, tag: tag)
-    })
+    let imageURL: URL = URL(string: imageUrlStr)!
+    
+    let task = URLSession.shared.dataTask(with: imageURL) { (data, response, error) in
+      guard error == nil else { return print(error!) }
+      guard let response = response as? HTTPURLResponse,
+        // ~= 범위 사이에 있는지 확인하는 것
+        200..<400 ~= response.statusCode
+        else { return print("StatusCode is not valid") }
+      guard let data = data else { return }
+      let iconImg = UIImage(data: data)
+      self.showMarkers(img: iconImg!, data: incidentData, tag: tag)
+    }
+    
+    task.resume()
   }
   
   // 파싱한 데이터들의 Marker를 찍는 역할을 함
@@ -92,36 +100,56 @@ class MapViewController: UIViewController {
     let lng = data.longitude
     
     let marker = NMFMarker(position: NMGLatLng(lat: lat, lng: lng), iconImage: NMFOverlayImage(image: img))
+    marker.isForceShowIcon = true
     
     // NMFOverlayTouchHandler를 설정함 (Pin Touch 이벤트를 작성)
     let handler: NMFOverlayTouchHandler = { [weak self] overlay in
-      
-      self?.pinClickAnimation()
-      self?.vMap.changePreviewContainer(data)
-      self?.selectedDataID = data.id
-      //      self?.selectedDataCategory = data.category
       
       // 핀을 누른 위치로 카메라를 이동
       let cameraUpdate = NMFCameraUpdate(scrollTo: marker.position)
       cameraUpdate.animation = .easeIn
       self?.vMap.nMapView.mapView.moveCamera(cameraUpdate)
-      
+      let categoryImg = self!.categoryShared.categoryData[data.category - 1].image
+      self?.vMap.changePreviewContainer(data, categoryImg)
       return true
     }
     
     marker.captionPerspectiveEnabled = true
     marker.iconPerspectiveEnabled = true
     marker.isHideCollidedSymbols = true
-    
+    marker.touchHandler = handler
     marker.userInfo = ["tag": tag]
     
-    marker.mapView = vMap.nMapView.mapView
-    marker.touchHandler = handler
+    let markerWidth: CGFloat = 40
+    let markerHeight: CGFloat = 50
+    marker.width = markerWidth.dynamic(1)
+    marker.height = markerHeight.dynamic(1)
+    
+    DispatchQueue.main.async {
+      marker.mapView = self.vMap.nMapView.mapView
+    }
   }
   
-  // 핀을 클릭했을 때 동작하는 애니메이션
-  private func pinClickAnimation() {
-    
+  private func getCategoryList() {
+    NetworkService.getCategoryList { [unowned self] result in
+      switch result {
+      case .success(let data):
+        self.categoryShared.categoryData = data
+      case .failure(let err):
+        print(err.localizedDescription)
+      }
+    }
+  }
+  
+  private func getIncidentDatas(lat: Double, lng: Double) {
+    NetworkService.getHomeIncidentData(latitude: lat, longitude: lng) { result in
+      switch result {
+      case .success(let data):
+        self.homeIncidentShared.incidentDatas = data
+      case .failure(let err):
+        print(err.localizedDescription)
+      }
+    }
   }
   
   private func attribute() {
@@ -146,15 +174,17 @@ class MapViewController: UIViewController {
   }
 }
 
-// MARK:- MKMapVieDelegate Extension
-extension MapViewController: MKMapViewDelegate {
-  func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-    
-  }
-}
-
 // MARK:- MapViewDelegate Extension
 extension MapViewController: MapViewDelegate {
+  func touchUpRefreshButton(coordinate: CLLocationCoordinate2D) {
+    DispatchQueue.main.async {
+      self.getCategoryList()
+      self.getIncidentDatas(lat: coordinate.latitude, lng: coordinate.longitude)
+      self.touchUpLocationButton(coordinate: coordinate)
+      self.view.layoutIfNeeded()
+    }
+  }
+  
   // 의뢰하기 버튼을 눌렀을 때 의뢰하기 VC를 띄우는 역할을 함
   func touchUpRegisterButton() {
     UIAlertController.registerShow(categoryList: categoryList, title: "의뢰하기", message: "아래 목록중 하나를 선택하세요", from: self)
@@ -163,10 +193,11 @@ extension MapViewController: MapViewDelegate {
   // Preview를 클릭했을 때, 상세 화면으로 이동하는 역할을 함
   func touchUpPreview() {
     let incidentVC = IncidentViewController()
+    if homeIncidentShared.incidentDatas?.count == 0 { return }
     
-    //TODO: Category 동적으로 넣어줘야 함 -> 뷰 생성을 위한 Category 입력임(카테고리별로 뷰가 다름)
-    //TODO: Incident Detail Data 호출해야함!! (selectedID 값 이용) -> 호출한 데이터의 category를 넣어주면 됌
-    incidentVC.category = selectedDataCategory
+    incidentVC.category = categoryList[(selectedIncidentData?.category)! - 1]
+    incidentVC.incidentData = selectedIncidentData
+    
     self.present(incidentVC, animated: true, completion: nil)
   }
   
@@ -175,11 +206,5 @@ extension MapViewController: MapViewDelegate {
     let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: coordinate.latitude, lng: coordinate.longitude))
     cameraUpdate.animation = .easeIn
     vMap.nMapView.mapView.moveCamera(cameraUpdate)
-  }
-  
-  func setNMGLatLng(coordinate: CLLocationCoordinate2D) {
-    
-    //    let locationOverlay = vMap.nMapView.locationOverlay
-    //    locationOverlay.location = NMGLatLng(lat: coordinate.latitude, lng: coordinate.longitude)
   }
 }
