@@ -67,7 +67,6 @@ class MapView: UIView {
   func changePreviewContainer(_ homeIncidentData: IncidentData, _ iconUrlStr: String) {
     titleLabel.text = homeIncidentData.title
     let iconURL: URL = URL(string: iconUrlStr)!
-    print("[Log8] :", iconUrlStr)
     imageView.kf.setImage(with: iconURL)
     dateLabel.text = homeIncidentData.createdAt
     contentsLabel.text = homeIncidentData.content

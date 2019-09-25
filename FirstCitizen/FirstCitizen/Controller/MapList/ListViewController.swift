@@ -75,7 +75,7 @@ class ListViewController: UIViewController {
   }
   
   private func extractCategory() {
-    categoryList = []
+    categoryList = ["전체"]
     let categoryData = categoryShared.categoryData
     categoryData.forEach {
       categoryList.append($0.name)
@@ -164,7 +164,6 @@ extension ListViewController: ListViewDelegate {
   }
   
   func touchUpCategory(categoryIndex: Int) {
-    print("[Log3] :", categoryIndex)
     indexingIncidentData(category: categoryIndex, incidentDatas: homeIncidentShared.incidentDatas!)
     listViewTableView.reloadData()
   }
