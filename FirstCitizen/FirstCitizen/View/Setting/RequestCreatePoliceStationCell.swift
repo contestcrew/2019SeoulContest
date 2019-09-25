@@ -41,7 +41,7 @@ class RequestCreatePoliceStationCell: UITableViewCell {
     picker.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
     picker.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
     picker.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-    picker.heightAnchor.constraint(equalToConstant: 80).isActive = true
+    picker.heightAnchor.constraint(equalToConstant: 120).isActive = true
   }
 }
 

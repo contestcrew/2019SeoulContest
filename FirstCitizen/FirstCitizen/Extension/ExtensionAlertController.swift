@@ -20,19 +20,30 @@ extension UIAlertController {
     controller.show(alert, sender: nil)
   }
   
-  class func registerShow(categoryList: [String], title: String, message: String, from controller: UIViewController) {
+  
+  // 미안 분기처리하기 귀찮아서 함수를 그냥 둘로 놔눳어 ㅠㅡㅠ
+  // 맵에서 접근할때
+  class func registerShowMap(categoryList: [String], title: String, message: String, from controller: UIViewController) {
     let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
     
     categoryList.forEach {
       if $0 == "똥휴지" {
         alert.addAction(UIAlertAction(title: $0, style: .default, handler: { (_) in
           let restroomRegisterVC = RestroomCreateViewController()
-          controller.present(restroomRegisterVC, animated: true, completion: nil)
+          restroomRegisterVC.root = .map
+          
+          let vc = UINavigationController(rootViewController: restroomRegisterVC)
+          
+          controller.present(vc, animated: true, completion: nil)
         }))
       } else {
         alert.addAction(UIAlertAction(title: $0, style: .default, handler: { (_) in
           let requestCreateVC = RequestCreateViewController()
-          controller.present(requestCreateVC, animated: true, completion: nil)
+          requestCreateVC.root = .map
+          
+          let vc = UINavigationController(rootViewController: requestCreateVC)
+          
+          controller.present(vc, animated: true, completion: nil)
         }))
       }
     }
@@ -40,18 +51,21 @@ extension UIAlertController {
     controller.show(alert, sender: nil)
   }
   
-  class func registerShow2(categoryList: [String], title: String, message: String, from controller: UIViewController) {
+  // 셋팅에서 접근할떄
+  class func registerShowSetting(categoryList: [String], title: String, message: String, from controller: UIViewController) {
     let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
     
     categoryList.forEach {
       if $0 == "똥휴지" {
         alert.addAction(UIAlertAction(title: $0, style: .default, handler: { (_) in
           let restroomRegisterVC = RestroomCreateViewController()
+          restroomRegisterVC.root = .setting
           controller.navigationController?.pushViewController(restroomRegisterVC, animated: true)
         }))
       } else {
         alert.addAction(UIAlertAction(title: $0, style: .default, handler: { (_) in
           let requestCreateVC = RequestCreateViewController()
+          requestCreateVC.root = .setting
           controller.navigationController?.pushViewController(requestCreateVC, animated: true)
         }))
       }
