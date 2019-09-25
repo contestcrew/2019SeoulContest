@@ -200,7 +200,7 @@ extension MapViewController: MapViewDelegate {
     if homeIncidentShared.incidentDatas?.count == 0 { return }
     
     incidentVC.category = categoryList[(selectedIncidentData?.category)! - 1]
-    incidentVC.incidentData = selectedIncidentData
+    incidentVC.detailIncidentData = selectedIncidentData
     
     self.present(incidentVC, animated: true, completion: nil)
   }

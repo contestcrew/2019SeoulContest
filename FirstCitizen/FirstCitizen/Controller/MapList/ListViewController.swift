@@ -60,7 +60,6 @@ class ListViewController: UIViewController {
   
   private func indexingIncidentData(category: Int, incidentDatas: [IncidentData]) {
     indexedIncidentData = []
-    categoryList = ["전체"]
     
     incidentDatas.forEach {
       if category == 0 {
@@ -151,8 +150,8 @@ extension ListViewController: UITableViewDelegate {
     let incidentVC = IncidentViewController()
     
     let categoryNum = indexedIncidentData[indexPath.row].category
-    
     incidentVC.category = categoryList[categoryNum]
+    incidentVC.detailIncidentData = indexedIncidentData[indexPath.row]
     self.present(incidentVC, animated: true, completion: nil)
   }
 }

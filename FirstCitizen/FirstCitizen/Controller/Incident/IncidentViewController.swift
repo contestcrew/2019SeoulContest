@@ -12,7 +12,7 @@ class IncidentViewController: UIViewController {
   var category: String = ""
   
   // 기존 기획대로는 detailIncident 받아와야하는데 기존에 다 가져와버림. 분리 예정
-  var incidentData: IncidentData?
+  var detailIncidentData: IncidentData?
   
   private let incidentView = IncidentView()
   
@@ -25,7 +25,7 @@ class IncidentViewController: UIViewController {
     super.viewWillLayoutSubviews()
     
     incidentView.category = category
-    incidentView.detailIncidentData = incidentData
+    incidentView.detailIncidentData = detailIncidentData
     attribute()
     layout()
   }
