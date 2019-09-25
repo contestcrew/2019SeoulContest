@@ -126,7 +126,7 @@ extension SettingRequestViewController: UITableViewDelegate {
     switch indexPath.row {
       // 의뢰하기
     case 0:
-      UIAlertController.registerShow2(categoryList: categoryList, title: "의뢰하기", message: "아래 목록중 하나를 선택하세요", from: self)
+      UIAlertController.registerShowSetting(categoryList: categoryList, title: "의뢰하기", message: "아래 목록중 하나를 선택하세요", from: self)
       
       
       // 기록

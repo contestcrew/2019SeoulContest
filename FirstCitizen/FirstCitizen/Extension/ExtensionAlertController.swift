@@ -20,7 +20,10 @@ extension UIAlertController {
     controller.show(alert, sender: nil)
   }
   
-  class func registerShow(categoryList: [String], title: String, message: String, from controller: UIViewController) {
+  
+  // 미안 분기처리하기 귀찮아서 함수를 그냥 둘로 놔눳어 ㅠㅡㅠ
+  // 맵에서 접근할때
+  class func registerShowMap(categoryList: [String], title: String, message: String, from controller: UIViewController) {
     let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
     
     categoryList.forEach {
@@ -48,7 +51,8 @@ extension UIAlertController {
     controller.show(alert, sender: nil)
   }
   
-  class func registerShow2(categoryList: [String], title: String, message: String, from controller: UIViewController) {
+  // 셋팅에서 접근할떄
+  class func registerShowSetting(categoryList: [String], title: String, message: String, from controller: UIViewController) {
     let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
     
     categoryList.forEach {

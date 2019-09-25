@@ -157,7 +157,7 @@ extension MapViewController: MKMapViewDelegate {
 extension MapViewController: MapViewDelegate {
   // 의뢰하기 버튼을 눌렀을 때 의뢰하기 VC를 띄우는 역할을 함
   func touchUpRegisterButton() {
-    UIAlertController.registerShow(categoryList: categoryList, title: "의뢰하기", message: "아래 목록중 하나를 선택하세요", from: self)
+    UIAlertController.registerShowMap(categoryList: categoryList, title: "의뢰하기", message: "아래 목록중 하나를 선택하세요", from: self)
   }
   
   // Preview를 클릭했을 때, 상세 화면으로 이동하는 역할을 함
