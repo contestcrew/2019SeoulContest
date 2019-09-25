@@ -203,8 +203,6 @@ extension RequestCreateViewController: UIPickerViewDataSource {
   func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
     return policeStation.count
   }
-  
-  
 }
 
 extension RequestCreateViewController: UIPickerViewDelegate {
