@@ -115,6 +115,7 @@ class MapViewController: UIViewController {
       self?.vMap.nMapView.mapView.moveCamera(cameraUpdate)
       let categoryImg = self!.categoryShared.categoryData[data.category - 1].image
       self?.vMap.changePreviewContainer(data, categoryImg)
+      self?.selectedIncidentData = data
       return true
     }
     

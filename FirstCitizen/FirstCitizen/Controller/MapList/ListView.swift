@@ -77,15 +77,18 @@ extension ListView: UITextFieldDelegate {
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     
     let updatedText: String = "\(textField.text!)\(string)"
-    delegate?.searchIncidents(searchingText: updatedText)
-    return true
+    
+    if updatedText.count < 20 {
+      delegate?.searchIncidents(searchingText: updatedText)
+      return true
+    } else {
+      return false
+    }
   }
 }
 
 extension ListView: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    print("[Log] :", categoryList.count)
-    print("[Log] :", categoryList.count)
     return categoryList.count
   }
   

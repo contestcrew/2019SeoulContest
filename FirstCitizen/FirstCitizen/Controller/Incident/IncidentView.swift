@@ -97,7 +97,8 @@ class IncidentView: UIView {
     }
     
     incidentTableView.snp.makeConstraints {
-      $0.top.leading.trailing.bottom.equalTo(self)
+      $0.top.leading.trailing.equalTo(self)
+      $0.bottom.equalTo(helpButton.snp.top).offset(-margin.dynamic(1))
     }
   }
   
@@ -171,7 +172,7 @@ extension IncidentView: UITableViewDelegate {
       scrollView.contentOffset.y = 0
     }
     
-    let heightHarf = UIScreen.main.bounds.height / 2
+    let heightHarf = (UIScreen.main.bounds.height / 3)
     
     if scrollView.bounds.minY < heightHarf {
       backButton.isHidden = false
