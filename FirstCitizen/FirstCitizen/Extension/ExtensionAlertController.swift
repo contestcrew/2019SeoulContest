@@ -24,8 +24,16 @@ extension UIAlertController {
     let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
     
     categoryList.forEach {
-      if $0 != "전체" {
-        alert.addAction(UIAlertAction(title: $0, style: .default, handler: nil))
+      if $0 == "똥휴지" {
+        alert.addAction(UIAlertAction(title: $0, style: .default, handler: { (_) in
+          let restroomRegisterVC = RestroomCreateViewController()
+          controller.present(restroomRegisterVC, animated: true, completion: nil)
+        }))
+      } else {
+        alert.addAction(UIAlertAction(title: $0, style: .default, handler: { (_) in
+          let requestCreateVC = RequestCreateViewController()
+          controller.present(requestCreateVC, animated: true, completion: nil)
+        }))
       }
     }
     alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))

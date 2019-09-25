@@ -13,12 +13,15 @@ class ListViewController: UIViewController {
   
   // MARK:- Properties
   //TODO: Api를 통해서 카테고리 리스트를 가저올 예정
-  private let sampleCategoryList = ["전체", "똥휴지", "사고", "실종", "분실"]
+  let homeIncidentShared = IncidentDataManager.shared
+  let categoryShared = CategoryDataManager.shared
   
-  var incidentData: [HomeIncidentData] = []
-  var indexedIncidentData: [HomeIncidentData] = []
-  var backUpIndexedIncidentData: [HomeIncidentData] = []
-  var searchedIncidentData: [HomeIncidentData] = []
+  private var categoryList = ["전체"]
+  
+  var incidentData: [IncidentData] = []
+  var indexedIncidentData: [IncidentData] = []
+  var backUpIndexedIncidentData: [IncidentData] = []
+  var searchedIncidentData: [IncidentData] = []
   
   private let listView = ListView()
   
@@ -28,8 +31,7 @@ class ListViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    dataParsing(datas: sampleDatas)
-    
+    displayDatasInMap()
     configure()
     autoLayout()
   }
@@ -37,7 +39,7 @@ class ListViewController: UIViewController {
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
     
-    listView.sampleCategoryList = sampleCategoryList
+    extractCategory()
   }
   
   // MARK:- Methods
@@ -47,7 +49,7 @@ class ListViewController: UIViewController {
     searchedIncidentData = []
     
     indexedIncidentData.forEach {
-      if $0.title.contains(searchedText) || $0.contents.contains(searchedText) {
+      if $0.title.contains(searchedText) || $0.content.contains(searchedText) {
         searchedIncidentData.append($0)
       }
     }
@@ -56,38 +58,37 @@ class ListViewController: UIViewController {
     self.listViewTableView.reloadData()
   }
   
-  private func indexingIncidentData(category: String, incidentDatas: [HomeIncidentData]) {
+  private func indexingIncidentData(category: String, incidentDatas: [IncidentData]) {
     indexedIncidentData = []
     
-    incidentDatas.forEach {
-      if category == "전체" {
-        indexedIncidentData = incidentDatas
-        return
-      }
-      
-      //TODO: 카테고리가 영어로 되어있으나, 선택되는 카테고리 이름은 한국어임
-      if $0.category == category {
-        indexedIncidentData.append($0)
-      }
-    }
+    //    incidentDatas.forEach {
+    //      if category == "전체" {
+    //        indexedIncidentData = incidentDatas
+    //        return
+    //      }
+    //
+    //      //TODO: 카테고리가 영어로 되어있으나, 선택되는 카테고리 이름은 한국어임
+    ////      if $0.category == category {
+    ////        indexedIncidentData.append($0)
+    ////      }
+    //    }
     
     backUpIndexedIncidentData = indexedIncidentData
   }
   
-  
-  private func dataParsing(datas: [Data]) {
-    var tag = 0
-    incidentData = []
-    DispatchQueue.main.async {
-      datas.forEach {
-        if let incidentData = try? JSONDecoder().decode(HomeIncidentData.self, from: $0) {
-          self.incidentData.append(incidentData)
-        }
-        tag += 1
-      }
-      self.indexedIncidentData = self.incidentData
-      self.listViewTableView.reloadData()
+  private func extractCategory() {
+    let categoryData = categoryShared.categoryData
+    categoryData.forEach {
+      categoryList.append($0.name)
     }
+    listView.categoryList = categoryList
+  }
+  
+  private func displayDatasInMap() {
+    guard let homeIncidentDatas = homeIncidentShared.incidentDatas else { return }
+    
+    self.indexedIncidentData = homeIncidentDatas
+    self.listViewTableView.reloadData()
   }
   
   private func configure() {
@@ -150,8 +151,9 @@ extension ListViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let incidentVC = IncidentViewController()
     
-    //TODO: indexpath.row의 값으로 incidentData[]의 값을 찾고, id 값으로 API를 호출하여 detail Data 가져오고 카테고리 수정 및 넘김.
-    incidentVC.category = "Missing"
+    let categoryNum = indexedIncidentData[indexPath.row].category
+    
+    incidentVC.category = categoryList[categoryNum]
     self.present(incidentVC, animated: true, completion: nil)
   }
 }
@@ -163,7 +165,7 @@ extension ListViewController: ListViewDelegate {
   }
   
   func touchUpCategory(categoryIndex: Int) {
-    indexingIncidentData(category: sampleCategoryList[categoryIndex], incidentDatas: incidentData)
+    indexingIncidentData(category: categoryList[categoryIndex], incidentDatas: incidentData)
     listViewTableView.reloadData()
   }
 }

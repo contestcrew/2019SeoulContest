@@ -64,17 +64,12 @@ class MapView: UIView {
   }
   
   // MARK:- Methods
-  func changePreviewContainer(_ homeIncidentData: HomeIncidentData) {
+  func changePreviewContainer(_ homeIncidentData: IncidentData) {
     titleLabel.text = homeIncidentData.title
-    
-    imageView.image = UIImage(named: homeIncidentData.category)
-//    let iconImage = UIImage(named: homeIncidentData.category)
-//    iconImage?.dynamicImage(completion: { (image) in
-//      imageView.image = image
-//    })
-    dateLabel.text = homeIncidentData.uploadTime
-    contentsLabel.text = homeIncidentData.contents
-    pointLabel.text = "Point \(homeIncidentData.servicePoint) + Bonus \(homeIncidentData.userPoint)"
+    //    imageView.image = UIImage(named: homeIncidentData.category)
+    dateLabel.text = homeIncidentData.createdAt
+    contentsLabel.text = homeIncidentData.content
+    pointLabel.text = "Point \(homeIncidentData.categoryScore) + Bonus \(homeIncidentData.score)"
     let attributedStr = NSMutableAttributedString(string: pointLabel.text!)
     attributedStr.addAttribute(.foregroundColor, value: UIColor.blue, range: (pointLabel.text! as NSString).range(of: "Bonus"))
     attributedStr.addAttribute(.foregroundColor, value: UIColor.orange, range: (pointLabel.text! as NSString).range(of: "Point"))
@@ -112,35 +107,22 @@ class MapView: UIView {
     nMapView.mapView.buildingHeight = 0.5
     nMapView.mapView.mapType = .basic
     nMapView.mapView.logoAlign = .leftTop
-    nMapView.positionMode = .compass
+    nMapView.positionMode = .direction
     nMapView.showLocationButton = false
     nMapView.showZoomControls = false
-    
     nMapView.showCompass = false
     nMapView.showScaleBar = false
+    nMapView.mapView.minZoomLevel = 15
     
     locationButton.setImage(#imageLiteral(resourceName: "MapCurrent"), for: .normal)
-//    let locationImage = UIImage(named: "MapCurrent")
-//    locationImage?.dynamicImage(completion: { (image) in
-//      locationButton.setImage(image, for: .normal)
-//    })
     locationButton.addTarget(self, action: #selector(touchUpLocationButton), for: .touchUpInside)
     locationButton.shadow()
     
     refreshButton.setImage(#imageLiteral(resourceName: "MapReset"), for: .normal)
-//    let refreshImage = UIImage(named: "MapReset")
-//    refreshImage?.dynamicImage(completion: { (image) in
-//      refreshButton.setImage(image, for: .normal)
-//    })
     refreshButton.addTarget(self, action: #selector(touchUpRefreshButton), for: .touchUpInside)
     refreshButton.shadow()
     
-    
     registerButton.setImage(#imageLiteral(resourceName: "MapAdd"), for: .normal)
-//    let mapImage = UIImage(named: "MapAdd")
-//    mapImage?.dynamicImage(completion: { (image) in
-//      registerButton.setImage(image, for: .normal)
-//    })
     registerButton.addTarget(self, action: #selector(touchUpRegisterButton), for: .touchUpInside)
     registerButton.shadow()
   }
@@ -159,11 +141,6 @@ class MapView: UIView {
     imageView.contentMode = .scaleAspectFit
     imageView.layer.cornerRadius = Standard.imageSize / 2
     imageView.image = UIImage(named: "Restroom")
-    
-//    let iconImage = UIImage(named: "Restroom")
-//    iconImage?.dynamicImage(completion: { (image) in
-//      imageView.image = image
-//    })
     
     titleLabel.text = "굳어가고 있어요 헬프미"
     titleLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -235,7 +212,7 @@ class MapView: UIView {
     
     [nMapView, gradientView, locationButton, refreshButton, registerButton, previewContainer]
       .forEach { self.addSubview($0) }
-
+    
     [titleLabel, imageView, guideLabel, dateLabel, pointLabel, contentsLabel, progressLabel]
       .forEach { previewContainer.addSubview($0) }
     
@@ -243,73 +220,73 @@ class MapView: UIView {
       $0.top.leading.trailing.equalTo(self)
       $0.height.equalTo(self).multipliedBy(0.75)
     }
-
+    
     gradientView.snp.makeConstraints {
       $0.leading.trailing.equalTo(self)
       $0.bottom.equalTo(nMapView)
       $0.height.equalTo(margin.dynamic(10))
     }
-
+    
     locationButton.snp.makeConstraints {
       $0.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(margin.dynamic(1))
       $0.trailing.equalTo(self).offset(-margin.dynamic(1))
       $0.width.height.equalTo(margin.dynamic(4))
     }
-
+    
     refreshButton.snp.makeConstraints {
       $0.top.equalTo(locationButton.snp.bottom).offset(margin.dynamic(2))
       $0.trailing.equalTo(self).offset(-margin.dynamic(1))
       $0.width.height.equalTo(margin.dynamic(4))
     }
-
+    
     registerButton.snp.makeConstraints {
       $0.top.equalTo(gradientView.snp.top)
       $0.trailing.equalTo(self).offset(-margin.dynamic(1))
       $0.width.height.equalTo(margin.dynamic(4))
     }
-
+    
     previewContainer.snp.makeConstraints {
       $0.top.equalTo(gradientView.snp.bottom).offset(-margin.dynamic(1))
       $0.leading.equalTo(self).offset(margin.dynamic(1))
       $0.trailing.bottom.equalTo(self).offset(-margin.dynamic(1))
     }
-
+    
     titleLabel.snp.makeConstraints {
       $0.top.equalToSuperview().offset(margin.dynamic(1))
       $0.leading.equalToSuperview().offset(margin.dynamic(1))
     }
-
+    
     imageView.snp.makeConstraints {
       $0.centerY.equalTo(titleLabel.snp.centerY)
       $0.trailing.equalToSuperview().offset(-margin.dynamic(1))
       $0.width.height.equalTo(margin.dynamic(4))
     }
-
+    
     guideLabel.snp.makeConstraints {
       $0.top.equalTo(titleLabel.snp.bottom).offset(margin.dynamic(1))
       $0.leading.equalToSuperview().offset(margin.dynamic(1))
       $0.trailing.equalToSuperview().offset(-margin.dynamic(1))
       $0.height.equalTo(margin.dynamic(0.2))
     }
-
+    
     dateLabel.snp.makeConstraints {
       $0.top.equalTo(guideLabel.snp.bottom).offset(margin.dynamic(1))
       $0.leading.equalToSuperview().offset(margin.dynamic(1))
     }
-
+    
     pointLabel.snp.makeConstraints {
       $0.top.equalTo(guideLabel.snp.bottom).offset(margin.dynamic(1))
       $0.leading.equalTo(dateLabel.snp.trailing)
       $0.trailing.equalToSuperview().offset(-margin.dynamic(1))
       $0.width.equalTo(dateLabel.snp.width)
     }
-
+    
     contentsLabel.snp.makeConstraints {
       $0.top.equalTo(dateLabel.snp.bottom).offset(margin.dynamic(2))
       $0.leading.equalToSuperview().offset(margin.dynamic(1))
       $0.bottom.equalToSuperview().offset(-margin.dynamic(2))
     }
-
+    
     progressLabel.snp.makeConstraints {
       $0.top.equalTo(dateLabel.snp.bottom).offset(margin.dynamic(2))
       $0.leading.equalTo(contentsLabel.snp.trailing)
