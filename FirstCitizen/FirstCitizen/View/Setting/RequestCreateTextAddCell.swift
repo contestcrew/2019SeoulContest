@@ -35,6 +35,8 @@ class RequestCreateTextAddCell: UITableViewCell {
   func setting(type: TextViewType) {
     switch type {
     case .field:
+      base.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Standard.ySpace).isActive = true
+      
       contentView.addSubview(textField)
       
       textField.translatesAutoresizingMaskIntoConstraints = false
@@ -45,6 +47,8 @@ class RequestCreateTextAddCell: UITableViewCell {
       textField.heightAnchor.constraint(equalToConstant: 24).isActive = true
       
     case .view:
+      base.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -56).isActive = true
+      
       contentView.addSubview(textView)
       
       textView.translatesAutoresizingMaskIntoConstraints = false
@@ -76,6 +80,6 @@ class RequestCreateTextAddCell: UITableViewCell {
     base.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Standard.ySpace).isActive = true
     base.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Standard.xSpace).isActive = true
     base.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Standard.xSpace).isActive = true
-    base.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Standard.ySpace).isActive = true
+    
   }
 }
