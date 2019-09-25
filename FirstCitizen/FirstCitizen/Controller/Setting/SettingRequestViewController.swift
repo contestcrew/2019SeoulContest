@@ -45,6 +45,7 @@ class SettingRequestViewController: UIViewController {
     MainTabBarController.vTabBarButton.isHidden = false
     navigationController?.popViewController(animated: true)
   }
+  
   // 카테고리 이름만 추출하여 categoryList 배열에 저장
   private func extractCategory() {
     let categoryData = categoryShared.categoryData

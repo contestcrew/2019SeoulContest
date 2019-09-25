@@ -48,6 +48,10 @@ class RequestCreateViewController: UIViewController {
   ]
   
   
+  var root: CreateRoot?
+  
+  
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -58,9 +62,26 @@ class RequestCreateViewController: UIViewController {
   
   private func navigationSet() {
     navigationItem.title = "의뢰하기"
+    navigationController?.navigationBar.shadowImage = UIImage()
+    navigationController?.navigationBar.barTintColor = .white
     
     let barButton = UIBarButtonItem(title: "의 뢰", style: .done, target: self, action: #selector(barButtonAction))
     navigationItem.rightBarButtonItem = barButton
+    
+    let backButton = UIBarButtonItem(image: UIImage(named: "navi-arrow-24x24"), style: .done, target: self, action: #selector(back))
+    navigationItem.leftBarButtonItem = backButton
+  }
+  
+  @objc func back() {
+    guard let tempRoot = root else { return }
+    
+    switch tempRoot {
+    case .map:
+      presentingViewController?.dismiss(animated: true)
+      
+    case .setting:
+      navigationController?.popViewController(animated: true)
+    }
   }
   
   @objc private func barButtonAction() {

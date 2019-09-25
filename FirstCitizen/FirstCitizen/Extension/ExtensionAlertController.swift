@@ -27,12 +27,20 @@ extension UIAlertController {
       if $0 == "똥휴지" {
         alert.addAction(UIAlertAction(title: $0, style: .default, handler: { (_) in
           let restroomRegisterVC = RestroomCreateViewController()
-          controller.present(restroomRegisterVC, animated: true, completion: nil)
+          restroomRegisterVC.root = .map
+          
+          let vc = UINavigationController(rootViewController: restroomRegisterVC)
+          
+          controller.present(vc, animated: true, completion: nil)
         }))
       } else {
         alert.addAction(UIAlertAction(title: $0, style: .default, handler: { (_) in
           let requestCreateVC = RequestCreateViewController()
-          controller.present(requestCreateVC, animated: true, completion: nil)
+          requestCreateVC.root = .map
+          
+          let vc = UINavigationController(rootViewController: requestCreateVC)
+          
+          controller.present(vc, animated: true, completion: nil)
         }))
       }
     }
@@ -47,11 +55,13 @@ extension UIAlertController {
       if $0 == "똥휴지" {
         alert.addAction(UIAlertAction(title: $0, style: .default, handler: { (_) in
           let restroomRegisterVC = RestroomCreateViewController()
+          restroomRegisterVC.root = .setting
           controller.navigationController?.pushViewController(restroomRegisterVC, animated: true)
         }))
       } else {
         alert.addAction(UIAlertAction(title: $0, style: .default, handler: { (_) in
           let requestCreateVC = RequestCreateViewController()
+          requestCreateVC.root = .setting
           controller.navigationController?.pushViewController(requestCreateVC, animated: true)
         }))
       }
