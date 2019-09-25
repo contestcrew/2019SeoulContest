@@ -23,13 +23,21 @@ class TitleCell: UITableViewCell {
     layout()
   }
   
+  func modifyProperties(_ title: String, _ iconImageStr: String) {
+    titleLabel.text = title
+    let iconURL = URL(string: iconImageStr)!
+    self.iconImageView.kf.setImage(with: iconURL)
+    
+    self.layoutIfNeeded()
+  }
+  
   private func attribute() {
     titleLabel.text = "하늘에서 날개를 ..."
     titleLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     titleLabel.dynamicFont(fontSize: 28, weight: .bold)
     
     iconImageView.contentMode = .scaleAspectFit
-    iconImageView.image = #imageLiteral(resourceName: "Restroom")
+    iconImageView.image = #imageLiteral(resourceName: "Crash")
     
     titleUnderLineLabel.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
   }
@@ -51,8 +59,8 @@ class TitleCell: UITableViewCell {
     }
     
     iconImageView.snp.makeConstraints {
+      $0.top.trailing.equalTo(contentView)
       $0.centerY.equalTo(titleLabel.snp.centerY)
-      $0.trailing.equalTo(contentView)
       $0.width.height.equalTo(margin.dynamic(3) + 5)
     }
     

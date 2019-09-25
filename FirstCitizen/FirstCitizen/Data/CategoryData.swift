@@ -8,9 +8,15 @@
 
 import Foundation
 
-struct CategoryData: Decodable {
+struct CategoryData: Codable {
   let id: Int
   let name: String
   let score: Int
   let image: String
+  let pinImage: String
+  
+  enum CodingKeys: String, CodingKey {
+    case id, name, score, image
+    case pinImage = "pin_image"
+  }
 }

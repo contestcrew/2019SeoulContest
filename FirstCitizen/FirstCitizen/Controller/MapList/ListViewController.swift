@@ -58,25 +58,24 @@ class ListViewController: UIViewController {
     self.listViewTableView.reloadData()
   }
   
-  private func indexingIncidentData(category: String, incidentDatas: [IncidentData]) {
+  private func indexingIncidentData(category: Int, incidentDatas: [IncidentData]) {
     indexedIncidentData = []
+    categoryList = ["전체"]
     
-    //    incidentDatas.forEach {
-    //      if category == "전체" {
-    //        indexedIncidentData = incidentDatas
-    //        return
-    //      }
-    //
-    //      //TODO: 카테고리가 영어로 되어있으나, 선택되는 카테고리 이름은 한국어임
-    ////      if $0.category == category {
-    ////        indexedIncidentData.append($0)
-    ////      }
-    //    }
-    
-    backUpIndexedIncidentData = indexedIncidentData
+    incidentDatas.forEach {
+      if category == 0 {
+        indexedIncidentData = incidentDatas
+        return
+      } else {
+        if $0.category == category {
+          indexedIncidentData.append($0)
+        }
+      }
+    }
   }
   
   private func extractCategory() {
+    categoryList = []
     let categoryData = categoryShared.categoryData
     categoryData.forEach {
       categoryList.append($0.name)
@@ -165,7 +164,8 @@ extension ListViewController: ListViewDelegate {
   }
   
   func touchUpCategory(categoryIndex: Int) {
-    indexingIncidentData(category: categoryList[categoryIndex], incidentDatas: incidentData)
+    print("[Log3] :", categoryIndex)
+    indexingIncidentData(category: categoryIndex, incidentDatas: homeIncidentShared.incidentDatas!)
     listViewTableView.reloadData()
   }
 }

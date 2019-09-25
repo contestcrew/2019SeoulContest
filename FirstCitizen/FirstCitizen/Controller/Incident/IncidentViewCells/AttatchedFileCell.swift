@@ -12,6 +12,8 @@ class AttatchedFileCell: UITableViewCell {
   
   static let identifier = "AttatchedFileCell"
   
+  private var pictureDatas: [String] = []
+  
   private let pictureLabel = UILabel()
   private let pictureUnderLineLabel = UILabel()
   
@@ -29,6 +31,10 @@ class AttatchedFileCell: UITableViewCell {
     
     attribute()
     layout()
+  }
+  
+  func modifyProperties(imagesStr: [String]) {
+    pictureDatas = imagesStr
   }
   
   private func attribute() {
@@ -84,12 +90,12 @@ class AttatchedFileCell: UITableViewCell {
 
 extension AttatchedFileCell: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 5
+    return pictureDatas.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IncidentCell.identifier, for: indexPath) as! IncidentCell
-    cell.incidentCellConfigure(reportImage: #imageLiteral(resourceName: "sample_image_2"))
+    cell.incidentCellConfigure(imageStr: pictureDatas[indexPath.row])
     return cell
   }
 }

@@ -9,31 +9,31 @@
 import Foundation
 
 struct DetailIncidentData: Codable {
-  let category: String
-  let id: Int
-  let coordinate: [Float]
-  let mainAddress: String
-  let detailAddress: String
-  let uploadTime: String
-  let servicePoint: Int
-  let userPoint: Int
-  let title: String
-  let contents: String
-  let occurredTime: String
-  let contentImage: String
+  let id, category: Int
+  let policeOffice: Int?
+  let author: Author
+  let title, content, status: String
+  let categoryScore, score: Int
+  let mainAddress, detailAddress: String
+  let latitude, longitude: Double
+  let occurredAt: String?
+  let createdAt: String
+  let updatedAt: String
+  let images: [String]
   
   enum CodingKeys: String, CodingKey {
-    case category
-    case id
-    case coordinate
+    case id, category
+    case policeOffice = "police_office"
+    case author
+    case title, content, status
+    case categoryScore = "category_score"
+    case score
     case mainAddress = "main_address"
     case detailAddress = "detail_address"
-    case uploadTime = "upload_time"
-    case servicePoint = "service_point"
-    case userPoint = "user_point"
-    case title
-    case contents
-    case occurredTime = "occurred_time"
-    case contentImage = "content_image"
+    case latitude, longitude
+    case occurredAt = "occurred_at"
+    case createdAt = "created_at"
+    case updatedAt = "updated_at"
+    case images
   }
 }
