@@ -2,317 +2,49 @@
 //  IncidentView.swift
 //  FirstCitizen
 //
-//  Created by Fury on 10/09/2019.
+//  Created by Fury on 24/09/2019.
 //  Copyright © 2019 Kira. All rights reserved.
 //
 
 import UIKit
-import NMapsMap
-
-protocol IncidentViewDelegate: class {
-  func touchUpBackButton()
-  func touchUpHelpButton(category: String)
-}
 
 class IncidentView: UIView {
-  var category: String = ""
   
-  weak var delegate: IncidentViewDelegate?
+  private let incidentTableView = UITableView()
   
-  private let locationManager = CLLocationManager()
-  
-  private let nmapView = NMFMapView()
-  private let gradientView = UIImageView()
-  
-  private let backButton = UIButton()
-  
-  private let bodyScrollView = UIScrollView()
-  private let bodyView = UIView()
-  private let titleLabel = UILabel()
-  private let imageView = UIImageView()
-  private let titleUnderLineView = UIView()
-  private let regionLabel = UILabel()
-  private let pointLabel = UILabel()
-  private let uploadTimeLabel = UILabel()
-  
-  private let occurredTimeLabel = UILabel()
-  private let occurredTimeUnderLineView = UIView()
-  private let occurredTimeText = UILabel()
-  
-  private let pictureLabel = UILabel()
-  private let pictureUnderLineView = UIView()
-  
-  private let pictureCollectionView: UICollectionView = {
-    let layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .horizontal
-    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-    collectionView.showsHorizontalScrollIndicator = false
-    collectionView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-    return collectionView
-  }()
-  
-  private let messageLabel = UILabel()
-  private let messageUnderLineView = UIView()
-  private let contentsLabel = UILabel()
-  
-  private let helpButton = UIButton(type: .custom)
-  
-  init(frame: CGRect, category: String) {
+  override init(frame: CGRect) {
     super.init(frame: frame)
     
-    self.category = category
     attribute()
     layout()
   }
   
-  @objc private func touchUpBackButton() {
-    delegate?.touchUpBackButton()
-  }
-  
-  @objc private func touchUpHelpButton() {
-    delegate?.touchUpHelpButton(category: category)
-  }
-  
-  func changeAttribute(detailIncidentData: DetailIncidentData) {
+  override func layoutSubviews() {
+    super.layoutSubviews()
     
-    // 카메라 위치 이동
-    let coordinate = detailIncidentData.coordinate
-    let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: Double(coordinate[0]), lng: Double(coordinate[1])))
-    nmapView.moveCamera(cameraUpdate)
-    
-    titleLabel.text = detailIncidentData.title
-    imageView.image = UIImage(named: detailIncidentData.category)
-    regionLabel.text = "\(detailIncidentData.mainAddress), \(detailIncidentData.detailAddress)"
-    pointLabel.text = "Point \(detailIncidentData.servicePoint) + Bonus \(detailIncidentData.userPoint)"
-    
-    let attributedStr = NSMutableAttributedString(string: pointLabel.text!)
-    attributedStr.addAttribute(.foregroundColor, value: UIColor.blue, range: (pointLabel.text! as NSString).range(of: "Bonus"))
-    attributedStr.addAttribute(.foregroundColor, value: UIColor.orange, range: (pointLabel.text! as NSString).range(of: "Point"))
-    pointLabel.attributedText = attributedStr
-    
-    uploadTimeLabel.text = detailIncidentData.uploadTime
-    contentsLabel.text = detailIncidentData.contents
-    occurredTimeText.text = detailIncidentData.occurredTime
+    incidentTableView.rowHeight = UITableView.automaticDimension
+    incidentTableView.estimatedRowHeight = 180
   }
   
   private func attribute() {
-    gradientView.image = UIImage(named: "Gradient")
-    gradientView.contentMode = .scaleToFill
     
-    backButton.setImage(#imageLiteral(resourceName: "Back_Button"), for: .normal)
-    backButton.addTarget(self, action: #selector(touchUpBackButton), for: .touchUpInside)
+    incidentTableView.allowsSelection = false
+    incidentTableView.separatorStyle = .none
+    incidentTableView.dataSource = self
+    incidentTableView.delegate = self
     
-    bodyScrollView.showsHorizontalScrollIndicator = false
-    bodyScrollView.delegate = self
-    
-    titleLabel.text = "하늘에서 날개를 잃어버렸어요..."
-    titleLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    titleLabel.dynamicFont(fontSize: 28, weight: .bold)
-    
-    imageView.contentMode = .scaleAspectFit
-    imageView.image = #imageLiteral(resourceName: "Restroom")
-    
-    titleUnderLineView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    
-    regionLabel.text = "서울특별시 성동구 성수22길 37, 사거리"
-    regionLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    regionLabel.dynamicFont(fontSize: 14, weight: .semibold)
-    regionLabel.numberOfLines = 0
-    
-    pointLabel.text = "1000"
-    pointLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    pointLabel.dynamicFont(fontSize: 14, weight: .semibold)
-    
-    uploadTimeLabel.text = "2019-06-04 목요일"
-    uploadTimeLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    uploadTimeLabel.dynamicFont(fontSize: 14, weight: .semibold)
-    
-    occurredTimeLabel.text = "발생시각"
-    occurredTimeLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    occurredTimeLabel.dynamicFont(fontSize: 24, weight: .bold)
-    
-    occurredTimeUnderLineView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    
-    occurredTimeText.text = "09:10"
-    occurredTimeText.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    occurredTimeText.dynamicFont(fontSize: 16, weight: .bold)
-    
-    pictureLabel.text = "사진"
-    pictureLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    pictureLabel.dynamicFont(fontSize: 24, weight: .bold)
-    
-    pictureUnderLineView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    
-    pictureCollectionView.dataSource = self
-    pictureCollectionView.delegate = self
-    pictureCollectionView.register(IncidentCell.self, forCellWithReuseIdentifier: IncidentCell.identifier)
-    
-    messageLabel.text = "메세지"
-    messageLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    messageLabel.dynamicFont(fontSize: 24, weight: .bold)
-    
-    messageUnderLineView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    
-    contentsLabel.text = "내 날개좀.. 찾아주세요.. 부탁드려요 ㅠㅠㅠㅠ"
-    contentsLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    contentsLabel.textAlignment = .justified
-    contentsLabel.dynamicFont(fontSize: 16, weight: .bold)
-    contentsLabel.numberOfLines = 0
-    
-    helpButton.setTitle("도와주기", for: .normal)
-    helpButton.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
-    helpButton.titleLabel?.dynamicFont(fontSize: 26, weight: .bold)
-    helpButton.layer.cornerRadius = 10
-    helpButton.backgroundColor = UIColor.appColor(.appButtonColor)
-    helpButton.addTarget(self, action: #selector(touchUpHelpButton), for: .touchUpInside)
+    incidentTableView.register(MapCell.self, forCellReuseIdentifier: MapCell.identifier)
+    incidentTableView.register(TitleCell.self, forCellReuseIdentifier: TitleCell.identifier)
+    incidentTableView.register(ExtraInfomaitionCell.self, forCellReuseIdentifier: ExtraInfomaitionCell.identifier)
+    incidentTableView.register(OccurredTimeCell.self, forCellReuseIdentifier: OccurredTimeCell.identifier)
+    incidentTableView.register(AttatchedFileCell.self, forCellReuseIdentifier: AttatchedFileCell.identifier)
+    incidentTableView.register(ContentsCell.self, forCellReuseIdentifier: ContentsCell.identifier)
   }
   
   private func layout() {
-    let margin: CGFloat = 10
-    
-    [helpButton, bodyScrollView].forEach { self.addSubview($0) }
-    
-    [nmapView, gradientView, bodyView].forEach { bodyScrollView.addSubview($0) }
-    
-    if category == "Restroom" {
-      [titleLabel, imageView, titleUnderLineView, regionLabel, pointLabel, uploadTimeLabel, messageLabel, messageUnderLineView, contentsLabel].forEach {
-        bodyView.addSubview($0)
-      }
-    } else {
-      [titleLabel, imageView, titleUnderLineView, regionLabel, pointLabel, uploadTimeLabel, occurredTimeLabel, occurredTimeUnderLineView, occurredTimeText, pictureLabel, pictureUnderLineView, pictureCollectionView, messageLabel, messageUnderLineView, contentsLabel].forEach {
-        bodyView.addSubview($0)
-      }
-    }
-    
-    self.addSubview(backButton)
-    
-    backButton.snp.makeConstraints {
-      $0.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(margin.dynamic(1))
-      $0.leading.equalTo(self.safeAreaLayoutGuide.snp.leading).offset(margin.dynamic(1))
-      $0.width.height.equalTo(margin.dynamic(3) + 5)
-    }
-    
-    bodyScrollView.snp.makeConstraints {
-      $0.top.leading.trailing.equalTo(self)
-      $0.bottom.equalTo(helpButton.snp.top).offset(-margin.dynamic(2))
-    }
-    
-    nmapView.snp.makeConstraints {
-      $0.top.leading.trailing.equalTo(bodyScrollView)
-      $0.height.equalTo(self).multipliedBy(0.5)
-    }
-    
-    gradientView.snp.makeConstraints {
-      $0.leading.trailing.equalTo(bodyScrollView)
-      $0.bottom.equalTo(nmapView.snp.bottom)
-      $0.height.equalTo(margin.dynamic(10))
-    }
-    
-    bodyView.snp.makeConstraints {
-      $0.top.equalTo(nmapView.snp.bottom)
-      $0.bottom.equalTo(bodyScrollView)
-      $0.leading.equalTo(self).offset(margin.dynamic(2))
-      $0.trailing.equalTo(self).offset(-margin.dynamic(2))
-    }
-    
-    titleLabel.snp.makeConstraints {
-      $0.top.leading.trailing.equalTo(bodyView)
-    }
-    
-    imageView.snp.makeConstraints {
-      $0.centerY.equalTo(titleLabel.snp.centerY)
-      $0.trailing.equalTo(self).offset(-margin.dynamic(2))
-      $0.width.height.equalTo(margin.dynamic(3) + 5)
-    }
-    
-    titleUnderLineView.snp.makeConstraints {
-      $0.top.equalTo(titleLabel.snp.bottom).offset(margin.dynamic(1))
-      $0.leading.trailing.equalTo(bodyView)
-      $0.height.equalTo(margin.dynamic(0.1))
-    }
-    
-    regionLabel.snp.makeConstraints {
-      $0.top.equalTo(titleUnderLineView.snp.bottom).offset(margin.dynamic(1))
-      $0.trailing.equalTo(bodyView)
-    }
-    
-    pointLabel.snp.makeConstraints {
-      $0.top.equalTo(regionLabel.snp.bottom).offset(margin.dynamic(1))
-      $0.trailing.equalTo(bodyView)
-    }
-    
-    uploadTimeLabel.snp.makeConstraints {
-      $0.top.equalTo(pointLabel.snp.bottom).offset(margin.dynamic(1))
-      $0.trailing.equalTo(bodyView)
-    }
-    
-    if category == "Restroom" {
-      messageLabel.snp.makeConstraints {
-        $0.top.equalTo(uploadTimeLabel.snp.bottom).offset(margin.dynamic(2))
-        $0.leading.equalTo(bodyView)
-      }
-    } else {
-      occurredTimeLabel.snp.makeConstraints {
-        $0.top.equalTo(uploadTimeLabel.snp.bottom).offset(margin.dynamic(2))
-        $0.leading.equalTo(bodyView)
-      }
-      
-      occurredTimeUnderLineView.snp.makeConstraints {
-        $0.top.equalTo(occurredTimeLabel.snp.bottom).offset(margin.dynamic(2))
-        $0.leading.trailing.equalTo(bodyView)
-        $0.height.equalTo(margin.dynamic(0.1))
-      }
-      
-      occurredTimeText.snp.makeConstraints {
-        $0.top.equalTo(occurredTimeUnderLineView.snp.bottom).offset(margin.dynamic(1))
-        $0.leading.trailing.equalTo(bodyView)
-      }
-      
-      pictureLabel.snp.makeConstraints {
-        $0.top.equalTo(occurredTimeText.snp.bottom).offset(margin.dynamic(2))
-        $0.leading.equalTo(bodyView)
-      }
-      
-      pictureUnderLineView.snp.makeConstraints {
-        $0.top.equalTo(pictureLabel.snp.bottom).offset(margin.dynamic(1))
-        $0.leading.trailing.equalTo(bodyView)
-        $0.height.equalTo(margin.dynamic(0.1))
-      }
-      
-      // TODO: 한 곳에서 width, height 처리할 것
-      let width = UIScreen.main.bounds.width - 60
-      let height = (width * 3) / 4
-      
-      pictureCollectionView.snp.makeConstraints {
-        $0.top.equalTo(pictureUnderLineView.snp.bottom).offset(margin.dynamic(2))
-        $0.leading.equalTo(self)
-        $0.trailing.equalTo(self)
-        $0.height.equalTo(height)
-      }
-      
-      messageLabel.snp.makeConstraints {
-        $0.top.equalTo(pictureCollectionView.snp.bottom).offset(margin.dynamic(2))
-        $0.leading.equalTo(bodyView)
-      }
-    }
-    
-    messageUnderLineView.snp.makeConstraints {
-      $0.top.equalTo(messageLabel.snp.bottom).offset(margin.dynamic(1))
-      $0.leading.trailing.equalTo(bodyView)
-      $0.height.equalTo(margin.dynamic(0.1))
-    }
-    
-    contentsLabel.snp.makeConstraints {
-      $0.top.equalTo(messageUnderLineView.snp.bottom).offset(margin.dynamic(1))
-      $0.leading.trailing.equalTo(bodyView)
-      $0.bottom.equalTo(bodyView).offset(-margin.dynamic(2))
-    }
-    
-    helpButton.snp.makeConstraints {
-      $0.leading.equalTo(self).offset(margin.dynamic(2))
-      $0.trailing.equalTo(self).offset(-margin.dynamic(2))
-      $0.bottom.equalTo(self).offset(-margin.dynamic(2))
-      $0.height.equalTo(margin.dynamic(5))
+    self.addSubview(incidentTableView)
+    incidentTableView.snp.makeConstraints {
+      $0.top.leading.trailing.bottom.equalTo(self)
     }
   }
   
@@ -321,45 +53,38 @@ class IncidentView: UIView {
   }
 }
 
-extension IncidentView: UICollectionViewDataSource {
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 5
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IncidentCell.identifier, for: indexPath) as! IncidentCell
-    cell.incidentCellConfigure(reportImage: #imageLiteral(resourceName: "sample_image_2"))
-    return cell
-  }
-}
-
-extension IncidentView: UICollectionViewDelegateFlowLayout {
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    let width = UIScreen.main.bounds.width - 60
-    let height = (width * 3) / 4
-    return CGSize(width: width, height: height)
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-    return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    let spacing: CGFloat = 20
-    return spacing.dynamic(1)
-  }
-}
-
-extension IncidentView: UIScrollViewDelegate {
-  func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    if scrollView.bounds.minY < 0 {
-      scrollView.contentOffset.y = 0
-    }
+extension IncidentView: UITableViewDataSource {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
-    if scrollView.bounds.minY < nmapView.frame.maxY - gradientView.frame.height {
-      backButton.isHidden = false
+    return 6
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+    if indexPath.row == 0 {
+      let cell = tableView.dequeueReusableCell(withIdentifier: MapCell.identifier, for: indexPath) as! MapCell
+      return cell
+    } else if indexPath.row == 1 {
+      let cell = tableView.dequeueReusableCell(withIdentifier: TitleCell.identifier, for: indexPath) as! TitleCell
+      return cell
+    } else if indexPath.row == 2 {
+      let cell = tableView.dequeueReusableCell(withIdentifier: ExtraInfomaitionCell.identifier, for: indexPath) as! ExtraInfomaitionCell
+      return cell
+    } else if indexPath.row == 3 {
+      let cell = tableView.dequeueReusableCell(withIdentifier: OccurredTimeCell.identifier, for: indexPath) as! OccurredTimeCell
+      return cell
+    } else if indexPath.row == 4 {
+      let cell = tableView.dequeueReusableCell(withIdentifier: AttatchedFileCell.identifier, for: indexPath) as! AttatchedFileCell
+      return cell
     } else {
-      backButton.isHidden = true
+      let cell = tableView.dequeueReusableCell(withIdentifier: ContentsCell.identifier, for: indexPath) as! ContentsCell
+      return cell
     }
+  }
+}
+
+extension IncidentView: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return UITableView.automaticDimension
   }
 }

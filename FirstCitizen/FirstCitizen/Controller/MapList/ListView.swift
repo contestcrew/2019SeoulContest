@@ -15,7 +15,7 @@ protocol ListViewDelegate: class {
 
 class ListView: UIView {
   
-  var sampleCategoryList: [String] = []
+  var categoryList: [String] = []
   private var selectedItemIndex: Int = 0
   weak var delegate: ListViewDelegate?
   
@@ -84,12 +84,12 @@ extension ListView: UITextFieldDelegate {
 
 extension ListView: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return sampleCategoryList.count
+    return categoryList.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as! CategoryCell
-    cell.cellConfigure(sampleCategoryList[indexPath.row])
+    cell.cellConfigure(categoryList[indexPath.row])
     
     if indexPath.row == selectedItemIndex {
       cell.categoryName.dynamicFont(fontSize: 26, weight: .bold)
@@ -106,7 +106,7 @@ extension ListView: UICollectionViewDelegateFlowLayout {
     let height: CGFloat = 50
     
     // categoryNmae Label의 font 속성을 참조하여 width 설정
-    let fontWidthSize: CGFloat = (sampleCategoryList[indexPath.row] as NSString).size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 24) as Any]).width
+    let fontWidthSize: CGFloat = (categoryList[indexPath.row] as NSString).size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 24) as Any]).width
     let dynamicWidthSize = (fontWidthSize + 30).dynamic(1)
     return CGSize(width: dynamicWidthSize, height: height.dynamic(1))
   }
@@ -119,7 +119,7 @@ extension ListView: UICollectionViewDelegateFlowLayout {
 
 extension ListView: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+    
     selectedItemIndex = indexPath.row
     delegate?.touchUpCategory(categoryIndex: selectedItemIndex)
     collectionView.reloadData()

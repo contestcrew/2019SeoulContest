@@ -38,12 +38,13 @@ class ListViewCell: UITableViewCell {
     contentView.layoutIfNeeded()
   }
   
-  func changePreviewContainer(_ homeIncidentData: HomeIncidentData) {
+  func changePreviewContainer(_ homeIncidentData: IncidentData) {
     titleLabel.text = homeIncidentData.title
     iconImage.image = UIImage(named: "\(homeIncidentData.category)")
-    dateLabel.text = homeIncidentData.uploadTime
-    contentsLabel.text = homeIncidentData.contents
-    pointLabel.text = "Point \(homeIncidentData.servicePoint) + Bonus \(homeIncidentData.userPoint)"
+    //    dateLabel.text = "temp 2019-08-14 금요일"
+    dateLabel.text = homeIncidentData.createdAt
+    contentsLabel.text = homeIncidentData.content
+    pointLabel.text = "Point \(homeIncidentData.categoryScore) + Bonus \(homeIncidentData.score)"
     let attributedStr = NSMutableAttributedString(string: pointLabel.text!)
     attributedStr.addAttribute(.foregroundColor, value: UIColor.blue, range: (pointLabel.text! as NSString).range(of: "Bonus"))
     attributedStr.addAttribute(.foregroundColor, value: UIColor.orange, range: (pointLabel.text! as NSString).range(of: "Point"))
