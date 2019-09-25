@@ -105,7 +105,7 @@ extension SettingViewController: UITableViewDataSource {
       case 0:
         let cell = SettingProfileCell()
         
-        cell.setting(imageName: "", nickName: "-", creditPoint: 0, point: 0)
+        cell.setting(imageName: "leaf", nickName: "-", creditPoint: 0, point: 0)
         
         return cell
         
@@ -129,10 +129,6 @@ extension SettingViewController: UITableViewDataSource {
         return cell
       }
     }
-    
-    
-    
-    
   }
 }
 
@@ -150,7 +146,7 @@ extension SettingViewController: UITableViewDelegate {
         
         navigationController?.pushViewController(vcSettingRequest, animated: true)
         
-      case 2...5:
+      case 2...inDocument.count:
         print(indexPath.row)
         
       default:
@@ -161,7 +157,10 @@ extension SettingViewController: UITableViewDelegate {
     case false:
       
       switch indexPath.row {
-      case 0...2:
+      case 0:
+        break
+        
+      case 1...outDocument.count:
         print(indexPath.row)
         
       default:
@@ -169,9 +168,5 @@ extension SettingViewController: UITableViewDelegate {
         tableView.reloadData()
       }
     }
-    
-    
-    
-    
   }
 }

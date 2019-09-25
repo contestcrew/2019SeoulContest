@@ -28,22 +28,28 @@ class SettingRequestViewController: UIViewController {
     MainTabBarController.vTabBarButton.isHidden = true
   }
   
-  override func viewWillDisappear(_ animated: Bool) {
-    super.viewDidDisappear(true)
-    MainTabBarController.vTabBarButton.isHidden = false
-  }
-  
   private func navigationSet() {
     navigationItem.title = "의 뢰"
     navigationController?.navigationBar.shadowImage = UIImage()
     navigationController?.navigationBar.barTintColor = .white
+    
+    let backButton = UIBarButtonItem(image: UIImage(named: "navi-arrow-24x24"), style: .done, target: self, action: #selector(back))
+    navigationItem.leftBarButtonItem = backButton
+  }
+  
+  @objc func back() {
+    MainTabBarController.vTabBarButton.isHidden = false
+    navigationController?.popViewController(animated: true)
   }
   
   private func configure() {
     view.backgroundColor = .white
     
+    tableView.delegate = self
     tableView.dataSource = self
     view.addSubview(tableView)
+    
+    
   }
   
   private struct Standard {
@@ -72,6 +78,7 @@ extension SettingRequestViewController: UITableViewDataSource {
     switch indexPath.row {
     case 0:
       let cell = UITableViewCell()
+      cell.selectionStyle = .none
       
       let label = UILabel()
       label.text = "의뢰하기"
@@ -93,9 +100,29 @@ extension SettingRequestViewController: UITableViewDataSource {
       return cell
       
     default:
-      return ListViewCell()
+      let cell = ListViewCell()
+      cell.selectionStyle = .none
+      
+      return cell
     }
     
     
+  }
+}
+
+extension SettingRequestViewController: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    switch indexPath.row {
+      // 의뢰하기
+    case 0:
+      let vc = RestroomCreateViewController()
+      
+      navigationController?.pushViewController(vc, animated: true)
+      
+      
+      // 기록
+    default:
+      break
+    }
   }
 }
