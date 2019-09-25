@@ -39,4 +39,24 @@ extension UIAlertController {
     alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
     controller.show(alert, sender: nil)
   }
+  
+  class func registerShow2(categoryList: [String], title: String, message: String, from controller: UIViewController) {
+    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+    
+    categoryList.forEach {
+      if $0 == "똥휴지" {
+        alert.addAction(UIAlertAction(title: $0, style: .default, handler: { (_) in
+          let restroomRegisterVC = RestroomCreateViewController()
+          controller.navigationController?.pushViewController(restroomRegisterVC, animated: true)
+        }))
+      } else {
+        alert.addAction(UIAlertAction(title: $0, style: .default, handler: { (_) in
+          let requestCreateVC = RequestCreateViewController()
+          controller.navigationController?.pushViewController(requestCreateVC, animated: true)
+        }))
+      }
+    }
+    alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
+    controller.present(alert, animated: true)
+  }
 }

@@ -14,6 +14,7 @@
 		4F87FFE9233AF5C60094CCD0 /* RequestCreateAddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87FFE8233AF5C60094CCD0 /* RequestCreateAddressCell.swift */; };
 		4F87FFED233AFC860094CCD0 /* RequestCreateTextAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87FFEC233AFC860094CCD0 /* RequestCreateTextAddCell.swift */; };
 		4F87FFF1233B190E0094CCD0 /* RequestCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87FFF0233B190E0094CCD0 /* RequestCreateViewController.swift */; };
+		4F87FFF3233B380F0094CCD0 /* RequestCreatePoliceStationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87FFF2233B380F0094CCD0 /* RequestCreatePoliceStationCell.swift */; };
 		4FF9669C230C032600E869FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF9669B230C032600E869FF /* AppDelegate.swift */; };
 		4FF966A1230C032600E869FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FF9669F230C032600E869FF /* Main.storyboard */; };
 		4FF966A6230C032700E869FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FF966A4230C032700E869FF /* LaunchScreen.storyboard */; };
@@ -78,6 +79,7 @@
 		4F87FFE8233AF5C60094CCD0 /* RequestCreateAddressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCreateAddressCell.swift; sourceTree = "<group>"; };
 		4F87FFEC233AFC860094CCD0 /* RequestCreateTextAddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCreateTextAddCell.swift; sourceTree = "<group>"; };
 		4F87FFF0233B190E0094CCD0 /* RequestCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCreateViewController.swift; sourceTree = "<group>"; };
+		4F87FFF2233B380F0094CCD0 /* RequestCreatePoliceStationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCreatePoliceStationCell.swift; sourceTree = "<group>"; };
 		4FF96698230C032600E869FF /* FirstCitizen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirstCitizen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FF9669B230C032600E869FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4FF966A0230C032600E869FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				4F87FFCE232896D20094CCD0 /* SettingGuideView.swift */,
 				4F87FFE8233AF5C60094CCD0 /* RequestCreateAddressCell.swift */,
 				4F87FFEC233AFC860094CCD0 /* RequestCreateTextAddCell.swift */,
+				4F87FFF2233B380F0094CCD0 /* RequestCreatePoliceStationCell.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -543,6 +546,7 @@
 				527E38F62332958700C01EC7 /* TestData.swift in Sources */,
 				CF687998233B1EE300F2A159 /* SplashViewController.swift in Sources */,
 				4F87FFE32339C6D60094CCD0 /* RestroomCreateViewController.swift in Sources */,
+				4F87FFF3233B380F0094CCD0 /* RequestCreatePoliceStationCell.swift in Sources */,
 				CF6879AB233B210000F2A159 /* AttatchedFileCell.swift in Sources */,
 				4FF966B4230C07E300E869FF /* PointViewController.swift in Sources */,
 				4F87FFDF2338CD9E0094CCD0 /* SettingRequestViewController.swift in Sources */,
@@ -739,7 +743,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = ZLN97H98PA;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -793,7 +797,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = ZLN97H98PA;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
