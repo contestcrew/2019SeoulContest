@@ -34,8 +34,10 @@ class MapCell: UITableViewCell {
         else { return print("StatusCode is not valid") }
       guard let data = data else { return }
       let iconImg = UIImage(data: data)
-      
-      
+      let marker = NMFMarker(position: NMGLatLng(lat: latitude, lng: longitude), iconImage: NMFOverlayImage(image: iconImg!))
+      DispatchQueue.main.async {
+        marker.mapView = self.nmapView
+      }
     }
     
     task.resume()

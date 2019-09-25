@@ -97,7 +97,8 @@ class IncidentView: UIView {
     }
     
     incidentTableView.snp.makeConstraints {
-      $0.top.leading.trailing.bottom.equalTo(self)
+      $0.top.leading.trailing.equalTo(self)
+      $0.bottom.equalTo(helpButton.snp.top).offset(-margin.dynamic(1))
     }
   }
   
@@ -114,8 +115,9 @@ extension IncidentView: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if indexPath.row == 0 {
       let cell = tableView.dequeueReusableCell(withIdentifier: MapCell.identifier, for: indexPath) as! MapCell
+      
       let pinImageUrlStr = categoryShared.categoryData[(detailIncidentData?.category)! - 1].pinImage
-//      cell.modifyProperties(detailIncidentData!.latitude, detailIncidentData!.longitude, pinImageURL: pinImageUrlStr)
+      cell.modifyProperties(detailIncidentData!.latitude, detailIncidentData!.longitude, pinImageUrlStr: pinImageUrlStr)
       return cell
     } else if indexPath.row == 1 {
       let cell = tableView.dequeueReusableCell(withIdentifier: TitleCell.identifier, for: indexPath) as! TitleCell
@@ -170,7 +172,7 @@ extension IncidentView: UITableViewDelegate {
       scrollView.contentOffset.y = 0
     }
     
-    let heightHarf = UIScreen.main.bounds.height / 2
+    let heightHarf = (UIScreen.main.bounds.height / 3)
     
     if scrollView.bounds.minY < heightHarf {
       backButton.isHidden = false

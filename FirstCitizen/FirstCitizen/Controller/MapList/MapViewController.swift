@@ -115,6 +115,7 @@ class MapViewController: UIViewController {
       self?.vMap.nMapView.mapView.moveCamera(cameraUpdate)
       let categoryImg = self!.categoryShared.categoryData[data.category - 1].image
       self?.vMap.changePreviewContainer(data, categoryImg)
+      self?.selectedIncidentData = data
       return true
     }
     
@@ -200,7 +201,7 @@ extension MapViewController: MapViewDelegate {
     if homeIncidentShared.incidentDatas?.count == 0 { return }
     
     incidentVC.category = categoryList[(selectedIncidentData?.category)! - 1]
-    incidentVC.incidentData = selectedIncidentData
+    incidentVC.detailIncidentData = selectedIncidentData
     
     self.present(incidentVC, animated: true, completion: nil)
   }

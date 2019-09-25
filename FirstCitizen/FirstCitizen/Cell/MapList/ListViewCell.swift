@@ -12,6 +12,7 @@ import UIKit
 class ListViewCell: UITableViewCell {
   
   static let identifier = "ListViewCell"
+  private let categoryShared = CategoryDataManager.shared
   
   private let iconImage = UIImageView()
   private let titleLabel = UILabel()
@@ -40,8 +41,9 @@ class ListViewCell: UITableViewCell {
   
   func changePreviewContainer(_ homeIncidentData: IncidentData) {
     titleLabel.text = homeIncidentData.title
-    iconImage.image = UIImage(named: "\(homeIncidentData.category)")
-    //    dateLabel.text = "temp 2019-08-14 금요일"
+    let iconImgUrlStr: String = categoryShared.categoryData[homeIncidentData.category - 1].image
+    let iconImgURL: URL = URL(string: iconImgUrlStr)!
+    iconImage.kf.setImage(with: iconImgURL)
     dateLabel.text = homeIncidentData.createdAt
     contentsLabel.text = homeIncidentData.content
     pointLabel.text = "Point \(homeIncidentData.categoryScore) + Bonus \(homeIncidentData.score)"
@@ -65,6 +67,7 @@ class ListViewCell: UITableViewCell {
     
     pointLabel.text = "Point 100 + Bonus 350"
     pointLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    pointLabel.textAlignment = .right
     pointLabel.dynamicFont(fontSize: 13, weight: .semibold)
     let attributedStr = NSMutableAttributedString(string: pointLabel.text!)
     attributedStr.addAttribute(.foregroundColor, value: UIColor.blue, range: (pointLabel.text! as NSString).range(of: "Bonus"))
@@ -112,7 +115,9 @@ class ListViewCell: UITableViewCell {
     
     pointLabel.snp.makeConstraints {
       $0.top.equalTo(guideLabel.snp.bottom).offset(margin.dynamic(1))
+      $0.leading.equalTo(dateLabel.snp.trailing)
       $0.trailing.equalToSuperview().offset(-margin.dynamic(1))
+      $0.width.equalTo(dateLabel.snp.width)
     }
     
     contentsLabel.snp.makeConstraints {
