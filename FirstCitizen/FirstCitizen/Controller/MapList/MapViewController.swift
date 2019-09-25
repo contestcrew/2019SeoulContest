@@ -47,7 +47,11 @@ class MapViewController: UIViewController {
   }
   
   private func showFirstData() {
-    let categoryImg = categoryShared.categoryData[selectedIncidentData!.category - 1].image
+    
+    //TODO: 카테고리 데이터가 없을 경우 빈 화면을 보여주는 뷰를 그릴 예정
+    guard let selectedIncidentData = selectedIncidentData else { return }
+    
+    let categoryImg = categoryShared.categoryData[selectedIncidentData.category - 1].image
     DispatchQueue.main.async {
       self.vMap.changePreviewContainer(self.selectedIncidentData!, categoryImg)
     }
