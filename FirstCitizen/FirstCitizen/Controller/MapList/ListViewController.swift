@@ -12,7 +12,6 @@ import SnapKit
 class ListViewController: UIViewController {
   
   // MARK:- Properties
-  //TODO: Api를 통해서 카테고리 리스트를 가저올 예정
   let homeIncidentShared = IncidentDataManager.shared
   let categoryShared = CategoryDataManager.shared
   
@@ -20,11 +19,12 @@ class ListViewController: UIViewController {
   
   var incidentData: [IncidentData] = []
   var indexedIncidentData: [IncidentData] = []
+  
+  // 현재 미사용중
   var backUpIndexedIncidentData: [IncidentData] = []
   var searchedIncidentData: [IncidentData] = []
   
   private let listView = ListView()
-  
   private let listViewTableView = UITableView()
   
   // MARK:- LifeCycles
@@ -45,7 +45,8 @@ class ListViewController: UIViewController {
   // MARK:- Methods
   // 한글이 정확한 조합이 안되어서 나옴
   private func searchingIncidentData(searchedText: String) {
-    indexedIncidentData = backUpIndexedIncidentData
+    backUpIndexedIncidentData = indexedIncidentData
+    
     searchedIncidentData = []
     
     indexedIncidentData.forEach {
@@ -60,7 +61,6 @@ class ListViewController: UIViewController {
   
   private func indexingIncidentData(category: Int, incidentDatas: [IncidentData]) {
     indexedIncidentData = []
-    categoryList = ["전체"]
     
     incidentDatas.forEach {
       if category == 0 {
@@ -72,6 +72,8 @@ class ListViewController: UIViewController {
         }
       }
     }
+    
+    backUpIndexedIncidentData = indexedIncidentData
   }
   
   private func extractCategory() {
@@ -86,8 +88,9 @@ class ListViewController: UIViewController {
   private func displayDatasInMap() {
     guard let homeIncidentDatas = homeIncidentShared.incidentDatas else { return }
     
-    self.indexedIncidentData = homeIncidentDatas
-    self.listViewTableView.reloadData()
+    indexedIncidentData = homeIncidentDatas
+    backUpIndexedIncidentData = indexedIncidentData
+    listViewTableView.reloadData()
   }
   
   private func configure() {
@@ -151,8 +154,8 @@ extension ListViewController: UITableViewDelegate {
     let incidentVC = IncidentViewController()
     
     let categoryNum = indexedIncidentData[indexPath.row].category
-    
     incidentVC.category = categoryList[categoryNum]
+    incidentVC.detailIncidentData = indexedIncidentData[indexPath.row]
     self.present(incidentVC, animated: true, completion: nil)
   }
 }
@@ -160,6 +163,7 @@ extension ListViewController: UITableViewDelegate {
 // MARK:- ListViewDelegate Extension
 extension ListViewController: ListViewDelegate {
   func searchIncidents(searchingText: String) {
+    indexedIncidentData = backUpIndexedIncidentData
     searchingIncidentData(searchedText: searchingText)
   }
   
