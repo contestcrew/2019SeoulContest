@@ -15,6 +15,9 @@
 		4F87FFED233AFC860094CCD0 /* RequestCreateTextAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87FFEC233AFC860094CCD0 /* RequestCreateTextAddCell.swift */; };
 		4F87FFF1233B190E0094CCD0 /* RequestCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87FFF0233B190E0094CCD0 /* RequestCreateViewController.swift */; };
 		4F87FFF3233B380F0094CCD0 /* RequestCreatePoliceStationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87FFF2233B380F0094CCD0 /* RequestCreatePoliceStationCell.swift */; };
+		4F87FFF5233B8BC10094CCD0 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87FFF4233B8BC10094CCD0 /* LoginVC.swift */; };
+		4F87FFF7233B8C220094CCD0 /* TextAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87FFF6233B8C220094CCD0 /* TextAddView.swift */; };
+		4F87FFF9233B914A0094CCD0 /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87FFF8233B914A0094CCD0 /* SignupVC.swift */; };
 		4FF9669C230C032600E869FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF9669B230C032600E869FF /* AppDelegate.swift */; };
 		4FF966A1230C032600E869FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FF9669F230C032600E869FF /* Main.storyboard */; };
 		4FF966A6230C032700E869FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FF966A4230C032700E869FF /* LaunchScreen.storyboard */; };
@@ -80,6 +83,9 @@
 		4F87FFEC233AFC860094CCD0 /* RequestCreateTextAddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCreateTextAddCell.swift; sourceTree = "<group>"; };
 		4F87FFF0233B190E0094CCD0 /* RequestCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCreateViewController.swift; sourceTree = "<group>"; };
 		4F87FFF2233B380F0094CCD0 /* RequestCreatePoliceStationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCreatePoliceStationCell.swift; sourceTree = "<group>"; };
+		4F87FFF4233B8BC10094CCD0 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		4F87FFF6233B8C220094CCD0 /* TextAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAddView.swift; sourceTree = "<group>"; };
+		4F87FFF8233B914A0094CCD0 /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
 		4FF96698230C032600E869FF /* FirstCitizen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirstCitizen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FF9669B230C032600E869FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4FF966A0230C032600E869FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -257,6 +263,7 @@
 				CF0CF52023154040004DF6A5 /* SignupView.swift */,
 				CF0CF51C2313C635004DF6A5 /* PreparedView.swift */,
 				4FF966C3230C28E800E869FF /* PointView.swift */,
+				4F87FFF6233B8C220094CCD0 /* TextAddView.swift */,
 				4F87FFCD232896BB0094CCD0 /* Setting */,
 			);
 			path = View;
@@ -319,6 +326,8 @@
 				CF0CF5112313912D004DF6A5 /* LoginViewController.swift */,
 				CF0CF51E23154028004DF6A5 /* SignupViewController.swift */,
 				CF0CF51A2313C627004DF6A5 /* PreparedViewController.swift */,
+				4F87FFF4233B8BC10094CCD0 /* LoginVC.swift */,
+				4F87FFF8233B914A0094CCD0 /* SignupVC.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -555,6 +564,7 @@
 				CF5E7EE92337E1AC0069235C /* RequestDetailView.swift in Sources */,
 				CF0CF5122313912D004DF6A5 /* LoginViewController.swift in Sources */,
 				CF5E7EE2233789AC0069235C /* ExtensionUILabel.swift in Sources */,
+				4F87FFF5233B8BC10094CCD0 /* LoginVC.swift in Sources */,
 				CF388F8323306EE700DA6A1C /* DetailIncidentData.swift in Sources */,
 				CF1E09D523275891006E9537 /* IncidentView.swift in Sources */,
 				CF6879A5233B20D200F2A159 /* TitleCell.swift in Sources */,
@@ -568,11 +578,13 @@
 				4FF966C4230C28E800E869FF /* PointView.swift in Sources */,
 				CF388F81232FCD0000DA6A1C /* ApiUrl.swift in Sources */,
 				CF5468682334DD3800F75DDB /* ListViewCell.swift in Sources */,
+				4F87FFF7233B8C220094CCD0 /* TextAddView.swift in Sources */,
 				4FF966B8230C07F200E869FF /* ListViewController.swift in Sources */,
 				CF54686523346E6A00F75DDB /* ListView.swift in Sources */,
 				CF1E09D323275860006E9537 /* IncidentViewController.swift in Sources */,
 				4FF966C2230C25FE00E869FF /* ExtensionFont.swift in Sources */,
 				CF68799E233B1FB300F2A159 /* IncidentDataManager.swift in Sources */,
+				4F87FFF9233B914A0094CCD0 /* SignupVC.swift in Sources */,
 				CF68799A233B1F2900F2A159 /* NetwrokService.swift in Sources */,
 				CF6879A0233B1FBF00F2A159 /* CategoryDataManager.swift in Sources */,
 				CF6879AD233B210B00F2A159 /* ContentsCell.swift in Sources */,
