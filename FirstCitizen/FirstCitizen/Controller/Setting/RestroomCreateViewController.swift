@@ -59,6 +59,7 @@ class RestroomCreateViewController: UIViewController {
     view.backgroundColor = .white
     
     tableView.dataSource = self
+    tableView.delegate = self
     tableView.separatorStyle = .none
     view.addSubview(tableView)
     
@@ -164,5 +165,22 @@ extension RestroomCreateViewController: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     textField.resignFirstResponder()
     return true
+  }
+}
+
+extension RestroomCreateViewController: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    switch indexPath.row {
+      // did tap map
+    case 2:
+      navigationController?.pushViewController(LocationWithMap(), animated: true)
+      
+      // did tap address
+    case 3:
+      ()
+      
+    default:
+      break
+    }
   }
 }
