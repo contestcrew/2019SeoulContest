@@ -69,6 +69,7 @@
 		CF6879A9233B20EE00F2A159 /* OccurredTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6879A8233B20EE00F2A159 /* OccurredTimeCell.swift */; };
 		CF6879AB233B210000F2A159 /* AttatchedFileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6879AA233B210000F2A159 /* AttatchedFileCell.swift */; };
 		CF6879AD233B210B00F2A159 /* ContentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6879AC233B210B00F2A159 /* ContentsCell.swift */; };
+		CFF55C26233CE43F00FEF380 /* RequestDetailHelpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF55C25233CE43F00FEF380 /* RequestDetailHelpCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -139,6 +140,7 @@
 		CF6879A8233B20EE00F2A159 /* OccurredTimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OccurredTimeCell.swift; sourceTree = "<group>"; };
 		CF6879AA233B210000F2A159 /* AttatchedFileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttatchedFileCell.swift; sourceTree = "<group>"; };
 		CF6879AC233B210B00F2A159 /* ContentsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsCell.swift; sourceTree = "<group>"; };
+		CFF55C25233CE43F00FEF380 /* RequestDetailHelpCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailHelpCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -386,6 +388,7 @@
 				CF5E7EE62337E1A20069235C /* RequestDetailViewController.swift */,
 				CF5E7EE82337E1AC0069235C /* RequestDetailView.swift */,
 				CF5E7EEA23385B080069235C /* RequestDetailCell.swift */,
+				CFF55C25233CE43F00FEF380 /* RequestDetailHelpCell.swift */,
 			);
 			path = RequestDetail;
 			sourceTree = "<group>";
@@ -546,6 +549,7 @@
 				527E38F62332958700C01EC7 /* TestData.swift in Sources */,
 				CF687998233B1EE300F2A159 /* SplashViewController.swift in Sources */,
 				4F87FFE32339C6D60094CCD0 /* RestroomCreateViewController.swift in Sources */,
+				CFF55C26233CE43F00FEF380 /* RequestDetailHelpCell.swift in Sources */,
 				4F87FFF3233B380F0094CCD0 /* RequestCreatePoliceStationCell.swift in Sources */,
 				CF6879AB233B210000F2A159 /* AttatchedFileCell.swift in Sources */,
 				4FF966B4230C07E300E869FF /* PointViewController.swift in Sources */,

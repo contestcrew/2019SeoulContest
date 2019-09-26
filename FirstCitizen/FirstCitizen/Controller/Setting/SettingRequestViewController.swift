@@ -37,11 +37,11 @@ class SettingRequestViewController: UIViewController {
     navigationController?.navigationBar.shadowImage = UIImage()
     navigationController?.navigationBar.barTintColor = .white
     
-    let backButton = UIBarButtonItem(image: UIImage(named: "navi-arrow-24x24"), style: .done, target: self, action: #selector(back))
+    let backButton = UIBarButtonItem(image: UIImage(named: "navi-arrow-24x24"), style: .done, target: self, action: #selector(touchUpBackButton))
     navigationItem.leftBarButtonItem = backButton
   }
   
-  @objc func back() {
+  @objc func touchUpBackButton() {
     MainTabBarController.vTabBarButton.isHidden = false
     navigationController?.popViewController(animated: true)
   }
@@ -70,12 +70,14 @@ class SettingRequestViewController: UIViewController {
   
   private func autoLayout() {
     let guide = view.safeAreaLayoutGuide
+    let margin: CGFloat = 10
     
-    tableView.translatesAutoresizingMaskIntoConstraints = false
-    tableView.topAnchor.constraint(equalTo: guide.topAnchor).isActive = true
-    tableView.leadingAnchor.constraint(equalTo: guide.leadingAnchor).isActive = true
-    tableView.trailingAnchor.constraint(equalTo: guide.trailingAnchor).isActive = true
-    tableView.bottomAnchor.constraint(equalTo: guide.bottomAnchor).isActive = true
+    tableView.snp.makeConstraints {
+      $0.top.equalTo(guide.snp.top)
+      $0.leading.equalTo(guide.snp.leading).offset(margin.dynamic(1))
+      $0.trailing.equalTo(guide.snp.trailing).offset(-margin.dynamic(1))
+      $0.bottom.equalTo(guide.snp.bottom)
+    }
   }
 }
 
@@ -96,7 +98,7 @@ extension SettingRequestViewController: UITableViewDataSource {
       label.upsFontBold(ofSize: 25)
       label.textColor = .white
       label.textAlignment = .center
-      label.backgroundColor = .blue
+      label.backgroundColor = UIColor.appColor(.appColor)
       label.layer.cornerRadius = 16
       label.layer.masksToBounds = true
       cell.contentView.addSubview(label)
@@ -113,7 +115,7 @@ extension SettingRequestViewController: UITableViewDataSource {
     default:
       let cell = ListViewCell()
       cell.selectionStyle = .none
-      
+//      cell.changePreviewContainer(<#T##homeIncidentData: IncidentData##IncidentData#>)
       return cell
     }
     
@@ -128,9 +130,11 @@ extension SettingRequestViewController: UITableViewDelegate {
     case 0:
       UIAlertController.registerShowSetting(categoryList: categoryList, title: "의뢰하기", message: "아래 목록중 하나를 선택하세요", from: self)
       
-      
       // 기록
     default:
+      let requestDetailVC = RequestDetailViewController()
+      
+      self.present(requestDetailVC, animated: true, completion: nil)
       break
     }
   }

@@ -12,71 +12,68 @@ class RequestDetailCell: UITableViewCell {
   static let identifier = "RequestDetailCell"
   var category: String = ""
   
-  private let nicknameLabel = UILabel()
-  private let reliabilityLabel = UILabel()
-  private let attachFileCountLabel = UILabel()
+  private let helpLabel = UILabel()
+  private let helpUnderLineView = UIView()
+  private let helpListTableView = UITableView()
   
-  private let acceptButton = UIButton()
+  
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
+    
+    
+  }
+  
+  override func layoutSubviews() {
+    super.layoutSubviews()
     
     attribute()
     layout()
   }
   
   private func attribute() {
-    nicknameLabel.text = "did**************"
-    nicknameLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    helpLabel.text = "내용"
+    helpLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    helpLabel.dynamicFont(fontSize: 24, weight: .bold)
     
-    reliabilityLabel.text = "신뢰도 : 100"
-    reliabilityLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    reliabilityLabel.textAlignment = .center
+    helpUnderLineView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     
-    attachFileCountLabel.text = "첨부파일 : 0"
-    attachFileCountLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    attachFileCountLabel.textAlignment = .center
+    helpListTableView.allowsSelection = false
+    //    helpListTableView.isScrollEnabled = false
+    helpListTableView.dataSource = self
+    helpListTableView.delegate = self
     
-    if category == "Restroom" {
-      acceptButton.setTitle("수락", for: .normal)
-      acceptButton.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
-      acceptButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
-    } else {
-      acceptButton.setImage(#imageLiteral(resourceName: "arrow"), for: .normal)
-      acceptButton.contentMode = .scaleAspectFit
-    }
+    helpListTableView.register(RequestDetailCell.self, forCellReuseIdentifier: RequestDetailCell.identifier)
   }
   
   private func layout() {
-    [nicknameLabel, reliabilityLabel, acceptButton].forEach { contentView.addSubview($0) }
+    let margin: CGFloat = 10
     
-    nicknameLabel.snp.makeConstraints {
-      $0.top.leading.equalToSuperview().offset(10)
-    }
+    self.addSubview(helpListTableView)
     
-    reliabilityLabel.snp.makeConstraints {
-      $0.top.equalTo(nicknameLabel.snp.bottom).offset(10)
-      $0.leading.equalToSuperview().offset(10)
-      $0.bottom.equalToSuperview().offset(-10)
-    }
-    
-    acceptButton.snp.makeConstraints {
-      $0.top.trailing.bottom.equalToSuperview()
-    }
-    
-    if category != "Restroom" {
-      contentView.addSubview(attachFileCountLabel)
-      
-      attachFileCountLabel.snp.makeConstraints {
-        $0.top.equalTo(nicknameLabel.snp.bottom).offset(10)
-        $0.leading.equalTo(reliabilityLabel.snp.trailing)
-        $0.trailing.equalTo(acceptButton.snp.leading)
-        $0.width.equalTo(reliabilityLabel.snp.width)
-      }
+    helpListTableView.snp.makeConstraints {
+      $0.top.equalTo(self)
+      $0.leading.trailing.equalTo(self)
+      $0.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-margin.dynamic(1))
     }
   }
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+}
+
+extension RequestDetailCell: UITableViewDataSource {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return 5
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: RequestDetailCell.identifier, for: indexPath) as! RequestDetailCell
+    return cell
+  }
+}
+
+extension RequestDetailCell: UITableViewDelegate {
+  
 }

@@ -68,11 +68,11 @@ class RequestCreateViewController: UIViewController {
     let barButton = UIBarButtonItem(title: "의 뢰", style: .done, target: self, action: #selector(barButtonAction))
     navigationItem.rightBarButtonItem = barButton
     
-    let backButton = UIBarButtonItem(image: UIImage(named: "navi-arrow-24x24"), style: .done, target: self, action: #selector(back))
+    let backButton = UIBarButtonItem(image: UIImage(named: "navi-arrow-24x24"), style: .done, target: self, action: #selector(touchUpBackButton))
     navigationItem.leftBarButtonItem = backButton
   }
   
-  @objc func back() {
+  @objc func touchUpBackButton() {
     guard let tempRoot = root else { return }
     
     switch tempRoot {

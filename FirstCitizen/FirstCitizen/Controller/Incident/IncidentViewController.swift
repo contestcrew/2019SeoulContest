@@ -49,7 +49,7 @@ class IncidentViewController: UIViewController {
 
 extension IncidentViewController: IncidentViewDelegate {
   func touchUpHelpButton(category: String) {
-    if category == "Restroom" {
+    if category == "똥휴지" {
       UIAlertController.restroomShow(
         title: "알림",
         message: "10분 이내 도움이 가능하신 경우 돕기 버튼을 선택해주시기 바랍니다.",

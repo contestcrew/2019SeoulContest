@@ -10,6 +10,7 @@ import UIKit
 
 enum AssetsColor {
   // AppColor Green
+  case appColor
   case appGreenColor
   case appYellowColor
   case appRedColor
@@ -20,6 +21,8 @@ enum AssetsColor {
 extension UIColor {
   static func appColor(_ colorName: AssetsColor) -> UIColor {
     switch colorName {
+    case .appColor:
+      return #colorLiteral(red: 0, green: 0.03756265342, blue: 0.5691775084, alpha: 1)
     case .appGreenColor:
       return #colorLiteral(red: 0, green: 0.8023447394, blue: 0.1060600653, alpha: 1)
     case .appYellowColor:

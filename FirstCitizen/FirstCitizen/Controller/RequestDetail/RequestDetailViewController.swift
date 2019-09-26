@@ -12,13 +12,24 @@ class RequestDetailViewController: UIViewController {
   
   var category: String = ""
   
-  lazy private var requestDetailView = RequestDetailView(frame: .zero, category: category)
+  // test
+  var testShared = IncidentDataManager.shared
+//  var requestDetailData: IncidentData?
+  
+  private var requestDetailView = RequestDetailView()
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     attribute()
     layout()
+  }
+  
+  override func viewWillLayoutSubviews() {
+    super.viewWillLayoutSubviews()
+    
+    requestDetailView.detailRequestIncidentData = testShared.incidentDatas![0]
   }
   
   private func attribute() {
@@ -30,8 +41,7 @@ class RequestDetailViewController: UIViewController {
     self.view.addSubview(requestDetailView)
     
     requestDetailView.snp.makeConstraints {
-      $0.top.leading.trailing.equalToSuperview()
-      $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+      $0.top.leading.trailing.bottom.equalToSuperview()
     }
   }
 }

@@ -77,11 +77,11 @@ class IncidentView: UIView {
   }
   
   private func layout() {
+    let margin: CGFloat = 10
+    
     [incidentTableView, backButton, helpButton].forEach {
       self.addSubview($0)
     }
-    
-    let margin: CGFloat = 10
     
     backButton.snp.makeConstraints {
       $0.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(margin.dynamic(4))
