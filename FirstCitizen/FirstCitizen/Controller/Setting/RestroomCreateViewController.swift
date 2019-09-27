@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NMapsMap
 
 enum CreateRoot {
   case map
@@ -16,6 +17,11 @@ enum CreateRoot {
 class RestroomCreateViewController: UIViewController {
   
   private let tableView = UITableView()
+  
+  var mainAdd = ""
+  var detailAdd = ""
+  var shortAdd = "현재 위치"
+  var location = NMGLatLng()
   
   var root: CreateRoot?
   
@@ -52,7 +58,42 @@ class RestroomCreateViewController: UIViewController {
   }
   
   @objc private func barButtonAction() {
+    // 의뢰 하는 버튼 카테고리 꼭 바꿔야함 동적으로
+    let titleCell = tableView.cellForRow(at: IndexPath(row: 5, section: 0)) as? RequestCreateTextAddCell
+    let title = titleCell?.textField.text ?? "오류"
     
+    let contentCell = tableView.cellForRow(at: IndexPath(row: 7, section: 0)) as? RequestCreateTextAddCell
+    let content = contentCell?.textView.text ?? "오류"
+    
+    let lat = location.lat
+    let lng = location.lng
+    
+    let timeFormatter = DateFormatter()
+    timeFormatter.locale = Locale(identifier: "ko")
+    timeFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    let time = timeFormatter.string(from: Date())
+    
+    print("time: ", time)
+    
+    let requestData = RequestData(category: 1,
+                                  police: 0,
+                                  title: title,
+                                  content: content,
+                                  score: 50,
+                                  mainAdd: mainAdd,
+                                  detailAdd: detailAdd,
+                                  lat: lat,
+                                  lng: lng,
+                                  time: time)
+    
+    print(requestData)
+    
+    NetworkService.createRequest(data: requestData) {
+      if $0 {
+        self.dismiss(animated: true)
+      }
+      print($0)
+    }
   }
   
   private func configure() {
@@ -102,7 +143,7 @@ extension RestroomCreateViewController: UITableViewDataSource {
       let cell = UITableViewCell()
       
       cell.selectionStyle = .none
-      cell.textLabel?.text = "현재위치"
+      cell.textLabel?.text = "\(shortAdd) \(detailAdd)"
       cell.textLabel?.textAlignment = .center
       cell.textLabel?.upsFontHeavy(ofSize: 15)
       
@@ -173,7 +214,9 @@ extension RestroomCreateViewController: UITableViewDelegate {
     switch indexPath.row {
       // did tap map
     case 2:
-      navigationController?.pushViewController(LocationWithMap(), animated: true)
+      let vc = LocationWithMap()
+      vc.delegate = self
+      navigationController?.pushViewController(vc, animated: true)
       
       // did tap address
     case 3:
@@ -183,4 +226,17 @@ extension RestroomCreateViewController: UITableViewDelegate {
       break
     }
   }
+}
+
+
+extension RestroomCreateViewController: LocationWithMapDelegate {
+  func sendAddress(main: String, detail: String, short: String, location: NMGLatLng) {
+    self.mainAdd = main
+    self.detailAdd = detail
+    self.shortAdd = short
+    self.location = location
+    self.tableView.reloadData()
+  }
+  
+  
 }

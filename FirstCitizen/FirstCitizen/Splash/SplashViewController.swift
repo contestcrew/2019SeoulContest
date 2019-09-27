@@ -49,11 +49,17 @@ class SplashViewController: UIViewController {
       case .success(let data):
         self.incidentShared.incidentDatas = data
         let mainTabBarVC = MainTabBarController()
-        self.present(mainTabBarVC, animated: true, completion: nil)
+        DispatchQueue.main.async {
+          self.present(mainTabBarVC, animated: true, completion: nil)
+        }
+        
+        
       case .failure(let err):
         // MARK: - 우선 실행은 가능하도록 함!!!
         let mainTabBarVC = MainTabBarController()
-        self.present(mainTabBarVC, animated: true, completion: nil)
+        DispatchQueue.main.async {
+          self.present(mainTabBarVC, animated: true, completion: nil)
+        }
         print(err.localizedDescription)
       }
     }
