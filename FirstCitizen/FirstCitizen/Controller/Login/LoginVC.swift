@@ -80,16 +80,6 @@ class LoginVC: UIViewController {
     present(alert, animated: true)
   }
   
-  private func successAlert(tilte: String?, message: String?) {
-    let alert = UIAlertController(title: tilte, message: message, preferredStyle: .alert)
-    let cancel = UIAlertAction(title: "닫기", style: .cancel) { [weak self] (action) in
-      guard let `self` = self else { return }
-      self.navigationController?.popViewController(animated: true)
-    }
-    alert.addAction(cancel)
-    present(alert, animated: true)
-  }
-  
   @objc private func loginAction() {
     guard
       let email = emailView.textField.text,
@@ -129,19 +119,21 @@ class LoginVC: UIViewController {
       } else {
         guard let response = response as? HTTPURLResponse else { return }
         
-        let token = data!.reduce("", {$0 + String(format: "%02X", $1)})
-        print(token)
-        
         if (200..<300) ~= response.statusCode {
           // 성공시
-//          DispatchQueue.main.async {
-//            self.successAlert(tilte: "회원가입 성공", message: nil)
-//          }
+          DispatchQueue.main.async {
+            let token = data!.reduce("", {$0 + String(format: "%02X", $1)})
+            print(token)
+            UserDefaults.standard.set(token, forKey: "Token")
+            self.navigationController?.popViewController(animated: true)
+          }
+          
         } else if (400..<500) ~= response.statusCode {
           // 정보가 틀렷을시
-//          DispatchQueue.main.async {
-//            self.alertAction(tilte: "이메일 중복", message: nil)
-//          }
+          DispatchQueue.main.async {
+            self.alertAction(tilte: "정보가 올바르지 않습니다", message: nil)
+          }
+          
         } else {
           // 그 외
           DispatchQueue.main.async {
