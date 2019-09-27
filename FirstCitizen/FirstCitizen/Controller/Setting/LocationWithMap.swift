@@ -13,7 +13,7 @@ import SnapKit
 import Alamofire
 
 protocol LocationWithMapDelegate: class {
-  func sendAddress(add: String)
+  func sendAddress(main: String, detail: String, short: String, location: NMGLatLng)
 }
 
 class LocationWithMap: UIViewController {
@@ -48,11 +48,12 @@ class LocationWithMap: UIViewController {
 //  var marker = NMFMarker()
 //  let markerImg = NMFOverlayImage(name: "PinLocation", reuseIdentifier: "PinLocation")
   
-  let nMapLocationManager = NMFLocationManager()
+//  let nMapLocationManager = NMFLocationManager()
   let nMapView = NMFNaverMapView(frame: UIScreen.main.bounds)
   private let locationManager = CLLocationManager()
   let geocoder = CLGeocoder()
   var fullAddress = ""
+  var lastLocation = NMGLatLng()
 //  var currentCoordinateValue: CLLocationCoordinate2D?
   
   override func viewDidLoad() {
@@ -68,9 +69,14 @@ class LocationWithMap: UIViewController {
   }
   
   @objc func didTapInsertBtn(_ sender: UIButton) {
-    UIAlertController.addDetailAddress(title: addressLabel.text!, message: "추가 주소 입력해주세요.", from: self) { (text) in
-      let add = self.fullAddress + " " + text
-      print(add)
+    UIAlertController.addDetailAddress(title: addressLabel.text!, message: "추가 주소 입력해주세요.", from: self) { [weak self] (text) in
+      let mainAdd = self?.fullAddress ?? ""
+      let detailAdd = text
+      let shortAdd = self?.addressLabel.text! ?? ""
+      self?.delegate?.sendAddress(main: mainAdd, detail: detailAdd, short: shortAdd, location: self?.lastLocation ?? NMGLatLng())
+      DispatchQueue.main.async {
+        self?.navigationController?.popViewController(animated: true)
+      }
     }
   }
   
@@ -199,7 +205,9 @@ extension LocationWithMap: NMFMapViewDelegate {
   func mapViewIdle(_ mapView: NMFMapView) {
     // 지도 탭 이벤트가 끝났을때 호출
 //    replaceCenterIcon(location: mapView.cameraPosition.target)
+    lastLocation = mapView.cameraPosition.target
     pointToAdd(location: mapView.cameraPosition.target) { add in
+      print(mapView.cameraPosition.target)
       DispatchQueue.main.async {
         self.addressLabel.text = add
       }
