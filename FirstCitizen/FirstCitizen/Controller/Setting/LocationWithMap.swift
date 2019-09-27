@@ -12,13 +12,20 @@ import MapKit
 import SnapKit
 import Alamofire
 
+protocol LocationWithMapDelegate: class {
+  func sendAddress(add: String)
+}
+
 class LocationWithMap: UIViewController {
+  
+  weak var delegate: LocationWithMapDelegate?
   
   let selectBtn: UIButton = {
     let btn = UIButton()
     btn.setTitle("현재주소 입력", for: .normal)
     btn.backgroundColor = .appColor(.appButtonColor)
     btn.layer.cornerRadius = 15
+    btn.addTarget(self, action: #selector(didTapInsertBtn(_:)), for: .touchUpInside)
     return btn
   }()
   
@@ -33,25 +40,38 @@ class LocationWithMap: UIViewController {
     return label
   }()
   
-  var marker = NMFMarker()
-  let markerImg = NMFOverlayImage(name: "PinLocation", reuseIdentifier: "PinLocation")
+  let pinIcon: UIImageView = {
+    let view = UIImageView(image: UIImage(named: "PinLocation"))
+    return view
+  }()
+  
+//  var marker = NMFMarker()
+//  let markerImg = NMFOverlayImage(name: "PinLocation", reuseIdentifier: "PinLocation")
   
   let nMapLocationManager = NMFLocationManager()
   let nMapView = NMFNaverMapView(frame: UIScreen.main.bounds)
   private let locationManager = CLLocationManager()
   let geocoder = CLGeocoder()
+  var fullAddress = ""
 //  var currentCoordinateValue: CLLocationCoordinate2D?
   
   override func viewDidLoad() {
     super.viewDidLoad()
     self.view.backgroundColor = .gray
-    locationManager.delegate = self
-    marker.iconImage = markerImg
+//    locationManager.delegate = self
+//    marker.iconImage = markerImg
     setupNavigation()
     checkAuthorizationStatus()
     nMapConfigure()
     setupLayout()
     
+  }
+  
+  @objc func didTapInsertBtn(_ sender: UIButton) {
+    UIAlertController.addDetailAddress(title: addressLabel.text!, message: "추가 주소 입력해주세요.", from: self) { (text) in
+      let add = self.fullAddress + " " + text
+      print(add)
+    }
   }
   
   func pointToAdd(location: NMGLatLng, completion: @escaping (String) -> ()) {
@@ -68,29 +88,30 @@ class LocationWithMap: UIViewController {
       else {
         completion("위치 주소 찾을 수 없음")
         return }
-      let add = "\(country) \(administrativeArea) \(locality) \(name)"
+      let add = "\(locality) \(name)"
+      self.fullAddress = "\(country) \(administrativeArea) \(locality) \(name)"
       completion(add)
     }
   }
   
-  func replaceCenterIcon(location: NMGLatLng) {
-    let markerWidth: CGFloat = 40
-    let markerHeight: CGFloat = 50
-    
-    marker.position = location
-    
-    marker.isForceShowIcon = true
-    marker.captionPerspectiveEnabled = true
-    marker.iconPerspectiveEnabled = true
-    marker.isHideCollidedSymbols = true
-    
-    marker.width = markerWidth.dynamic(1)
-    marker.height = markerHeight.dynamic(1)
-    
-    DispatchQueue.main.async {
-      self.marker.mapView = self.nMapView.mapView
-    }
-  }
+//  func replaceCenterIcon(location: NMGLatLng) {
+//    let markerWidth: CGFloat = 40
+//    let markerHeight: CGFloat = 50
+//
+//    marker.position = location
+//
+//    marker.isForceShowIcon = true
+//    marker.captionPerspectiveEnabled = true
+//    marker.iconPerspectiveEnabled = true
+//    marker.isHideCollidedSymbols = true
+//
+//    marker.width = markerWidth.dynamic(1)
+//    marker.height = markerHeight.dynamic(1)
+//
+//    DispatchQueue.main.async {
+//      self.marker.mapView = self.nMapView.mapView
+//    }
+//  }
   
   func nMapConfigure() {
     nMapView.mapView.mapType = .basic
@@ -106,7 +127,7 @@ class LocationWithMap: UIViewController {
   }
   
   func setupLayout() {
-    [nMapView, selectBtn, addressLabel].forEach { self.view.addSubview($0) }
+    [nMapView, selectBtn, addressLabel, pinIcon].forEach { self.view.addSubview($0) }
     
     selectBtn.snp.makeConstraints {
       $0.trailing.bottom.equalToSuperview().offset(-30)
@@ -118,8 +139,17 @@ class LocationWithMap: UIViewController {
       $0.bottom.equalTo(selectBtn.snp.top).offset(-30)
     }
     
-    view.bringSubviewToFront(selectBtn)
-    view.bringSubviewToFront(addressLabel)
+    pinIcon.snp.makeConstraints {
+      let markerWidth: CGFloat = 40
+      let markerHeight: CGFloat = 50
+      $0.bottom.equalTo(self.view.snp.centerY)
+      $0.centerX.equalToSuperview()
+      $0.width.equalTo(markerWidth.dynamic(1))
+      $0.height.equalTo(markerHeight.dynamic(1))
+    }
+    
+//    view.bringSubviewToFront(selectBtn)
+//    view.bringSubviewToFront(addressLabel)
   }
   
   func checkAuthorizationStatus() {
@@ -156,19 +186,19 @@ class LocationWithMap: UIViewController {
 }
 
 // MARK:- CLLocationManagerDelegate Extension
-extension LocationWithMap: CLLocationManagerDelegate {
-  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    if let coor = manager.location?.coordinate {
-//      currentCoordinateValue = coor
-      replaceCenterIcon(location: NMGLatLng(from: coor))
-    }
-  }
-}
+//extension LocationWithMap: CLLocationManagerDelegate {
+//  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//    if let coor = manager.location?.coordinate {
+////      currentCoordinateValue = coor
+////      replaceCenterIcon(location: NMGLatLng(from: coor))
+//    }
+//  }
+//}
 
 extension LocationWithMap: NMFMapViewDelegate {
   func mapViewIdle(_ mapView: NMFMapView) {
     // 지도 탭 이벤트가 끝났을때 호출
-    replaceCenterIcon(location: mapView.cameraPosition.target)
+//    replaceCenterIcon(location: mapView.cameraPosition.target)
     pointToAdd(location: mapView.cameraPosition.target) { add in
       DispatchQueue.main.async {
         self.addressLabel.text = add
@@ -176,7 +206,7 @@ extension LocationWithMap: NMFMapViewDelegate {
     }
   }
   
-  func mapView(_ mapView: NMFMapView, regionWillChangeAnimated animated: Bool, byReason reason: Int) {
-    replaceCenterIcon(location: mapView.cameraPosition.target)
-  }
+//  func mapView(_ mapView: NMFMapView, regionWillChangeAnimated animated: Bool, byReason reason: Int) {
+//    replaceCenterIcon(location: mapView.cameraPosition.target)
+//  }
 }
