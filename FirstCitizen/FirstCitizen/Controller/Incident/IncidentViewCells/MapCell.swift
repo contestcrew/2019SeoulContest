@@ -23,6 +23,26 @@ class MapCell: UITableViewCell {
     layout()
   }
   
+  func modifyProperties(_ latitude: Double, _ longitude: Double, pinImageUrlStr: String) {
+    let pinImageURL: URL = URL(string: pinImageUrlStr)!
+    
+    let task = URLSession.shared.dataTask(with: pinImageURL) { (data, response, error) in
+      guard error == nil else { return print(error!) }
+      guard let response = response as? HTTPURLResponse,
+        // ~= 범위 사이에 있는지 확인하는 것
+        200..<400 ~= response.statusCode
+        else { return print("StatusCode is not valid") }
+      guard let data = data else { return }
+      let iconImg = UIImage(data: data)
+      let marker = NMFMarker(position: NMGLatLng(lat: latitude, lng: longitude), iconImage: NMFOverlayImage(image: iconImg!))
+      DispatchQueue.main.async {
+        marker.mapView = self.nmapView
+      }
+    }
+    
+    task.resume()
+  }
+  
   private func attribute() {
     gradientView.image = UIImage(named: "Gradient")
     gradientView.contentMode = .scaleToFill

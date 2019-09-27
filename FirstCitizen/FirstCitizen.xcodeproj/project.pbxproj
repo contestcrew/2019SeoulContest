@@ -34,6 +34,7 @@
 		4FF966C8230C345E00E869FF /* ExtensionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF966C7230C345E00E869FF /* ExtensionView.swift */; };
 		4FF966CE230C49AB00E869FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FF966CD230C49AB00E869FF /* Assets.xcassets */; };
 		4FF966D4230C706800E869FF /* SettingProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF966D3230C706800E869FF /* SettingProfileCell.swift */; };
+		5212408A233B9599002C99AD /* LocationWithMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52124089233B9599002C99AD /* LocationWithMap.swift */; };
 		527E38F423321C1000C01EC7 /* ExtensionUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E38F323321C1000C01EC7 /* ExtensionUIImage.swift */; };
 		527E38F62332958700C01EC7 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E38F52332958700C01EC7 /* TestData.swift */; };
 		6B36858508F29EBE5EFE4F77 /* Pods_FirstCitizen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50CCF6F72520B16B5901678A /* Pods_FirstCitizen.framework */; };
@@ -105,6 +106,7 @@
 		4FF966CD230C49AB00E869FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4FF966D3230C706800E869FF /* SettingProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfileCell.swift; sourceTree = "<group>"; };
 		50CCF6F72520B16B5901678A /* Pods_FirstCitizen.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirstCitizen.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		52124089233B9599002C99AD /* LocationWithMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationWithMap.swift; sourceTree = "<group>"; };
 		527E38F323321C1000C01EC7 /* ExtensionUIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIImage.swift; sourceTree = "<group>"; };
 		527E38F52332958700C01EC7 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		80EA8319B751197666F7ABE9 /* Pods-FirstCitizen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstCitizen.release.xcconfig"; path = "Target Support Files/Pods-FirstCitizen/Pods-FirstCitizen.release.xcconfig"; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 				4F87FFDE2338CD9E0094CCD0 /* SettingRequestViewController.swift */,
 				4F87FFE22339C6D60094CCD0 /* RestroomCreateViewController.swift */,
 				4F87FFF0233B190E0094CCD0 /* RequestCreateViewController.swift */,
+				52124089233B9599002C99AD /* LocationWithMap.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -596,6 +599,7 @@
 				CF5467D3233349C700F75DDB /* ReportView.swift in Sources */,
 				CF6879A3233B20C300F2A159 /* MapCell.swift in Sources */,
 				CF5E7EE42337DC010069235C /* ExtensionAlertController.swift in Sources */,
+				5212408A233B9599002C99AD /* LocationWithMap.swift in Sources */,
 				CF68799C233B1F4100F2A159 /* CategoryData.swift in Sources */,
 				4FF966D4230C706800E869FF /* SettingProfileCell.swift in Sources */,
 				4F87FFE9233AF5C60094CCD0 /* RequestCreateAddressCell.swift in Sources */,
@@ -761,6 +765,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = FirstCitizen/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -799,7 +804,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "KakaoOpenSDK-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -815,6 +820,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = FirstCitizen/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -853,7 +859,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "KakaoOpenSDK-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

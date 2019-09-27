@@ -21,12 +21,11 @@ class IncidentCell: UICollectionViewCell {
     layout()
   }
   
-  func incidentCellConfigure(reportImage: UIImage) {
+  func incidentCellConfigure(imageStr: String) {
 
-    imageView.image = #imageLiteral(resourceName: "sample_image_2")
-//    imageView.image?.resize(scale: 1, completion: { image in
-//      imageView.image = image
-//    })
+    let imageURL: URL = URL(string: imageStr)!
+    
+    imageView.kf.setImage(with: imageURL)
   }
   
   private func attribute() {

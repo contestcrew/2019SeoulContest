@@ -23,6 +23,10 @@ class OccurredTimeCell: UITableViewCell {
     layout()
   }
   
+  func modifyProperties(_ occurredTime: String) {
+    occurredTimeText.text = occurredTime
+  }
+  
   private func attribute() {
     occurredTimeLabel.text = "발생시각"
     occurredTimeLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
