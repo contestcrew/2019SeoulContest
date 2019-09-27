@@ -9,7 +9,7 @@
 import UIKit
 
 class RequestDetailHelpCell: UITableViewCell {
-  static let identifer = "RequestDetailHelpCell"
+  static let identifier = "RequestDetailHelpCell"
   
   var category = ""
   
@@ -21,6 +21,12 @@ class RequestDetailHelpCell: UITableViewCell {
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
+    
+    
+  }
+  
+  override func layoutSubviews() {
+    super.layoutSubviews()
     
     attribute()
     layout()
@@ -59,6 +65,7 @@ class RequestDetailHelpCell: UITableViewCell {
       $0.top.equalTo(nicknameLabel.snp.bottom).offset(10)
       $0.leading.equalToSuperview().offset(10)
       $0.bottom.equalToSuperview().offset(-10)
+      $0.height.equalTo(nicknameLabel.snp.height)
     }
     
     acceptButton.snp.makeConstraints {
@@ -72,6 +79,7 @@ class RequestDetailHelpCell: UITableViewCell {
         $0.top.equalTo(nicknameLabel.snp.bottom).offset(10)
         $0.leading.equalTo(reliabilityLabel.snp.trailing)
         $0.trailing.equalTo(acceptButton.snp.leading)
+        $0.bottom.equalTo(contentView)
         $0.width.equalTo(reliabilityLabel.snp.width)
       }
     }

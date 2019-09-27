@@ -22,19 +22,17 @@ class RequestDetailViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    requestDetailView.detailRequestIncidentData = testShared.incidentDatas![0]
+    
     attribute()
     layout()
-  }
-  
-  override func viewWillLayoutSubviews() {
-    super.viewWillLayoutSubviews()
-    
-    requestDetailView.detailRequestIncidentData = testShared.incidentDatas![0]
   }
   
   private func attribute() {
     self.view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     requestDetailView.category = category
+    
+    requestDetailView.delegate = self
   }
   
   private func layout() {
@@ -43,5 +41,11 @@ class RequestDetailViewController: UIViewController {
     requestDetailView.snp.makeConstraints {
       $0.top.leading.trailing.bottom.equalToSuperview()
     }
+  }
+}
+
+extension RequestDetailViewController: RequestDetailViewDelegate {
+  func touchUpBackButton() {
+    self.dismiss(animated: true, completion: nil)
   }
 }

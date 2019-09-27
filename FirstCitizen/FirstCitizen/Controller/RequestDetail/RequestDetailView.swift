@@ -10,8 +10,13 @@
 import UIKit
 import NMapsMap
 
+protocol RequestDetailViewDelegate: class {
+  func touchUpBackButton()
+}
+
 class RequestDetailView: UIView {
   
+  weak var delegate: RequestDetailViewDelegate?
   var category: String = ""
   
   var detailRequestIncidentData: IncidentData?
@@ -34,18 +39,13 @@ class RequestDetailView: UIView {
   
   override func layoutSubviews() {
     super.layoutSubviews()
-    
-    print("[Log3] :", detailRequestIncidentData?.content)
-    
-    
-    
-    
+
     incidentTableView.rowHeight = UITableView.automaticDimension
     incidentTableView.estimatedRowHeight = 180
   }
   
   @objc private func touchUpBackButton() {
-    //    delegate?.touchUpBackButton()
+        delegate?.touchUpBackButton()
   }
   
   private func attribute() {
@@ -77,13 +77,13 @@ class RequestDetailView: UIView {
     }
     
     backButton.snp.makeConstraints {
-      $0.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(margin.dynamic(4))
+      $0.top.equalTo(self.safeAreaLayoutGuide.snp.top)
       $0.leading.equalTo(self.safeAreaLayoutGuide.snp.leading).offset(margin.dynamic(1))
       $0.width.height.equalTo(margin.dynamic(3) + 5)
     }
     
     incidentTableView.snp.makeConstraints {
-      $0.top.leading.trailing.equalTo(self)
+      $0.top.leading.trailing.bottom.equalTo(self)
     }
   }
   
@@ -136,9 +136,6 @@ extension RequestDetailView: UITableViewDataSource {
     } else if indexPath.row == 5 {
       let cell = tableView.dequeueReusableCell(withIdentifier: ContentsCell.identifier, for: indexPath) as! ContentsCell
       cell.modifyProperties(detailRequestIncidentData!.content)
-      return cell
-    } else if indexPath.row == 6 {
-      let cell = tableView.dequeueReusableCell(withIdentifier: RequestDetailCell.identifier, for: indexPath) as! RequestDetailCell
       return cell
     } else {
       let cell = tableView.dequeueReusableCell(withIdentifier: RequestDetailCell.identifier, for: indexPath) as! RequestDetailCell
