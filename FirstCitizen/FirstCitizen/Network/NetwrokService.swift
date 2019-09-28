@@ -14,6 +14,11 @@ class NetworkService {
     case networkErr, NoData
   }
   
+  static let header: HTTPHeaders = [
+    "Content-Type": "application/json",
+    "Authorization": "Token 9e3838aef1806fbe4b6d1edd80f28914148559af"
+  ]
+  
   static func getCategoryList(completion: @escaping (Result<[CategoryData]>) -> ()) {
     
     let urlStr = ApiUrl.ApiUrl(apiName: .categoryApi)
@@ -57,6 +62,7 @@ class NetworkService {
     }
   }
   
+<<<<<<< HEAD
   static func getSettingRequestData(completion: @escaping (Result<[DetailIncidentData]>) -> ()) {
     
 //    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
@@ -120,5 +126,55 @@ class NetworkService {
           print(ErrorType.networkErr)
         }
     }
+  }
+
+  static func createRequest(data: RequestData, completion: @escaping (Bool) -> ()) {
+    
+    var bodyData: Data
+    if data.police == 0 {
+    bodyData = """
+      {
+      "category": "\(data.category)",
+      "police_office": "",
+      "title": "\(data.title)",
+      "content": "\(data.content)",
+      "score": "\(data.score)",
+      "main_address": "\(data.mainAdd)",
+      "detail_address": "\(data.detailAdd)",
+      "latitude": "\(data.lat)",
+      "longitude": "\(data.lng)",
+      "occurred_at": "\(data.time)"
+      }
+      """.data(using: .utf8)!
+    } else {
+      bodyData = """
+      {
+      "category": "\(data.category)",
+      "police_office": "\(data.police)",
+      "title": "\(data.title)",
+      "content": "\(data.content)",
+      "score": "\(data.score)",
+      "main_address": "\(data.mainAdd)",
+      "detail_address": "\(data.detailAdd)",
+      "latitude": "\(data.lat)",
+      "longitude": "\(data.lng)",
+      "occurred_at": "\(data.time)"
+      }
+      """.data(using: .utf8)!
+    }
+    
+    Alamofire.upload(bodyData,
+                     to: ApiUrl.ApiUrl(apiName: .requestCreate),
+                     method: .post,
+                     headers: header)
+      .response { (res) in
+        switch res.response?.statusCode {
+        case 201:
+          completion(true)
+        default:
+          completion(false)
+        }
+    }
+    
   }
 }

@@ -20,6 +20,18 @@ extension UIAlertController {
     controller.show(alert, sender: nil)
   }
   
+  class func addDetailAddress(title: String, message: String, from controller: UIViewController, completion: @escaping (String) -> ()) {
+    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+    
+    alert.addTextField()
+    alert.addAction(UIAlertAction(title: "입력", style: .default, handler: { (_) in
+      if alert.textFields?.first?.text != nil{
+          completion((alert.textFields?.first?.text)!)
+      }
+    }))
+    alert.addAction(UIAlertAction(title: "취소", style: .cancel))
+    controller.present(alert, animated: true)
+  }
   
   // 미안 분기처리하기 귀찮아서 함수를 그냥 둘로 놔눳어 ㅠㅡㅠ
   // 맵에서 접근할때

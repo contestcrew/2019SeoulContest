@@ -15,6 +15,7 @@ enum FirstCitizenApi {
   case homeIncidentApi
   case incidentRequestApi
   case incidentReportApi
+  case requestCreate
 }
 
 class ApiUrl {
@@ -32,6 +33,9 @@ class ApiUrl {
     case .incidentReportApi:
       let incidentReportURL: String = "\(baseURL)/report/"
       return incidentReportURL
+    case .requestCreate:
+      let url: String = "\(baseURL)/request/"
+      return url
     }
   }
 }
