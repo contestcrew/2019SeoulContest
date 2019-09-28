@@ -11,7 +11,7 @@ import UIKit
 class SettingRequestViewController: UIViewController {
   
   private let categoryShared = CategoryDataManager.shared
-  
+  var requestIncidentDatas: [DetailIncidentData] = []
   private let tableView = UITableView()
   
   private var categoryList: [String] = []
@@ -118,8 +118,6 @@ extension SettingRequestViewController: UITableViewDataSource {
 //      cell.changePreviewContainer(<#T##homeIncidentData: IncidentData##IncidentData#>)
       return cell
     }
-    
-    
   }
 }
 
@@ -132,8 +130,16 @@ extension SettingRequestViewController: UITableViewDelegate {
       
       // 기록
     default:
-      let requestDetailVC = RequestDetailViewController()
       
+      let requestDetailVC = RequestDetailViewController()
+//      let reportRulApi = NetworkService.getRequestHelpData(requestID: ) { result in
+//        switch result {
+//        case .success(let data):
+//
+//        case .failure(let err):
+//          print(err.localizedDescription)
+//        }
+//      }
       self.present(requestDetailVC, animated: true, completion: nil)
       break
     }

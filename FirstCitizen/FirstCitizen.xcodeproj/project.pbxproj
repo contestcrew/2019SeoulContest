@@ -73,6 +73,7 @@
 		CF6879A9233B20EE00F2A159 /* OccurredTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6879A8233B20EE00F2A159 /* OccurredTimeCell.swift */; };
 		CF6879AB233B210000F2A159 /* AttatchedFileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6879AA233B210000F2A159 /* AttatchedFileCell.swift */; };
 		CF6879AD233B210B00F2A159 /* ContentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6879AC233B210B00F2A159 /* ContentsCell.swift */; };
+		CF79718A233D9CFF008DC550 /* ReportData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF797189233D9CFF008DC550 /* ReportData.swift */; };
 		CFF55C26233CE43F00FEF380 /* RequestDetailHelpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF55C25233CE43F00FEF380 /* RequestDetailHelpCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -148,6 +149,7 @@
 		CF6879A8233B20EE00F2A159 /* OccurredTimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OccurredTimeCell.swift; sourceTree = "<group>"; };
 		CF6879AA233B210000F2A159 /* AttatchedFileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttatchedFileCell.swift; sourceTree = "<group>"; };
 		CF6879AC233B210B00F2A159 /* ContentsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsCell.swift; sourceTree = "<group>"; };
+		CF797189233D9CFF008DC550 /* ReportData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportData.swift; sourceTree = "<group>"; };
 		CFF55C25233CE43F00FEF380 /* RequestDetailHelpCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailHelpCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -364,6 +366,7 @@
 				CF388F8223306EE700DA6A1C /* DetailIncidentData.swift */,
 				CF68799D233B1FB300F2A159 /* IncidentDataManager.swift */,
 				CF68799F233B1FBF00F2A159 /* CategoryDataManager.swift */,
+				CF797189233D9CFF008DC550 /* ReportData.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -592,6 +595,7 @@
 				4FF966C2230C25FE00E869FF /* ExtensionFont.swift in Sources */,
 				CF68799E233B1FB300F2A159 /* IncidentDataManager.swift in Sources */,
 				4F87FFF9233B914A0094CCD0 /* SignupVC.swift in Sources */,
+				CF79718A233D9CFF008DC550 /* ReportData.swift in Sources */,
 				CF68799A233B1F2900F2A159 /* NetwrokService.swift in Sources */,
 				CF6879A0233B1FBF00F2A159 /* CategoryDataManager.swift in Sources */,
 				CF6879AD233B210B00F2A159 /* ContentsCell.swift in Sources */,

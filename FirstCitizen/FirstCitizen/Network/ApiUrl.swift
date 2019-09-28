@@ -13,6 +13,7 @@ private let baseURL = "http://eb-seoulcontest-deploy-master.ap-northeast-2.elast
 enum FirstCitizenApi {
   case categoryApi
   case homeIncidentApi
+  case incidentRequestApi
   case incidentReportApi
 }
 
@@ -25,6 +26,9 @@ class ApiUrl {
     case .homeIncidentApi:
       let homeIncidentURL: String = "\(baseURL)/request/boundary/"
       return homeIncidentURL
+    case .incidentRequestApi:
+      let incidentRequestURL: String = "\(baseURL)/request/"
+      return incidentRequestURL
     case .incidentReportApi:
       let incidentReportURL: String = "\(baseURL)/report/"
       return incidentReportURL
