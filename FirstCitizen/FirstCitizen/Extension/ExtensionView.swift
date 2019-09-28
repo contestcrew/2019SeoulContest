@@ -8,8 +8,6 @@
 
 import UIKit
 
-import UIKit
-
 extension UIView {
   func shadow() {
     self.layer.shadowRadius = 5.0

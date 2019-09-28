@@ -21,11 +21,13 @@ class IncidentCell: UICollectionViewCell {
     layout()
   }
   
-  func incidentCellConfigure(imageStr: String) {
-
-    let imageURL: URL = URL(string: imageStr)!
-    
-    imageView.kf.setImage(with: imageURL)
+  func incidentCellConfigure(isNoPicture: Bool, imageStr: String?) {
+    if isNoPicture {
+      imageView.image = #imageLiteral(resourceName: "no_image_icon")
+    } else {
+      let imageURL: URL = URL(string: imageStr!)!
+      imageView.kf.setImage(with: imageURL)
+    }
   }
   
   private func attribute() {

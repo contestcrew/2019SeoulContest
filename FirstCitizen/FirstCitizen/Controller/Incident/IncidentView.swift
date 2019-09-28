@@ -127,9 +127,14 @@ extension IncidentView: UITableViewDataSource {
       return cell
     } else if indexPath.row == 2 {
       let cell = tableView.dequeueReusableCell(withIdentifier: ExtraInfomaitionCell.identifier, for: indexPath) as! ExtraInfomaitionCell
-      let fullAddress = "\(detailIncidentData!.mainAddress), \(detailIncidentData!.detailAddress)"
+      
+      let mainAddress = detailIncidentData?.mainAddress ?? ""
+      let detailAddress = detailIncidentData?.detailAddress ?? ""
+      let fullAddress = "\(mainAddress), \(detailAddress)"
+      
       let point = "Point \(detailIncidentData!.categoryScore) + Bonus \(detailIncidentData!.score)"
-      let uploadTime = "\(detailIncidentData!.createdAt)"
+      
+      let uploadTime = "\(detailIncidentData?.createdAt ?? "")"
       
       cell.modifyProperties(fullAddress, point, uploadTime)
       

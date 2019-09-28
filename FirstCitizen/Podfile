@@ -7,7 +7,6 @@ target 'FirstCitizen' do
   pod 'Alamofire'
   pod 'Kingfisher', '~> 5.0'
   pod 'SnapKit'
-  pod 'naveridlogin-sdk-ios'
   pod 'NMapsMap'
   # Pods for FirstCitizen
 

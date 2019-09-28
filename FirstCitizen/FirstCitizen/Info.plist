@@ -2,23 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-  <key>NSAppTransportSecurity</key>
-  <dict>
-    <key>NSAllowsArbitraryLoads</key><true/>
-  </dict>
-  <key>NMFClientId</key>
-  <string>3v2c6d2j04</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Always and When In Use</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>When In Use</string>
-	<key>KAKAO_APP_KEY</key>
-	<string>640d1b6d7df7e4564541ebc4ab8ccb22</string>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>naversearchapp</string>
-		<string>naversearchthirdlogin</string>
-	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -38,30 +21,27 @@
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
-			<key>CFBundleURLIconFile</key>
+			<key>CFBundleURLName</key>
 			<string></string>
-			<key>CFBundleURLName</key>
-			<string>naverlogin</string>
 			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>naverlogin</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>kakaologin</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>kakao640d1b6d7df7e4564541ebc4ab8ccb22</string>
-			</array>
+			<array/>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NMFClientId</key>
+	<string>3v2c6d2j04</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Always and When In Use</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>When In Use</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>

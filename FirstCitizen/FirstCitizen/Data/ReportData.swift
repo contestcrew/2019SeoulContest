@@ -15,9 +15,9 @@ struct ReportData: Codable {
   let content: String
   let isAgreedInform: Bool
   let helpedAt: String
-  let createdAt: String
-  let updatedAt: String
-  let images: [String]
+  let createdAt: String?
+  let updatedAt: String?
+  let images: [String]?
   
   enum CodingKeys: String, CodingKey {
     case request
@@ -30,4 +30,6 @@ struct ReportData: Codable {
     case updatedAt = "updated_at"
     case images
   }
+  
+  
 }

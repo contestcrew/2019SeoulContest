@@ -6,7 +6,7 @@
 //  Copyright © 2019 Kira. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension CGFloat {
   func dynamic(_ multipliedBy: CGFloat) -> CGFloat {

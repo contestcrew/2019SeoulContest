@@ -15,7 +15,8 @@ class MainTabBarController: UITabBarController {
   private let vcPoint = PointViewController()
   private let vcMap = MapViewController()
   private let vcList = ListViewController()
-  private let vcSetting = UINavigationController(rootViewController: SettingViewController())
+  private let settingVC = SettingViewController()
+  lazy private var vcSetting = UINavigationController(rootViewController: settingVC)
   
   private var isPosition = true
   
@@ -36,7 +37,6 @@ class MainTabBarController: UITabBarController {
     view.addSubview(MainTabBarController.vTabBarButton)
     
     viewControllers = [vcMap, vcList, vcPoint, vcSetting]
-    
     
   }
   
@@ -59,7 +59,17 @@ class MainTabBarController: UITabBarController {
   }
   
   @objc private func settingDidTap(_ sender: UIButton) {
-    self.selectedViewController = vcSetting
+    NetworkService.getSettingRequestData { [weak self] result in
+      switch result {
+      case .success(let data):
+        
+        self!.settingVC.requestIncidentDatas = data
+        self!.selectedViewController = self?.vcSetting
+      case .failure(let err):
+        print(err.localizedDescription)
+      }
+    }
+    
   }
   
   private struct Standard {
