@@ -62,7 +62,6 @@ class NetworkService {
     }
   }
   
-<<<<<<< HEAD
   static func getSettingRequestData(completion: @escaping (Result<[DetailIncidentData]>) -> ()) {
     
 //    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
