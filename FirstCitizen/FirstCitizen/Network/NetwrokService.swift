@@ -60,7 +60,11 @@ class NetworkService {
     }
   }
   
+<<<<<<< HEAD
+  static func getSettingRequestData(completion: @escaping (Result<[DetailIncidentData]>) -> ()) {
+=======
   static func getSettingRequestData(completion: @escaping (Result<[IncidentData]>) -> ()) {
+>>>>>>> c2eb28d335d86f201c15803bf29ec1834dbb5975
     
 //    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
 //    print("[Log8] :", token)
