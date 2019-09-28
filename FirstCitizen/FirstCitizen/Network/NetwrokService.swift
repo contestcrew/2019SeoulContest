@@ -14,41 +14,124 @@ class NetworkService {
     case networkErr, NoData
   }
   
+  static func nowTime() -> String {
+    let timeFormatter = DateFormatter()
+    timeFormatter.locale = Locale(identifier: "ko")
+    timeFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    return timeFormatter.string(from: Date())
+  }
+  
   static let header: HTTPHeaders = [
-    "Content-Type": "application/json",
-    "Authorization": "Token 9e3838aef1806fbe4b6d1edd80f28914148559af"
+    "Content-Type": "multipart/form-data",
+    "Authorization": "Token 9e3838aef1806fbe4b6d1edd80f28914148559af",
+    "Accept-Encoding": "gzip, deflate"
   ]
   
-  static func report(completion: @escaping (Bool) -> ()) {
-    let data = """
-    {
-    "request": 1,
-    "author": 1,
-    "title": "test",
-    "content": "test",
-    "is_agreed_inform": true,
-    "helped_at": "2019-09-28T11:21:29.564Z",
-      "images": "[\(UIImage(named: "TestImg")?.jpegData(compressionQuality: 0.3)?.base64EncodedString())]"
+  static func report(data: ReportData, images: [UIImage], completion: @escaping (Bool) -> ()) {
+    
+    var imgData = [Data]()
+    
+    images.forEach {
+      imgData.append($0.pngData()!)
     }
-    """.data(using: .utf8)!
     
     let url = ApiUrl.ApiUrl(apiName: .incidentReportApi)
     
-    print("origin data: ", data, UIImage(named: "TestImg")?.jpegData(compressionQuality: 0.3)?.base64EncodedString())
-    
-    Alamofire.upload(data,
-                     to: url,
-                     method: .post,
-                     headers: header)
-      .response { (res) in
-        switch res.response?.statusCode {
-        case 201:
-          completion(true)
-          print("res.Data", res.data)
-        default:
-          completion(false)
-        }
+    let multiData = MultipartFormData()
+    multiData.append("1".data(using: .utf8)!, withName: "request")
+    multiData.append("\(data.author)".data(using: .utf8)!, withName: "author")
+    multiData.append(data.title.data(using: .utf8)!, withName: "title")
+    multiData.append(data.content.data(using: .utf8)!, withName: "content")
+    multiData.append("\(data.isAgreedInform)".data(using: .utf8)!, withName: "is_agreed_inform")
+    multiData.append(nowTime().data(using: .utf8)!, withName: "helped_at")
+    if imgData.count != 0 {
+      for (idx, data) in imgData.enumerated() {
+        multiData.append(data, withName: "image_\(idx+1)")
+      }
     }
+    
+    let encodeData = try? multiData.encode()
+    
+    let testHeaders = [
+      "content-type": "\(multiData.contentType)",
+      "Accept": "*/*",
+      "Cache-Control": "no-cache",
+      "Host": "eb-seoulcontest-deploy-master.ap-northeast-2.elasticbeanstalk.com",
+      "Accept-Encoding": "gzip, deflate",
+      "Content-Length": "\(multiData.contentLength)",
+      "Connection": "keep-alive",
+      "cache-control": "no-cache"
+    ]
+    
+//    let data = """
+//      {
+//      "request": "1",
+//      "author": "\(data.author)",
+//      "title": "\(data.title)",
+//      "content": "\(data.content)",
+//      "is_agreed_inform": "\(data.isAgreedInform)",
+//      "helped_at": "\(nowTime())",
+//      "images": "\(imgData)"
+//      }
+//      """.data(using: .utf8)!
+    
+    
+    
+//    Alamofire.upload(multipartFormData: { (MultipartFormData) in
+//      MultipartFormData.append("1".data(using: .utf8)!, withName: "request")
+//      MultipartFormData.append("\(data.author)".data(using: .utf8)!, withName: "author")
+//      MultipartFormData.append(data.title.data(using: .utf8)!, withName: "title")
+//      MultipartFormData.append(data.content.data(using: .utf8)!, withName: "content")
+//      MultipartFormData.append("\(data.isAgreedInform)".data(using: .utf8)!, withName: "is_agreed_inform")
+//      MultipartFormData.append(nowTime().data(using: .utf8)!, withName: "helped_at")
+//      if imgData.count != 0 {
+//        for (idx, data) in imgData.enumerated() {
+//          MultipartFormData.append(data, withName: "image_\(idx+1)")
+//        }
+//      }
+//
+//      print("multipartFormData: ", MultipartFormData.contentLength)
+//    }, to: url, method: .post, headers: header) { (result) in
+//      print("result encoding: ", result)
+//      }
+    print("encoded Data: ", encodeData!)
+    
+    let req = try! URLRequest(url: url, method: .post, headers: testHeaders)
+    
+    Alamofire.upload(encodeData ?? Data(), with: req)
+      .response { (res) in
+        print("Header: ", res.request?.allHTTPHeaderFields)
+          switch res.response?.statusCode {
+          case 201:
+            completion(true)
+            let data = try? JSONSerialization.jsonObject(with: res.data!)
+            print("result Data: ", data)
+          default:
+            completion(false)
+            let data = try? JSONSerialization.jsonObject(with: res.data!)
+            print("result Data: ", data)
+          }
+      }
+      
+    
+//        Alamofire.upload(encodeData ?? Data(),
+//                     to: url,
+//                     method: .post,
+//                     headers: header)
+//      .response { (res) in
+//        switch res.response?.statusCode {
+//        case 201:
+//          completion(true)
+//          let data = try? JSONSerialization.jsonObject(with: res.data!)
+//          print("result Data: ", data)
+//        default:
+//          completion(false)
+//          let data = try? JSONSerialization.jsonObject(with: res.data!)
+//          print("result Data: ", data)
+//        }
+//    }
+    
+    
   }
   
   static func getCategoryList(completion: @escaping (Result<[CategoryData]>) -> ()) {
@@ -75,9 +158,10 @@ class NetworkService {
     let parameters: [String: Double] = ["latitude": latitude, "longitude": longitude]
     
     let urlStr = ApiUrl.ApiUrl(apiName: .homeIncidentApi)
-    let url = URL(string: urlStr)!
+//    let url = URL(string: urlStr)!
     
-    Alamofire.request(url, method: .get, parameters: parameters, encoding: URLEncoding.default).responseData { response in
+    Alamofire.request(urlStr, method: .get, parameters: parameters, encoding: URLEncoding.default)
+      .responseData { response in
       
       switch response.result {
       case .success(let data):

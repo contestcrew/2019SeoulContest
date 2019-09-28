@@ -41,6 +41,7 @@
 		527E38F423321C1000C01EC7 /* ExtensionUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E38F323321C1000C01EC7 /* ExtensionUIImage.swift */; };
 		527E38F62332958700C01EC7 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E38F52332958700C01EC7 /* TestData.swift */; };
 		52EA1ABD233E8E0900244D29 /* RequestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EA1ABC233E8E0900244D29 /* RequestData.swift */; };
+		52EA1AD3233FDE7300244D29 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EA1AD2233FDE7300244D29 /* ImageCell.swift */; };
 		6B36858508F29EBE5EFE4F77 /* Pods_FirstCitizen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50CCF6F72520B16B5901678A /* Pods_FirstCitizen.framework */; };
 		C173D172233F4E4400C6F448 /* LocationWithAddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C173D171233F4E4400C6F448 /* LocationWithAddVC.swift */; };
 		CF1E09D323275860006E9537 /* IncidentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1E09D223275860006E9537 /* IncidentViewController.swift */; };
@@ -113,6 +114,7 @@
 		527E38F323321C1000C01EC7 /* ExtensionUIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIImage.swift; sourceTree = "<group>"; };
 		527E38F52332958700C01EC7 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		52EA1ABC233E8E0900244D29 /* RequestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestData.swift; sourceTree = "<group>"; };
+		52EA1AD2233FDE7300244D29 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		80EA8319B751197666F7ABE9 /* Pods-FirstCitizen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstCitizen.release.xcconfig"; path = "Target Support Files/Pods-FirstCitizen/Pods-FirstCitizen.release.xcconfig"; sourceTree = "<group>"; };
 		A49A9086C3D192F57DEDDDD6 /* Pods-FirstCitizen.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstCitizen.debug.xcconfig"; path = "Target Support Files/Pods-FirstCitizen/Pods-FirstCitizen.debug.xcconfig"; sourceTree = "<group>"; };
 		C173D171233F4E4400C6F448 /* LocationWithAddVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationWithAddVC.swift; sourceTree = "<group>"; };
@@ -310,6 +312,14 @@
 			path = Setting;
 			sourceTree = "<group>";
 		};
+		52EA1AC3233FC7C700244D29 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				52EA1AD2233FDE7300244D29 /* ImageCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		6BF0C2A65BCA8FC5FB2A8439 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -382,6 +392,7 @@
 		CF5467CF233349A600F75DDB /* Report */ = {
 			isa = PBXGroup;
 			children = (
+				52EA1AC3233FC7C700244D29 /* Cell */,
 				CF5467D0233349BC00F75DDB /* ReportViewController.swift */,
 				CF5467D2233349C700F75DDB /* ReportView.swift */,
 			);
@@ -590,6 +601,7 @@
 				CF5467D3233349C700F75DDB /* ReportView.swift in Sources */,
 				CF6879A3233B20C300F2A159 /* MapCell.swift in Sources */,
 				CF5E7EE42337DC010069235C /* ExtensionAlertController.swift in Sources */,
+				52EA1AD3233FDE7300244D29 /* ImageCell.swift in Sources */,
 				5212408A233B9599002C99AD /* LocationWithMap.swift in Sources */,
 				CF68799C233B1F4100F2A159 /* CategoryData.swift in Sources */,
 				4F87FFFC233EF4F40094CCD0 /* PointCardCell.swift in Sources */,
@@ -681,7 +693,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -736,7 +748,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -752,13 +764,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 5W72YMDK56;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = FirstCitizen/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -804,13 +816,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 5W72YMDK56;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = FirstCitizen/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

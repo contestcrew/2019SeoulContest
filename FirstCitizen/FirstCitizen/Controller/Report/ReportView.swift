@@ -7,15 +7,47 @@
 //
 
 import UIKit
+import TLPhotoPicker
 
 protocol ReportViewDelegate: class {
-  func touchUpReportButton()
+  func touchUpReportButton(title: String, content: String, isAgree: Bool, images: [UIImage])
   func touchUpBackButton()
 }
 
 class ReportView: UIView {
   
   weak var delegate: ReportViewDelegate?
+  
+  var imageArr = [UIImage]()
+  
+  var selectedAssets = [TLPHAsset]() {
+    didSet {
+      collectionView.reloadData()
+    }
+    willSet(new) {
+      new.forEach {
+        imageArr.append($0.fullResolutionImage ?? UIImage())
+      }
+    }
+  }
+  
+  let flowLayout: UICollectionViewFlowLayout = {
+    let layout = UICollectionViewFlowLayout()
+    let count = CGFloat(3)
+    let width = (UIScreen.main.bounds.width-(5*(count-1)))/count
+    layout.scrollDirection = .horizontal
+    layout.itemSize = CGSize(width: width, height: width)
+    return layout
+  }()
+  
+  lazy var collectionView: UICollectionView = {
+    let view = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+    view.backgroundColor = .clear
+    view.register(ImageCell.self, forCellWithReuseIdentifier: "cell")
+    view.dataSource = self
+    view.delegate = self
+    return view
+  }()
   
   private let backButton = UIButton()
   private let reportHedaerTitleLabel = UILabel()
@@ -31,7 +63,7 @@ class ReportView: UIView {
   let contentsTextField = UITextField()
   
   private let attachFileLabel = UILabel()
-  private let attachFileButton = UIButton()
+  let attachFileButton = UIButton()
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -46,7 +78,12 @@ class ReportView: UIView {
   }
   
   @objc private func touchUpReportButton() {
-    delegate?.touchUpReportButton()
+    if titleTextField.text != "" || contentsTextField.text != "" {
+      delegate?.touchUpReportButton(title: titleTextField.text!,
+                                    content: contentsTextField.text!,
+                                    isAgree: isOfferSwitch.isOn,
+                                    images: imageArr)
+    }
   }
   
   @objc private func touchUpBackButton() {
@@ -127,7 +164,7 @@ class ReportView: UIView {
   private func layout() {
     let margin: CGFloat = 10
     
-    [backButton, reportHedaerTitleLabel, reportButton, offerReportLabel, isOfferSwitch, titleLabel, titleTextField, contentsLabel, contentsTextField, attachFileLabel, attachFileButton].forEach { self.addSubview($0) }
+    [backButton, reportHedaerTitleLabel, reportButton, offerReportLabel, isOfferSwitch, titleLabel, titleTextField, contentsLabel, contentsTextField, attachFileLabel, attachFileButton, collectionView].forEach { self.addSubview($0) }
     
     backButton.snp.makeConstraints {
       $0.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(margin.dynamic(1))
@@ -192,6 +229,11 @@ class ReportView: UIView {
       $0.trailing.equalToSuperview().offset(-margin.dynamic(2))
       $0.width.height.equalTo(margin.dynamic(3) + 5)
     }
+    
+    collectionView.snp.makeConstraints {
+      $0.bottom.leading.trailing.equalToSuperview()
+      $0.top.equalTo(attachFileLabel.snp.bottom).offset(10)
+    }
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -214,4 +256,23 @@ extension ReportView: UITextFieldDelegate {
       return newString.length <= contentsMaxLength
     }
   }
+}
+
+
+extension ReportView: UICollectionViewDataSource {
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return imageArr.count
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ImageCell
+    let image = imageArr[indexPath.row]
+    cell.imgView.image = image
+    return cell
+  }
+  
+}
+
+extension ReportView: UICollectionViewDelegate {
+  
 }
