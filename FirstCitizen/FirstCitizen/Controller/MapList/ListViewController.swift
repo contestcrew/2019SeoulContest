@@ -140,7 +140,7 @@ extension ListViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: ListViewCell.identifier, for: indexPath) as! ListViewCell
-    
+    cell.selectionStyle = .none
     cell.changePreviewContainer(indexedIncidentData[indexPath.row])
     return cell
   }
