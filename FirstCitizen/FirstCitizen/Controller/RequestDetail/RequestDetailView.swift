@@ -102,7 +102,7 @@ extension RequestDetailView: UITableViewDataSource {
       let cell = tableView.dequeueReusableCell(withIdentifier: MapCell.identifier, for: indexPath) as! MapCell
       
       let pinImageUrlStr = categoryShared.categoryData[(detailRequestIncidentData?.category)! - 1].pinImage
-      cell.modifyProperties(detailRequestIncidentData!.latitude, detailRequestIncidentData!.longitude, pinImageUrlStr: pinImageUrlStr)
+      cell.modifyProperties(detailRequestIncidentData?.latitude, detailRequestIncidentData?.longitude, pinImageUrlStr: pinImageUrlStr)
       return cell
     } else if indexPath.row == 1 {
       let cell = tableView.dequeueReusableCell(withIdentifier: TitleCell.identifier, for: indexPath) as! TitleCell
@@ -112,9 +112,14 @@ extension RequestDetailView: UITableViewDataSource {
       return cell
     } else if indexPath.row == 2 {
       let cell = tableView.dequeueReusableCell(withIdentifier: ExtraInfomaitionCell.identifier, for: indexPath) as! ExtraInfomaitionCell
-      let fullAddress = "\(detailRequestIncidentData!.mainAddress), \(detailRequestIncidentData!.detailAddress)"
+      
+      let mainAddress = detailRequestIncidentData?.mainAddress ?? ""
+      let detailAddress = detailRequestIncidentData?.detailAddress ?? ""
+      let fullAddress = "\(mainAddress), \(detailAddress)"
+      
       let point = "Point \(detailRequestIncidentData!.categoryScore) + Bonus \(detailRequestIncidentData!.score)"
-      let uploadTime = "\(detailRequestIncidentData!.createdAt)"
+      
+      let uploadTime = "\(detailRequestIncidentData?.createdAt ?? "")"
       
       cell.modifyProperties(fullAddress, point, uploadTime)
       
@@ -124,7 +129,10 @@ extension RequestDetailView: UITableViewDataSource {
       if category == "똥휴지" {
         cell.isHidden = true
       }
-      cell.modifyProperties(detailRequestIncidentData!.occurredAt!)
+      
+      let occurredTime = detailRequestIncidentData?.occurredAt ?? ""
+      
+      cell.modifyProperties(occurredTime)
       return cell
     } else if indexPath.row == 4 {
       let cell = tableView.dequeueReusableCell(withIdentifier: AttatchedFileCell.identifier, for: indexPath) as! AttatchedFileCell

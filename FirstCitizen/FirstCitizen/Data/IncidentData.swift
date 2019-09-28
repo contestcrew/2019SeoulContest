@@ -14,7 +14,7 @@ struct IncidentData: Codable {
   let author: Author
   let title, content, status: String
   let categoryScore, score: Int
-  let mainAddress, detailAddress: String
+  let mainAddress, detailAddress: String?
   let latitude, longitude: Double
   let occurredAt: String?
   let createdAt: String?

@@ -12,6 +12,7 @@ class SettingViewController: UIViewController {
   
   private let tableView = UITableView()
   
+  var requestIncidentDatas: [IncidentData] = []
   //  private var requestList = [String]()  // 의뢰 목록
   //  private var helpList = [String]()   // 도움 목록
   
@@ -82,7 +83,7 @@ extension SettingViewController: UITableViewDataSource {
         
         if indexPath.row == 1 {
           cell.countLabel.isHidden = false
-          cell.countLabel.text = "0"
+          cell.countLabel.text = "\(requestIncidentDatas.count)"
         }
         
         return cell
@@ -143,16 +144,8 @@ extension SettingViewController: UITableViewDelegate {
         
       case 1:
         let vcSettingRequest = SettingRequestViewController()
-        
-        NetworkService.getSettingRequestData { [weak self] result in
-          switch result {
-          case .success(let data):
-            vcSettingRequest.requestIncidentDatas = data
-            self?.navigationController?.pushViewController(vcSettingRequest, animated: true)
-          case .failure(let err):
-            print(err.localizedDescription)
-          }
-        }
+        vcSettingRequest.requestIncidentDatas = requestIncidentDatas
+        navigationController?.pushViewController(vcSettingRequest, animated: true)
         
       case 2...inDocument.count:
         print(indexPath.row)

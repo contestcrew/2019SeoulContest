@@ -1,30 +1,31 @@
 //
-//  DetailIncidentData.swift
+//  TestIncidentData.swift
 //  FirstCitizen
 //
-//  Created by Fury on 17/09/2019.
+//  Created by Fury on 28/09/2019.
 //  Copyright © 2019 Kira. All rights reserved.
 //
 
 import Foundation
 
-struct DetailIncidentData: Codable {
+struct TestIncidentData: Codable {
   let id, category: Int
   let policeOffice: Int?
-  let author: Author
+//  let author: Author
   let title, content, status: String
   let categoryScore, score: Int
-  let mainAddress, detailAddress: String?
+  let mainAddress: String?
+  let detailAddress: String?
   let latitude, longitude: Double
   let occurredAt: String?
-  let createdAt: String
-  let updatedAt: String
+  let createdAt: String?
+  let updatedAt: String?
   let images: [String]
   
   enum CodingKeys: String, CodingKey {
     case id, category
     case policeOffice = "police_office"
-    case author
+//    case author
     case title, content, status
     case categoryScore = "category_score"
     case score
@@ -37,3 +38,8 @@ struct DetailIncidentData: Codable {
     case images
   }
 }
+
+//struct Author: Codable {
+//  let id: Int
+//  let nickname: String
+//}

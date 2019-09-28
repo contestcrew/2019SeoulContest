@@ -19,8 +19,6 @@ class ListViewController: UIViewController {
   
   var incidentData: [IncidentData] = []
   var indexedIncidentData: [IncidentData] = []
-  
-  // 현재 미사용중
   var backUpIndexedIncidentData: [IncidentData] = []
   var searchedIncidentData: [IncidentData] = []
   

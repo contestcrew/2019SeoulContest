@@ -34,7 +34,7 @@ class SettingDocumentCell: UITableViewCell {
     contentView.addSubview(titleLabel)
     
     countLabel.isHidden = true
-    countLabel.upsFontHeavy(ofSize: 20)
+    countLabel.dynamicFont(fontSize: 15, weight: .bold)
     countLabel.backgroundColor = .blue
     countLabel.layer.cornerRadius = 8
     countLabel.layer.masksToBounds = true
