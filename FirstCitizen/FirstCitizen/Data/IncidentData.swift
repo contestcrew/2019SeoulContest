@@ -17,8 +17,8 @@ struct IncidentData: Codable {
   let mainAddress, detailAddress: String
   let latitude, longitude: Double
   let occurredAt: String?
-  let createdAt: String
-  let updatedAt: String
+  let createdAt: String?
+  let updatedAt: String?
   let images: [String]
   
   enum CodingKeys: String, CodingKey {

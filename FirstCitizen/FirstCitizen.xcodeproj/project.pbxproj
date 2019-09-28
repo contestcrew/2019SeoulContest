@@ -37,6 +37,7 @@
 		5212408A233B9599002C99AD /* LocationWithMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52124089233B9599002C99AD /* LocationWithMap.swift */; };
 		527E38F423321C1000C01EC7 /* ExtensionUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E38F323321C1000C01EC7 /* ExtensionUIImage.swift */; };
 		527E38F62332958700C01EC7 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E38F52332958700C01EC7 /* TestData.swift */; };
+		52EA1ABD233E8E0900244D29 /* RequestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EA1ABC233E8E0900244D29 /* RequestData.swift */; };
 		6B36858508F29EBE5EFE4F77 /* Pods_FirstCitizen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50CCF6F72520B16B5901678A /* Pods_FirstCitizen.framework */; };
 		CF0CF5122313912D004DF6A5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0CF5112313912D004DF6A5 /* LoginViewController.swift */; };
 		CF0CF51423139137004DF6A5 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0CF51323139137004DF6A5 /* LoginView.swift */; };
@@ -109,6 +110,7 @@
 		52124089233B9599002C99AD /* LocationWithMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationWithMap.swift; sourceTree = "<group>"; };
 		527E38F323321C1000C01EC7 /* ExtensionUIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIImage.swift; sourceTree = "<group>"; };
 		527E38F52332958700C01EC7 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
+		52EA1ABC233E8E0900244D29 /* RequestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestData.swift; sourceTree = "<group>"; };
 		80EA8319B751197666F7ABE9 /* Pods-FirstCitizen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstCitizen.release.xcconfig"; path = "Target Support Files/Pods-FirstCitizen/Pods-FirstCitizen.release.xcconfig"; sourceTree = "<group>"; };
 		A49A9086C3D192F57DEDDDD6 /* Pods-FirstCitizen.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstCitizen.debug.xcconfig"; path = "Target Support Files/Pods-FirstCitizen/Pods-FirstCitizen.debug.xcconfig"; sourceTree = "<group>"; };
 		CF0CF5112313912D004DF6A5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -362,6 +364,7 @@
 				CF388F8223306EE700DA6A1C /* DetailIncidentData.swift */,
 				CF68799D233B1FB300F2A159 /* IncidentDataManager.swift */,
 				CF68799F233B1FBF00F2A159 /* CategoryDataManager.swift */,
+				52EA1ABC233E8E0900244D29 /* RequestData.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -576,6 +579,7 @@
 				4FF966C6230C31AE00E869FF /* ExtensionColor.swift in Sources */,
 				4FF966AF230C043B00E869FF /* MainTabBarController.swift in Sources */,
 				4FF9669C230C032600E869FF /* AppDelegate.swift in Sources */,
+				52EA1ABD233E8E0900244D29 /* RequestData.swift in Sources */,
 				CF0CF51F23154028004DF6A5 /* SignupViewController.swift in Sources */,
 				CF6879A7233B20DF00F2A159 /* ExtraInformationCell.swift in Sources */,
 				4FF966C4230C28E800E869FF /* PointView.swift in Sources */,
