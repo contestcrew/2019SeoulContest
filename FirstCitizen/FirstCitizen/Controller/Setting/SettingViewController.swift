@@ -113,7 +113,7 @@ extension SettingViewController: UITableViewDataSource {
       case 1...2:
         let cell = SettingDocumentCell()
         
-        cell.titleLabel.text = inDocument[indexPath.row - 1]
+        cell.titleLabel.text = outDocument[indexPath.row - 1]
         
         return cell
         
