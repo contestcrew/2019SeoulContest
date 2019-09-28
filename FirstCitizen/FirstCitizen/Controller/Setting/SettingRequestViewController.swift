@@ -11,7 +11,7 @@ import UIKit
 class SettingRequestViewController: UIViewController {
   
   private let categoryShared = CategoryDataManager.shared
-  var requestIncidentDatas: [DetailIncidentData] = []
+  var requestIncidentDatas: [IncidentData] = []
   private let tableView = UITableView()
   
   private var categoryList: [String] = []
@@ -58,9 +58,8 @@ class SettingRequestViewController: UIViewController {
     
     tableView.delegate = self
     tableView.dataSource = self
+    tableView.separatorStyle = .none
     view.addSubview(tableView)
-    
-    
   }
   
   private struct Standard {
@@ -83,7 +82,7 @@ class SettingRequestViewController: UIViewController {
 
 extension SettingRequestViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return sampleDatas.count + 1
+    return requestIncidentDatas.count + 1
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -115,7 +114,7 @@ extension SettingRequestViewController: UITableViewDataSource {
     default:
       let cell = ListViewCell()
       cell.selectionStyle = .none
-//      cell.changePreviewContainer(<#T##homeIncidentData: IncidentData##IncidentData#>)
+      cell.changePreviewContainer(requestIncidentDatas[indexPath.row - 1])
       return cell
     }
   }
@@ -130,18 +129,30 @@ extension SettingRequestViewController: UITableViewDelegate {
       
       // 기록
     default:
-      
       let requestDetailVC = RequestDetailViewController()
-//      let reportRulApi = NetworkService.getRequestHelpData(requestID: ) { result in
-//        switch result {
-//        case .success(let data):
-//
-//        case .failure(let err):
-//          print(err.localizedDescription)
-//        }
-//      }
-      self.present(requestDetailVC, animated: true, completion: nil)
+      print("[Log3] :", requestIncidentDatas[indexPath.row + 1].createdAt ?? "")
+      NetworkService.getRequestHelpData(requestID: requestIncidentDatas[indexPath.row - 1].id) { [weak self] result in
+        switch result {
+        case .success(let data):
+          requestDetailVC.requestDetailData = self?.requestIncidentDatas[indexPath.row - 1]
+          requestDetailVC.reportDatas = data
+          self?.present(requestDetailVC, animated: true, completion: nil)
+        case .failure(let err):
+          print(err.localizedDescription)
+        }
+      }
       break
+    }
+  }
+  
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    let normalHeight: CGFloat = 80
+    let rowHeight: CGFloat = 180
+    
+    if indexPath.row == 0 {
+      return normalHeight.dynamic(1)
+    } else {
+      return rowHeight.dynamic(1)
     }
   }
 }

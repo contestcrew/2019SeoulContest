@@ -26,15 +26,17 @@ class MapViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    
     attribute()
     extractCategory()
     displayDatasInMap()
-    showFirstData()
+    
   }
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     
+    showFirstData()
     layout()
   }
   

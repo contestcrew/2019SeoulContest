@@ -23,7 +23,7 @@ class MapCell: UITableViewCell {
     layout()
   }
   
-  func modifyProperties(_ latitude: Double, _ longitude: Double, pinImageUrlStr: String) {
+  func modifyProperties(_ latitude: Double?, _ longitude: Double?, pinImageUrlStr: String) {
     let pinImageURL: URL = URL(string: pinImageUrlStr)!
     
     let task = URLSession.shared.dataTask(with: pinImageURL) { (data, response, error) in
@@ -34,7 +34,10 @@ class MapCell: UITableViewCell {
         else { return print("StatusCode is not valid") }
       guard let data = data else { return }
       let iconImg = UIImage(data: data)
-      let marker = NMFMarker(position: NMGLatLng(lat: latitude, lng: longitude), iconImage: NMFOverlayImage(image: iconImg!))
+      
+      guard let lat = latitude, let lng = longitude else { return }
+      
+      let marker = NMFMarker(position: NMGLatLng(lat: lat, lng: lng), iconImage: NMFOverlayImage(image: iconImg!))
       let markerWidth: CGFloat = 40
       let markerHeight: CGFloat = 50
       marker.width = markerWidth.dynamic(1)
@@ -42,7 +45,7 @@ class MapCell: UITableViewCell {
       
       DispatchQueue.main.async {
         marker.mapView = self.nmapView
-        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: latitude, lng: longitude))
+        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: lat, lng: lng))
         cameraUpdate.animation = .easeIn
         self.nmapView.moveCamera(cameraUpdate)
       }

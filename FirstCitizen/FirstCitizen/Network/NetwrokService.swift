@@ -45,32 +45,29 @@ class NetworkService {
     let urlStr = ApiUrl.ApiUrl(apiName: .homeIncidentApi)
     let url = URL(string: urlStr)!
     
-    let req = Alamofire.request(url, method: .get, parameters: parameters, encoding: URLEncoding.default)
-    
-    req.validate()
-      .responseData { response in
-        switch response.result {
-        case .success(let data):
-          guard let result = try? JSONDecoder().decode([IncidentData].self, from: data) else {
-            completion(.failure(ErrorType.NoData))
-            return
-          }
-          completion(.success(result))
-        case .failure(_):
-          print(ErrorType.networkErr)
+    Alamofire.request(url, method: .get, parameters: parameters, encoding: URLEncoding.default).responseData { response in
+      
+      switch response.result {
+      case .success(let data):
+        guard let result = try? JSONDecoder().decode([IncidentData].self, from: data) else {
+          completion(.failure(ErrorType.NoData))
+          return
         }
+        completion(.success(result))
+      case .failure(_):
+        print(ErrorType.networkErr)
+      }
     }
   }
   
-<<<<<<< HEAD
-  static func getSettingRequestData(completion: @escaping (Result<[DetailIncidentData]>) -> ()) {
+  static func getSettingRequestData(completion: @escaping (Result<[IncidentData]>) -> ()) {
     
 //    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
 //    print("[Log8] :", token)
     
     let headers: HTTPHeaders = [
       "Content-Type": "application/json",
-      "Authorization": "Token bdef7052f9ed4f97bd65ec8afa481bd25deed959"
+      "Authorization": "Token 9e3838aef1806fbe4b6d1edd80f28914148559af"
     ]
     
     let urlStr = ApiUrl.ApiUrl(apiName: .incidentRequestApi)
@@ -82,7 +79,7 @@ class NetworkService {
       .responseData { response in
         switch response.result {
         case .success(let data):
-          guard let result = try? JSONDecoder().decode([DetailIncidentData].self, from: data) else {
+          guard let result = try? JSONDecoder().decode([IncidentData].self, from: data) else {
             completion(.failure(ErrorType.NoData))
             return
           }
@@ -95,13 +92,13 @@ class NetworkService {
     }
   }
   
-  static func getRequestHelpData(requestID: Int, completion: @escaping (Result<ReportData>) -> ()) {
+  static func getRequestHelpData(requestID: Int, completion: @escaping (Result<[ReportData]>) -> ()) {
     
-    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
+//    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
     
     let header: HTTPHeaders = [
       "Content-Type": "application/json",
-      "Authorization": "Token bdef7052f9ed4f97bd65ec8afa481bd25deed959"
+      "Authorization": "Token 9e3838aef1806fbe4b6d1edd80f28914148559af"
     ]
     
     let parameters: [String: Int] = ["request": requestID]
@@ -115,7 +112,7 @@ class NetworkService {
       .responseData(queue: DispatchQueue.global()) { response in
         switch response.result {
         case .success(let data):
-          guard let result = try? JSONDecoder().decode(ReportData.self, from: data) else {
+          guard let result = try? JSONDecoder().decode([ReportData].self, from: data) else {
             completion(.failure(ErrorType.networkErr))
             return
           }
