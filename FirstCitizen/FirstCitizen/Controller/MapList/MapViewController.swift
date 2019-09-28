@@ -26,20 +26,14 @@ class MapViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    
     attribute()
     extractCategory()
-    
-    
     displayDatasInMap()
-    
-    
   }
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     
-//    showFirstData()
     layout()
   }
   
@@ -121,6 +115,8 @@ class MapViewController: UIViewController {
         let categoryImg = self!.categoryShared.categoryData[data.category - 1].image
         self?.vMap.changePreviewContainer(data, categoryImg)
         self?.selectedIncidentData = data
+        self?.vMap.previewContainer.isHidden = false
+        self?.vMap.firstExplainLabel.isHidden = true
         return true
       }
       

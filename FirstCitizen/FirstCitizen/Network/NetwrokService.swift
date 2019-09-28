@@ -49,10 +49,23 @@ class NetworkService {
       
       switch response.result {
       case .success(let data):
-        guard let result = try? JSONDecoder().decode([IncidentData].self, from: data) else {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .millisecondsSince1970
+        guard let result = try? decoder.decode([IncidentData].self, from: data) else {
           completion(.failure(ErrorType.NoData))
           return
         }
+        
+//        let date = Date()
+        let test = result[0].createdAt ?? ""
+        print("[Log4] :", test.makeDisplayTime())
+//        let startDate = DateFormatter().date(from: Date().getToday())
+//
+//        let endDate = DateFormatter().date(from: test.makeDisplayTime())
+//
+//
+//        Date().displayDate(startDate: startDate!, endDate: endDate!)
+        
         completion(.success(result))
       case .failure(_):
         print(ErrorType.networkErr)
@@ -81,7 +94,9 @@ class NetworkService {
       .responseData { response in
         switch response.result {
         case .success(let data):
-          guard let result = try? JSONDecoder().decode([IncidentData].self, from: data) else {
+          let decoder = JSONDecoder()
+          decoder.dateDecodingStrategy = .secondsSince1970
+          guard let result = try? decoder.decode([IncidentData].self, from: data) else {
             completion(.failure(ErrorType.NoData))
             return
           }
@@ -114,7 +129,9 @@ class NetworkService {
       .responseData { response in
         switch response.result {
         case .success(let data):
-          guard let result = try? JSONDecoder().decode([ReportData].self, from: data) else {
+          let decoder = JSONDecoder()
+          decoder.dateDecodingStrategy = .secondsSince1970
+          guard let result = try? decoder.decode([ReportData].self, from: data) else {
             completion(.failure(ErrorType.networkErr))
             return
           }
