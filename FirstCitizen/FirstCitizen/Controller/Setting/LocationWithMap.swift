@@ -58,14 +58,22 @@ class LocationWithMap: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.view.backgroundColor = .gray
+//    self.view.backgroundColor = .blue
 //    locationManager.delegate = self
 //    marker.iconImage = markerImg
+    
     setupNavigation()
     checkAuthorizationStatus()
     nMapConfigure()
     setupLayout()
     
+    let backButton = UIBarButtonItem(image: UIImage(named: "navi-arrow-24x24"), style: .done, target: self, action: #selector(touchUpBackButton))
+    backButton.tintColor = .blue
+    navigationItem.leftBarButtonItem = backButton
+  }
+  
+  @objc func touchUpBackButton() {
+    navigationController?.popViewController(animated: true)
   }
   
   @objc func didTapInsertBtn(_ sender: UIButton) {
