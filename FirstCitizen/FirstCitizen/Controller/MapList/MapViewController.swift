@@ -36,7 +36,7 @@ class MapViewController: UIViewController {
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     
-    showFirstData()
+//    showFirstData()
     layout()
   }
   
