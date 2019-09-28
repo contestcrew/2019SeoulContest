@@ -12,8 +12,8 @@ class SettingViewController: UIViewController {
   
   private let tableView = UITableView()
   
-//  private var requestList = [String]()  // 의뢰 목록
-//  private var helpList = [String]()   // 도움 목록
+  //  private var requestList = [String]()  // 의뢰 목록
+  //  private var helpList = [String]()   // 도움 목록
   
   private let inDocument = ["의뢰", "도움", "공지사항", "이용약관", "내 정보"]
   private let outDocument = ["공지사항", "이용약관"]
@@ -144,7 +144,15 @@ extension SettingViewController: UITableViewDelegate {
       case 1:
         let vcSettingRequest = SettingRequestViewController()
         
-        navigationController?.pushViewController(vcSettingRequest, animated: true)
+        NetworkService.getSettingRequestData { [weak self] result in
+          switch result {
+          case .success(let data):
+            vcSettingRequest.requestIncidentDatas = data
+            self?.navigationController?.pushViewController(vcSettingRequest, animated: true)
+          case .failure(let err):
+            print(err.localizedDescription)
+          }
+        }
         
       case 2...inDocument.count:
         print(indexPath.row)

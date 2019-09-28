@@ -21,6 +21,9 @@ class ReportView: UIView {
   private let reportHedaerTitleLabel = UILabel()
   private let reportButton = UIButton()
   
+  private let offerReportLabel = UILabel()
+  private let isOfferSwitch = UISwitch()
+  
   private let titleLabel = UILabel()
   let titleTextField = UITextField()
   
@@ -54,7 +57,7 @@ class ReportView: UIView {
     backButton.setImage(#imageLiteral(resourceName: "Back_Button"), for: .normal)
     backButton.addTarget(self, action: #selector(touchUpBackButton), for: .touchUpInside)
     
-    reportHedaerTitleLabel.text = "제보하기"
+    reportHedaerTitleLabel.text = "도와주기"
     reportHedaerTitleLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     reportHedaerTitleLabel.dynamicFont(fontSize: 26, weight: .heavy)
     
@@ -66,7 +69,13 @@ class ReportView: UIView {
     reportButton.layer.cornerRadius = 5
     reportButton.addTarget(self, action: #selector(touchUpReportButton), for: .touchUpInside)
     
-    titleLabel.text = "타이틀 (필수)"
+    offerReportLabel.text = "경찰 정보 제공"
+    offerReportLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    offerReportLabel.dynamicFont(fontSize: 24, weight: .heavy)
+    
+    isOfferSwitch.isOn = true
+    
+    titleLabel.text = "제목 (필수)"
     titleLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     titleLabel.dynamicFont(fontSize: 24, weight: .heavy)
     let titleAttributedStr = NSMutableAttributedString(string: titleLabel.text!)
@@ -81,12 +90,13 @@ class ReportView: UIView {
     titleTextField.clearButtonMode = .whileEditing
     titleTextField.keyboardType = .default
     titleTextField.returnKeyType = .continue
+    titleTextField.delegate = self
     
-    contentsLabel.text = "메세지 (필수)"
+    contentsLabel.text = "내용 (필수)"
     contentsLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     contentsLabel.dynamicFont(fontSize: 24, weight: .heavy)
     let contentsAttributedStr = NSMutableAttributedString(string: contentsLabel.text!)
-    contentsAttributedStr.addAttribute(.foregroundColor, value: UIColor.green, range: (contentsLabel.text! as NSString).range(of: "(필수)"))
+    contentsAttributedStr.addAttribute(.foregroundColor, value: UIColor.appColor(.appGreenColor), range: (contentsLabel.text! as NSString).range(of: "(필수)"))
     contentsAttributedStr.addAttribute(.font, value: UIFont.systemFont(ofSize: 16, weight: .heavy), range: (contentsLabel.text! as NSString).range(of: "(필수)"))
     contentsLabel.attributedText = contentsAttributedStr
     
@@ -98,6 +108,7 @@ class ReportView: UIView {
     contentsTextField.clearButtonMode = .whileEditing
     contentsTextField.keyboardType = .default
     contentsTextField.returnKeyType = .done
+    contentsTextField.delegate = self
     
     attachFileLabel.text = "파일 첨부 (선택)"
     attachFileLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -116,7 +127,7 @@ class ReportView: UIView {
   private func layout() {
     let margin: CGFloat = 10
     
-    [backButton, reportHedaerTitleLabel, reportButton, titleLabel, titleTextField, contentsLabel, contentsTextField, attachFileLabel, attachFileButton].forEach { self.addSubview($0) }
+    [backButton, reportHedaerTitleLabel, reportButton, offerReportLabel, isOfferSwitch, titleLabel, titleTextField, contentsLabel, contentsTextField, attachFileLabel, attachFileButton].forEach { self.addSubview($0) }
     
     backButton.snp.makeConstraints {
       $0.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(margin.dynamic(1))
@@ -135,8 +146,20 @@ class ReportView: UIView {
       $0.height.equalTo(margin.dynamic(3) + 5)
     }
     
-    titleLabel.snp.makeConstraints {
+    offerReportLabel.snp.makeConstraints {
       $0.top.equalTo(backButton.snp.bottom).offset(margin.dynamic(4))
+      $0.leading.equalToSuperview().offset(margin.dynamic(2))
+    }
+    
+    isOfferSwitch.snp.makeConstraints {
+      $0.top.equalTo(backButton.snp.bottom).offset(margin.dynamic(4))
+      $0.leading.equalTo(offerReportLabel.snp.trailing)
+      $0.trailing.equalTo(reportButton.snp.trailing).offset(-2)
+      $0.centerY.equalTo(offerReportLabel.snp.centerY)
+    }
+    
+    titleLabel.snp.makeConstraints {
+      $0.top.equalTo(offerReportLabel.snp.bottom).offset(margin.dynamic(4))
       $0.leading.equalToSuperview().offset(margin.dynamic(2))
     }
     
@@ -173,5 +196,22 @@ class ReportView: UIView {
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+}
+
+extension ReportView: UITextFieldDelegate {
+  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    let titleMaxLength = 15
+    let contentsMaxLength = 300
+    
+    let currentString: NSString = textField.text! as NSString
+    let newString: NSString =
+      currentString.replacingCharacters(in: range, with: string) as NSString
+    
+    if textField == titleTextField {
+      return newString.length <= titleMaxLength
+    } else {
+      return newString.length <= contentsMaxLength
+    }
   }
 }

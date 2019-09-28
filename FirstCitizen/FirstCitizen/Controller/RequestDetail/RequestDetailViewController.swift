@@ -12,10 +12,19 @@ class RequestDetailViewController: UIViewController {
   
   var category: String = ""
   
-  lazy private var requestDetailView = RequestDetailView(frame: .zero, category: category)
+  // test
+  var testShared = IncidentDataManager.shared
+//  var requestDetailData: IncidentData?
+  
+  private var requestDetailView = RequestDetailView()
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    // 내가 의뢰한 내역이 없으면 클릭될 일이 없음
+    // 의뢰한 내역이 있다면 동적으로 데이터를 보내야 함
+    requestDetailView.detailRequestIncidentData = testShared.incidentDatas![0]
     
     attribute()
     layout()
@@ -24,14 +33,21 @@ class RequestDetailViewController: UIViewController {
   private func attribute() {
     self.view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     requestDetailView.category = category
+    
+    requestDetailView.delegate = self
   }
   
   private func layout() {
     self.view.addSubview(requestDetailView)
     
     requestDetailView.snp.makeConstraints {
-      $0.top.leading.trailing.equalToSuperview()
-      $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+      $0.top.leading.trailing.bottom.equalToSuperview()
     }
+  }
+}
+
+extension RequestDetailViewController: RequestDetailViewDelegate {
+  func touchUpBackButton() {
+    self.dismiss(animated: true, completion: nil)
   }
 }
