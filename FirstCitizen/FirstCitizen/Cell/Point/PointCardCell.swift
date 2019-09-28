@@ -1,15 +1,17 @@
 //
-//  PointView.swift
+//  PointCardCell.swift
 //  FirstCitizen
 //
-//  Created by Lee on 20/08/2019.
+//  Created by Lee on 28/09/2019.
 //  Copyright © 2019 Kira. All rights reserved.
 //
 
 import UIKit
 import SnapKit
 
-class PointView: UIView {
+class PointCardCell: UITableViewCell {
+
+  static let identifier = "PointCardCell"
   
   private let cardView = UIView()
   private let gradient = CAGradientLayer()
@@ -18,21 +20,8 @@ class PointView: UIView {
   private let pointLabel = UILabel()
   private let subLabel = UILabel()
   
-  private let imageView = UIImageView()
-  let button = UIButton()
-  
-  let collectionView: UICollectionView = {
-    let layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .horizontal
-    
-    let temp = UICollectionView(frame: .zero, collectionViewLayout: layout)
-    temp.contentInset = UIEdgeInsets(top: 24, left: 24, bottom: 24, right: 24)
-    
-    return temp
-  }()
-
-  override init(frame: CGRect) {
-    super.init(frame: frame)
+  override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    super.init(style: style, reuseIdentifier: reuseIdentifier)
     
     configure()
     autoLayout()
@@ -59,46 +48,36 @@ class PointView: UIView {
   }
   
   private func configure() {
+    self.selectionStyle = .none
+    
     cardView.layer.cornerRadius = 16
     cardView.layer.masksToBounds = true
-//    self.addSubview(cardView)
-    
     
     titleLabel.text = "업's"
     titleLabel.textColor = .white
     titleLabel.upsFontHeavy(ofSize: 25)
-//    self.addSubview(titleLabel)
     
     pointLabel.text = "1750"
     pointLabel.textColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
     pointLabel.upsFontHeavy(ofSize: 30)
     
-    
     subLabel.text = "kira1021@gmail.com"
     subLabel.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-//    self.addSubview(subLabel)
-    
-    imageView.image = #imageLiteral(resourceName: "stamp")
-    imageView.contentMode = .scaleAspectFit
   }
   
   private struct Standard {
     static let space: CGFloat = 8
-    static let xSpace: CGFloat = 40
-    static let ySpace: CGFloat = 32
-    
     static let cardSpace: CGFloat = 40
     static let cardHeight: CGFloat = 160
     static let cardContentSpace: CGFloat = 16
   }
   
   private func autoLayout() {
-    
-    [cardView, titleLabel, pointLabel, subLabel, imageView, button, collectionView].forEach { self.addSubview($0) }
+    [cardView, titleLabel, pointLabel, subLabel].forEach { self.addSubview($0) }
     
     cardView.snp.makeConstraints {
       $0.top.leading.equalTo(self).offset(Standard.cardSpace)
-      $0.trailing.equalTo(self).offset(-Standard.cardSpace)
+      $0.trailing.bottom.equalTo(self).offset(-Standard.cardSpace)
       $0.height.equalTo(Standard.cardHeight)
     }
     
@@ -114,11 +93,5 @@ class PointView: UIView {
       $0.leading.equalTo(cardView).offset(Standard.cardContentSpace)
       $0.bottom.equalTo(cardView).offset(-Standard.cardContentSpace)
     }
-    
-    imageView.translatesAutoresizingMaskIntoConstraints = false
-    imageView.topAnchor.constraint(equalTo: cardView.bottomAnchor, constant: Standard.ySpace).isActive = true
-    
-    collectionView.translatesAutoresizingMaskIntoConstraints = false
-    
   }
 }
