@@ -13,8 +13,6 @@ class SettingViewController: UIViewController {
   private let tableView = UITableView()
   
   var requestIncidentDatas: [IncidentData] = []
-  //  private var requestList = [String]()  // 의뢰 목록
-  //  private var helpList = [String]()   // 도움 목록
   
   private let inDocument = ["의뢰", "도움", "공지사항", "이용약관", "내 정보"]
   private let outDocument = ["공지사항", "이용약관"]
