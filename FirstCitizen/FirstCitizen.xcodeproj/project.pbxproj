@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F870000233EF8AA0094CCD0 /* PointCouponCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87FFFF233EF8AA0094CCD0 /* PointCouponCell.swift */; };
 		4F87FFCF232896D20094CCD0 /* SettingGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87FFCE232896D20094CCD0 /* SettingGuideView.swift */; };
 		4F87FFDD2337886F0094CCD0 /* SettingDocumentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87FFDC2337886F0094CCD0 /* SettingDocumentCell.swift */; };
 		4F87FFDF2338CD9E0094CCD0 /* SettingRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87FFDE2338CD9E0094CCD0 /* SettingRequestViewController.swift */; };
@@ -18,6 +19,8 @@
 		4F87FFF5233B8BC10094CCD0 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87FFF4233B8BC10094CCD0 /* LoginVC.swift */; };
 		4F87FFF7233B8C220094CCD0 /* TextAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87FFF6233B8C220094CCD0 /* TextAddView.swift */; };
 		4F87FFF9233B914A0094CCD0 /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87FFF8233B914A0094CCD0 /* SignupVC.swift */; };
+		4F87FFFC233EF4F40094CCD0 /* PointCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87FFFB233EF4F40094CCD0 /* PointCardCell.swift */; };
+		4F87FFFE233EF6BC0094CCD0 /* PointStampCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87FFFD233EF6BC0094CCD0 /* PointStampCell.swift */; };
 		4FF9669C230C032600E869FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF9669B230C032600E869FF /* AppDelegate.swift */; };
 		4FF966A1230C032600E869FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FF9669F230C032600E869FF /* Main.storyboard */; };
 		4FF966A6230C032700E869FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FF966A4230C032700E869FF /* LaunchScreen.storyboard */; };
@@ -91,6 +94,9 @@
 		4F87FFF4233B8BC10094CCD0 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		4F87FFF6233B8C220094CCD0 /* TextAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAddView.swift; sourceTree = "<group>"; };
 		4F87FFF8233B914A0094CCD0 /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
+		4F87FFFB233EF4F40094CCD0 /* PointCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointCardCell.swift; sourceTree = "<group>"; };
+		4F87FFFD233EF6BC0094CCD0 /* PointStampCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointStampCell.swift; sourceTree = "<group>"; };
+		4F87FFFF233EF8AA0094CCD0 /* PointCouponCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointCouponCell.swift; sourceTree = "<group>"; };
 		4FF96698230C032600E869FF /* FirstCitizen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirstCitizen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FF9669B230C032600E869FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4FF966A0230C032600E869FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -179,6 +185,16 @@
 				4F87FFF2233B380F0094CCD0 /* RequestCreatePoliceStationCell.swift */,
 			);
 			path = Setting;
+			sourceTree = "<group>";
+		};
+		4F87FFFA233EF4BE0094CCD0 /* Point */ = {
+			isa = PBXGroup;
+			children = (
+				4F87FFFB233EF4F40094CCD0 /* PointCardCell.swift */,
+				4F87FFFD233EF6BC0094CCD0 /* PointStampCell.swift */,
+				4F87FFFF233EF8AA0094CCD0 /* PointCouponCell.swift */,
+			);
+			path = Point;
 			sourceTree = "<group>";
 		};
 		4FF9668F230C032600E869FF = {
@@ -297,6 +313,7 @@
 		4FF966D1230C700C00E869FF /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				4F87FFFA233EF4BE0094CCD0 /* Point */,
 				CF5468662334DD1C00F75DDB /* MapList */,
 				CF1E09D623275F1D006E9537 /* Incident */,
 				4FF966D5230C706C00E869FF /* Setting */,
@@ -572,6 +589,7 @@
 				4F87FFE32339C6D60094CCD0 /* RestroomCreateViewController.swift in Sources */,
 				CFF55C26233CE43F00FEF380 /* RequestDetailHelpCell.swift in Sources */,
 				4F87FFF3233B380F0094CCD0 /* RequestCreatePoliceStationCell.swift in Sources */,
+				4F870000233EF8AA0094CCD0 /* PointCouponCell.swift in Sources */,
 				CF6879AB233B210000F2A159 /* AttatchedFileCell.swift in Sources */,
 				4FF966B4230C07E300E869FF /* PointViewController.swift in Sources */,
 				4F87FFDF2338CD9E0094CCD0 /* SettingRequestViewController.swift in Sources */,
@@ -616,6 +634,7 @@
 				CF5E7EE42337DC010069235C /* ExtensionAlertController.swift in Sources */,
 				5212408A233B9599002C99AD /* LocationWithMap.swift in Sources */,
 				CF68799C233B1F4100F2A159 /* CategoryData.swift in Sources */,
+				4F87FFFC233EF4F40094CCD0 /* PointCardCell.swift in Sources */,
 				4FF966D4230C706800E869FF /* SettingProfileCell.swift in Sources */,
 				4F87FFE9233AF5C60094CCD0 /* RequestCreateAddressCell.swift in Sources */,
 				CF5467D1233349BC00F75DDB /* ReportViewController.swift in Sources */,
@@ -627,6 +646,7 @@
 				CF0CF51D2313C635004DF6A5 /* PreparedView.swift in Sources */,
 				CF0CF51423139137004DF6A5 /* LoginView.swift in Sources */,
 				CF5E7EED233863A80069235C /* ExtensionCGFloat.swift in Sources */,
+				4F87FFFE233EF6BC0094CCD0 /* PointStampCell.swift in Sources */,
 				4FF966BA230C07F900E869FF /* SettingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

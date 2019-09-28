@@ -15,7 +15,21 @@ class PointView: UIView {
   private let gradient = CAGradientLayer()
   
   private let titleLabel = UILabel()
+  private let pointLabel = UILabel()
   private let subLabel = UILabel()
+  
+  private let imageView = UIImageView()
+  let button = UIButton()
+  
+  let collectionView: UICollectionView = {
+    let layout = UICollectionViewFlowLayout()
+    layout.scrollDirection = .horizontal
+    
+    let temp = UICollectionView(frame: .zero, collectionViewLayout: layout)
+    temp.contentInset = UIEdgeInsets(top: 24, left: 24, bottom: 24, right: 24)
+    
+    return temp
+  }()
 
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -55,15 +69,23 @@ class PointView: UIView {
     titleLabel.upsFontHeavy(ofSize: 25)
 //    self.addSubview(titleLabel)
     
+    pointLabel.text = "1750"
+    pointLabel.textColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
+    pointLabel.upsFontHeavy(ofSize: 30)
+    
+    
     subLabel.text = "kira1021@gmail.com"
-    subLabel.textColor = .white
+    subLabel.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
 //    self.addSubview(subLabel)
     
-    
+    imageView.image = #imageLiteral(resourceName: "stamp")
+    imageView.contentMode = .scaleAspectFit
   }
   
   private struct Standard {
     static let space: CGFloat = 8
+    static let xSpace: CGFloat = 40
+    static let ySpace: CGFloat = 32
     
     static let cardSpace: CGFloat = 40
     static let cardHeight: CGFloat = 160
@@ -72,7 +94,7 @@ class PointView: UIView {
   
   private func autoLayout() {
     
-    [cardView, titleLabel, subLabel].forEach { self.addSubview($0) }
+    [cardView, titleLabel, pointLabel, subLabel, imageView, button, collectionView].forEach { self.addSubview($0) }
     
     cardView.snp.makeConstraints {
       $0.top.leading.equalTo(self).offset(Standard.cardSpace)
@@ -84,23 +106,19 @@ class PointView: UIView {
       $0.top.leading.equalTo(cardView).offset(Standard.cardContentSpace)
     }
     
+    pointLabel.translatesAutoresizingMaskIntoConstraints = false
+    pointLabel.centerXAnchor.constraint(equalTo: cardView.centerXAnchor).isActive = true
+    pointLabel.centerYAnchor.constraint(equalTo: cardView.centerYAnchor).isActive = true
+    
     subLabel.snp.makeConstraints {
       $0.leading.equalTo(cardView).offset(Standard.cardContentSpace)
       $0.bottom.equalTo(cardView).offset(-Standard.cardContentSpace)
     }
     
-//    cardView.translatesAutoresizingMaskIntoConstraints = false
-//    cardView.topAnchor.constraint(equalTo: self.topAnchor, constant: Standard.cardSpace).isActive = true
-//    cardView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Standard.cardSpace).isActive = true
-//    cardView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -Standard.cardSpace).isActive = true
-//    cardView.heightAnchor.constraint(equalToConstant: Standard.cardHeight).isActive = true
-//    
-//    titleLabel.translatesAutoresizingMaskIntoConstraints = false
-//    titleLabel.topAnchor.constraint(equalTo: cardView.topAnchor, constant: Standard.cardContentSpace).isActive = true
-//    titleLabel.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: Standard.cardContentSpace).isActive = true
-//    
-//    subLabel.translatesAutoresizingMaskIntoConstraints = false
-//    subLabel.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: Standard.cardContentSpace).isActive = true
-//    subLabel.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -Standard.cardContentSpace).isActive = true
+    imageView.translatesAutoresizingMaskIntoConstraints = false
+    imageView.topAnchor.constraint(equalTo: cardView.bottomAnchor, constant: Standard.ySpace).isActive = true
+    
+    collectionView.translatesAutoresizingMaskIntoConstraints = false
+    
   }
 }
