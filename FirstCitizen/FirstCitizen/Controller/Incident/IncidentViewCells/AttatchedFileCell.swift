@@ -35,6 +35,7 @@ class AttatchedFileCell: UITableViewCell {
   
   func modifyProperties(imagesStr: [String]) {
     pictureDatas = imagesStr
+    pictureCollectionView.reloadData()
   }
   
   private func attribute() {
@@ -90,12 +91,22 @@ class AttatchedFileCell: UITableViewCell {
 
 extension AttatchedFileCell: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return pictureDatas.count
+    if pictureDatas.count == 0 {
+      return 1
+    } else {
+      return pictureDatas.count
+    }
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IncidentCell.identifier, for: indexPath) as! IncidentCell
-    cell.incidentCellConfigure(imageStr: pictureDatas[indexPath.row])
+    
+    if pictureDatas.count == 0 {
+      cell.incidentCellConfigure(isNoPicture: true, imageStr: nil)
+    } else {
+      cell.incidentCellConfigure(isNoPicture: false, imageStr: pictureDatas[indexPath.row])
+    }
     return cell
   }
 }

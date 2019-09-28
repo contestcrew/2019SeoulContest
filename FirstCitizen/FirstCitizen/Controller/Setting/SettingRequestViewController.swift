@@ -130,7 +130,6 @@ extension SettingRequestViewController: UITableViewDelegate {
       // 기록
     default:
       let requestDetailVC = RequestDetailViewController()
-      print("[Log3] :", requestIncidentDatas[indexPath.row + 1].createdAt ?? "")
       NetworkService.getRequestHelpData(requestID: requestIncidentDatas[indexPath.row - 1].id) { [weak self] result in
         switch result {
         case .success(let data):
