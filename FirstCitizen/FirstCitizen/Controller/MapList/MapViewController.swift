@@ -29,7 +29,10 @@ class MapViewController: UIViewController {
     
     attribute()
     extractCategory()
+    
+    
     displayDatasInMap()
+    
     
   }
   
@@ -105,36 +108,37 @@ class MapViewController: UIViewController {
     let lat = data.latitude
     let lng = data.longitude
     
-    let marker = NMFMarker(position: NMGLatLng(lat: lat, lng: lng), iconImage: NMFOverlayImage(image: img))
-    marker.isForceShowIcon = true
-    
-    // NMFOverlayTouchHandler를 설정함 (Pin Touch 이벤트를 작성)
-    let handler: NMFOverlayTouchHandler = { [weak self] overlay in
-      
-      // 핀을 누른 위치로 카메라를 이동
-      let cameraUpdate = NMFCameraUpdate(scrollTo: marker.position)
-      cameraUpdate.animation = .easeIn
-      self?.vMap.nMapView.mapView.moveCamera(cameraUpdate)
-      let categoryImg = self!.categoryShared.categoryData[data.category - 1].image
-      self?.vMap.changePreviewContainer(data, categoryImg)
-      self?.selectedIncidentData = data
-      return true
-    }
-    
-    marker.captionPerspectiveEnabled = true
-    marker.iconPerspectiveEnabled = true
-    marker.isHideCollidedSymbols = true
-    marker.touchHandler = handler
-    marker.userInfo = ["tag": tag]
-    
-    let markerWidth: CGFloat = 40
-    let markerHeight: CGFloat = 50
-    marker.width = markerWidth.dynamic(1)
-    marker.height = markerHeight.dynamic(1)
-    
     DispatchQueue.main.async {
+      let marker = NMFMarker(position: NMGLatLng(lat: lat, lng: lng), iconImage: NMFOverlayImage(image: img))
+      marker.isForceShowIcon = true
+      
+      // NMFOverlayTouchHandler를 설정함 (Pin Touch 이벤트를 작성)
+      let handler: NMFOverlayTouchHandler = { [weak self] overlay in
+        // 핀을 누른 위치로 카메라를 이동
+        let cameraUpdate = NMFCameraUpdate(scrollTo: marker.position)
+        cameraUpdate.animation = .easeIn
+        self?.vMap.nMapView.mapView.moveCamera(cameraUpdate)
+        let categoryImg = self!.categoryShared.categoryData[data.category - 1].image
+        self?.vMap.changePreviewContainer(data, categoryImg)
+        self?.selectedIncidentData = data
+        return true
+      }
+      
+      marker.captionPerspectiveEnabled = true
+      marker.iconPerspectiveEnabled = true
+      marker.isHideCollidedSymbols = true
+      marker.touchHandler = handler
+      marker.userInfo = ["tag": tag]
+      
+      let markerWidth: CGFloat = 40
+      let markerHeight: CGFloat = 50
+      marker.width = markerWidth.dynamic(1)
+      marker.height = markerHeight.dynamic(1)
+      
       marker.mapView = self.vMap.nMapView.mapView
     }
+    
+    
   }
   
   private func getCategoryList() {
