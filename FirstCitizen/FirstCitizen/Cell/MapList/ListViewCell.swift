@@ -55,7 +55,6 @@ class ListViewCell: UITableViewCell {
   
   private func attribute() {
     iconImage.contentMode = .scaleAspectFit
-    iconImage.image = #imageLiteral(resourceName: "Restroom")
     
     titleLabel.text = "굳어가고 있어요 헬프미"
     titleLabel.dynamicFont(fontSize: 26, weight: .heavy)
