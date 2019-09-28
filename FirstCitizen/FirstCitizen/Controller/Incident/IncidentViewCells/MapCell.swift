@@ -35,8 +35,16 @@ class MapCell: UITableViewCell {
       guard let data = data else { return }
       let iconImg = UIImage(data: data)
       let marker = NMFMarker(position: NMGLatLng(lat: latitude, lng: longitude), iconImage: NMFOverlayImage(image: iconImg!))
+      let markerWidth: CGFloat = 40
+      let markerHeight: CGFloat = 50
+      marker.width = markerWidth.dynamic(1)
+      marker.height = markerHeight.dynamic(1)
+      
       DispatchQueue.main.async {
         marker.mapView = self.nmapView
+        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: latitude, lng: longitude))
+        cameraUpdate.animation = .easeIn
+        self.nmapView.moveCamera(cameraUpdate)
       }
     }
     
@@ -46,6 +54,8 @@ class MapCell: UITableViewCell {
   private func attribute() {
     gradientView.image = UIImage(named: "Gradient")
     gradientView.contentMode = .scaleToFill
+    
+    nmapView.minZoomLevel = 15
   }
   
   private func layout() {
