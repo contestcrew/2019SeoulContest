@@ -19,6 +19,38 @@ class NetworkService {
     "Authorization": "Token 9e3838aef1806fbe4b6d1edd80f28914148559af"
   ]
   
+  static func report(completion: @escaping (Bool) -> ()) {
+    let data = """
+    {
+    "request": 1,
+    "author": 1,
+    "title": "test",
+    "content": "test",
+    "is_agreed_inform": true,
+    "helped_at": "2019-09-28T11:21:29.564Z",
+      "images": "[\(UIImage(named: "TestImg")?.jpegData(compressionQuality: 0.3)?.base64EncodedString())]"
+    }
+    """.data(using: .utf8)!
+    
+    let url = ApiUrl.ApiUrl(apiName: .incidentReportApi)
+    
+    print("origin data: ", data, UIImage(named: "TestImg")?.jpegData(compressionQuality: 0.3)?.base64EncodedString())
+    
+    Alamofire.upload(data,
+                     to: url,
+                     method: .post,
+                     headers: header)
+      .response { (res) in
+        switch res.response?.statusCode {
+        case 201:
+          completion(true)
+          print("res.Data", res.data)
+        default:
+          completion(false)
+        }
+    }
+  }
+  
   static func getCategoryList(completion: @escaping (Result<[CategoryData]>) -> ()) {
     
     let urlStr = ApiUrl.ApiUrl(apiName: .categoryApi)
