@@ -39,9 +39,11 @@ class RestroomCreateViewController: UIViewController {
     navigationController?.navigationBar.barTintColor = .white
     
     let barButton = UIBarButtonItem(title: "의 뢰", style: .done, target: self, action: #selector(barButtonAction))
+    barButton.tintColor = .blue
     navigationItem.rightBarButtonItem = barButton
     
     let backButton = UIBarButtonItem(image: UIImage(named: "navi-arrow-24x24"), style: .done, target: self, action: #selector(touchUpBackButton))
+    backButton.tintColor = .blue
     navigationItem.leftBarButtonItem = backButton
   }
   
@@ -221,6 +223,9 @@ extension RestroomCreateViewController: UITableViewDelegate {
       // did tap address
     case 3:
       ()
+      let vc = LocationWithAddVC()
+      navigationController?.pushViewController(vc, animated: true)
+
       
     default:
       break
