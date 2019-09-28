@@ -6,7 +6,7 @@
 //  Copyright © 2019 Kira. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension UIImage {
   // 아직 사용할 예정 아님

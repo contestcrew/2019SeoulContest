@@ -109,7 +109,7 @@ class NetworkService {
     let req = Alamofire.request(url, method: .get, parameters: parameters, encoding: URLEncoding.default, headers: header)
     
     req.validate()
-      .responseData(queue: DispatchQueue.global()) { response in
+      .responseData { response in
         switch response.result {
         case .success(let data):
           guard let result = try? JSONDecoder().decode([ReportData].self, from: data) else {

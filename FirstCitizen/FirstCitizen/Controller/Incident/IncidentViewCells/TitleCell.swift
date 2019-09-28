@@ -27,8 +27,6 @@ class TitleCell: UITableViewCell {
     titleLabel.text = title
     let iconURL = URL(string: iconImageStr)!
     self.iconImageView.kf.setImage(with: iconURL)
-    
-    self.layoutIfNeeded()
   }
   
   private func attribute() {
@@ -37,7 +35,6 @@ class TitleCell: UITableViewCell {
     titleLabel.dynamicFont(fontSize: 28, weight: .bold)
     
     iconImageView.contentMode = .scaleAspectFit
-    iconImageView.image = #imageLiteral(resourceName: "Crash")
     
     titleUnderLineLabel.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
   }
