@@ -60,14 +60,12 @@ class NetworkService {
     }
   }
   
-<<<<<<< HEAD
-  static func getSettingRequestData(completion: @escaping (Result<[DetailIncidentData]>) -> ()) {
-=======
+  
   static func getSettingRequestData(completion: @escaping (Result<[IncidentData]>) -> ()) {
->>>>>>> c2eb28d335d86f201c15803bf29ec1834dbb5975
     
-//    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
-//    print("[Log8] :", token)
+    
+    //    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
+    //    print("[Log8] :", token)
     
     let headers: HTTPHeaders = [
       "Content-Type": "application/json",
@@ -98,7 +96,7 @@ class NetworkService {
   
   static func getRequestHelpData(requestID: Int, completion: @escaping (Result<[ReportData]>) -> ()) {
     
-//    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
+    //    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
     
     let header: HTTPHeaders = [
       "Content-Type": "application/json",
@@ -128,40 +126,40 @@ class NetworkService {
         }
     }
   }
-
+  
   static func createRequest(data: RequestData, completion: @escaping (Bool) -> ()) {
     
     var bodyData: Data
     if data.police == 0 {
-    bodyData = """
-      {
-      "category": "\(data.category)",
-      "police_office": "",
-      "title": "\(data.title)",
-      "content": "\(data.content)",
-      "score": "\(data.score)",
-      "main_address": "\(data.mainAdd)",
-      "detail_address": "\(data.detailAdd)",
-      "latitude": "\(data.lat)",
-      "longitude": "\(data.lng)",
-      "occurred_at": "\(data.time)"
-      }
-      """.data(using: .utf8)!
+      bodyData = """
+        {
+        "category": "\(data.category)",
+        "police_office": "",
+        "title": "\(data.title)",
+        "content": "\(data.content)",
+        "score": "\(data.score)",
+        "main_address": "\(data.mainAdd)",
+        "detail_address": "\(data.detailAdd)",
+        "latitude": "\(data.lat)",
+        "longitude": "\(data.lng)",
+        "occurred_at": "\(data.time)"
+        }
+        """.data(using: .utf8)!
     } else {
       bodyData = """
-      {
-      "category": "\(data.category)",
-      "police_office": "\(data.police)",
-      "title": "\(data.title)",
-      "content": "\(data.content)",
-      "score": "\(data.score)",
-      "main_address": "\(data.mainAdd)",
-      "detail_address": "\(data.detailAdd)",
-      "latitude": "\(data.lat)",
-      "longitude": "\(data.lng)",
-      "occurred_at": "\(data.time)"
-      }
-      """.data(using: .utf8)!
+        {
+        "category": "\(data.category)",
+        "police_office": "\(data.police)",
+        "title": "\(data.title)",
+        "content": "\(data.content)",
+        "score": "\(data.score)",
+        "main_address": "\(data.mainAdd)",
+        "detail_address": "\(data.detailAdd)",
+        "latitude": "\(data.lat)",
+        "longitude": "\(data.lng)",
+        "occurred_at": "\(data.time)"
+        }
+        """.data(using: .utf8)!
     }
     
     Alamofire.upload(bodyData,
