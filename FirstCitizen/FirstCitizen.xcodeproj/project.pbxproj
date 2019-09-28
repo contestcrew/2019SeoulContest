@@ -42,6 +42,7 @@
 		527E38F62332958700C01EC7 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E38F52332958700C01EC7 /* TestData.swift */; };
 		52EA1ABD233E8E0900244D29 /* RequestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EA1ABC233E8E0900244D29 /* RequestData.swift */; };
 		6B36858508F29EBE5EFE4F77 /* Pods_FirstCitizen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50CCF6F72520B16B5901678A /* Pods_FirstCitizen.framework */; };
+		C173D172233F4E4400C6F448 /* LocationWithAddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C173D171233F4E4400C6F448 /* LocationWithAddVC.swift */; };
 		CF1E09D323275860006E9537 /* IncidentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1E09D223275860006E9537 /* IncidentViewController.swift */; };
 		CF1E09D523275891006E9537 /* IncidentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1E09D423275891006E9537 /* IncidentView.swift */; };
 		CF1E09D823275F33006E9537 /* IncidentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1E09D723275F33006E9537 /* IncidentCell.swift */; };
@@ -114,6 +115,7 @@
 		52EA1ABC233E8E0900244D29 /* RequestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestData.swift; sourceTree = "<group>"; };
 		80EA8319B751197666F7ABE9 /* Pods-FirstCitizen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstCitizen.release.xcconfig"; path = "Target Support Files/Pods-FirstCitizen/Pods-FirstCitizen.release.xcconfig"; sourceTree = "<group>"; };
 		A49A9086C3D192F57DEDDDD6 /* Pods-FirstCitizen.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstCitizen.debug.xcconfig"; path = "Target Support Files/Pods-FirstCitizen/Pods-FirstCitizen.debug.xcconfig"; sourceTree = "<group>"; };
+		C173D171233F4E4400C6F448 /* LocationWithAddVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationWithAddVC.swift; sourceTree = "<group>"; };
 		CF1E09D223275860006E9537 /* IncidentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncidentViewController.swift; sourceTree = "<group>"; };
 		CF1E09D423275891006E9537 /* IncidentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncidentView.swift; sourceTree = "<group>"; };
 		CF1E09D723275F33006E9537 /* IncidentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncidentCell.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 				4F87FFE22339C6D60094CCD0 /* RestroomCreateViewController.swift */,
 				4F87FFF0233B190E0094CCD0 /* RequestCreateViewController.swift */,
 				52124089233B9599002C99AD /* LocationWithMap.swift */,
+				C173D171233F4E4400C6F448 /* LocationWithAddVC.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -602,6 +605,7 @@
 				CF68799C233B1F4100F2A159 /* CategoryData.swift in Sources */,
 				4F87FFFC233EF4F40094CCD0 /* PointCardCell.swift in Sources */,
 				4FF966D4230C706800E869FF /* SettingProfileCell.swift in Sources */,
+				C173D172233F4E4400C6F448 /* LocationWithAddVC.swift in Sources */,
 				4F87FFE9233AF5C60094CCD0 /* RequestCreateAddressCell.swift in Sources */,
 				CF5467D1233349BC00F75DDB /* ReportViewController.swift in Sources */,
 				CFC1731C233EF0A00053872B /* TestIncidentData.swift in Sources */,
@@ -759,7 +763,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = KNHX5B578D;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -811,7 +815,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = KNHX5B578D;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

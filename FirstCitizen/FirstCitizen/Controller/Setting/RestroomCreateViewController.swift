@@ -220,7 +220,9 @@ extension RestroomCreateViewController: UITableViewDelegate {
       
       // did tap address
     case 3:
-      ()
+      let vc = LocationWithAddVC()
+      navigationController?.pushViewController(vc, animated: true)
+      
       
     default:
       break
