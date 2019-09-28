@@ -65,7 +65,6 @@ class LocationWithMap: UIViewController {
     checkAuthorizationStatus()
     nMapConfigure()
     setupLayout()
-    
   }
   
   @objc func didTapInsertBtn(_ sender: UIButton) {
