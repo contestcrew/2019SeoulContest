@@ -102,7 +102,11 @@ class RestroomCreateViewController: UIViewController {
     NetworkService.createRequest(data: requestData) {
       if $0 {
         DispatchQueue.main.async {
-          self.dismiss(animated: true)
+          if let navi = self.navigationController {
+            navi.popViewController(animated: true)
+          } else {
+            self.dismiss(animated: true)
+          }
         }
       }
       print($0)

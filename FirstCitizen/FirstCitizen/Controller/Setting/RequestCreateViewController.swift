@@ -147,7 +147,11 @@ class RequestCreateViewController: UIViewController {
     NetworkService.createRequestWithImage(data: requestData, images: imageArr) {
       if $0 {
         DispatchQueue.main.async {
-          self.dismiss(animated: true)
+          if let navi = self.navigationController {
+            navi.popViewController(animated: true)
+          } else {
+            self.dismiss(animated: true)
+          }
         }
       }
       print($0)
