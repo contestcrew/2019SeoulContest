@@ -212,7 +212,6 @@ class LocationWithMap: UIViewController {
 extension LocationWithMap: NMFMapViewDelegate {
   func mapViewIdle(_ mapView: NMFMapView) {
     // 지도 탭 이벤트가 끝났을때 호출
-//    replaceCenterIcon(location: mapView.cameraPosition.target)
     lastLocation = mapView.cameraPosition.target
     pointToAdd(location: mapView.cameraPosition.target) { add in
       print(mapView.cameraPosition.target)

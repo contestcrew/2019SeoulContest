@@ -21,6 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //    window?.rootViewController = UINavigationController(rootViewController: LoginVC())
     window?.makeKeyAndVisible()
     
+//    NetworkService.report {
+//      print($0)
+//    }
+    
     return true
   }
 }
