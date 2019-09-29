@@ -79,17 +79,15 @@ class MainTabBarController: UITabBarController {
   }
   
   @objc private func settingDidTap(_ sender: UIButton) {
-    NetworkService.getSettingRequestData { [weak self] result in
+    NetworkService.getUserInfo { [weak self] result in
       switch result {
       case .success(let data):
-        
-        self!.settingVC.requestIncidentDatas = data
-        self!.selectedViewController = self?.vcSetting
+        self?.settingVC.userInfo = data
+        self?.selectedViewController = self?.vcSetting
       case .failure(let err):
         print(err.localizedDescription)
       }
     }
-    
   }
   
   private struct Standard {

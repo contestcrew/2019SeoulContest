@@ -37,12 +37,9 @@ class IncidentViewController: UIViewController {
   
   private func layout() {
     self.view.addSubview(incidentView)
-    
-    let safeAreaTopInset = self.view.safeAreaInsets.top
-    
+
     incidentView.snp.makeConstraints {
-      $0.top.equalToSuperview().offset(-safeAreaTopInset)
-      $0.leading.trailing.bottom.equalToSuperview()
+      $0.top.leading.trailing.bottom.equalToSuperview()
     }
   }
 }

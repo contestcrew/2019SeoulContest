@@ -11,6 +11,7 @@ import Foundation
 private let baseURL = "http://eb-seoulcontest-deploy-master.ap-northeast-2.elasticbeanstalk.com"
 
 enum FirstCitizenApi {
+  case userInfoApi
   case categoryApi
   case homeIncidentApi
   case incidentRequestApi
@@ -21,6 +22,9 @@ enum FirstCitizenApi {
 class ApiUrl {
   static func ApiUrl(apiName: FirstCitizenApi) -> String {
     switch apiName {
+    case .userInfoApi:
+      let userInfoURL: String = "\(baseURL)/account/"
+      return userInfoURL
     case .categoryApi:
       let categoryURL: String = "\(baseURL)/request/category/"
       return categoryURL
