@@ -20,6 +20,12 @@ class PointViewController: UIViewController {
     autoLayout()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    tableView.reloadData()
+  }
+  
   private func configure() {
     view.backgroundColor = .white
     
@@ -77,7 +83,8 @@ extension PointViewController: UITableViewDataSource {
     switch indexPath.section {
     case 0:
       let cell = PointCardCell()
-      
+      let userShared = UserInfoManager.shared
+      cell.cellModify(point: userShared.userInfo!.citizenScore ,nickname: userShared.userInfo!.username)
       return cell
       
     case 1:

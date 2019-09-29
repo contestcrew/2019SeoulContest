@@ -167,6 +167,7 @@ extension SettingViewController: UITableViewDelegate {
         
       default:
         UserDefaults.standard.removeObject(forKey: "Token")
+        UserDefaults.standard.removeObject(forKey: "userID")
         isSign = false
         tableView.reloadData()
       }

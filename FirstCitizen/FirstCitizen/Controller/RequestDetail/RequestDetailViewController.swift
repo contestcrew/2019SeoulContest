@@ -16,7 +16,6 @@ class RequestDetailViewController: UIViewController {
   var testShared = IncidentDataManager.shared
   
   var requestDetailData: IncidentData?
-  var reportDatas: [ReportData]?
   
   private var requestDetailView = RequestDetailView()
   
@@ -25,7 +24,6 @@ class RequestDetailViewController: UIViewController {
     super.viewDidLoad()
     
     requestDetailView.detailRequestIncidentData = requestDetailData
-    
     attribute()
     layout()
   }

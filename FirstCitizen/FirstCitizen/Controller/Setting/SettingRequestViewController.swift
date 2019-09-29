@@ -135,7 +135,9 @@ extension SettingRequestViewController: UITableViewDelegate {
         case .success(let data):
           requestDetailVC.category = (self?.categoryList[((self?.requestIncidentDatas[indexPath.row - 1])?.category)! - 1])!
           requestDetailVC.requestDetailData = self?.requestIncidentDatas[indexPath.row - 1]
-          requestDetailVC.reportDatas = data
+          let reportShared = ReportDataManager.shared
+          reportShared.reportDatas = data
+          reportShared.reportCategory = (self?.categoryList[((self?.requestIncidentDatas[indexPath.row - 1])?.category)! - 1])!
           self?.present(requestDetailVC, animated: true, completion: nil)
         case .failure(let err):
           print(err.localizedDescription)
