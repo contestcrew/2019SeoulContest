@@ -8,6 +8,7 @@
 
 import UIKit
 import NMapsMap
+import TLPhotoPicker
 
 class RequestCreateViewController: UIViewController {
   
@@ -16,7 +17,8 @@ class RequestCreateViewController: UIViewController {
   var cell1 = RequestCreatePoliceStationCell()
   var cell7 = RequestCreateTextAddCell()
   var cell9 = RequestCreateTextAddCell()
-  
+  var cell10 = ImagePickerCell()
+
   var mainAdd = ""
   var detailAdd = ""
   var shortAdd = "현재 위치"
@@ -25,6 +27,18 @@ class RequestCreateViewController: UIViewController {
   var category = 1
   
   var police = 0
+  
+  var imageArr = [UIImage]()
+  
+  var selectedAssets = [TLPHAsset]() {
+    willSet(new) {
+      imageArr = []
+      new.forEach {
+        imageArr.append($0.fullResolutionImage ?? UIImage())
+      }
+      cell10.imageArr = imageArr
+    }
+  }
   
   private let policeStation = [
     "없음",
@@ -167,7 +181,7 @@ class RequestCreateViewController: UIViewController {
 
 extension RequestCreateViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 10
+    return 11
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -256,6 +270,11 @@ extension RequestCreateViewController: UITableViewDataSource {
       
       return cell
       
+    case 10:
+      let cell = cell10
+      cell.delegate = self
+//      cell.imageArr = self.imageArr
+      return cell
     default:
       return UITableViewCell()
     }
@@ -310,6 +329,7 @@ extension RequestCreateViewController: UITableViewDelegate {
       break
     }
   }
+  
 }
 
 extension RequestCreateViewController: LocationWithMapDelegate {
@@ -322,4 +342,25 @@ extension RequestCreateViewController: LocationWithMapDelegate {
   }
   
   
+}
+
+extension RequestCreateViewController: ImagePickerCellDelegate {
+  func didTapImageAddBtn() {
+    print("didTapImageAddBtn")
+    let picker = TLPhotosPickerViewController()
+    picker.delegate = self
+    self.present(picker, animated: true)
+  }
+  
+  func tableviewReload() {
+    self.tableView.reloadData()
+  }
+  
+   
+}
+
+extension RequestCreateViewController: TLPhotosPickerViewControllerDelegate {
+  func dismissPhotoPicker(withTLPHAssets: [TLPHAsset]) {
+    self.selectedAssets = withTLPHAssets
+  }
 }
