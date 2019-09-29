@@ -38,7 +38,6 @@ class MapViewController: UIViewController {
     super.viewDidLayoutSubviews()
     
     layout()
-    vMap.layoutIfNeeded()
   }
   
   // MARK:- Methods
@@ -136,6 +135,8 @@ class MapViewController: UIViewController {
         marker.iconPerspectiveEnabled = true
         marker.isHideCollidedSymbols = true
         marker.touchHandler = handler
+        marker.isForceShowIcon = true
+        marker.tag = UInt(tag)
         marker.userInfo = ["tag": tag]
         tag += 1
         
@@ -205,6 +206,8 @@ extension MapViewController: MapViewDelegate {
     DispatchQueue.main.async {
       self.getCategoryList()
       self.getIncidentDatas(lat: coordinate.latitude, lng: coordinate.longitude)
+      self.extractCategory()
+      self.showMarkers()
       self.touchUpLocationButton(coordinate: coordinate)
       self.view.layoutIfNeeded()
     }
