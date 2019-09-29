@@ -133,6 +133,7 @@ extension SettingRequestViewController: UITableViewDelegate {
       NetworkService.getRequestHelpData(requestID: requestIncidentDatas[indexPath.row - 1].id) { [weak self] result in
         switch result {
         case .success(let data):
+          requestDetailVC.category = (self?.categoryList[((self?.requestIncidentDatas[indexPath.row - 1])?.category)! - 1])!
           requestDetailVC.requestDetailData = self?.requestIncidentDatas[indexPath.row - 1]
           requestDetailVC.reportDatas = data
           self?.present(requestDetailVC, animated: true, completion: nil)
