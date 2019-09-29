@@ -70,11 +70,11 @@ class MainTabBarController: UITabBarController {
   @objc private func mapListDidTap(_ sender: UIButton) {
     switch isPosition {
     case true:
-      MainTabBarController.vTabBarButton.mapListButton.setImage(UIImage(named: "TabBarMap"), for: .normal)
+      MainTabBarController.vTabBarButton.mapListButton.setImage(UIImage(named: "TabBarList"), for: .normal)
       self.selectedViewController = vcList
       
     case false:
-      MainTabBarController.vTabBarButton.mapListButton.setImage(UIImage(named: "TabBarList"), for: .normal)
+      MainTabBarController.vTabBarButton.mapListButton.setImage(UIImage(named: "TabBarMap"), for: .normal)
       self.selectedViewController = vcMap
     }
     

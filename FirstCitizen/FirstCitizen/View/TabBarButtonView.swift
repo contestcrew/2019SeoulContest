@@ -37,7 +37,7 @@ class TabBarButtonView: UIView {
   private func configure() {
     pointButton.setImage(UIImage(named: "TabBarPoint"), for: .normal)
  
-    mapListButton.setImage(UIImage(named: "TabBarList"), for: .normal)
+    mapListButton.setImage(UIImage(named: "TabBarMap"), for: .normal)
     
     settingButton.setImage(UIImage(named: "TabBarSetting"), for: .normal)
   }
