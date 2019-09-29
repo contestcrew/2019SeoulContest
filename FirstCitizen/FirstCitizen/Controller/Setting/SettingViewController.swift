@@ -151,6 +151,7 @@ extension SettingViewController: UITableViewDelegate {
         break
         
       case 1:
+        // 의뢰
         NetworkService.getSettingRequestData { [weak self] result in
           switch result {
           case .success(let data):
@@ -179,9 +180,8 @@ extension SettingViewController: UITableViewDelegate {
         print(indexPath.row)
         
       default:
-        let loginVC = LoginVC()
-        let navigationController = UINavigationController(rootViewController: loginVC)
-        
+        // 로그인버튼
+        let navigationController = UINavigationController(rootViewController: LoginVC())
         self.present(navigationController, animated: true)
       }
     }

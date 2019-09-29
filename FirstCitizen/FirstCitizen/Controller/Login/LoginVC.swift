@@ -97,6 +97,9 @@ class LoginVC: UIViewController {
       return
     }
     
+    emailView.textField.resignFirstResponder()
+    passwordView.textField.resignFirstResponder()
+    
     let url = URL(string: "http://eb-seoulcontest-deploy-master.ap-northeast-2.elasticbeanstalk.com/account/get_token/")!
     
     var request = URLRequest(url: url)
@@ -139,6 +142,7 @@ class LoginVC: UIViewController {
             guard let ud = UserDefaults.standard.object(forKey: "Token") else { return }
             print("UserDefaults :", ud)
             
+            self.getUserInfo()
 //            self.navigationController?.popViewController(animated: true)
           }
           
@@ -157,6 +161,10 @@ class LoginVC: UIViewController {
       }
     }.resume()
     
+    
+  }
+  
+  private func getUserInfo() {
     NetworkService.getUserInfo { result in
       switch result {
       case .success(let data):

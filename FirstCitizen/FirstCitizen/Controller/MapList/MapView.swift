@@ -74,9 +74,7 @@ class MapView: UIView {
   // MARK:- Methods
   func changePreviewContainer(_ homeIncidentData: IncidentData, _ iconImg: UIImage) {
     titleLabel.text = homeIncidentData.title
-//    let iconURL: URL = URL(string: iconUrlStr)!
     imageView.image = iconImg
-//    imageView.kf.setImage(with: iconURL)
     
     guard let createdTime = homeIncidentData.createdAt else { return }
     let date = Date()
@@ -149,6 +147,7 @@ class MapView: UIView {
   }
   
   func attribute() {
+    self.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     gradientView.image = UIImage(named: "Gradient")
     gradientView.contentMode = .scaleToFill
     
