@@ -40,4 +40,21 @@ extension Date {
     
     return timeStamp
   }
+  
+  func convertOccurredDateFormatter(date: String) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"//this your string date format
+    dateFormatter.locale = Locale(identifier: "ko_KR")
+    let convertedDate = dateFormatter.date(from: date)
+    
+    guard dateFormatter.date(from: date) != nil else {
+      assert(false, "no date from string")
+      return ""
+    }
+    
+    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"///this is what you want to convert format
+    let timeStamp = dateFormatter.string(from: convertedDate!)
+    
+    return timeStamp
+  }
 }

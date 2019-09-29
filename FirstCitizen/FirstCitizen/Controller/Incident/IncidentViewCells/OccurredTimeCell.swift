@@ -24,7 +24,16 @@ class OccurredTimeCell: UITableViewCell {
   }
   
   func modifyProperties(_ occurredTime: String) {
-    occurredTimeText.text = occurredTime
+//    occurredTimeText.text = occurredTime
+    
+    let date = Date()
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+    let time = date.convertOccurredDateFormatter(date: occurredTime)
+    let dateTime = dateFormatter.date(from: time)
+    let daysBetweenDate = date.daysBetweenDate(toDate: dateTime!)
+    
+    occurredTimeText.text = daysBetweenDate
   }
   
   private func attribute() {

@@ -62,7 +62,7 @@ class NetworkService {
     let body = """
       {
       "request": "\(requestID)",
-      "helped_at": "\(nowTime())",
+      "helped_at": "\(nowTime())"
       }
       """.data(using: .utf8)
     
