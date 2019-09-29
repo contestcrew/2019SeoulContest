@@ -32,14 +32,13 @@ class MapViewController: UIViewController {
     guard let token = UserDefaults.standard.string(forKey: "Token") else { return }
     print("[Token] :", token)
     
-    
+    extractCategory()
     attribute()
   }
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     
-    extractCategory()
     showMarkers()
     layout()
   }
@@ -115,8 +114,8 @@ class MapViewController: UIViewController {
       
       homeIncidentDatas.forEach {
         let currentIncidentData = $0
-        let lat = $0.latitude
-        let lng = $0.longitude
+        let lat = $0.latitude ?? 0
+        let lng = $0.longitude ?? 0
         
         let marker = NMFMarker(position: NMGLatLng(lat: lat, lng: lng), iconImage: markersImgDic[$0.category]!)
         

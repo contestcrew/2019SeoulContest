@@ -10,7 +10,7 @@ import Foundation
 
 struct ReportData: Codable {
   let request: Int
-  let author: Int
+  let author: Author
   let title: String
   let content: String
   let isAgreedInform: Bool

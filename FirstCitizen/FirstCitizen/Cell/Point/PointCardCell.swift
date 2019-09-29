@@ -47,6 +47,11 @@ class PointCardCell: UITableViewCell {
     
   }
   
+  func cellModify(point: Int, nickname: String) {
+    pointLabel.text = "\(point)"
+    subLabel.text = nickname
+  }
+  
   private func configure() {
     self.selectionStyle = .none
     

@@ -18,65 +18,127 @@ class RequestDetailHelpCell: UITableViewCell {
   private let attachFileCountLabel = UILabel()
   
   private let acceptButton = UIButton()
+  private let denyButton = UIButton()
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     
-    
-  }
-  
-  override func layoutSubviews() {
-    super.layoutSubviews()
-    
+    let reportShared = ReportDataManager.shared
+    category = reportShared.reportCategory
     attribute()
     layout()
   }
   
-  private func attribute() {
-    nicknameLabel.text = "did**************"
-    nicknameLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    contentView.layer.borderColor = UIColor.appColor(.appLayerBorderColor).cgColor
+    contentView.layer.borderWidth = 2
+    contentView.layer.cornerRadius = 10
     
-    reliabilityLabel.text = "신뢰도 : 100"
-    reliabilityLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    reliabilityLabel.textAlignment = .center
-    
-    attachFileCountLabel.text = "첨부파일 : 0"
-    attachFileCountLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    attachFileCountLabel.textAlignment = .center
-    
-    if category == "Restroom" {
+    contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0))
+    contentView.layoutIfNeeded()
+  }
+  
+  @objc private func touchUpAcceptButton(_ sender: UIButton) {
+    if sender.titleLabel?.text == "수락" {
+      acceptButton.setTitle("완료", for: .normal)
+      acceptButton.setTitleColor(#colorLiteral(red: 0, green: 0.01932368055, blue: 1, alpha: 1), for: .normal)
+      denyButton.isHidden = false
+    } else {
       acceptButton.setTitle("수락", for: .normal)
       acceptButton.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
-      acceptButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
+      denyButton.isHidden = true
+    }
+    
+  }
+  
+  @objc private func touchUpDenyButton() {
+    
+  }
+  
+  @objc private func touchUpShowButton() {
+    
+  }
+  
+  func cellModify(reportData: ReportData) {
+    nicknameLabel.text = "\(reportData.author.nickname)"
+    //    reliabilityLabel.text = "신뢰도 : \(reportData.)"
+    
+    if category == "똥휴지" {
+      
+    } else {
+      attachFileCountLabel.text = "첨부파일 : \(reportData.images!.count)"
+    }
+  }
+  
+  private func attribute() {
+    nicknameLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    nicknameLabel.dynamicFont(fontSize: 18, weight: .medium)
+    nicknameLabel.textAlignment = .left
+    
+    reliabilityLabel.text = "신뢰도 : 100"
+    reliabilityLabel.dynamicFont(fontSize: 18, weight: .medium)
+    reliabilityLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    reliabilityLabel.textAlignment = .left
+    
+    attachFileCountLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    attachFileCountLabel.textAlignment = .center
+    attachFileCountLabel.dynamicFont(fontSize: 20, weight: .heavy)
+    
+    if category == "똥휴지" {
+      acceptButton.setTitle("수락", for: .normal)
+      acceptButton.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
+      acceptButton.titleLabel?.dynamicFont(fontSize: 20, weight: .heavy)
+      acceptButton.addTarget(self, action: #selector(touchUpAcceptButton(_:)), for: .touchUpInside)
+      
+      denyButton.setTitle("거부", for: .normal)
+      denyButton.setTitleColor(#colorLiteral(red: 1, green: 0, blue: 0, alpha: 1), for: .normal)
+      denyButton.titleLabel?.dynamicFont(fontSize: 20, weight: .heavy)
+      denyButton.addTarget(self, action: #selector(touchUpDenyButton), for: .touchUpInside)
+      denyButton.isHidden = true
     } else {
       acceptButton.setImage(#imageLiteral(resourceName: "arrow"), for: .normal)
       acceptButton.contentMode = .scaleAspectFit
+      acceptButton.titleLabel?.dynamicFont(fontSize: 14, weight: .medium)
+      acceptButton.addTarget(self, action: #selector(touchUpShowButton), for: .touchUpInside)
     }
   }
   
   private func layout() {
+    let margin: CGFloat = 10
+    
     [nicknameLabel, reliabilityLabel, acceptButton].forEach { contentView.addSubview($0) }
     
     nicknameLabel.snp.makeConstraints {
-      $0.top.leading.equalToSuperview().offset(10)
+      $0.top.leading.equalToSuperview().offset(margin.dynamic(1))
+      $0.height.equalTo(margin.dynamic(5))
     }
     
     reliabilityLabel.snp.makeConstraints {
-      $0.top.equalTo(nicknameLabel.snp.bottom).offset(10)
-      $0.leading.equalToSuperview().offset(10)
-      $0.bottom.equalToSuperview().offset(-10)
+      $0.top.equalTo(nicknameLabel.snp.bottom).offset(margin.dynamic(1))
+      $0.leading.equalToSuperview().offset(margin.dynamic(1))
+      $0.bottom.equalToSuperview().offset(-margin.dynamic(1))
       $0.height.equalTo(nicknameLabel.snp.height)
     }
     
     acceptButton.snp.makeConstraints {
-      $0.top.trailing.bottom.equalToSuperview()
+      $0.top.bottom.equalToSuperview()
+      $0.trailing.equalTo(contentView).offset(-margin.dynamic(1))
     }
     
-    if category != "Restroom" {
+    if category == "똥휴지" {
+      contentView.addSubview(denyButton)
+      
+      denyButton.snp.makeConstraints {
+        $0.top.bottom.equalToSuperview()
+        $0.trailing.equalTo(acceptButton.snp.leading).offset(-margin.dynamic(1))
+      }
+      
+    } else {
       contentView.addSubview(attachFileCountLabel)
       
       attachFileCountLabel.snp.makeConstraints {
-        $0.top.equalTo(nicknameLabel.snp.bottom).offset(10)
+        $0.top.equalTo(nicknameLabel.snp.bottom).offset(margin.dynamic(1))
         $0.leading.equalTo(reliabilityLabel.snp.trailing)
         $0.trailing.equalTo(acceptButton.snp.leading)
         $0.bottom.equalTo(contentView)

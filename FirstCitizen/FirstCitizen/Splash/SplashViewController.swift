@@ -22,9 +22,23 @@ class SplashViewController: UIViewController {
     self.view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     
     locationManager.delegate = self
-    
+    getUserInfo()
     getLocationPermission()
     
+  }
+  
+  private func getUserInfo() {
+    guard let _ = UserDefaults.standard.string(forKey: "Token") else { return }
+    
+    NetworkService.getUserInfo { result in
+      switch result {
+      case .success(let data):
+        let shared = UserInfoManager.shared
+        shared.userInfo = data
+      case .failure(let err):
+        print(err.localizedDescription)
+      }
+    }
   }
   
   private func getCategoryList() {

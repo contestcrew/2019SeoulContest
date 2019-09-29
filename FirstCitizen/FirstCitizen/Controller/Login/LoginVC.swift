@@ -136,7 +136,6 @@ class LoginVC: UIViewController {
             
             UserDefaults.standard.set("Token " + token, forKey: "Token")
             UserDefaults.standard.set(userID, forKey: "userID")
-            
             print("토큰 :", token)
             UserDefaults.standard.set("Token " + token, forKey: "Token")
             guard let ud = UserDefaults.standard.object(forKey: "Token") else { return }
