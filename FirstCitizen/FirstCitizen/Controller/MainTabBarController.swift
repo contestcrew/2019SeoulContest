@@ -18,7 +18,8 @@ class MainTabBarController: UITabBarController {
   private let settingVC = SettingViewController()
   lazy private var vcSetting = UINavigationController(rootViewController: settingVC)
   
-  private var isPosition = true
+  private var isPosition = true // 메인 맵뷰 리스트뷰로 변경
+  private var isOther = true    // 다른 탭에 넘어 갔다왓을때는 기존의 메인뷰 보여주기위함
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -56,6 +57,8 @@ class MainTabBarController: UITabBarController {
   }
   
   @objc private func pointDidTap(_ sender: UIButton) {
+    isOther = false
+    
     guard let _ = UserDefaults.standard.object(forKey: "Token") as? String else {
       alertAction(tilte: "알림", message: "로그인이 필요한 서비스입니다")
       return
@@ -67,18 +70,21 @@ class MainTabBarController: UITabBarController {
   @objc private func mapListDidTap(_ sender: UIButton) {
     switch isPosition {
     case true:
-      MainTabBarController.vTabBarButton.mapListButton.setImage(UIImage(named: "TabBarList"), for: .normal)
-      self.selectedViewController = vcMap
-      isPosition = false
-      
-    case false:
       MainTabBarController.vTabBarButton.mapListButton.setImage(UIImage(named: "TabBarMap"), for: .normal)
       self.selectedViewController = vcList
-      isPosition = true
+      
+    case false:
+      MainTabBarController.vTabBarButton.mapListButton.setImage(UIImage(named: "TabBarList"), for: .normal)
+      self.selectedViewController = vcMap
     }
+    
+    guard isOther else { return isOther = true }
+    isPosition.toggle()
   }
   
   @objc private func settingDidTap(_ sender: UIButton) {
+    isOther = false
+    
     NetworkService.getUserInfo { [weak self] result in
       switch result {
       case .success(let data):
