@@ -30,6 +30,14 @@ class SettingViewController: UIViewController {
     super.viewWillAppear(true)
     
     navigationController?.navigationBar.isHidden = true
+    
+    if let _ = UserDefaults.standard.object(forKey: "Token") as? String {
+      isSign = true
+      tableView.reloadData()
+    } else {
+      isSign = false
+      tableView.reloadData()
+    }
   }
   
   private func configure() {
@@ -70,7 +78,7 @@ extension SettingViewController: UITableViewDataSource {
       case 0:
         let cell = SettingProfileCell()
         
-        cell.setting(imageName: "leaf", nickName: "Up's", creditPoint: 1200, point: 200)
+        cell.setting(imageName: "leaf", nickName: "dldbdjq@gmail.com", creditPoint: 1200, point: 200)
         
         return cell
         
@@ -149,12 +157,12 @@ extension SettingViewController: UITableViewDelegate {
         print(indexPath.row)
         
       default:
+        UserDefaults.standard.removeObject(forKey: "Token")
         isSign = false
         tableView.reloadData()
       }
       
     case false:
-      
       switch indexPath.row {
       case 0:
         break
@@ -163,8 +171,9 @@ extension SettingViewController: UITableViewDelegate {
         print(indexPath.row)
         
       default:
-        isSign = true
-        tableView.reloadData()
+        let loginVC = UINavigationController(rootViewController: LoginVC())
+        
+        self.present(loginVC, animated: true)
       }
     }
   }
