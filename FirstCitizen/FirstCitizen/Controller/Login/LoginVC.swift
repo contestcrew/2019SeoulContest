@@ -39,7 +39,8 @@ class LoginVC: UIViewController {
   }
   
   @objc func back() {
-    presentingViewController?.dismiss(animated: true)
+//    presentingViewController?.dismiss(animated: true)
+    self.dismiss(animated: true)
   }
   
   private func configure() {
@@ -123,9 +124,12 @@ class LoginVC: UIViewController {
           // 성공시
           DispatchQueue.main.async {
             let token = data!.reduce("", {$0 + String(format: "%02X", $1)})
-            print(token)
+            print("토큰 : ", token)
             UserDefaults.standard.set(token, forKey: "Token")
-            self.navigationController?.popViewController(animated: true)
+            guard let ud = UserDefaults.standard.object(forKey: "Token") else { return }
+            print("UserDefaults : ", ud)
+//            self.navigationController?.popViewController(animated: true)
+            self.dismiss(animated: true)
           }
           
         } else if (400..<500) ~= response.statusCode {

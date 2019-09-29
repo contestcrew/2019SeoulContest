@@ -40,7 +40,27 @@ class MainTabBarController: UITabBarController {
     
   }
   
+  private func alertAction(tilte: String?, message: String?) {
+    let alert = UIAlertController(title: tilte, message: message, preferredStyle: .actionSheet)
+    let login = UIAlertAction(title: "로그인", style: .default) { (action) in
+      let loginVC = UINavigationController(rootViewController: LoginVC())
+      
+      self.present(loginVC, animated: true)
+    }
+    let cancel = UIAlertAction(title: "취소", style: .cancel) { (action) in
+      
+    }
+    alert.addAction(login)
+    alert.addAction(cancel)
+    present(alert, animated: true)
+  }
+  
   @objc private func pointDidTap(_ sender: UIButton) {
+    guard let _ = UserDefaults.standard.object(forKey: "Token") as? String else {
+      alertAction(tilte: "알림", message: "로그인이 필요한 서비스입니다")
+      return
+    }
+    
     self.selectedViewController = vcPoint
   }
   

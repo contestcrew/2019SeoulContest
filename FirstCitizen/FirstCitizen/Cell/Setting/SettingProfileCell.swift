@@ -32,7 +32,7 @@ class SettingProfileCell: UITableViewCell {
   
   func setting(imageName: String, nickName: String, creditPoint: Int, point: Int) {
     topImageView.image = UIImage(named: imageName)
-    nickNameLabel.text = "닉네임 : " + nickName
+    nickNameLabel.text = "이메일 : " + nickName
     creditLabel.text = "매너점수 : \(creditPoint)"
     pointLabel.text = "Point : \(point)"
   }
@@ -44,7 +44,7 @@ class SettingProfileCell: UITableViewCell {
     topImageView.layer.masksToBounds = true
     contentView.addSubview(topImageView)
     
-    nickNameLabel.textColor = .darkGray
+    nickNameLabel.textColor = .black
     nickNameLabel.upsFontBold(ofSize: 17)
     contentView.addSubview(nickNameLabel)
     
@@ -52,7 +52,7 @@ class SettingProfileCell: UITableViewCell {
     creditLabel.textColor = .black
     contentView.addSubview(creditLabel)
     
-    pointLabel.textColor = .black
+    pointLabel.textColor = #colorLiteral(red: 0.7254902124, green: 0.4784313738, blue: 0.09803921729, alpha: 1)
     pointLabel.upsFontBold(ofSize: 17)
     contentView.addSubview(pointLabel)
   }
