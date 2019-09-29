@@ -82,10 +82,12 @@ class NetworkService {
   
   static func report(data: ReportData, images: [UIImage], completion: @escaping (Bool) -> ()) {
     
+    guard let token = UserDefaults.standard.string(forKey: "Token") else { return }
+    
     var imgData = [Data]()
     
     images.forEach {
-      imgData.append($0.pngData()!)
+      imgData.append($0.jpegData(compressionQuality: 0.5)!)
     }
     
     let url = ApiUrl.ApiUrl(apiName: .incidentReportApi)
@@ -98,8 +100,8 @@ class NetworkService {
     multiData.append("\(data.isAgreedInform)".data(using: .utf8)!, withName: "is_agreed_inform")
     multiData.append(nowTime().data(using: .utf8)!, withName: "helped_at")
     if imgData.count != 0 {
-      for (data) in imgData {
-        multiData.append(data, withName: "images")
+      for (idx, data) in imgData.enumerated() {
+        multiData.append(data, withName: "images", fileName: "image\(idx).jpeg", mimeType: "image/jpeg")
       }
     }
     
@@ -113,7 +115,8 @@ class NetworkService {
       "Accept-Encoding": "gzip, deflate",
       "Content-Length": "\(multiData.contentLength)",
       "Connection": "keep-alive",
-      "cache-control": "no-cache"
+      "cache-control": "no-cache",
+      "Authorization": "\(token)"
     ]
     
     //    let data = """
@@ -371,4 +374,150 @@ class NetworkService {
     }
     
   }
+  
+  static func createRequestWithImage(data: RequestData, images: [UIImage]?, completion: @escaping (Bool) -> ()) {
+    
+    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
+    
+    var imgData = [Data]()
+    
+    if let images = images {
+      images.forEach {
+        imgData.append($0.jpegData(compressionQuality: 0.5)!)
+      }
+    }
+    
+//    let headers: HTTPHeaders = [
+//      "Content-Type": "application/json",
+//      "Authorization": "\(token)"
+//    ]
+//
+//    var bodyData: Data
+//    if data.police == 0 {
+//      bodyData = """
+//        {
+//        "category": "\(data.category)",
+//        "police_office": "",
+//        "title": "\(data.title)",
+//        "content": "\(data.content)",
+//        "score": "\(data.score)",
+//        "main_address": "\(data.mainAdd)",
+//        "detail_address": "\(data.detailAdd)",
+//        "latitude": "\(data.lat)",
+//        "longitude": "\(data.lng)",
+//        "occurred_at": "\(data.time)"
+//        }
+//        """.data(using: .utf8)!
+//    } else {
+//      bodyData = """
+//        {
+//        "category": "\(data.category)",
+//        "police_office": "\(data.police)",
+//        "title": "\(data.title)",
+//        "content": "\(data.content)",
+//        "score": "\(data.score)",
+//        "main_address": "\(data.mainAdd)",
+//        "detail_address": "\(data.detailAdd)",
+//        "latitude": "\(data.lat)",
+//        "longitude": "\(data.lng)",
+//        "occurred_at": "\(data.time)"
+//        }
+//        """.data(using: .utf8)!
+//    }
+    
+//    let multiData = MultipartFormData()
+//    multiData.append("\(data.category)".data(using: .utf8)!, withName: "category")
+//    if data.police != 0 {
+//      multiData.append("\(data.police)".data(using: .utf8)!, withName: "police_office")
+//    }
+//    multiData.append(data.title.data(using: .utf8)!, withName: "title")
+//    multiData.append(data.content.data(using: .utf8)!, withName: "content")
+//    multiData.append("\(data.score)".data(using: .utf8)!, withName: "score")
+//    multiData.append(data.mainAdd.data(using: .utf8)!, withName: "main_address")
+//    multiData.append(data.detailAdd.data(using: .utf8)!, withName: "detail_address")
+//    multiData.append("\(data.lat)".data(using: .utf8)!, withName: "latitude")
+//    multiData.append("\(data.lng)".data(using: .utf8)!, withName: "longitude")
+//    multiData.append(data.time.data(using: .utf8)!, withName: "occurred_at")
+//
+//
+//      if imgData.count != 0 {
+//        for (data) in imgData {
+//          multiData.append(data, withName: "images")
+//        }
+//      }
+//
+//
+//
+//    let encodeData = try? multiData.encode()
+//
+//    let testHeaders = [
+//      "content-type": "\(multiData.contentType)",
+//      "Accept": "*/*",
+//      "Cache-Control": "no-cache",
+//      "Host": "eb-seoulcontest-deploy-master.ap-northeast-2.elasticbeanstalk.com",
+//      "Accept-Encoding": "gzip, deflate",
+//      "Content-Length": "\(multiData.contentLength)",
+//      "Connection": "keep-alive",
+//      "cache-control": "no-cache",
+//      "Authorization": "\(token)"
+//    ]
+    
+    let basicHeader = [
+      "Authorization": "\(token)"
+    ]
+    
+//    print("encodedData: ", encodeData)
+    
+    upload(multipartFormData: { (multiData) in
+      multiData.append("\(data.category)".data(using: .utf8)!, withName: "category")
+      if data.police != 0 {
+        multiData.append("\(data.police)".data(using: .utf8)!, withName: "police_office")
+      }
+      multiData.append(data.title.data(using: .utf8)!, withName: "title")
+      multiData.append(data.content.data(using: .utf8)!, withName: "content")
+      multiData.append("\(data.score)".data(using: .utf8)!, withName: "score")
+      multiData.append(data.mainAdd.data(using: .utf8)!, withName: "main_address")
+      multiData.append(data.detailAdd.data(using: .utf8)!, withName: "detail_address")
+      multiData.append("\(data.lat)".data(using: .utf8)!, withName: "latitude")
+      multiData.append("\(data.lng)".data(using: .utf8)!, withName: "longitude")
+      multiData.append(data.time.data(using: .utf8)!, withName: "occurred_at")
+      print("imageData: ", imgData)
+        if imgData.count != 0 {
+          for (idx, data) in imgData.enumerated() {
+//            multiData.append(data, withName: "images")
+            multiData.append(data, withName: "images", fileName: "image\(idx).jpeg", mimeType: "image/jpeg")
+          }
+        }
+    }, to: ApiUrl.ApiUrl(apiName: .requestCreate), method: .post, headers: basicHeader) { (result) in
+      print("ssession Result: ", result)
+    }
+    
+//    Alamofire.upload(encodeData ?? Data(),
+//                     to: ApiUrl.ApiUrl(apiName: .requestCreate),
+//                     method: .post,
+//                     headers: testHeaders)
+//      .response { (res) in
+//          switch res.response?.statusCode {
+//          case 201:
+//            completion(true)
+//          default:
+//            completion(false)
+//          }
+//      }
+    
+//    Alamofire.upload(bodyData,
+//                     to: ApiUrl.ApiUrl(apiName: .requestCreate),
+//                     method: .post,
+//                     headers: headers)
+//      .response { (res) in
+//        switch res.response?.statusCode {
+//        case 201:
+//          completion(true)
+//        default:
+//          completion(false)
+//        }
+//    }
+    
+  }
+  
 }

@@ -115,11 +115,11 @@ class RequestCreateViewController: UIViewController {
   @objc private func barButtonAction() {
     print("didTapbarbtn")
     
-    let titleCell = tableView.cellForRow(at: IndexPath(row: 7, section: 0)) as? RequestCreateTextAddCell
-    let title = titleCell?.textField.text ?? "오류"
+    let titleCell = cell7
+    let title = titleCell.textField.text ?? "오류"
     
-    let contentCell = tableView.cellForRow(at: IndexPath(row: 9, section: 0)) as? RequestCreateTextAddCell
-    let content = contentCell?.textView.text ?? "오류"
+    let contentCell = cell9
+    let content = contentCell.textView.text ?? "오류"
     
     let lat = location.lat
     let lng = location.lng
@@ -144,12 +144,19 @@ class RequestCreateViewController: UIViewController {
     
     print(requestData)
     
-    NetworkService.createRequest(data: requestData) {
+    NetworkService.createRequestWithImage(data: requestData, images: imageArr) {
       if $0 {
         self.dismiss(animated: true)
       }
       print($0)
     }
+    
+//    NetworkService.createRequest(data: requestData) {
+//      if $0 {
+//        self.dismiss(animated: true)
+//      }
+//      print($0)
+//    }
     
   }
   

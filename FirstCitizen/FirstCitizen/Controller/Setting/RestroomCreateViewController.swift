@@ -72,11 +72,11 @@ class RestroomCreateViewController: UIViewController {
   
   @objc private func barButtonAction() {
     // 의뢰 하는 버튼 카테고리 꼭 바꿔야함 동적으로
-    let titleCell = tableView.cellForRow(at: IndexPath(row: 5, section: 0)) as? RequestCreateTextAddCell
-    let title = titleCell?.textField.text ?? "오류"
+    let titleCell = cell5
+    let title = titleCell.textField.text ?? "오류"
     
-    let contentCell = tableView.cellForRow(at: IndexPath(row: 7, section: 0)) as? RequestCreateTextAddCell
-    let content = contentCell?.textView.text ?? "오류"
+    let contentCell = cell7
+    let content = contentCell.textView.text ?? "오류"
     
     let lat = location.lat
     let lng = location.lng
