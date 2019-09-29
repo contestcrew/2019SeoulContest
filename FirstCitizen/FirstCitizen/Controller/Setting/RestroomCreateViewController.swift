@@ -75,7 +75,6 @@ class RestroomCreateViewController: UIViewController {
     timeFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
     let time = timeFormatter.string(from: Date())
     
-    print("time: ", time)
     
     let requestData = RequestData(category: 1,
                                   police: 0,
@@ -223,6 +222,9 @@ extension RestroomCreateViewController: UITableViewDelegate {
       // did tap address
     case 3:
       ()
+      let vc = LocationWithAddVC()
+      navigationController?.pushViewController(vc, animated: true)
+
       
     default:
       break

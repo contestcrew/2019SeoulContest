@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -41,7 +41,9 @@
 		527E38F423321C1000C01EC7 /* ExtensionUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E38F323321C1000C01EC7 /* ExtensionUIImage.swift */; };
 		527E38F62332958700C01EC7 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E38F52332958700C01EC7 /* TestData.swift */; };
 		52EA1ABD233E8E0900244D29 /* RequestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EA1ABC233E8E0900244D29 /* RequestData.swift */; };
+		52EA1AD3233FDE7300244D29 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EA1AD2233FDE7300244D29 /* ImageCell.swift */; };
 		6B36858508F29EBE5EFE4F77 /* Pods_FirstCitizen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50CCF6F72520B16B5901678A /* Pods_FirstCitizen.framework */; };
+		C173D172233F4E4400C6F448 /* LocationWithAddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C173D171233F4E4400C6F448 /* LocationWithAddVC.swift */; };
 		CF1E09D323275860006E9537 /* IncidentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1E09D223275860006E9537 /* IncidentViewController.swift */; };
 		CF1E09D523275891006E9537 /* IncidentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1E09D423275891006E9537 /* IncidentView.swift */; };
 		CF1E09D823275F33006E9537 /* IncidentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1E09D723275F33006E9537 /* IncidentCell.swift */; };
@@ -71,6 +73,8 @@
 		CF6879AD233B210B00F2A159 /* ContentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6879AC233B210B00F2A159 /* ContentsCell.swift */; };
 		CF79718A233D9CFF008DC550 /* ReportData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF797189233D9CFF008DC550 /* ReportData.swift */; };
 		CFC1731C233EF0A00053872B /* TestIncidentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC1731B233EF0A00053872B /* TestIncidentData.swift */; };
+		CFC1731E233F359A0053872B /* ExtensionDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC1731D233F359A0053872B /* ExtensionDate.swift */; };
+		CFC17320233F4B2C0053872B /* ExtensionString.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC1731F233F4B2C0053872B /* ExtensionString.swift */; };
 		CFF55C26233CE43F00FEF380 /* RequestDetailHelpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF55C25233CE43F00FEF380 /* RequestDetailHelpCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -112,8 +116,10 @@
 		527E38F323321C1000C01EC7 /* ExtensionUIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIImage.swift; sourceTree = "<group>"; };
 		527E38F52332958700C01EC7 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		52EA1ABC233E8E0900244D29 /* RequestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestData.swift; sourceTree = "<group>"; };
+		52EA1AD2233FDE7300244D29 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		80EA8319B751197666F7ABE9 /* Pods-FirstCitizen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstCitizen.release.xcconfig"; path = "Target Support Files/Pods-FirstCitizen/Pods-FirstCitizen.release.xcconfig"; sourceTree = "<group>"; };
 		A49A9086C3D192F57DEDDDD6 /* Pods-FirstCitizen.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstCitizen.debug.xcconfig"; path = "Target Support Files/Pods-FirstCitizen/Pods-FirstCitizen.debug.xcconfig"; sourceTree = "<group>"; };
+		C173D171233F4E4400C6F448 /* LocationWithAddVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationWithAddVC.swift; sourceTree = "<group>"; };
 		CF1E09D223275860006E9537 /* IncidentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncidentViewController.swift; sourceTree = "<group>"; };
 		CF1E09D423275891006E9537 /* IncidentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncidentView.swift; sourceTree = "<group>"; };
 		CF1E09D723275F33006E9537 /* IncidentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncidentCell.swift; sourceTree = "<group>"; };
@@ -143,6 +149,8 @@
 		CF6879AC233B210B00F2A159 /* ContentsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsCell.swift; sourceTree = "<group>"; };
 		CF797189233D9CFF008DC550 /* ReportData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportData.swift; sourceTree = "<group>"; };
 		CFC1731B233EF0A00053872B /* TestIncidentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestIncidentData.swift; sourceTree = "<group>"; };
+		CFC1731D233F359A0053872B /* ExtensionDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDate.swift; sourceTree = "<group>"; };
+		CFC1731F233F4B2C0053872B /* ExtensionString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionString.swift; sourceTree = "<group>"; };
 		CFF55C25233CE43F00FEF380 /* RequestDetailHelpCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailHelpCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -251,6 +259,7 @@
 				4F87FFE22339C6D60094CCD0 /* RestroomCreateViewController.swift */,
 				4F87FFF0233B190E0094CCD0 /* RequestCreateViewController.swift */,
 				52124089233B9599002C99AD /* LocationWithMap.swift */,
+				C173D171233F4E4400C6F448 /* LocationWithAddVC.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -283,6 +292,8 @@
 				4FF966C7230C345E00E869FF /* ExtensionView.swift */,
 				CF5E7EE32337DC010069235C /* ExtensionAlertController.swift */,
 				CF5E7EEC233863A80069235C /* ExtensionCGFloat.swift */,
+				CFC1731D233F359A0053872B /* ExtensionDate.swift */,
+				CFC1731F233F4B2C0053872B /* ExtensionString.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -305,6 +316,14 @@
 				4F87FFDC2337886F0094CCD0 /* SettingDocumentCell.swift */,
 			);
 			path = Setting;
+			sourceTree = "<group>";
+		};
+		52EA1AC3233FC7C700244D29 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				52EA1AD2233FDE7300244D29 /* ImageCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		6BF0C2A65BCA8FC5FB2A8439 /* Frameworks */ = {
@@ -379,6 +398,7 @@
 		CF5467CF233349A600F75DDB /* Report */ = {
 			isa = PBXGroup;
 			children = (
+				52EA1AC3233FC7C700244D29 /* Cell */,
 				CF5467D0233349BC00F75DDB /* ReportViewController.swift */,
 				CF5467D2233349C700F75DDB /* ReportView.swift */,
 			);
@@ -500,22 +520,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FirstCitizen/Pods-FirstCitizen-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
-				"${PODS_ROOT}/NMapsMap/framework/NMapsMap.framework",
-				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-FirstCitizen/Pods-FirstCitizen-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NMapsMap.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-FirstCitizen/Pods-FirstCitizen-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -556,6 +565,7 @@
 				CF5E7EE023376BB40069235C /* CategoryCell.swift in Sources */,
 				527E38F62332958700C01EC7 /* TestData.swift in Sources */,
 				CF687998233B1EE300F2A159 /* SplashViewController.swift in Sources */,
+				CFC17320233F4B2C0053872B /* ExtensionString.swift in Sources */,
 				4F87FFE32339C6D60094CCD0 /* RestroomCreateViewController.swift in Sources */,
 				CFF55C26233CE43F00FEF380 /* RequestDetailHelpCell.swift in Sources */,
 				4F87FFF3233B380F0094CCD0 /* RequestCreatePoliceStationCell.swift in Sources */,
@@ -574,6 +584,7 @@
 				4FF966C6230C31AE00E869FF /* ExtensionColor.swift in Sources */,
 				4FF966AF230C043B00E869FF /* MainTabBarController.swift in Sources */,
 				4FF9669C230C032600E869FF /* AppDelegate.swift in Sources */,
+				CFC1731E233F359A0053872B /* ExtensionDate.swift in Sources */,
 				52EA1ABD233E8E0900244D29 /* RequestData.swift in Sources */,
 				CF6879A7233B20DF00F2A159 /* ExtraInformationCell.swift in Sources */,
 				4FF966C4230C28E800E869FF /* PointView.swift in Sources */,
@@ -598,10 +609,12 @@
 				CF5467D3233349C700F75DDB /* ReportView.swift in Sources */,
 				CF6879A3233B20C300F2A159 /* MapCell.swift in Sources */,
 				CF5E7EE42337DC010069235C /* ExtensionAlertController.swift in Sources */,
+				52EA1AD3233FDE7300244D29 /* ImageCell.swift in Sources */,
 				5212408A233B9599002C99AD /* LocationWithMap.swift in Sources */,
 				CF68799C233B1F4100F2A159 /* CategoryData.swift in Sources */,
 				4F87FFFC233EF4F40094CCD0 /* PointCardCell.swift in Sources */,
 				4FF966D4230C706800E869FF /* SettingProfileCell.swift in Sources */,
+				C173D172233F4E4400C6F448 /* LocationWithAddVC.swift in Sources */,
 				4F87FFE9233AF5C60094CCD0 /* RequestCreateAddressCell.swift in Sources */,
 				CF5467D1233349BC00F75DDB /* ReportViewController.swift in Sources */,
 				CFC1731C233EF0A00053872B /* TestIncidentData.swift in Sources */,
@@ -688,7 +701,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -743,7 +756,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -765,7 +778,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = FirstCitizen/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -817,7 +830,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = FirstCitizen/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

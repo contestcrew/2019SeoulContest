@@ -57,6 +57,7 @@ extension IncidentViewController: IncidentViewDelegate {
       )
     } else {
       let reportVC = ReportViewController()
+      reportVC.detailIncidentData = detailIncidentData
       self.present(reportVC, animated: true, completion: nil)
     }
   }

@@ -89,7 +89,15 @@ extension SettingViewController: UITableViewDataSource {
         
         if indexPath.row == 1 {
           cell.countLabel.isHidden = false
-          cell.countLabel.text = "\(requestIncidentDatas.count)"
+          var requestCount = 0
+          
+          requestIncidentDatas.forEach {
+            if $0.status == "도움요청중" {
+              requestCount += 1
+            }
+          }
+          
+          cell.countLabel.text = "\(requestCount)"
         }
         
         return cell
