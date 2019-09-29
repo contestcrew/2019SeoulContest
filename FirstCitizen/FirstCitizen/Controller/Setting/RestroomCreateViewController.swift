@@ -18,6 +18,15 @@ class RestroomCreateViewController: UIViewController {
   
   private let tableView = UITableView()
   
+  var cell0 = UITableViewCell()
+  var cell1 = UITableViewCell()
+  var cell2 = RequestCreateAddressCell()
+  var cell3 = RequestCreateAddressCell()
+  var cell4 = UITableViewCell()
+  var cell5 = RequestCreateTextAddCell()
+  var cell6 = UITableViewCell()
+  var cell7 = RequestCreateTextAddCell()
+  
   var mainAdd = ""
   var detailAdd = ""
   var shortAdd = "현재 위치"
@@ -135,7 +144,7 @@ extension RestroomCreateViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     switch indexPath.row {
     case 0:
-      let cell = UITableViewCell()
+      let cell = cell0
       
       cell.selectionStyle = .none
       cell.textLabel?.text = " 위치 입력"
@@ -144,7 +153,7 @@ extension RestroomCreateViewController: UITableViewDataSource {
       return cell
       
     case 1:
-      let cell = UITableViewCell()
+      let cell = cell1
       
       cell.selectionStyle = .none
       cell.textLabel?.text = "\(shortAdd) \(detailAdd)"
@@ -154,21 +163,21 @@ extension RestroomCreateViewController: UITableViewDataSource {
       return cell
       
     case 2:
-      let cell = RequestCreateAddressCell()
+      let cell = cell2
       
       cell.setting(type: .map)
       
       return cell
       
     case 3:
-      let cell = RequestCreateAddressCell()
+      let cell = cell3
       
       cell.setting(type: .text)
       
       return cell
       
     case 4:
-      let cell = UITableViewCell()
+      let cell = cell4
       
       cell.selectionStyle = .none
       cell.textLabel?.text = " 제목"
@@ -177,7 +186,7 @@ extension RestroomCreateViewController: UITableViewDataSource {
       return cell
       
     case 5:
-      let cell = RequestCreateTextAddCell()
+      let cell = cell5
       
       cell.setting(type: .field)
       cell.textField.delegate = self
@@ -185,7 +194,7 @@ extension RestroomCreateViewController: UITableViewDataSource {
       return cell
       
     case 6:
-      let cell = UITableViewCell()
+      let cell = cell6
       
       cell.selectionStyle = .none
       cell.textLabel?.text = " 내용"
@@ -194,7 +203,7 @@ extension RestroomCreateViewController: UITableViewDataSource {
       return cell
       
     case 7:
-      let cell = RequestCreateTextAddCell()
+      let cell = cell7
       
       cell.setting(type: .view)
       
