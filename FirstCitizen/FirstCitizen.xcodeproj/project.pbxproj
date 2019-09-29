@@ -55,6 +55,8 @@
 		CF54686523346E6A00F75DDB /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54686423346E6A00F75DDB /* ListView.swift */; };
 		CF5468682334DD3800F75DDB /* ListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5468672334DD3800F75DDB /* ListViewCell.swift */; };
 		CF58BA1C2340DC4C00389D54 /* UserInfoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF58BA1B2340DC4C00389D54 /* UserInfoData.swift */; };
+		CF58BA1E234131A900389D54 /* UserInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF58BA1D234131A900389D54 /* UserInfoManager.swift */; };
+		CF58BA2023413D2000389D54 /* ReportDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF58BA1F23413D2000389D54 /* ReportDataManager.swift */; };
 		CF5E7EE023376BB40069235C /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5E7EDF23376BB40069235C /* CategoryCell.swift */; };
 		CF5E7EE42337DC010069235C /* ExtensionAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5E7EE32337DC010069235C /* ExtensionAlertController.swift */; };
 		CF5E7EE72337E1A20069235C /* RequestDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5E7EE62337E1A20069235C /* RequestDetailViewController.swift */; };
@@ -132,6 +134,8 @@
 		CF54686423346E6A00F75DDB /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		CF5468672334DD3800F75DDB /* ListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewCell.swift; sourceTree = "<group>"; };
 		CF58BA1B2340DC4C00389D54 /* UserInfoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoData.swift; sourceTree = "<group>"; };
+		CF58BA1D234131A900389D54 /* UserInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoManager.swift; sourceTree = "<group>"; };
+		CF58BA1F23413D2000389D54 /* ReportDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDataManager.swift; sourceTree = "<group>"; };
 		CF5E7EDF23376BB40069235C /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		CF5E7EE32337DC010069235C /* ExtensionAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionAlertController.swift; sourceTree = "<group>"; };
 		CF5E7EE62337E1A20069235C /* RequestDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailViewController.swift; sourceTree = "<group>"; };
@@ -383,8 +387,10 @@
 				CF68799D233B1FB300F2A159 /* IncidentDataManager.swift */,
 				CF68799F233B1FBF00F2A159 /* CategoryDataManager.swift */,
 				CF797189233D9CFF008DC550 /* ReportData.swift */,
+				CF58BA1F23413D2000389D54 /* ReportDataManager.swift */,
 				52EA1ABC233E8E0900244D29 /* RequestData.swift */,
 				CF58BA1B2340DC4C00389D54 /* UserInfoData.swift */,
+				CF58BA1D234131A900389D54 /* UserInfoManager.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -586,6 +592,7 @@
 				CF5E7EE72337E1A20069235C /* RequestDetailViewController.swift in Sources */,
 				4FF966C6230C31AE00E869FF /* ExtensionColor.swift in Sources */,
 				4FF966AF230C043B00E869FF /* MainTabBarController.swift in Sources */,
+				CF58BA2023413D2000389D54 /* ReportDataManager.swift in Sources */,
 				4FF9669C230C032600E869FF /* AppDelegate.swift in Sources */,
 				CFC1731E233F359A0053872B /* ExtensionDate.swift in Sources */,
 				52EA1ABD233E8E0900244D29 /* RequestData.swift in Sources */,
@@ -596,6 +603,7 @@
 				4F87FFF7233B8C220094CCD0 /* TextAddView.swift in Sources */,
 				4FF966B8230C07F200E869FF /* ListViewController.swift in Sources */,
 				CF54686523346E6A00F75DDB /* ListView.swift in Sources */,
+				CF58BA1E234131A900389D54 /* UserInfoManager.swift in Sources */,
 				CF1E09D323275860006E9537 /* IncidentViewController.swift in Sources */,
 				4FF966C2230C25FE00E869FF /* ExtensionFont.swift in Sources */,
 				CF68799E233B1FB300F2A159 /* IncidentDataManager.swift in Sources */,

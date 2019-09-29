@@ -26,7 +26,7 @@ class RequestDetailView: UIView {
   
   private let backButton = UIButton()
   
-  private let incidentTableView = UITableView()
+  let incidentTableView = UITableView()
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -147,6 +147,7 @@ extension RequestDetailView: UITableViewDataSource {
       return cell
     } else {
       let cell = tableView.dequeueReusableCell(withIdentifier: RequestDetailCell.identifier, for: indexPath) as! RequestDetailCell
+      
       return cell
     }
   }

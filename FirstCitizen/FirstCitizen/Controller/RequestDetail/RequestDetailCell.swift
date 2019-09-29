@@ -11,7 +11,8 @@ import UIKit
 class RequestDetailCell: UITableViewCell {
   
   static let identifier = "RequestDetailCell"
-  var category: String = ""
+  
+  let reportShared = ReportDataManager.shared
   
   private let helpLabel = UILabel()
   private let helpUnderLineLabel = UILabel()
@@ -24,24 +25,17 @@ class RequestDetailCell: UITableViewCell {
     layout()
   }
   
-  override func layoutSubviews() {
-    super.layoutSubviews()
-    
-    helpListTableView.rowHeight = UITableView.automaticDimension
-    helpListTableView.estimatedRowHeight = 180
-  }
-  
   private func attribute() {
     helpLabel.text = "도움"
     helpLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     helpLabel.dynamicFont(fontSize: 24, weight: .bold)
     
     helpUnderLineLabel.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    
-//    helpListTableView.allowsSelection = false
-//    helpListTableView.isScrollEnabled = false
+  
+    helpListTableView.showsVerticalScrollIndicator = false
     helpListTableView.dataSource = self
     helpListTableView.delegate = self
+    helpListTableView.separatorStyle = .none
     
     helpListTableView.register(RequestDetailHelpCell.self, forCellReuseIdentifier: RequestDetailHelpCell.identifier)
   }
@@ -67,8 +61,9 @@ class RequestDetailCell: UITableViewCell {
     
     helpListTableView.snp.makeConstraints {
       $0.top.equalTo(helpUnderLineLabel.snp.bottom).offset(margin.dynamic(1))
-      $0.leading.trailing.bottom.equalToSuperview()
-//      $0.height.equalTo(500)
+      $0.leading.equalTo(contentView).offset(margin.dynamic(2))
+      $0.trailing.bottom.equalTo(contentView).offset(-margin.dynamic(2))
+      $0.height.equalTo(margin.dynamic(10) * CGFloat(reportShared.reportDatas.count))
     }
   }
   
@@ -79,11 +74,13 @@ class RequestDetailCell: UITableViewCell {
 
 extension RequestDetailCell: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 5
+    return reportShared.reportDatas.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: RequestDetailHelpCell.identifier, for: indexPath) as! RequestDetailHelpCell
+    cell.cellModify(reportData: reportShared.reportDatas[indexPath.row])
+    cell.selectionStyle = .none
     return cell
   }
 }
@@ -91,6 +88,6 @@ extension RequestDetailCell: UITableViewDataSource {
 extension RequestDetailCell: UITableViewDelegate {
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
-    return UITableView.automaticDimension
+    return 100
   }
 }

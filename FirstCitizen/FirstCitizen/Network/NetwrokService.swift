@@ -38,6 +38,8 @@ class NetworkService {
             completion(.failure(ErrorType.NoData))
             return
           }
+          let userShared = UserInfoManager.shared
+          userShared.userInfo = result
           completion(.success(result))
         case .failure(_):
           completion(.failure(ErrorType.networkErr))
@@ -48,7 +50,7 @@ class NetworkService {
   static func restroomReport(requestID: Int, completion: @escaping (Bool) -> ()) {
     
     guard let token = UserDefaults.standard.string(forKey: "Token") else { return }
-    print("[Toekn] restroom :", token)
+    print("[Token] restroom :", token)
     let urlStr = ApiUrl.ApiUrl(apiName: .incidentReportApi)
     let url: URL = URL(string: urlStr)!
     
@@ -56,13 +58,10 @@ class NetworkService {
       "Content-Type": "application/json",
       "Authorization": "\(token)"
     ]
-    
+
     let body = """
       {
       "request": "\(requestID)",
-      "title": "",
-      "content": "",
-      "is_agreed_inform": "false",
       "helped_at": "\(nowTime())",
       }
       """.data(using: .utf8)

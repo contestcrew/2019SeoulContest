@@ -50,7 +50,7 @@ class ReportViewController: UIViewController {
 extension ReportViewController: ReportViewDelegate {
   func touchUpReportButton(title: String, content: String, isAgree: Bool, images: [UIImage]) {
     let origin = detailIncidentData!
-    let data = ReportData(request: origin.id, author: origin.author.id, title: title, content: content, isAgreedInform: isAgree, helpedAt: "", createdAt: "", updatedAt: "", images: [])
+    let data = ReportData(request: origin.id, author: origin.author, title: title, content: content, isAgreedInform: isAgree, helpedAt: "", createdAt: "", updatedAt: "", images: [])
     
     NetworkService.report(data: data, images: images) {
       print($0)

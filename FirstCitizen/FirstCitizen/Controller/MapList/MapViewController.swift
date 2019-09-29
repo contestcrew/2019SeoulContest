@@ -32,14 +32,13 @@ class MapViewController: UIViewController {
     guard let token = UserDefaults.standard.string(forKey: "Token") else { return }
     print("[Token] :", token)
     
-    
+    extractCategory()
     attribute()
   }
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     
-    extractCategory()
     showMarkers()
     layout()
   }
