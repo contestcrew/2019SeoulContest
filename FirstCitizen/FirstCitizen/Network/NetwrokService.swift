@@ -103,8 +103,8 @@ class NetworkService {
     multiData.append("\(data.isAgreedInform)".data(using: .utf8)!, withName: "is_agreed_inform")
     multiData.append(nowTime().data(using: .utf8)!, withName: "helped_at")
     if imgData.count != 0 {
-      for (idx, data) in imgData.enumerated() {
-        multiData.append(data, withName: "image_\(idx+1)")
+      for (data) in imgData {
+        multiData.append(data, withName: "images")
       }
     }
     
@@ -321,6 +321,8 @@ class NetworkService {
   }
   
   static func createRequest(data: RequestData, completion: @escaping (Bool) -> ()) {
+    
+    print("create Request Data: ", data)
     
     var bodyData: Data
     if data.police == 0 {
