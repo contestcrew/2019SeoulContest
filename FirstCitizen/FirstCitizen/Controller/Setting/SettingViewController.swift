@@ -10,14 +10,14 @@ import UIKit
 
 class SettingViewController: UIViewController {
   
-  private let tableView = UITableView()
+  let tableView = UITableView()
   
-  var requestIncidentDatas: [IncidentData] = []
+  var userInfo: UserInfoData?
   
   private let inDocument = ["의뢰", "도움", "공지사항", "이용약관", "내 정보"]
   private let outDocument = ["공지사항", "이용약관"]
   
-  private var isSign = true
+  var isSign = true
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -35,7 +35,6 @@ class SettingViewController: UIViewController {
       isSign = true
       tableView.reloadData()
     } else {
-      isSign = false
       tableView.reloadData()
     }
   }
@@ -77,8 +76,11 @@ extension SettingViewController: UITableViewDataSource {
       switch indexPath.row {
       case 0:
         let cell = SettingProfileCell()
+        let nickname = userInfo?.username ?? ""
+        let creditPoint = userInfo?.mannerScore ?? 0
+        let point = userInfo?.citizenScore ?? 0
         
-        cell.setting(imageName: "leaf", nickName: "dldbdjq@gmail.com", creditPoint: 1200, point: 200)
+        cell.setting(imageName: "leaf", nickName: nickname, creditPoint: creditPoint, point: point)
         
         return cell
         
@@ -89,15 +91,7 @@ extension SettingViewController: UITableViewDataSource {
         
         if indexPath.row == 1 {
           cell.countLabel.isHidden = false
-          var requestCount = 0
-          
-          requestIncidentDatas.forEach {
-            if $0.status == "도움요청중" {
-              requestCount += 1
-            }
-          }
-          
-          cell.countLabel.text = "\(requestCount)"
+          cell.countLabel.text = "\(userInfo?.requestCount ?? 0)"
         }
         
         return cell
@@ -157,10 +151,16 @@ extension SettingViewController: UITableViewDelegate {
         break
         
       case 1:
-        let vcSettingRequest = SettingRequestViewController()
-        vcSettingRequest.requestIncidentDatas = requestIncidentDatas
-        navigationController?.pushViewController(vcSettingRequest, animated: true)
-        
+        NetworkService.getSettingRequestData { [weak self] result in
+          switch result {
+          case .success(let data):
+            let vcSettingRequest = SettingRequestViewController()
+            vcSettingRequest.requestIncidentDatas = data
+            self?.navigationController?.pushViewController(vcSettingRequest, animated: true)
+          case .failure(let err):
+            print(err.localizedDescription)
+          }
+        }
       case 2...inDocument.count:
         print(indexPath.row)
         
@@ -179,9 +179,10 @@ extension SettingViewController: UITableViewDelegate {
         print(indexPath.row)
         
       default:
-        let loginVC = UINavigationController(rootViewController: LoginVC())
+        let loginVC = LoginVC()
+        let navigationController = UINavigationController(rootViewController: loginVC)
         
-        self.present(loginVC, animated: true)
+        self.present(navigationController, animated: true)
       }
     }
   }

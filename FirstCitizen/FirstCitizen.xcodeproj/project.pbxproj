@@ -54,6 +54,7 @@
 		CF5467D3233349C700F75DDB /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5467D2233349C700F75DDB /* ReportView.swift */; };
 		CF54686523346E6A00F75DDB /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF54686423346E6A00F75DDB /* ListView.swift */; };
 		CF5468682334DD3800F75DDB /* ListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5468672334DD3800F75DDB /* ListViewCell.swift */; };
+		CF58BA1C2340DC4C00389D54 /* UserInfoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF58BA1B2340DC4C00389D54 /* UserInfoData.swift */; };
 		CF5E7EE023376BB40069235C /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5E7EDF23376BB40069235C /* CategoryCell.swift */; };
 		CF5E7EE42337DC010069235C /* ExtensionAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5E7EE32337DC010069235C /* ExtensionAlertController.swift */; };
 		CF5E7EE72337E1A20069235C /* RequestDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5E7EE62337E1A20069235C /* RequestDetailViewController.swift */; };
@@ -130,6 +131,7 @@
 		CF5467D2233349C700F75DDB /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		CF54686423346E6A00F75DDB /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		CF5468672334DD3800F75DDB /* ListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewCell.swift; sourceTree = "<group>"; };
+		CF58BA1B2340DC4C00389D54 /* UserInfoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoData.swift; sourceTree = "<group>"; };
 		CF5E7EDF23376BB40069235C /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		CF5E7EE32337DC010069235C /* ExtensionAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionAlertController.swift; sourceTree = "<group>"; };
 		CF5E7EE62337E1A20069235C /* RequestDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailViewController.swift; sourceTree = "<group>"; };
@@ -382,6 +384,7 @@
 				CF68799F233B1FBF00F2A159 /* CategoryDataManager.swift */,
 				CF797189233D9CFF008DC550 /* ReportData.swift */,
 				52EA1ABC233E8E0900244D29 /* RequestData.swift */,
+				CF58BA1B2340DC4C00389D54 /* UserInfoData.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -600,6 +603,7 @@
 				CF79718A233D9CFF008DC550 /* ReportData.swift in Sources */,
 				CF68799A233B1F2900F2A159 /* NetwrokService.swift in Sources */,
 				CF6879A0233B1FBF00F2A159 /* CategoryDataManager.swift in Sources */,
+				CF58BA1C2340DC4C00389D54 /* UserInfoData.swift in Sources */,
 				CF6879AD233B210B00F2A159 /* ContentsCell.swift in Sources */,
 				527E38F423321C1000C01EC7 /* ExtensionUIImage.swift in Sources */,
 				4F87FFCF232896D20094CCD0 /* SettingGuideView.swift in Sources */,
