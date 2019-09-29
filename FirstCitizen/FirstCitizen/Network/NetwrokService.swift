@@ -22,9 +22,8 @@ class NetworkService {
   }
   
   static let header: HTTPHeaders = [
-    "Content-Type": "multipart/form-data",
+    "Content-Type": "application/json",
     "Authorization": "Token 9e3838aef1806fbe4b6d1edd80f28914148559af",
-    "Accept-Encoding": "gzip, deflate"
   ]
   
   static func report(data: ReportData, images: [UIImage], completion: @escaping (Bool) -> ()) {
@@ -172,19 +171,19 @@ class NetworkService {
           return
         }
         
-        let test = result[0].createdAt ?? ""
-        print("[Log4] :", test)
-        let date = Date()
-        let date2 = date.convertDateFormatter(date: test)
-        print("[Log4] :", date2)
+//        let test = result[0].createdAt ?? ""
+//        print("[Log4] :", test)
+//        let date = Date()
+//        let date2 = date.convertDateFormatter(date: test)
+//        print("[Log4] :", date2)
+//
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+//        let date3 = dateFormatter.date(from: date2)
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-        let date3 = dateFormatter.date(from: date2)
         
         
         
-        let numOfDays =
         
         completion(.success(result))
       case .failure(_):

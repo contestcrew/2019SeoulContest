@@ -71,7 +71,7 @@ open class TLAlbumPopView: UIView,PopupViewProtocol {
             let userInterfaceStyle = previousTraitCollection?.userInterfaceStyle
         {
             if userInterfaceStyle.rawValue == 2 {
-                self.popupView.backgroundColor = UIColor.systemBackground
+                self.popupView.backgroundColor = UIColor.white
             }else {
                 self.popupView.backgroundColor = UIColor.white
             }
