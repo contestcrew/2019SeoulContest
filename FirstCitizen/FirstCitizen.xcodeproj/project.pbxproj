@@ -41,10 +41,11 @@
 		5257B2A8234130BA0083AC04 /* ImagePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5257B2A7234130BA0083AC04 /* ImagePickerCell.swift */; };
 		527E38F423321C1000C01EC7 /* ExtensionUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E38F323321C1000C01EC7 /* ExtensionUIImage.swift */; };
 		527E38F62332958700C01EC7 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E38F52332958700C01EC7 /* TestData.swift */; };
+		52E4AC7823416BB800D3F427 /* SearchTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4AC7723416BB800D3F427 /* SearchTableCell.swift */; };
+		52E4AC7A23416BD400D3F427 /* LocationWithAddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4AC7923416BD400D3F427 /* LocationWithAddVC.swift */; };
 		52EA1ABD233E8E0900244D29 /* RequestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EA1ABC233E8E0900244D29 /* RequestData.swift */; };
 		52EA1AD3233FDE7300244D29 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EA1AD2233FDE7300244D29 /* ImageCell.swift */; };
 		6B36858508F29EBE5EFE4F77 /* Pods_FirstCitizen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50CCF6F72520B16B5901678A /* Pods_FirstCitizen.framework */; };
-		C173D172233F4E4400C6F448 /* LocationWithAddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C173D171233F4E4400C6F448 /* LocationWithAddVC.swift */; };
 		CF1E09D323275860006E9537 /* IncidentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1E09D223275860006E9537 /* IncidentViewController.swift */; };
 		CF1E09D523275891006E9537 /* IncidentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1E09D423275891006E9537 /* IncidentView.swift */; };
 		CF1E09D823275F33006E9537 /* IncidentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1E09D723275F33006E9537 /* IncidentCell.swift */; };
@@ -120,11 +121,12 @@
 		5257B2A7234130BA0083AC04 /* ImagePickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerCell.swift; sourceTree = "<group>"; };
 		527E38F323321C1000C01EC7 /* ExtensionUIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIImage.swift; sourceTree = "<group>"; };
 		527E38F52332958700C01EC7 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
+		52E4AC7723416BB800D3F427 /* SearchTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableCell.swift; sourceTree = "<group>"; };
+		52E4AC7923416BD400D3F427 /* LocationWithAddVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationWithAddVC.swift; sourceTree = "<group>"; };
 		52EA1ABC233E8E0900244D29 /* RequestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestData.swift; sourceTree = "<group>"; };
 		52EA1AD2233FDE7300244D29 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		80EA8319B751197666F7ABE9 /* Pods-FirstCitizen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstCitizen.release.xcconfig"; path = "Target Support Files/Pods-FirstCitizen/Pods-FirstCitizen.release.xcconfig"; sourceTree = "<group>"; };
 		A49A9086C3D192F57DEDDDD6 /* Pods-FirstCitizen.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstCitizen.debug.xcconfig"; path = "Target Support Files/Pods-FirstCitizen/Pods-FirstCitizen.debug.xcconfig"; sourceTree = "<group>"; };
-		C173D171233F4E4400C6F448 /* LocationWithAddVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationWithAddVC.swift; sourceTree = "<group>"; };
 		CF1E09D223275860006E9537 /* IncidentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncidentViewController.swift; sourceTree = "<group>"; };
 		CF1E09D423275891006E9537 /* IncidentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncidentView.swift; sourceTree = "<group>"; };
 		CF1E09D723275F33006E9537 /* IncidentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncidentCell.swift; sourceTree = "<group>"; };
@@ -268,7 +270,7 @@
 				4F87FFE22339C6D60094CCD0 /* RestroomCreateViewController.swift */,
 				4F87FFF0233B190E0094CCD0 /* RequestCreateViewController.swift */,
 				52124089233B9599002C99AD /* LocationWithMap.swift */,
-				C173D171233F4E4400C6F448 /* LocationWithAddVC.swift */,
+				52E4AC7623416AD400D3F427 /* LocationWIthAdd */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -333,6 +335,15 @@
 				5257B2A7234130BA0083AC04 /* ImagePickerCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		52E4AC7623416AD400D3F427 /* LocationWIthAdd */ = {
+			isa = PBXGroup;
+			children = (
+				52E4AC7723416BB800D3F427 /* SearchTableCell.swift */,
+				52E4AC7923416BD400D3F427 /* LocationWithAddVC.swift */,
+			);
+			path = LocationWIthAdd;
 			sourceTree = "<group>";
 		};
 		52EA1AC3233FC7C700244D29 /* Cell */ = {
@@ -587,6 +598,7 @@
 				CF687998233B1EE300F2A159 /* SplashViewController.swift in Sources */,
 				CFC17320233F4B2C0053872B /* ExtensionString.swift in Sources */,
 				4F87FFE32339C6D60094CCD0 /* RestroomCreateViewController.swift in Sources */,
+				52E4AC7A23416BD400D3F427 /* LocationWithAddVC.swift in Sources */,
 				CFF55C26233CE43F00FEF380 /* RequestDetailHelpCell.swift in Sources */,
 				4F87FFF3233B380F0094CCD0 /* RequestCreatePoliceStationCell.swift in Sources */,
 				4F870000233EF8AA0094CCD0 /* PointCouponCell.swift in Sources */,
@@ -624,6 +636,7 @@
 				CF68799A233B1F2900F2A159 /* NetwrokService.swift in Sources */,
 				CF6879A0233B1FBF00F2A159 /* CategoryDataManager.swift in Sources */,
 				CF58BA1C2340DC4C00389D54 /* UserInfoData.swift in Sources */,
+				52E4AC7823416BB800D3F427 /* SearchTableCell.swift in Sources */,
 				CF6879AD233B210B00F2A159 /* ContentsCell.swift in Sources */,
 				527E38F423321C1000C01EC7 /* ExtensionUIImage.swift in Sources */,
 				4F87FFCF232896D20094CCD0 /* SettingGuideView.swift in Sources */,
@@ -638,7 +651,6 @@
 				CF68799C233B1F4100F2A159 /* CategoryData.swift in Sources */,
 				4F87FFFC233EF4F40094CCD0 /* PointCardCell.swift in Sources */,
 				4FF966D4230C706800E869FF /* SettingProfileCell.swift in Sources */,
-				C173D172233F4E4400C6F448 /* LocationWithAddVC.swift in Sources */,
 				4F87FFE9233AF5C60094CCD0 /* RequestCreateAddressCell.swift in Sources */,
 				CF5467D1233349BC00F75DDB /* ReportViewController.swift in Sources */,
 				CFC1731C233EF0A00053872B /* TestIncidentData.swift in Sources */,
@@ -796,7 +808,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 5W72YMDK56;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -848,7 +860,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 5W72YMDK56;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
