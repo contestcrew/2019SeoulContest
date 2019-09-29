@@ -13,6 +13,10 @@ class RequestCreateViewController: UIViewController {
   
   private let tableView = UITableView()
   
+  var cell1 = RequestCreatePoliceStationCell()
+  var cell7 = RequestCreateTextAddCell()
+  var cell9 = RequestCreateTextAddCell()
+  
   var mainAdd = ""
   var detailAdd = ""
   var shortAdd = "현재 위치"
@@ -178,8 +182,9 @@ extension RequestCreateViewController: UITableViewDataSource {
       return cell
       
     case 1:
-      let cell = RequestCreatePoliceStationCell()
+      let cell = cell1
       
+//      cell.picker.selectRow(police, inComponent: police, animated: true)
       cell.picker.dataSource = self
       cell.picker.delegate = self
       
@@ -228,7 +233,7 @@ extension RequestCreateViewController: UITableViewDataSource {
       return cell
       
     case 7:
-      let cell = RequestCreateTextAddCell()
+      let cell = cell7
       
       cell.setting(type: .field)
       cell.textField.delegate = self
@@ -245,7 +250,7 @@ extension RequestCreateViewController: UITableViewDataSource {
       return cell
       
     case 9:
-      let cell = RequestCreateTextAddCell()
+      let cell = cell9
       
       cell.setting(type: .view)
       
