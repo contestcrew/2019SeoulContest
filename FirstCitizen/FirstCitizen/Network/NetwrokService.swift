@@ -56,15 +56,19 @@ class NetworkService {
           return
         }
         
-//        let date = Date()
         let test = result[0].createdAt ?? ""
-        print("[Log4] :", test.makeDisplayTime())
-//        let startDate = DateFormatter().date(from: Date().getToday())
-//
-//        let endDate = DateFormatter().date(from: test.makeDisplayTime())
-//
-//
-//        Date().displayDate(startDate: startDate!, endDate: endDate!)
+        print("[Log4] :", test)
+        let date = Date()
+        let date2 = date.convertDateFormatter(date: test)
+        print("[Log4] :", date2)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+        let date3 = dateFormatter.date(from: date2)
+        
+        
+        
+        let numOfDays =
         
         completion(.success(result))
       case .failure(_):

@@ -9,26 +9,27 @@
 import UIKit
 
 extension Date {
-  func getToday() -> String {
-    let date = Date()
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-    dateFormatter.locale = Locale(identifier: "ko_KR")
-    
-    let result = dateFormatter.string(from: date)
-    
-    return result
+  func daysBetweenDate(toDate: Date) -> Int {
+    let components = Calendar.current.dateComponents([.day], from: self, to: toDate)
+    return components.day ?? 0
   }
   
-  func displayDate(startDate: Date, endDate: Date) {
-    do {
-      let formatter = DateComponentsFormatter()
-      formatter.allowedUnits = [.day]
-      formatter.unitsStyle = .full   // 이유는 모르겠으나 꼭 필요하다!
-      
-      if let daysString = formatter.string(from: startDate, to: endDate) {
-        print("\(daysString)만큼 차이납니다.")
-      }
+  func convertDateFormatter(date: String) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"//this your string date format
+    dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
+    dateFormatter.locale = Locale(identifier: "ko_KR")
+    let convertedDate = dateFormatter.date(from: date)
+    
+    guard dateFormatter.date(from: date) != nil else {
+      assert(false, "no date from string")
+      return ""
     }
+    
+    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"///this is what you want to convert format
+    dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
+    let timeStamp = dateFormatter.string(from: convertedDate!)
+    
+    return timeStamp
   }
 }
