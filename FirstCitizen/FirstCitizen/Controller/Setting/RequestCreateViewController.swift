@@ -7,10 +7,20 @@
 //
 
 import UIKit
+import NMapsMap
 
 class RequestCreateViewController: UIViewController {
   
   private let tableView = UITableView()
+  
+  var mainAdd = ""
+  var detailAdd = ""
+  var shortAdd = "현재 위치"
+  var location = NMGLatLng()
+  
+  var category = 1
+  
+  var police = 0
   
   private let policeStation = [
     "없음",
@@ -54,7 +64,7 @@ class RequestCreateViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    print("category in create", category)
     navigationSet()
     configure()
     autoLayout()
@@ -85,6 +95,43 @@ class RequestCreateViewController: UIViewController {
   }
   
   @objc private func barButtonAction() {
+    print("didTapbarbtn")
+    
+    let titleCell = tableView.cellForRow(at: IndexPath(row: 7, section: 0)) as? RequestCreateTextAddCell
+    let title = titleCell?.textField.text ?? "오류"
+    
+    let contentCell = tableView.cellForRow(at: IndexPath(row: 9, section: 0)) as? RequestCreateTextAddCell
+    let content = contentCell?.textView.text ?? "오류"
+    
+    let lat = location.lat
+    let lng = location.lng
+    
+    let timeFormatter = DateFormatter()
+    timeFormatter.locale = Locale(identifier: "ko")
+    timeFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    let time = timeFormatter.string(from: Date())
+    
+    print("category: ", category)
+    
+    let requestData = RequestData(category: category,
+                                  police: police,
+                                  title: title,
+                                  content: content,
+                                  score: 0,
+                                  mainAdd: mainAdd,
+                                  detailAdd: detailAdd,
+                                  lat: lat,
+                                  lng: lng,
+                                  time: time)
+    
+    print(requestData)
+    
+    NetworkService.createRequest(data: requestData) {
+      if $0 {
+        self.dismiss(animated: true)
+      }
+      print($0)
+    }
     
   }
   
@@ -92,6 +139,7 @@ class RequestCreateViewController: UIViewController {
     view.backgroundColor = .white
     
     tableView.dataSource = self
+    tableView.delegate = self
     tableView.separatorStyle = .none
     view.addSubview(tableView)
     
@@ -150,7 +198,7 @@ extension RequestCreateViewController: UITableViewDataSource {
       let cell = UITableViewCell()
       
       cell.selectionStyle = .none
-      cell.textLabel?.text = "현재위치"
+      cell.textLabel?.text = "\(shortAdd) \(detailAdd)"
       cell.textLabel?.textAlignment = .center
       cell.textLabel?.upsFontHeavy(ofSize: 15)
       
@@ -230,4 +278,43 @@ extension RequestCreateViewController: UIPickerViewDelegate {
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
     return policeStation[row]
   }
+  
+  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    print("police: ", row)
+    police = row
+  }
+}
+
+extension RequestCreateViewController: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    switch indexPath.row {
+      // did tap map
+    case 4:
+      let vc = LocationWithMap()
+      vc.delegate = self
+      navigationController?.pushViewController(vc, animated: true)
+      
+      // did tap address
+    case 5:
+      ()
+      let vc = LocationWithAddVC()
+      navigationController?.pushViewController(vc, animated: true)
+
+      
+    default:
+      break
+    }
+  }
+}
+
+extension RequestCreateViewController: LocationWithMapDelegate {
+  func sendAddress(main: String, detail: String, short: String, location: NMGLatLng) {
+    self.mainAdd = main
+    self.detailAdd = detail
+    self.shortAdd = short
+    self.location = location
+    self.tableView.reloadData()
+  }
+  
+  
 }

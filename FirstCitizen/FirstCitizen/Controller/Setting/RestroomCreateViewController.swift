@@ -23,11 +23,13 @@ class RestroomCreateViewController: UIViewController {
   var shortAdd = "현재 위치"
   var location = NMGLatLng()
   
+  var category = 1
+  
   var root: CreateRoot?
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    print("category in restroom", category)
     navigationSet()
     configure()
     autoLayout()
@@ -75,8 +77,9 @@ class RestroomCreateViewController: UIViewController {
     timeFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
     let time = timeFormatter.string(from: Date())
     
+    print("category: ", category)
     
-    let requestData = RequestData(category: 1,
+    let requestData = RequestData(category: category,
                                   police: 0,
                                   title: title,
                                   content: content,
