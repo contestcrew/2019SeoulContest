@@ -9,15 +9,24 @@
 import UIKit
 
 extension Date {
-  func daysBetweenDate(toDate: Date) -> Int {
-    let components = Calendar.current.dateComponents([.day], from: self, to: toDate)
-    return components.day ?? 0
+  func daysBetweenDate(toDate: Date) -> String {
+    let components = Calendar.current.dateComponents([.second], from: self, to: toDate)
+    let absSecond = abs(components.second ?? 0)
+    
+    if absSecond < 360 {
+      return "방금 전"
+    } else if absSecond < 3600 {
+      return "\(absSecond / 60)분 전"
+    } else if absSecond < 86400 {
+      return "\(absSecond / 3600)시간 전"
+    } else {
+      return "\(absSecond / 86400)일 전"
+    }
   }
   
   func convertDateFormatter(date: String) -> String {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"//this your string date format
-    dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
     dateFormatter.locale = Locale(identifier: "ko_KR")
     let convertedDate = dateFormatter.date(from: date)
     
@@ -27,7 +36,6 @@ extension Date {
     }
     
     dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"///this is what you want to convert format
-    dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
     let timeStamp = dateFormatter.string(from: convertedDate!)
     
     return timeStamp

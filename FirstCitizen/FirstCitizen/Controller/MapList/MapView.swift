@@ -68,6 +68,7 @@ class MapView: UIView {
     
     firstAttribute()
     attribute()
+    
   }
   
   // MARK:- Methods
@@ -75,8 +76,16 @@ class MapView: UIView {
     titleLabel.text = homeIncidentData.title
     let iconURL: URL = URL(string: iconUrlStr)!
     imageView.kf.setImage(with: iconURL)
+    
     guard let createdTime = homeIncidentData.createdAt else { return }
-    dateLabel.text = createdTime
+    let date = Date()
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+    let time = date.convertDateFormatter(date: createdTime)
+    let dateTime = dateFormatter.date(from: time)
+    let daysBetweenDate = date.daysBetweenDate(toDate: dateTime!)
+    dateLabel.text = daysBetweenDate
+    
     contentsLabel.text = homeIncidentData.content
     pointLabel.text = "Point \(homeIncidentData.categoryScore) + Bonus \(homeIncidentData.score)"
     let attributedStr = NSMutableAttributedString(string: pointLabel.text!)

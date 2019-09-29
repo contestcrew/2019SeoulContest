@@ -30,7 +30,15 @@ class ExtraInfomaitionCell: UITableViewCell {
     attributedStr.addAttribute(.foregroundColor, value: UIColor.blue, range: (pointLabel.text! as NSString).range(of: "Bonus"))
     attributedStr.addAttribute(.foregroundColor, value: UIColor.orange, range: (pointLabel.text! as NSString).range(of: "Point"))
     pointLabel.attributedText = attributedStr
-    uploadTimeLabel.text = uploadTime
+    
+    let date = Date()
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+    let time = date.convertDateFormatter(date: uploadTime)
+    let dateTime = dateFormatter.date(from: time)
+    let daysBetweenDate = date.daysBetweenDate(toDate: dateTime!)
+    
+    uploadTimeLabel.text = daysBetweenDate
   }
   
   private func attribute() {
@@ -38,6 +46,7 @@ class ExtraInfomaitionCell: UITableViewCell {
     regionLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     regionLabel.dynamicFont(fontSize: 14, weight: .semibold)
     regionLabel.numberOfLines = 0
+    regionLabel.textAlignment = .right
     
     pointLabel.text = "Point 1000 + Bonus 50"
     pointLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -56,6 +65,7 @@ class ExtraInfomaitionCell: UITableViewCell {
     
     regionLabel.snp.makeConstraints {
       $0.top.equalTo(contentView).offset(margin.dynamic(1))
+      $0.leading.equalTo(self).offset(margin.dynamic(2))
       $0.trailing.equalTo(self).offset(-margin.dynamic(2))
     }
     

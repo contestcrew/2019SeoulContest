@@ -13,7 +13,7 @@ class MapCell: UITableViewCell {
   
   static let identifier = "MapCell"
   
-  private let nmapView = NMFMapView()
+  private let nmapView = NMFMapView(frame: .zero)
   private let gradientView = UIImageView()
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -55,10 +55,13 @@ class MapCell: UITableViewCell {
   }
   
   private func attribute() {
+    nmapView.mapType = .basic
+    nmapView.logoAlign = .rightTop
+    nmapView.logoMargin = UIEdgeInsets(top: 60, left: 0, bottom: 0, right: 0)
+    nmapView.minZoomLevel = 15
+    
     gradientView.image = UIImage(named: "Gradient")
     gradientView.contentMode = .scaleToFill
-    
-    nmapView.minZoomLevel = 15
   }
   
   private func layout() {

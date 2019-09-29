@@ -44,7 +44,16 @@ class ListViewCell: UITableViewCell {
     let iconImgUrlStr: String = categoryShared.categoryData[homeIncidentData.category - 1].image
     let iconImgURL: URL = URL(string: iconImgUrlStr)!
     iconImage.kf.setImage(with: iconImgURL)
-    dateLabel.text = homeIncidentData.createdAt
+    
+    guard let createdTime = homeIncidentData.createdAt else { return }
+    let date = Date()
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+    let time = date.convertDateFormatter(date: createdTime)
+    let dateTime = dateFormatter.date(from: time)
+    let daysBetweenDate = date.daysBetweenDate(toDate: dateTime!)
+    dateLabel.text = daysBetweenDate
+    
     contentsLabel.text = homeIncidentData.content
     pointLabel.text = "Point \(homeIncidentData.categoryScore) + Bonus \(homeIncidentData.score)"
     let attributedStr = NSMutableAttributedString(string: pointLabel.text!)
