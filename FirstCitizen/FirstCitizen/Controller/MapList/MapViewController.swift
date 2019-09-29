@@ -29,14 +29,18 @@ class MapViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    extractCategory()
-    showMarkers()
+    guard let token = UserDefaults.standard.string(forKey: "Token") else { return }
+    print("[Token] :", token)
+    
+    
     attribute()
   }
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     
+    extractCategory()
+    showMarkers()
     layout()
   }
   

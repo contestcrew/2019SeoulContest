@@ -24,9 +24,7 @@ extension UIAlertController {
       NetworkService.restroomReport(requestID: requsetID, completion: { result in
         switch result {
         case true:
-          DispatchQueue.main.async {
-            controller.dismiss(animated: true, completion: nil)
-          }
+          controller.dismiss(animated: true, completion: nil)
         case false:
           print(Error.self)
         }
