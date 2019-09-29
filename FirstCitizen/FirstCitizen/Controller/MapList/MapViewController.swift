@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import NMapsMap
 import Alamofire
+import Kingfisher
 
 class MapViewController: UIViewController {
   
@@ -18,6 +19,8 @@ class MapViewController: UIViewController {
   let categoryShared = CategoryDataManager.shared
   
   private var categoryList: [String] = []
+  private var iconImgDic: [Int: UIImage] = [:]
+  private var pinIconImgDic: [Int: UIImage] = [:]
   private var selectedIncidentData: IncidentData?
   
   private let vMap = MapView()
@@ -25,15 +28,15 @@ class MapViewController: UIViewController {
   // MARK:- LifeCycles
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    
+    extractCategory()
+    showMarkers()
     attribute()
   }
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     
-    extractCategory()
-    displayDatasInMap()
     layout()
     vMap.layoutIfNeeded()
   }
@@ -42,100 +45,114 @@ class MapViewController: UIViewController {
   // 카테고리 이름만 추출하여 categoryList 배열에 저장
   private func extractCategory() {
     let categoryData = categoryShared.categoryData
+    let semaphore = DispatchSemaphore(value: 0)
     
     categoryList = categoryData.map { $0.name }
-  }
-  
-  private func showFirstData() {
     
-    //TODO: 카테고리 데이터가 없을 경우 빈 화면을 보여주는 뷰를 그릴 예정
-    guard let selectedIncidentData = selectedIncidentData else { return }
-    
-    let categoryImg = categoryShared.categoryData[selectedIncidentData.category - 1].image
-    DispatchQueue.main.async {
-      self.vMap.changePreviewContainer(self.selectedIncidentData!, categoryImg)
-    }
-  }
-  
-  private func displayDatasInMap() {
-    guard let homeIncidentDatas = homeIncidentShared.incidentDatas else { return }
-    if homeIncidentDatas.count != 0 {
-      selectedIncidentData = homeIncidentDatas[0]
-    }
-    
-    var tag = 0
-    homeIncidentDatas.forEach {
-      getIconImage(incidentData: $0, tag: tag)
-      tag += 1
-    }
-  }
-  
-  // icon image url로 이미지를 가져오는 함수
-  private func getIconImage(incidentData: IncidentData, tag: Int) {
-    // ToDo 이미지 캐시처리가 필요함
-    
-    var imageUrlStr: String = ""
-    
-    categoryShared.categoryData.forEach {
-      if $0.id == incidentData.category {
-        imageUrlStr = $0.pinImage
+    // icon 이미지 최초 다운로드
+    categoryData.forEach {
+      if iconImgDic[$0.id] == nil {
+        let imageURL: URL = URL(string: $0.image)!
+        let id = $0.id
+        
+        let task = URLSession.shared.dataTask(with: imageURL) { (data, response, error) in
+          guard error == nil else { return print(error!) }
+          guard let response = response as? HTTPURLResponse,
+            // ~= 범위 사이에 있는지 확인하는 것
+            200..<400 ~= response.statusCode
+            else { return print("StatusCode is not valid") }
+          guard let data = data else { return }
+          semaphore.signal()
+          self.iconImgDic[id] = UIImage(data: data)
+        }
+        task.resume()
+        semaphore.wait()
       }
     }
     
-    let imageURL: URL = URL(string: imageUrlStr)!
-    
-    let task = URLSession.shared.dataTask(with: imageURL) { (data, response, error) in
-      guard error == nil else { return print(error!) }
-      guard let response = response as? HTTPURLResponse,
-        // ~= 범위 사이에 있는지 확인하는 것
-        200..<400 ~= response.statusCode
-        else { return print("StatusCode is not valid") }
-      guard let data = data else { return }
-      let iconImg = UIImage(data: data)
-      self.showMarkers(img: iconImg!, data: incidentData, tag: tag)
+    // pin 이미지 최초 다운로드
+    categoryData.forEach {
+      if self.pinIconImgDic[$0.id] == nil {
+        let imageURL: URL = URL(string: $0.pinImage)!
+        let id = $0.id
+        
+        let task2 = URLSession.shared.dataTask(with: imageURL) { (data, response, error) in
+          guard error == nil else { return print(error!) }
+          guard let response = response as? HTTPURLResponse,
+            // ~= 범위 사이에 있는지 확인하는 것
+            200..<400 ~= response.statusCode
+            else { return print("StatusCode is not valid") }
+          guard let data = data else { return }
+          semaphore.signal()
+          self.pinIconImgDic[id] = UIImage(data: data)
+        }
+        
+        task2.resume()
+        semaphore.wait()
+      }
     }
-    
-    task.resume()
   }
   
   // 파싱한 데이터들의 Marker를 찍는 역할을 함
-  private func showMarkers(img: UIImage, data: IncidentData, tag: Int) {
-    let lat = data.latitude
-    let lng = data.longitude
+  private func showMarkers() {
+    guard let homeIncidentDatas = homeIncidentShared.incidentDatas else { return }
+    var tag = 0
     
-    DispatchQueue.main.async {
-      let marker = NMFMarker(position: NMGLatLng(lat: lat, lng: lng), iconImage: NMFOverlayImage(image: img))
-      marker.isForceShowIcon = true
+    DispatchQueue.global(qos: .default).async {
+      var markers = [NMFMarker]()
+      var markersImgDic = [Int: NMFOverlayImage]()
       
-      // NMFOverlayTouchHandler를 설정함 (Pin Touch 이벤트를 작성)
-      let handler: NMFOverlayTouchHandler = { [weak self] overlay in
-        // 핀을 누른 위치로 카메라를 이동
-        let cameraUpdate = NMFCameraUpdate(scrollTo: marker.position)
-        cameraUpdate.animation = .easeIn
-        self?.vMap.nMapView.mapView.moveCamera(cameraUpdate)
-        let categoryImg = self!.categoryShared.categoryData[data.category - 1].image
-        self?.vMap.changePreviewContainer(data, categoryImg)
-        self?.selectedIncidentData = data
-        self?.vMap.previewContainer.isHidden = false
-        self?.vMap.firstExplainLabel.isHidden = true
-        return true
+      // 핀 이미지가 들어간 NMFOverlayImage 생성
+      self.pinIconImgDic.forEach {
+        let key = $0.key
+        if markersImgDic[key] == nil {
+          markersImgDic[key] = NMFOverlayImage(image: $0.value)
+        }
       }
       
-      marker.captionPerspectiveEnabled = true
-      marker.iconPerspectiveEnabled = true
-      marker.isHideCollidedSymbols = true
-      marker.touchHandler = handler
-      marker.userInfo = ["tag": tag]
+      homeIncidentDatas.forEach {
+        let currentIncidentData = $0
+        let lat = $0.latitude
+        let lng = $0.longitude
+        
+        let marker = NMFMarker(position: NMGLatLng(lat: lat, lng: lng), iconImage: markersImgDic[$0.category]!)
+        
+        // NMFOverlayTouchHandler를 설정함 (Pin Touch 이벤트를 작성)
+        let handler: NMFOverlayTouchHandler = { [weak self] overlay in
+          // 핀을 누른 위치로 카메라를 이동
+          let cameraUpdate = NMFCameraUpdate(scrollTo: marker.position)
+          cameraUpdate.animation = .easeIn
+          self?.vMap.nMapView.mapView.moveCamera(cameraUpdate)
+          let categoryImg = self?.iconImgDic[currentIncidentData.category]
+          self?.selectedIncidentData = currentIncidentData
+          self?.vMap.changePreviewContainer(currentIncidentData, categoryImg!)
+          
+          self?.vMap.previewContainer.isHidden = false
+          self?.vMap.firstExplainLabel.isHidden = true
+          return true
+        }
+        
+        marker.captionPerspectiveEnabled = true
+        marker.iconPerspectiveEnabled = true
+        marker.isHideCollidedSymbols = true
+        marker.touchHandler = handler
+        marker.userInfo = ["tag": tag]
+        tag += 1
+        
+        let markerWidth: CGFloat = 40
+        let markerHeight: CGFloat = 50
+        marker.width = markerWidth.dynamic(1)
+        marker.height = markerHeight.dynamic(1)
+        
+        markers.append(marker)
+      }
       
-      let markerWidth: CGFloat = 40
-      let markerHeight: CGFloat = 50
-      marker.width = markerWidth.dynamic(1)
-      marker.height = markerHeight.dynamic(1)
-      
-      marker.mapView = self.vMap.nMapView.mapView
+      DispatchQueue.main.async { [weak self] in
+        for marker in markers {
+          marker.mapView = self?.vMap.nMapView.mapView
+        }
+      }
     }
-    
-    
   }
   
   private func getCategoryList() {

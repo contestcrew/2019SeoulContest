@@ -40,5 +40,5 @@ struct IncidentData: Codable {
 
 struct Author: Codable {
   let id: Int
-  let nickname: String
+  let nickname: String?
 }

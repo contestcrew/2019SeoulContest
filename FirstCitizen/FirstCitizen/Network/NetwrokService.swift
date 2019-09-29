@@ -50,6 +50,41 @@ class NetworkService {
     }
   }
   
+  static func restroomReport(requestID: Int, completion: @escaping (Bool) -> ()) {
+    
+    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
+    
+    let urlStr = ApiUrl.ApiUrl(apiName: .incidentReportApi)
+    let url: URL = URL(string: urlStr)!
+    
+    let headers: HTTPHeaders = [
+      "Content-Type": "application/json",
+      "Authorization": "\(token)"
+    ]
+    
+    let body = """
+      {
+      "request": "\(requestID)",
+      "title": "",
+      "content": "",
+      "is_agreed_inform": "false",
+      "helped_at": "\(nowTime())",
+      }
+      """.data(using: .utf8)
+    
+    guard let data = body else { return }
+    
+    Alamofire.upload(data, to: url, method: .post, headers: headers)
+      .responseData(queue: .global()) { res in
+        switch res.result {
+        case .success(_):
+          completion(true)
+        case .failure(_):
+          completion(false)
+        }
+    }
+  }
+  
   static func report(data: ReportData, images: [UIImage], completion: @escaping (Bool) -> ()) {
     
     var imgData = [Data]()
@@ -220,7 +255,6 @@ class NetworkService {
     
     
     guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
-    //    print("[Log8] :", token)
     
     let headers: HTTPHeaders = [
       "Content-Type": "application/json",

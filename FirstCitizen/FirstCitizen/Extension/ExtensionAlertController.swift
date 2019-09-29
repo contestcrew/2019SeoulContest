@@ -18,11 +18,20 @@ extension UIAlertController {
     }
     return 1
   }
-  
-  class func restroomShow(title: String, message: String, from controller: UIViewController) {
+  class func restroomShow(title: String, message: String, requsetID: Int, from controller: UIViewController) {
     let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
     alert.addAction(UIAlertAction(title: "돕기", style: .default, handler: { _ in
-      controller.dismiss(animated: true, completion: nil)
+      NetworkService.restroomReport(requestID: requsetID, completion: { result in
+        switch result {
+        case true:
+          DispatchQueue.main.async {
+            controller.dismiss(animated: true, completion: nil)
+          }
+        case false:
+          print(Error.self)
+        }
+      })
+      
     }))
     alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: { _ in
       controller.dismiss(animated: true, completion: nil)

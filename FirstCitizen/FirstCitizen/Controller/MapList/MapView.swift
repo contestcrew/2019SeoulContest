@@ -72,10 +72,11 @@ class MapView: UIView {
   }
   
   // MARK:- Methods
-  func changePreviewContainer(_ homeIncidentData: IncidentData, _ iconUrlStr: String) {
+  func changePreviewContainer(_ homeIncidentData: IncidentData, _ iconImg: UIImage) {
     titleLabel.text = homeIncidentData.title
-    let iconURL: URL = URL(string: iconUrlStr)!
-    imageView.kf.setImage(with: iconURL)
+//    let iconURL: URL = URL(string: iconUrlStr)!
+    imageView.image = iconImg
+//    imageView.kf.setImage(with: iconURL)
     
     guard let createdTime = homeIncidentData.createdAt else { return }
     let date = Date()
