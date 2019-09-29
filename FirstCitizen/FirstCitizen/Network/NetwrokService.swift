@@ -21,11 +21,6 @@ class NetworkService {
     return timeFormatter.string(from: Date())
   }
   
-  static let header: HTTPHeaders = [
-    "Content-Type": "application/json",
-    "Authorization": "Token 9e3838aef1806fbe4b6d1edd80f28914148559af",
-  ]
-  
   static func getUserInfo(completion: @escaping (Result<UserInfoData>) -> ()) {
     guard let userID = UserDefaults.standard.value(forKey: "userID") else { return }
     
@@ -322,7 +317,12 @@ class NetworkService {
   
   static func createRequest(data: RequestData, completion: @escaping (Bool) -> ()) {
     
-    print("create Request Data: ", data)
+    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
+    
+    let headers: HTTPHeaders = [
+      "Content-Type": "application/json",
+      "Authorization": "\(token)"
+    ]
     
     var bodyData: Data
     if data.police == 0 {
@@ -360,7 +360,7 @@ class NetworkService {
     Alamofire.upload(bodyData,
                      to: ApiUrl.ApiUrl(apiName: .requestCreate),
                      method: .post,
-                     headers: header)
+                     headers: headers)
       .response { (res) in
         switch res.response?.statusCode {
         case 201:
