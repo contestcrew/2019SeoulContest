@@ -37,7 +37,6 @@ class MapViewController: UIViewController {
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     
-    
     layout()
     vMap.layoutIfNeeded()
   }
@@ -66,10 +65,8 @@ class MapViewController: UIViewController {
           semaphore.signal()
           self.iconImgDic[id] = UIImage(data: data)
         }
-        
         task.resume()
         semaphore.wait()
-        
       }
     }
     
