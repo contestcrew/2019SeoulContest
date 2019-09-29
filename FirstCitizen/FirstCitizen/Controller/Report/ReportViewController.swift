@@ -75,7 +75,6 @@ extension ReportViewController: UITextFieldDelegate {
 
 extension ReportViewController: TLPhotosPickerViewControllerDelegate {
   func dismissPhotoPicker(withTLPHAssets: [TLPHAsset]) {
-    print("photos: ", withTLPHAssets)
     self.reportView.selectedAssets = withTLPHAssets
   }
 }
