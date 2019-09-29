@@ -99,11 +99,11 @@ class RestroomCreateViewController: UIViewController {
                                   lng: lng,
                                   time: time)
     
-    print(requestData)
-    
     NetworkService.createRequest(data: requestData) {
       if $0 {
-        self.dismiss(animated: true)
+        DispatchQueue.main.async {
+          self.dismiss(animated: true)
+        }
       }
       print($0)
     }
@@ -233,7 +233,6 @@ extension RestroomCreateViewController: UITableViewDelegate {
       
       // did tap address
     case 3:
-      ()
       let vc = LocationWithAddVC()
       navigationController?.pushViewController(vc, animated: true)
 

@@ -135,7 +135,7 @@ class RequestCreateViewController: UIViewController {
                                   police: police,
                                   title: title,
                                   content: content,
-                                  score: 0,
+                                  score: 50,
                                   mainAdd: mainAdd,
                                   detailAdd: detailAdd,
                                   lat: lat,
@@ -146,7 +146,9 @@ class RequestCreateViewController: UIViewController {
     
     NetworkService.createRequestWithImage(data: requestData, images: imageArr) {
       if $0 {
-        self.dismiss(animated: true)
+        DispatchQueue.main.async {
+          self.dismiss(animated: true)
+        }
       }
       print($0)
     }
@@ -327,10 +329,9 @@ extension RequestCreateViewController: UITableViewDelegate {
       
       // did tap address
     case 5:
-      ()
       let vc = LocationWithAddVC()
       navigationController?.pushViewController(vc, animated: true)
-
+      
       
     default:
       break

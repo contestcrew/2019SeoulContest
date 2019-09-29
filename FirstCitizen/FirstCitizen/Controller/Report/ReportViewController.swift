@@ -53,6 +53,11 @@ extension ReportViewController: ReportViewDelegate {
     let data = ReportData(request: origin.id, author: origin.author, title: title, content: content, isAgreedInform: isAgree, helpedAt: "", createdAt: "", updatedAt: "", images: [])
     
     NetworkService.report(data: data, images: images) {
+      if $0 {
+        DispatchQueue.main.async {
+          self.dismiss(animated: true)
+        }
+      }
       print($0)
     }
   }
