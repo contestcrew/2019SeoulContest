@@ -254,7 +254,7 @@ class NetworkService {
   static func getSettingRequestData(completion: @escaping (Result<[IncidentData]>) -> ()) {
     
     
-    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
+    guard let token = UserDefaults.standard.string(forKey: "Token") else { return }
     
     let headers: HTTPHeaders = [
       "Content-Type": "application/json",
