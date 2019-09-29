@@ -84,7 +84,7 @@ class IncidentView: UIView {
     }
     
     backButton.snp.makeConstraints {
-      $0.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(margin.dynamic(4))
+      $0.top.equalTo(self.safeAreaLayoutGuide.snp.top)
       $0.leading.equalTo(self.safeAreaLayoutGuide.snp.leading).offset(margin.dynamic(1))
       $0.width.height.equalTo(margin.dynamic(3) + 5)
     }

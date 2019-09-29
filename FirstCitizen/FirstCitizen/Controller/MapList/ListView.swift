@@ -43,6 +43,10 @@ class ListView: UIView {
     searchTextField.layer.borderColor = UIColor.appColor(.appLayerBorderColor).cgColor
     searchTextField.layer.borderWidth = 3
     searchTextField.delegate = self
+    searchTextField.rightView = UIImageView(image: #imageLiteral(resourceName: "search"))
+    searchTextField.rightView?.frame.inset(by: UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15))
+    searchTextField.rightViewMode = .always
+    searchTextField.returnKeyType = .done
     
     categoryCollectionView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     categoryCollectionView.dataSource = self
@@ -84,6 +88,11 @@ extension ListView: UITextFieldDelegate {
     } else {
       return false
     }
+  }
+  
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    textField.resignFirstResponder()
+    return true
   }
 }
 
