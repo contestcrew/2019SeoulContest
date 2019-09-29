@@ -22,9 +22,8 @@ class NetworkService {
   }
   
   static let header: HTTPHeaders = [
-    "Content-Type": "multipart/form-data",
+    "Content-Type": "application/json",
     "Authorization": "Token 9e3838aef1806fbe4b6d1edd80f28914148559af",
-    "Accept-Encoding": "gzip, deflate"
   ]
   
   static func report(data: ReportData, images: [UIImage], completion: @escaping (Bool) -> ()) {
@@ -165,10 +164,27 @@ class NetworkService {
       
       switch response.result {
       case .success(let data):
-        guard let result = try? JSONDecoder().decode([IncidentData].self, from: data) else {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .millisecondsSince1970
+        guard let result = try? decoder.decode([IncidentData].self, from: data) else {
           completion(.failure(ErrorType.NoData))
           return
         }
+        
+//        let test = result[0].createdAt ?? ""
+//        print("[Log4] :", test)
+//        let date = Date()
+//        let date2 = date.convertDateFormatter(date: test)
+//        print("[Log4] :", date2)
+//
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+//        let date3 = dateFormatter.date(from: date2)
+        
+        
+        
+        
+        
         completion(.success(result))
       case .failure(_):
         print(ErrorType.networkErr)
@@ -197,7 +213,9 @@ class NetworkService {
       .responseData { response in
         switch response.result {
         case .success(let data):
-          guard let result = try? JSONDecoder().decode([IncidentData].self, from: data) else {
+          let decoder = JSONDecoder()
+          decoder.dateDecodingStrategy = .secondsSince1970
+          guard let result = try? decoder.decode([IncidentData].self, from: data) else {
             completion(.failure(ErrorType.NoData))
             return
           }
@@ -230,7 +248,9 @@ class NetworkService {
       .responseData { response in
         switch response.result {
         case .success(let data):
-          guard let result = try? JSONDecoder().decode([ReportData].self, from: data) else {
+          let decoder = JSONDecoder()
+          decoder.dateDecodingStrategy = .secondsSince1970
+          guard let result = try? decoder.decode([ReportData].self, from: data) else {
             completion(.failure(ErrorType.networkErr))
             return
           }

@@ -225,7 +225,7 @@ open class TLPhotosPickerViewController: UIViewController {
             let userInterfaceStyle = traitCollection.userInterfaceStyle
             let image = TLBundle.podBundleImage(named: "pop_arrow")
             if userInterfaceStyle.rawValue == 2 {
-                self.popArrowImageView.image = image?.colorMask(color: .systemBackground)
+                self.popArrowImageView.image = image?.colorMask(color: .white)
                 self.view.backgroundColor = .black
                 self.collectionView.backgroundColor = .black
             }else {
