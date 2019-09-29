@@ -53,7 +53,7 @@ class PointCardCell: UITableViewCell {
     cardView.layer.cornerRadius = 16
     cardView.layer.masksToBounds = true
     
-    titleLabel.text = "업's"
+    titleLabel.text = "First Citizen"
     titleLabel.textColor = .white
     titleLabel.upsFontHeavy(ofSize: 25)
     
