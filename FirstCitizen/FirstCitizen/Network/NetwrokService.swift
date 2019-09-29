@@ -47,8 +47,8 @@ class NetworkService {
   
   static func restroomReport(requestID: Int, completion: @escaping (Bool) -> ()) {
     
-    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
-    
+    guard let token = UserDefaults.standard.string(forKey: "Token") else { return }
+    print("[Toekn] restroom :", token)
     let urlStr = ApiUrl.ApiUrl(apiName: .incidentReportApi)
     let url: URL = URL(string: urlStr)!
     
