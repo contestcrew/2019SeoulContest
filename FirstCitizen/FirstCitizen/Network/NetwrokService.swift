@@ -450,10 +450,14 @@ class NetworkService {
       .responseData { (res) in
         switch res.result {
         case .success(let data):
-          let result = try? JSONDecoder().decode(NaverAdd.self, from: data)
-          print(result)
+          guard let result = try? JSONDecoder().decode(NaverAdd.self, from: data) else {
+            completion(.failure(ErrorType.NoData))
+            return
+          }
+          completion(.success(result))
         case .failure(let err):
           dump(err)
+          completion(.failure(ErrorType.networkErr))
         }
         
     }

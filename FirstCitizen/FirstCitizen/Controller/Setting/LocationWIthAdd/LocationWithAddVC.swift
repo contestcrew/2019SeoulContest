@@ -18,6 +18,12 @@ class LocationWithAddVC: UIViewController {
   var location = NMGLatLng()
   
   let locationManager = CLLocationManager()
+  
+  var tableData: NaverAdd? {
+    didSet {
+      tableView.reloadData()
+    }
+  }
 
   lazy var tableView: UITableView = {
     let tb = UITableView()
@@ -114,7 +120,7 @@ class LocationWithAddVC: UIViewController {
     NetworkService.searchAddress(query: sender.text ?? "", location: location) { (result) in
       switch result {
       case .success(let data):
-        print(data)
+        self.tableData = data
       case .failure(let err):
         dump(err)
       }
@@ -123,8 +129,8 @@ class LocationWithAddVC: UIViewController {
   
   // MARK: -  searchTablCell 의 Button 클릭했을때 alert 띄우기
   @objc func didTapButton(_ sender: UIButton) {
-    
-    let alert = UIAlertController(title: "상세주소 입력", message: "성동구 성수이로22길", preferredStyle: .alert)
+    let add = tableData?.places[sender.tag].roadAddress
+    let alert = UIAlertController(title: "상세주소 입력", message: add, preferredStyle: .alert)
     let enter = UIAlertAction(title: "입력", style: .default)
     let cancel = UIAlertAction(title: "취소", style: .destructive)
     alert.view.tintColor = UIColor.darkGray
@@ -216,15 +222,23 @@ class LocationWithAddVC: UIViewController {
 extension LocationWithAddVC: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     // MARK: - 검색할때 들어와야할 cell 의 갯수
-    return 3
+    return tableData?.meta.count ?? 1
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableCell.identifire, for: indexPath) as! SearchTableCell
     cell.selectionStyle = .none
-    
+    if tableData == nil {
+      cell.searchBtn.setTitle("검색어를 입력하세요.", for: .normal)
+    } else {
+      let main = tableData?.places[indexPath.row]
+      let name = main?.name
+      cell.searchBtn.tag = indexPath.row
+      cell.searchBtn.setTitle("\(name ?? "애러")", for: .normal)
+      cell.searchBtn.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
+    }
     // MARK: -  searchTableCell의 button의 addTarget
-    cell.searchBtn.addTarget(self, action: #selector(didTapButton(_:)), for: .touchDown)
+    
     return cell
   }
   
