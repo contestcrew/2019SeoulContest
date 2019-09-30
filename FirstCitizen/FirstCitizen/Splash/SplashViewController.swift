@@ -41,11 +41,11 @@ class SplashViewController: UIViewController {
   }
   
   private func getCategoryList() {
-    NetworkService.getCategoryList { [unowned self] result in
+    NetworkService.getCategoryList { [weak self] result in
       switch result {
       case .success(let data):
-        self.categoryShared.categoryData = data
-        self.getIncidentDatas()
+        self?.categoryShared.categoryData = data
+        self?.getIncidentDatas()
       case .failure(let err):
         print(err.localizedDescription)
       }

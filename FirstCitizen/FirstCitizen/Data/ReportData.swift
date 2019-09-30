@@ -9,6 +9,7 @@
 import Foundation
 
 struct ReportData: Codable {
+  let id: Int
   let request: Int
   let author: Author
   let title: String
@@ -18,8 +19,10 @@ struct ReportData: Codable {
   let createdAt: String?
   let updatedAt: String?
   let images: [String]?
+  let isSelected: Bool
   
   enum CodingKeys: String, CodingKey {
+    case id
     case request
     case author
     case title
@@ -29,6 +32,7 @@ struct ReportData: Codable {
     case createdAt = "created_at"
     case updatedAt = "updated_at"
     case images
+    case isSelected = "is_select"
   }
   
   
