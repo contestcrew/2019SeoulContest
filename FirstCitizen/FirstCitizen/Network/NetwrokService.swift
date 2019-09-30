@@ -297,6 +297,7 @@ class NetworkService {
     
     let body = """
       {
+      "id": "\(requestID)",
       "category": "\(incidentData.category)",
       "title": "\(incidentData.title)",
       "content": "\(incidentData.content)",
