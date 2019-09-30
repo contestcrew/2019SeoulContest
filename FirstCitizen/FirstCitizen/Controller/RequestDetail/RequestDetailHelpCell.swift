@@ -43,10 +43,12 @@ class RequestDetailHelpCell: UITableViewCell {
     if reportShared.isAcceptOneThings {
       if sender.titleLabel?.text == "완료" {
         acceptButton.setTitleColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), for: .normal)
+        acceptButton.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         denyButton.isHidden = true
       } else if sender.titleLabel?.text == "거부" {
         acceptButton.setTitle("수락", for: .normal)
         acceptButton.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
+        acceptButton.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         denyButton.isHidden = true
         reportShared.isAcceptOneThings = false
       }
@@ -54,7 +56,9 @@ class RequestDetailHelpCell: UITableViewCell {
       if sender.titleLabel?.text == "수락" {
         acceptButton.setTitle("완료", for: .normal)
         acceptButton.setTitleColor(#colorLiteral(red: 0, green: 0.01932368055, blue: 1, alpha: 1), for: .normal)
+        acceptButton.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         denyButton.isHidden = false
+        denyButton.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         reportShared.isAcceptOneThings = true
         
         NetworkService.updateRequestHelpData(requestID: reportShared.relatedRequestIdx, incidentData: reportShared.relatedRequestData!)
@@ -62,6 +66,7 @@ class RequestDetailHelpCell: UITableViewCell {
       } else {
         acceptButton.setTitle("수락", for: .normal)
         acceptButton.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
+        acceptButton.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         denyButton.isHidden = true
       }
     }
@@ -98,16 +103,18 @@ class RequestDetailHelpCell: UITableViewCell {
       acceptButton.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
       acceptButton.titleLabel?.dynamicFont(fontSize: 20, weight: .heavy)
       acceptButton.addTarget(self, action: #selector(touchUpAcceptButton(_:)), for: .touchUpInside)
-      
+      acceptButton.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
       denyButton.setTitle("거부", for: .normal)
       denyButton.setTitleColor(#colorLiteral(red: 1, green: 0, blue: 0, alpha: 1), for: .normal)
       denyButton.titleLabel?.dynamicFont(fontSize: 20, weight: .heavy)
       denyButton.addTarget(self, action: #selector(touchUpAcceptButton(_:)), for: .touchUpInside)
       denyButton.isHidden = true
+      denyButton.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     } else {
       acceptButton.setImage(#imageLiteral(resourceName: "arrow"), for: .normal)
       acceptButton.contentMode = .scaleAspectFit
       acceptButton.titleLabel?.dynamicFont(fontSize: 14, weight: .medium)
+      acceptButton.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     }
   }
   
