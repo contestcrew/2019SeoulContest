@@ -13,8 +13,8 @@ class ReportHelpDetailViewController: UIViewController {
   var reportHelpDetailData: ReportData?
   
   private let backButton = UIButton()
+  private let selectButton = UIButton()
   var reportHelpDetailTableView = UITableView()
-  
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -27,10 +27,21 @@ class ReportHelpDetailViewController: UIViewController {
     self.dismiss(animated: true, completion: nil)
   }
   
+  @objc private func touchUpSelectButton() {
+    
+  }
+  
   private func attribute() {
     self.view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     backButton.setImage(#imageLiteral(resourceName: "Back_Button"), for: .normal)
     backButton.addTarget(self, action: #selector(touchUpBackButton), for: .touchUpInside)
+    
+    selectButton.setTitle("선택", for: .normal)
+    selectButton.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
+    selectButton.backgroundColor = UIColor.appColor(.appButtonColor)
+    selectButton.layer.cornerRadius = 10
+    selectButton.layer.borderWidth = 2
+    selectButton.addTarget(self, action: #selector(touchUpSelectButton), for: .touchUpInside)
     
     reportHelpDetailTableView.separatorStyle = .none
     reportHelpDetailTableView.dataSource = self
@@ -42,6 +53,7 @@ class ReportHelpDetailViewController: UIViewController {
   private func layout() {
     let margin: CGFloat = 10
     view.addSubview(backButton)
+    view.addSubview(selectButton)
     view.addSubview(reportHelpDetailTableView)
     
     backButton.snp.makeConstraints {
@@ -50,11 +62,18 @@ class ReportHelpDetailViewController: UIViewController {
       $0.width.height.equalTo(margin.dynamic(3) + 5)
     }
     
+    selectButton.snp.makeConstraints {
+      $0.leading.equalTo(view).offset(margin.dynamic(2))
+      $0.trailing.equalTo(view).offset(-margin.dynamic(2))
+      $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-margin.dynamic(1))
+      $0.height.equalTo(margin.dynamic(5))
+    }
+    
     reportHelpDetailTableView.snp.makeConstraints {
       $0.top.equalTo(backButton.snp.bottom).offset(margin.dynamic(2))
       $0.leading.equalTo(view).offset(margin.dynamic(1))
       $0.trailing.equalTo(view).offset(-margin.dynamic(1))
-      $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+      $0.bottom.equalTo(selectButton.snp.top)
     }
   }
 }

@@ -114,7 +114,6 @@ class RequestDetailHelpCell: UITableViewCell {
       acceptButton.setImage(#imageLiteral(resourceName: "arrow"), for: .normal)
       acceptButton.contentMode = .scaleAspectFit
       acceptButton.titleLabel?.dynamicFont(fontSize: 14, weight: .medium)
-      acceptButton.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     }
   }
   
