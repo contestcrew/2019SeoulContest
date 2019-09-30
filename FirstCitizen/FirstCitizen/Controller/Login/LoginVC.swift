@@ -171,8 +171,10 @@ class LoginVC: UIViewController {
         guard let naviVC = presentedVC.viewControllers?[3] as? UINavigationController else { return }
         guard let vc = naviVC.viewControllers[0] as? SettingViewController else { return }
         
+        let userShared = UserInfoManager.shared
+        userShared.userInfo = data
+
         DispatchQueue.main.async {
-          vc.userInfo = data
           vc.isSign = false
           vc.tableView.reloadData()
           self.dismiss(animated: true)

@@ -79,7 +79,9 @@ extension RequestDetailCell: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: RequestDetailHelpCell.identifier, for: indexPath) as! RequestDetailHelpCell
-    cell.cellModify(reportData: reportShared.reportDatas[indexPath.row])
+    NetworkService.getUserMannerScore(userID: reportShared.reportDatas[indexPath.row].author.id) { score in
+      cell.cellModify(reliablity: score, reportData: self.reportShared.reportDatas[indexPath.row])
+    }
     cell.selectionStyle = .none
     return cell
   }
