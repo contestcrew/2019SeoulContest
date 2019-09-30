@@ -58,6 +58,9 @@ class MainTabBarController: UITabBarController {
   }
   
   @objc private func pointDidTap(_ sender: UIButton) {
+    if isOther {
+      isPosition.toggle()
+    }
     isOther = false
     
     guard let _ = UserDefaults.standard.object(forKey: "Token") as? String else {
@@ -69,6 +72,8 @@ class MainTabBarController: UITabBarController {
   }
   
   @objc private func mapListDidTap(_ sender: UIButton) {
+    isOther = true
+    
     switch isPosition {
     case true:
       MainTabBarController.vTabBarButton.mapListButton.setImage(UIImage(named: "TabBarList"), for: .normal)
@@ -79,12 +84,15 @@ class MainTabBarController: UITabBarController {
       self.selectedViewController = vcMap
     }
     
-    guard isOther else { return isOther = true }
     isPosition.toggle()
   }
   
   @objc private func settingDidTap(_ sender: UIButton) {
+    if isOther {
+      isPosition.toggle()
+    }
     isOther = false
+    
     self.selectedViewController = self.vcSetting
   }
   
