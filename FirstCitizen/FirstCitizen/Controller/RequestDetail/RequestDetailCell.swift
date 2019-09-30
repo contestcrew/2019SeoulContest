@@ -31,7 +31,7 @@ class RequestDetailCell: UITableViewCell {
   }
   
   @objc private func touchUpShowButton(_ sender: UIButton) {
-    delegate?.touchUpShowButton(tag: sender.tag)
+    
   }
   
   private func attribute() {
@@ -90,8 +90,6 @@ extension RequestDetailCell: UITableViewDataSource {
     let cell = tableView.dequeueReusableCell(withIdentifier: RequestDetailHelpCell.identifier, for: indexPath) as! RequestDetailHelpCell
     NetworkService.getUserMannerScore(userID: reportShared.reportDatas[indexPath.row].author.id) { score in
       cell.cellModify(reliablity: score, reportData: self.reportShared.reportDatas[indexPath.row])
-      cell.acceptButton.tag = indexPath.row
-      cell.acceptButton.addTarget(self, action: #selector(self.touchUpShowButton(_:)), for: .touchUpInside)
     }
     cell.selectionStyle = .none
     return cell
@@ -101,6 +99,10 @@ extension RequestDetailCell: UITableViewDataSource {
 }
 
 extension RequestDetailCell: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    delegate?.touchUpShowButton(tag: indexPath.row)
+  }
+  
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
     return 100
