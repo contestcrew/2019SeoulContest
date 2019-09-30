@@ -7,31 +7,27 @@
 //
 
 import UIKit
-import MapKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
   
   var window: UIWindow?
+  let vc = SplashViewController()
   
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    
     runApp()
-    
     return true
   }
   
   func runApp() {
-    let vc = SplashViewController()
     
     window = UIWindow(frame: UIScreen.main.bounds)
     window?.rootViewController = vc
     window?.makeKeyAndVisible()
   }
   
-  func applicationDidBecomeActive(_ application: UIApplication) {
-    runApp()
-  }
-  
 }
+
+
+
