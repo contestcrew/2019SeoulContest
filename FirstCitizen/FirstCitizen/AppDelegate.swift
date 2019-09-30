@@ -7,25 +7,31 @@
 //
 
 import UIKit
+import MapKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
   
   var window: UIWindow?
   
+  
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
-    window = UIWindow(frame: UIScreen.main.bounds)
-    
-    window?.rootViewController = SplashViewController()
-//    window?.rootViewController = UINavigationController(rootViewController: LoginVC())
-    window?.makeKeyAndVisible()
-    
-//    NetworkService.report {
-//      print($0)
-//    }
+    runApp()
     
     return true
   }
+  
+  func runApp() {
+    let vc = SplashViewController()
+    
+    window = UIWindow(frame: UIScreen.main.bounds)
+    window?.rootViewController = vc
+    window?.makeKeyAndVisible()
+  }
+  
+  func applicationDidBecomeActive(_ application: UIApplication) {
+    runApp()
+  }
+  
 }
-
