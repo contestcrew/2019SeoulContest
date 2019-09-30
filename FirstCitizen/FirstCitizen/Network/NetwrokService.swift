@@ -116,7 +116,7 @@ class NetworkService {
     let url = ApiUrl.ApiUrl(apiName: .incidentReportApi)
     
     let multiData = MultipartFormData()
-    multiData.append("1".data(using: .utf8)!, withName: "request")
+    multiData.append("\(data.request)".data(using: .utf8)!, withName: "request")
     multiData.append("\(data.author)".data(using: .utf8)!, withName: "author")
     multiData.append(data.title.data(using: .utf8)!, withName: "title")
     multiData.append(data.content.data(using: .utf8)!, withName: "content")
