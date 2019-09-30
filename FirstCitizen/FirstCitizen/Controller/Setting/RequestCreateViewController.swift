@@ -85,9 +85,18 @@ class RequestCreateViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     print("category in create", category)
+    view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap(_:))))
     navigationSet()
     configure()
     autoLayout()
+  }
+  
+  @objc func handleTap(_ sender: UITapGestureRecognizer) {
+    if sender.state == .ended {
+      view.endEditing(true)
+      tableView.endEditing(true)
+    }
+    sender.cancelsTouchesInView = false
   }
   
   private func navigationSet() {
@@ -336,6 +345,7 @@ extension RequestCreateViewController: UITableViewDelegate {
       // did tap address
     case 5:
       let vc = LocationWithAddVC()
+      vc.delegate = self
       navigationController?.pushViewController(vc, animated: true)
       
       
@@ -348,6 +358,18 @@ extension RequestCreateViewController: UITableViewDelegate {
 
 extension RequestCreateViewController: LocationWithMapDelegate {
   func sendAddress(main: String, detail: String, short: String, location: NMGLatLng) {
+    self.mainAdd = main
+    self.detailAdd = detail
+    self.shortAdd = short
+    self.location = location
+    self.tableView.reloadData()
+  }
+  
+  
+}
+
+extension RequestCreateViewController: LocationWithAddVCDelegate {
+  func sendAdd(main: String, detail: String, short: String, location: NMGLatLng) {
     self.mainAdd = main
     self.detailAdd = detail
     self.shortAdd = short

@@ -41,9 +41,18 @@ class RestroomCreateViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     print("category in restroom", category)
+    view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap(_:))))
     navigationSet()
     configure()
     autoLayout()
+  }
+  
+  @objc func handleTap(_ sender: UITapGestureRecognizer) {
+    if sender.state == .ended {
+      view.endEditing(true)
+      tableView.endEditing(true)
+    }
+    sender.cancelsTouchesInView = false
   }
   
   private func navigationSet() {
@@ -240,6 +249,7 @@ extension RestroomCreateViewController: UITableViewDelegate {
       // did tap address
     case 3:
       let vc = LocationWithAddVC()
+      vc.delegate = self
       navigationController?.pushViewController(vc, animated: true)
 
       
@@ -252,6 +262,17 @@ extension RestroomCreateViewController: UITableViewDelegate {
 
 extension RestroomCreateViewController: LocationWithMapDelegate {
   func sendAddress(main: String, detail: String, short: String, location: NMGLatLng) {
+    self.mainAdd = main
+    self.detailAdd = detail
+    self.shortAdd = short
+    self.location = location
+    self.tableView.reloadData()
+  }
+  
+}
+
+extension RestroomCreateViewController: LocationWithAddVCDelegate {
+  func sendAdd(main: String, detail: String, short: String, location: NMGLatLng) {
     self.mainAdd = main
     self.detailAdd = detail
     self.shortAdd = short

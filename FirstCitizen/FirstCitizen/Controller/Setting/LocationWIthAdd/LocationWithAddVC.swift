@@ -11,9 +11,15 @@ import SnapKit
 import NMapsMap
 import MapKit
 
+protocol LocationWithAddVCDelegate: class {
+  func sendAdd(main: String, detail: String, short: String, location: NMGLatLng)
+}
+
 // MARK: - LocationWithAddVC
 
 class LocationWithAddVC: UIViewController {
+  
+  weak var delegate: LocationWithAddVCDelegate?
   
   var location = NMGLatLng()
   
@@ -99,6 +105,10 @@ class LocationWithAddVC: UIViewController {
     setupNavigation()
   }
   
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    view.endEditing(true)
+  }
+  
   // MARK: -  textfield tap했을때 tableView 나옵니다
   @objc private func didTapTF(_ sender: UITextField) {
     
@@ -129,9 +139,18 @@ class LocationWithAddVC: UIViewController {
   
   // MARK: -  searchTablCell 의 Button 클릭했을때 alert 띄우기
   @objc func didTapButton(_ sender: UIButton) {
-    let add = tableData?.places[sender.tag].roadAddress
+    let add = tableData?.places[sender.tag].jibunAddress ?? ""
+    let lat = Double(tableData?.places[sender.tag].y ?? "0") ?? 0
+    let lng = Double(tableData?.places[sender.tag].x ?? "0") ?? 0
+    
     let alert = UIAlertController(title: "상세주소 입력", message: add, preferredStyle: .alert)
-    let enter = UIAlertAction(title: "입력", style: .default)
+    let enter = UIAlertAction(title: "입력", style: .default, handler: { (_) in
+      if alert.textFields?.first?.text != nil{
+        let detailAdd = (alert.textFields?.first?.text)!
+        self.delegate?.sendAdd(main: add, detail: detailAdd, short: add, location: NMGLatLng(lat: lat, lng: lng))
+        self.navigationController?.popViewController(animated: true)
+      }
+    })
     let cancel = UIAlertAction(title: "취소", style: .destructive)
     alert.view.tintColor = UIColor.darkGray
     alert.addAction(enter)
