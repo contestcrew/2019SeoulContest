@@ -47,6 +47,29 @@ class NetworkService {
     }
   }
   
+  static func getUserMannerScore(userID: Int, completion: @escaping (Int) -> ()) {
+    
+    let urlStr = ApiUrl.ApiUrl(apiName: .userInfoApi)
+    let fullUrlStr = "\(urlStr)\(userID)"
+    let url: URL = URL(string: fullUrlStr)!
+    
+    let req = Alamofire.request(url, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil)
+    
+    req.validate()
+      .responseData { response in
+        switch response.result {
+        case .success(let data):
+          guard let result = try? JSONDecoder().decode(UserInfoData.self, from: data) else {
+            print(ErrorType.NoData)
+            return
+          }
+          completion(result.mannerScore)
+        case .failure(_):
+          print(ErrorType.networkErr)
+        }
+    }
+  }
+  
   static func restroomReport(requestID: Int, completion: @escaping (Bool) -> ()) {
     
     guard let token = UserDefaults.standard.string(forKey: "Token") else { return }
@@ -168,9 +191,7 @@ class NetworkService {
         
         switch response.result {
         case .success(let data):
-          let decoder = JSONDecoder()
-          decoder.dateDecodingStrategy = .millisecondsSince1970
-          guard let result = try? decoder.decode([IncidentData].self, from: data) else {
+          guard let result = try? JSONDecoder().decode([IncidentData].self, from: data) else {
             completion(.failure(ErrorType.NoData))
             return
           }
@@ -216,9 +237,7 @@ class NetworkService {
       .responseData { response in
         switch response.result {
         case .success(let data):
-          let decoder = JSONDecoder()
-          decoder.dateDecodingStrategy = .secondsSince1970
-          guard let result = try? decoder.decode([IncidentData].self, from: data) else {
+          guard let result = try? JSONDecoder().decode([IncidentData].self, from: data) else {
             completion(.failure(ErrorType.NoData))
             return
           }
@@ -251,9 +270,7 @@ class NetworkService {
       .responseData { response in
         switch response.result {
         case .success(let data):
-          let decoder = JSONDecoder()
-          decoder.dateDecodingStrategy = .secondsSince1970
-          guard let result = try? decoder.decode([ReportData].self, from: data) else {
+          guard let result = try? JSONDecoder().decode([ReportData].self, from: data) else {
             completion(.failure(ErrorType.networkErr))
             return
           }
@@ -264,6 +281,60 @@ class NetworkService {
           print(ErrorType.networkErr)
         }
     }
+  }
+  
+  static func updateRequestHelpData(requestID: Int, incidentData: IncidentData) {
+    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
+    
+    let headers: HTTPHeaders = [
+      "Content-Type": "application/json",
+      "Authorization": "\(token)"
+    ]
+    
+    let urlStr = ApiUrl.ApiUrl(apiName: .incidentRequestApi)
+    let fullUrlStr = "\(urlStr)\(requestID)"
+    let url: URL = URL(string: fullUrlStr)!
+    
+    let body = """
+      {
+      "category": "\(incidentData.category)",
+      "title": "\(incidentData.title)",
+      "content": "\(incidentData.content)",
+      "status": "진행중"
+      }
+      """.data(using: .utf8)
+    
+    guard let data = body else { return }
+    
+    Alamofire.upload(data, to: url, method: .patch, headers: headers)
+      .uploadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
+        print("Upload Porgress : \(progress.fractionCompleted)")
+    }
+      .validate { request, response, data in
+        return .success
+    }
+      .responseJSON { response in
+        debugPrint(response)
+    }
+  }
+  
+  static func updateReportHelpData(requestID: Int) {
+    
+    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
+    
+    let headers: HTTPHeaders = [
+      "Content-Type": "application/json",
+      "Authorization": "\(token)"
+    ]
+    
+    let parameters: [String: Int] = ["request": requestID]
+    
+    let urlStr = ApiUrl.ApiUrl(apiName: .incidentReportApi)
+    let url: URL = URL(string: urlStr)!
+    
+    let req = Alamofire.request(url, method: .patch, parameters: parameters, encoding: URLEncoding.default, headers: headers)
+    
+    req.validate()
   }
   
   static func createRequest(data: RequestData, completion: @escaping (Bool) -> ()) {

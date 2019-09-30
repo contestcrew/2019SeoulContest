@@ -14,5 +14,9 @@ class ReportDataManager {
   private init() {}
   
   var reportCategory: String = ""
+  var isAcceptOneThings: Bool = false
+  var acceptReportIdx: Int = 0
+  var relatedRequestIdx: Int = 0
+  var relatedRequestData: IncidentData?
   var reportDatas: [ReportData] = []
 }
