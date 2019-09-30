@@ -117,4 +117,17 @@ extension UIAlertController {
     alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
     controller.present(alert, animated: true)
   }
+  
+  class func killApp(title: String, message: String, from controller: UIViewController) {
+    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+    
+    alert.addAction(UIAlertAction(title: "확인", style: .cancel, handler: { _ in
+      controller.dismiss(animated: true, completion: nil)
+      UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
+    }))
+    controller.show(alert, sender: nil)
+  }
+  
 }
+
+
