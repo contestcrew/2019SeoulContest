@@ -14,7 +14,7 @@ class TitleCell: UITableViewCell {
   
   private let titleLabel = UILabel()
   private let iconImageView = UIImageView()
-  private let titleUnderLineLabel = UILabel()
+  let titleUnderLineLabel = UILabel()
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -25,8 +25,12 @@ class TitleCell: UITableViewCell {
   
   func modifyProperties(_ title: String, _ iconImageStr: String) {
     titleLabel.text = title
-    let iconURL = URL(string: iconImageStr)!
-    self.iconImageView.kf.setImage(with: iconURL)
+    if iconImageStr == "" {
+      
+    } else {
+      let iconURL = URL(string: iconImageStr)!
+      self.iconImageView.kf.setImage(with: iconURL)
+    }
   }
   
   private func attribute() {

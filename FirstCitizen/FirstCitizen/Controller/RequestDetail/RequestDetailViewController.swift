@@ -45,6 +45,13 @@ class RequestDetailViewController: UIViewController {
 }
 
 extension RequestDetailViewController: RequestDetailViewDelegate {
+  func touchUpShowButton(tag: Int) {
+    let shared = ReportDataManager.shared
+    let reportHelpDetailVC = ReportHelpDetailViewController()
+    reportHelpDetailVC.reportHelpDetailData = shared.reportDatas[tag]
+    self.present(reportHelpDetailVC, animated: true, completion: nil)
+  }
+  
   func touchUpBackButton() {
     self.dismiss(animated: true, completion: nil)
   }

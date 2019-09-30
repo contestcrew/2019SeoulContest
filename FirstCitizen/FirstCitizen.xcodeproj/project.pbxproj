@@ -60,6 +60,7 @@
 		CF58BA1C2340DC4C00389D54 /* UserInfoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF58BA1B2340DC4C00389D54 /* UserInfoData.swift */; };
 		CF58BA1E234131A900389D54 /* UserInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF58BA1D234131A900389D54 /* UserInfoManager.swift */; };
 		CF58BA2023413D2000389D54 /* ReportDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF58BA1F23413D2000389D54 /* ReportDataManager.swift */; };
+		CF58BA2323419F9E00389D54 /* ReportHelpDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF58BA2223419F9E00389D54 /* ReportHelpDetailViewController.swift */; };
 		CF5E7EE023376BB40069235C /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5E7EDF23376BB40069235C /* CategoryCell.swift */; };
 		CF5E7EE42337DC010069235C /* ExtensionAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5E7EE32337DC010069235C /* ExtensionAlertController.swift */; };
 		CF5E7EE72337E1A20069235C /* RequestDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5E7EE62337E1A20069235C /* RequestDetailViewController.swift */; };
@@ -142,6 +143,7 @@
 		CF58BA1B2340DC4C00389D54 /* UserInfoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoData.swift; sourceTree = "<group>"; };
 		CF58BA1D234131A900389D54 /* UserInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoManager.swift; sourceTree = "<group>"; };
 		CF58BA1F23413D2000389D54 /* ReportDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDataManager.swift; sourceTree = "<group>"; };
+		CF58BA2223419F9E00389D54 /* ReportHelpDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportHelpDetailViewController.swift; sourceTree = "<group>"; };
 		CF5E7EDF23376BB40069235C /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		CF5E7EE32337DC010069235C /* ExtensionAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionAlertController.swift; sourceTree = "<group>"; };
 		CF5E7EE62337E1A20069235C /* RequestDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailViewController.swift; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 				4FF966B0230C074F00E869FF /* MapList */,
 				CF1E09CF2326198A006E9537 /* Incident */,
 				CF5E7EE52337E16A0069235C /* RequestDetail */,
+				CF58BA2123419F5900389D54 /* HelpDetail */,
 				CF5467CF233349A600F75DDB /* Report */,
 				4FF966B1230C079D00E869FF /* Setting */,
 			);
@@ -447,6 +450,14 @@
 			path = MapList;
 			sourceTree = "<group>";
 		};
+		CF58BA2123419F5900389D54 /* HelpDetail */ = {
+			isa = PBXGroup;
+			children = (
+				CF58BA2223419F9E00389D54 /* ReportHelpDetailViewController.swift */,
+			);
+			path = HelpDetail;
+			sourceTree = "<group>";
+		};
 		CF5E7EE52337E16A0069235C /* RequestDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -640,6 +651,7 @@
 				CF68799A233B1F2900F2A159 /* NetwrokService.swift in Sources */,
 				CF6879A0233B1FBF00F2A159 /* CategoryDataManager.swift in Sources */,
 				CF58BA1C2340DC4C00389D54 /* UserInfoData.swift in Sources */,
+				CF58BA2323419F9E00389D54 /* ReportHelpDetailViewController.swift in Sources */,
 				52E4AC7823416BB800D3F427 /* SearchTableCell.swift in Sources */,
 				CF6879AD233B210B00F2A159 /* ContentsCell.swift in Sources */,
 				527E38F423321C1000C01EC7 /* ExtensionUIImage.swift in Sources */,
