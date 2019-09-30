@@ -62,7 +62,7 @@ extension UIAlertController {
         alert.addAction(UIAlertAction(title: $0, style: .default, handler: { (alert) in
           
           let restroomRegisterVC = RestroomCreateViewController()
-          
+          restroomRegisterVC.fromMap = true
           restroomRegisterVC.category = getCategoryInRequest(list: categoryList, alert: alert)
           restroomRegisterVC.root = .map
           
@@ -74,7 +74,7 @@ extension UIAlertController {
         alert.addAction(UIAlertAction(title: $0, style: .default, handler: { (alert) in
           
           let requestCreateVC = RequestCreateViewController()
-          
+          requestCreateVC.fromMap = true
           requestCreateVC.category = getCategoryInRequest(list: categoryList, alert: alert)
           requestCreateVC.root = .map
           
@@ -98,7 +98,7 @@ extension UIAlertController {
         alert.addAction(UIAlertAction(title: $0, style: .default, handler: { (alert) in
           
           let restroomRegisterVC = RestroomCreateViewController()
-          
+          restroomRegisterVC.fromMap = false
           restroomRegisterVC.category = getCategoryInRequest(list: categoryList, alert: alert)
           restroomRegisterVC.root = .setting
           controller.navigationController?.pushViewController(restroomRegisterVC, animated: true)
@@ -107,7 +107,7 @@ extension UIAlertController {
         alert.addAction(UIAlertAction(title: $0, style: .default, handler: { (alert) in
           
           let requestCreateVC = RequestCreateViewController()
-          
+          requestCreateVC.fromMap = false
           requestCreateVC.category = getCategoryInRequest(list: categoryList, alert: alert)
           requestCreateVC.root = .setting
           controller.navigationController?.pushViewController(requestCreateVC, animated: true)
