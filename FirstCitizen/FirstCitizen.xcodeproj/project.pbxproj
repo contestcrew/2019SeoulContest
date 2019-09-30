@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -79,6 +79,7 @@
 		CF6879AB233B210000F2A159 /* AttatchedFileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6879AA233B210000F2A159 /* AttatchedFileCell.swift */; };
 		CF6879AD233B210B00F2A159 /* ContentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6879AC233B210B00F2A159 /* ContentsCell.swift */; };
 		CF79718A233D9CFF008DC550 /* ReportData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF797189233D9CFF008DC550 /* ReportData.swift */; };
+		CF7F91342341DDEC00ED1E52 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CF7F91332341DDEC00ED1E52 /* GoogleService-Info.plist */; };
 		CFC1731C233EF0A00053872B /* TestIncidentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC1731B233EF0A00053872B /* TestIncidentData.swift */; };
 		CFC1731E233F359A0053872B /* ExtensionDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC1731D233F359A0053872B /* ExtensionDate.swift */; };
 		CFC17320233F4B2C0053872B /* ExtensionString.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC1731F233F4B2C0053872B /* ExtensionString.swift */; };
@@ -162,6 +163,7 @@
 		CF6879AA233B210000F2A159 /* AttatchedFileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttatchedFileCell.swift; sourceTree = "<group>"; };
 		CF6879AC233B210B00F2A159 /* ContentsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsCell.swift; sourceTree = "<group>"; };
 		CF797189233D9CFF008DC550 /* ReportData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportData.swift; sourceTree = "<group>"; };
+		CF7F91332341DDEC00ED1E52 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CFC1731B233EF0A00053872B /* TestIncidentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestIncidentData.swift; sourceTree = "<group>"; };
 		CFC1731D233F359A0053872B /* ExtensionDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDate.swift; sourceTree = "<group>"; };
 		CFC1731F233F4B2C0053872B /* ExtensionString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionString.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 		4FF9669A230C032600E869FF /* FirstCitizen */ = {
 			isa = PBXGroup;
 			children = (
+				CF7F91332341DDEC00ED1E52 /* GoogleService-Info.plist */,
 				4FF9669B230C032600E869FF /* AppDelegate.swift */,
 				CF687996233B1ECD00F2A159 /* Splash */,
 				4FF966C0230C25EA00E869FF /* Extension */,
@@ -501,7 +504,7 @@
 				4FF96694230C032600E869FF /* Sources */,
 				4FF96695230C032600E869FF /* Frameworks */,
 				4FF96696230C032600E869FF /* Resources */,
-				5301BE469A03FD61A92214A0 /* [CP] Embed Pods Frameworks */,
+				D39206F021F1D448AB5036C9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -551,6 +554,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FF966A6230C032700E869FF /* LaunchScreen.storyboard in Resources */,
+				CF7F91342341DDEC00ED1E52 /* GoogleService-Info.plist in Resources */,
 				4FF966CE230C49AB00E869FF /* Assets.xcassets in Resources */,
 				4FF966A1230C032600E869FF /* Main.storyboard in Resources */,
 			);
@@ -559,17 +563,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		5301BE469A03FD61A92214A0 /* [CP] Embed Pods Frameworks */ = {
+		D39206F021F1D448AB5036C9 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FirstCitizen/Pods-FirstCitizen-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FirstCitizen/Pods-FirstCitizen-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${PODS_ROOT}/NMapsMap/framework/NMapsMap.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/TLPhotoPicker/TLPhotoPicker.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FirstCitizen/Pods-FirstCitizen-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NMapsMap.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TLPhotoPicker.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
