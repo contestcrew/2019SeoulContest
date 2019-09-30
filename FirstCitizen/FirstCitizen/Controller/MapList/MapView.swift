@@ -103,7 +103,7 @@ class MapView: UIView {
     let progressAttributedStr = NSMutableAttributedString(string: progressLabel.text!)
     
     progressAttributedStr.addAttribute(.foregroundColor, value: UIColor.appColor(.appGreenColor
-    ), range: (progressLabel.text! as NSString).range(of: "도움요쳥중"))
+    ), range: (progressLabel.text! as NSString).range(of: "도움요청중"))
     
     progressAttributedStr.addAttribute(.foregroundColor, value: UIColor.appColor(.appYellowColor
     ), range: (progressLabel.text! as NSString).range(of: "진행중"))
