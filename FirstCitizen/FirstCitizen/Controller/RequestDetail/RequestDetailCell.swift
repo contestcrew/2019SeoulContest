@@ -91,6 +91,7 @@ extension RequestDetailCell: UITableViewDataSource {
     NetworkService.getUserMannerScore(userID: reportShared.reportDatas[indexPath.row].author.id) { score in
       cell.cellModify(reliablity: score, reportData: self.reportShared.reportDatas[indexPath.row])
     }
+    cell.acceptButton.tag = indexPath.row
     cell.selectionStyle = .none
     return cell
   }

@@ -41,4 +41,9 @@ struct IncidentData: Codable {
 struct Author: Codable {
   let id: Int
   let nickname: String
+  
+  enum CodingKeys: String, CodingKey {
+    case id
+    case nickname
+  }
 }

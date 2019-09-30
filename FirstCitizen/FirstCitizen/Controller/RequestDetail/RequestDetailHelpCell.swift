@@ -60,9 +60,14 @@ class RequestDetailHelpCell: UITableViewCell {
         denyButton.isHidden = false
         denyButton.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         reportShared.isAcceptOneThings = true
-        
-        NetworkService.updateRequestHelpData(requestID: reportShared.relatedRequestIdx, incidentData: reportShared.relatedRequestData!)
-        
+  
+        NetworkService.updateReportHelpData(requestID: reportShared.reportDatas[sender.tag].id) { result in
+          if result {
+            NetworkService.updateRequestHelpData(requestID: self.reportShared.relatedRequestIdx, completion: { result in
+              print("[Log] : 성공")
+            })
+          }
+        }
       } else {
         acceptButton.setTitle("수락", for: .normal)
         acceptButton.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)

@@ -91,6 +91,26 @@ class MapView: UIView {
     attributedStr.addAttribute(.foregroundColor, value: UIColor.blue, range: (pointLabel.text! as NSString).range(of: "Bonus"))
     attributedStr.addAttribute(.foregroundColor, value: UIColor.orange, range: (pointLabel.text! as NSString).range(of: "Point"))
     pointLabel.attributedText = attributedStr
+    
+    if homeIncidentData.status == "start" {
+      progressLabel.text = "도움요청중"
+    } else if homeIncidentData.status == "progress" {
+      progressLabel.text = "진행중"
+    } else {
+      progressLabel.text = "완료"
+    }
+    
+    let progressAttributedStr = NSMutableAttributedString(string: progressLabel.text!)
+    
+    progressAttributedStr.addAttribute(.foregroundColor, value: UIColor.appColor(.appGreenColor
+    ), range: (progressLabel.text! as NSString).range(of: "도움요쳥중"))
+    
+    progressAttributedStr.addAttribute(.foregroundColor, value: UIColor.appColor(.appYellowColor
+    ), range: (progressLabel.text! as NSString).range(of: "진행중"))
+    
+    progressAttributedStr.addAttribute(.foregroundColor, value: UIColor.darkGray, range: (progressLabel.text! as NSString).range(of: "완료"))
+    
+    progressLabel.attributedText = progressAttributedStr
   }
   
   // 현재 위치로 지도 이동하는 메서드

@@ -40,7 +40,6 @@ class ReportHelpDetailViewController: UIViewController {
     selectButton.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
     selectButton.backgroundColor = UIColor.appColor(.appButtonColor)
     selectButton.layer.cornerRadius = 10
-    selectButton.layer.borderWidth = 2
     selectButton.addTarget(self, action: #selector(touchUpSelectButton), for: .touchUpInside)
     
     reportHelpDetailTableView.separatorStyle = .none
