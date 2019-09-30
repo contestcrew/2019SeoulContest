@@ -118,8 +118,8 @@ extension UIAlertController {
     controller.present(alert, animated: true)
   }
   
-  class func killApp(title: String, message: String, from controller: UIViewController) {
-    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+  class func killApp(from controller: UIViewController) {
+    let alert = UIAlertController(title: "위치 권한 필요", message: "위치권한을 '앱을 사용하는 동안'으로 해야만 작동합니다.", preferredStyle: .alert)
     
     alert.addAction(UIAlertAction(title: "확인", style: .cancel, handler: { _ in
       controller.dismiss(animated: true, completion: nil)
