@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import NMapsMap
 
 class NetworkService {
   enum ErrorType: Error {
@@ -435,31 +436,27 @@ class NetworkService {
       completion(true)
     }
     
-//    Alamofire.upload(encodeData ?? Data(),
-//                     to: ApiUrl.ApiUrl(apiName: .requestCreate),
-//                     method: .post,
-//                     headers: testHeaders)
-//      .response { (res) in
-//          switch res.response?.statusCode {
-//          case 201:
-//            completion(true)
-//          default:
-//            completion(false)
-//          }
-//      }
+  }
+  
+  static func searchAddress(query: String, location: NMGLatLng, completion: @escaping (Result<NaverAdd>) -> ()) {
+    let urlString = "https://naveropenapi.apigw.ntruss.com/map-place/v1/search?query=\(query)&coordinate=\(location.lng),\(location.lat)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
     
-//    Alamofire.upload(bodyData,
-//                     to: ApiUrl.ApiUrl(apiName: .requestCreate),
-//                     method: .post,
-//                     headers: headers)
-//      .response { (res) in
-//        switch res.response?.statusCode {
-//        case 201:
-//          completion(true)
-//        default:
-//          completion(false)
-//        }
-//    }
+    let naverHeader = [
+      "X-NCP-APIGW-API-KEY-ID": "3v2c6d2j04",
+      "X-NCP-APIGW-API-KEY": "FynI2wqrM2XD6dU2LTAAMCznyPHAC20DPF8ZoX5f"
+    ]
+    
+    Alamofire.request(urlString ?? "", method: .get, headers: naverHeader)
+      .responseData { (res) in
+        switch res.result {
+        case .success(let data):
+          let result = try? JSONDecoder().decode(NaverAdd.self, from: data)
+          print(result)
+        case .failure(let err):
+          dump(err)
+        }
+        
+    }
     
   }
   

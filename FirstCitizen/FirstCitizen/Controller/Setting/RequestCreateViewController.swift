@@ -14,6 +14,8 @@ class RequestCreateViewController: UIViewController {
   
   private let tableView = UITableView()
   
+  var fromMap = true
+  
   var cell1 = RequestCreatePoliceStationCell()
   var cell7 = RequestCreateTextAddCell()
   var cell9 = RequestCreateTextAddCell()
@@ -147,10 +149,10 @@ class RequestCreateViewController: UIViewController {
     NetworkService.createRequestWithImage(data: requestData, images: imageArr) {
       if $0 {
         DispatchQueue.main.async {
-          if let navi = self.navigationController {
-            navi.popViewController(animated: true)
-          } else {
+          if self.fromMap {
             self.dismiss(animated: true)
+          } else {
+            self.navigationController?.popViewController(animated: true)
           }
         }
       }
