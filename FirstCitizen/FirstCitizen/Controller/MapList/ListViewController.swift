@@ -142,6 +142,7 @@ extension ListViewController: UITableViewDataSource {
     let cell = tableView.dequeueReusableCell(withIdentifier: ListViewCell.identifier, for: indexPath) as! ListViewCell
     cell.selectionStyle = .none
     cell.changePreviewContainer(indexedIncidentData[indexPath.row])
+    
     return cell
   }
 }
