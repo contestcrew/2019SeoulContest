@@ -80,7 +80,6 @@ class SplashViewController: UIViewController {
   private func getLocationPermission() {
     // 권한 요청
     locationManager.requestWhenInUseAuthorization()
-    locationManager.requestAlwaysAuthorization()
     locationManager.desiredAccuracy = kCLLocationAccuracyBest
     locationManager.startUpdatingLocation()
   }
@@ -99,25 +98,29 @@ extension SplashViewController: CLLocationManagerDelegate {
     print("location manager authorization status changed")
     
     switch status {
-    case .authorizedAlways:
+    case .authorizedWhenInUse:
       print("user allow app to get location data when app is active or in background")
       getCategoryList()
       break
-    case .authorizedWhenInUse:
+    case .authorizedAlways:
       print("user allow app to get location data only when app is active")
-      getCategoryList()
+      UIAlertController.killApp(from: self)
       break
     case .denied:
       print("user tap 'disallow' on the permission dialog, cant get location data")
-      UIAlertController.killApp(title: "위치 허용", message: "user tap 'disallow' on the permission dialog, cant get location data", from: self)
+      UIAlertController.killApp(from: self)
+      break
     case .restricted:
       print("parental control setting disallow location data")
-      UIAlertController.killApp(title: "위치 허용", message: "parental control setting disallow location data", from: self)
+      UIAlertController.killApp(from: self)
+      break
     case .notDetermined:
       print("the location permission dialog haven't shown before, user haven't tap allow/disallow")
-      UIAlertController.killApp(title: "위치 허용", message: "the location permission dialog haven't shown before, user haven't tap allow/disallow", from: self)
+      UIAlertController.killApp(from: self)
+      break
     @unknown default:
       fatalError()
+      break
     }
   }
 }
