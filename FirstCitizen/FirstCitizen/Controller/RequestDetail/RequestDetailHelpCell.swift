@@ -10,8 +10,10 @@ import UIKit
 
 class RequestDetailHelpCell: UITableViewCell {
   static let identifier = "RequestDetailHelpCell"
+  let reportShared = ReportDataManager.shared
   
   var category = ""
+  var isAcceptOneThins: Bool = false
   
   private let nicknameLabel = UILabel()
   private let reliabilityLabel = UILabel()
@@ -23,7 +25,6 @@ class RequestDetailHelpCell: UITableViewCell {
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     
-    let reportShared = ReportDataManager.shared
     category = reportShared.reportCategory
     attribute()
     layout()
@@ -40,14 +41,30 @@ class RequestDetailHelpCell: UITableViewCell {
   }
   
   @objc private func touchUpAcceptButton(_ sender: UIButton) {
-    if sender.titleLabel?.text == "수락" {
-      acceptButton.setTitle("완료", for: .normal)
-      acceptButton.setTitleColor(#colorLiteral(red: 0, green: 0.01932368055, blue: 1, alpha: 1), for: .normal)
-      denyButton.isHidden = false
+    if reportShared.isAcceptOneThings {
+      if sender.titleLabel?.text == "완료" {
+        acceptButton.setTitleColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), for: .normal)
+        denyButton.isHidden = true
+      } else if sender.titleLabel?.text == "거부" {
+        acceptButton.setTitle("수락", for: .normal)
+        acceptButton.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
+        denyButton.isHidden = true
+        reportShared.isAcceptOneThings = false
+      }
     } else {
-      acceptButton.setTitle("수락", for: .normal)
-      acceptButton.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
-      denyButton.isHidden = true
+      if sender.titleLabel?.text == "수락" {
+        acceptButton.setTitle("완료", for: .normal)
+        acceptButton.setTitleColor(#colorLiteral(red: 0, green: 0.01932368055, blue: 1, alpha: 1), for: .normal)
+        denyButton.isHidden = false
+        reportShared.isAcceptOneThings = true
+        
+        NetworkService.updateRequestHelpData(requestID: reportShared.relatedRequestIdx, incidentData: reportShared.relatedRequestData!)
+        
+      } else {
+        acceptButton.setTitle("수락", for: .normal)
+        acceptButton.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
+        denyButton.isHidden = true
+      }
     }
     
   }
@@ -60,9 +77,9 @@ class RequestDetailHelpCell: UITableViewCell {
     
   }
   
-  func cellModify(reportData: ReportData) {
+  func cellModify(reliablity: Int, reportData: ReportData) {
     nicknameLabel.text = "\(reportData.author.nickname)"
-    //    reliabilityLabel.text = "신뢰도 : \(reportData.)"
+        reliabilityLabel.text = "신뢰도 : \(reliablity)"
     
     if category == "똥휴지" {
       
@@ -94,7 +111,7 @@ class RequestDetailHelpCell: UITableViewCell {
       denyButton.setTitle("거부", for: .normal)
       denyButton.setTitleColor(#colorLiteral(red: 1, green: 0, blue: 0, alpha: 1), for: .normal)
       denyButton.titleLabel?.dynamicFont(fontSize: 20, weight: .heavy)
-      denyButton.addTarget(self, action: #selector(touchUpDenyButton), for: .touchUpInside)
+      denyButton.addTarget(self, action: #selector(touchUpAcceptButton(_:)), for: .touchUpInside)
       denyButton.isHidden = true
     } else {
       acceptButton.setImage(#imageLiteral(resourceName: "arrow"), for: .normal)
