@@ -95,26 +95,33 @@ class MapViewController: UIViewController {
   // 파싱한 데이터들의 Marker를 찍는 역할을 함
   private func showMarkers() {
     guard let homeIncidentDatas = homeIncidentShared.incidentDatas else { return }
-    var tag = 0
+    
+    var markers = [NMFMarker]()
+    var markersImgDic = [Int: NMFOverlayImage]()
+    
+    // 핀 이미지가 들어간 NMFOverlayImage 생성
+    self.pinIconImgDic.forEach {
+      let key = $0.key
+      if markersImgDic[key] == nil {
+        markersImgDic[key] = NMFOverlayImage(image: $0.value)
+      }
+    }
     
     DispatchQueue.global(qos: .default).async {
-      var markers = [NMFMarker]()
-      var markersImgDic = [Int: NMFOverlayImage]()
-      
-      // 핀 이미지가 들어간 NMFOverlayImage 생성
-      self.pinIconImgDic.forEach {
-        let key = $0.key
-        if markersImgDic[key] == nil {
-          markersImgDic[key] = NMFOverlayImage(image: $0.value)
-        }
-      }
-      
       homeIncidentDatas.forEach {
         let currentIncidentData = $0
         let lat = $0.latitude ?? 0
         let lng = $0.longitude ?? 0
         
         let marker = NMFMarker(position: NMGLatLng(lat: lat, lng: lng), iconImage: markersImgDic[$0.category]!)
+        marker.captionPerspectiveEnabled = true
+        marker.iconPerspectiveEnabled = true
+        marker.isHideCollidedSymbols = true
+        marker.isForceShowIcon = true
+        let markerWidth: CGFloat = 40
+        let markerHeight: CGFloat = 50
+        marker.width = markerWidth.dynamic(1)
+        marker.height = markerHeight.dynamic(1)
         
         // NMFOverlayTouchHandler를 설정함 (Pin Touch 이벤트를 작성)
         let handler: NMFOverlayTouchHandler = { [weak self] overlay in
@@ -130,21 +137,7 @@ class MapViewController: UIViewController {
           self?.vMap.firstExplainLabel.isHidden = true
           return true
         }
-        
-        marker.captionPerspectiveEnabled = true
-        marker.iconPerspectiveEnabled = true
-        marker.isHideCollidedSymbols = true
         marker.touchHandler = handler
-        marker.isForceShowIcon = true
-        marker.tag = UInt(tag)
-        marker.userInfo = ["tag": tag]
-        tag += 1
-        
-        let markerWidth: CGFloat = 40
-        let markerHeight: CGFloat = 50
-        marker.width = markerWidth.dynamic(1)
-        marker.height = markerHeight.dynamic(1)
-        
         markers.append(marker)
       }
       
