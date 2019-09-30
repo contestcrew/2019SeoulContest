@@ -18,6 +18,8 @@ class RestroomCreateViewController: UIViewController {
   
   private let tableView = UITableView()
   
+  var fromMap = true
+  
   var cell0 = UITableViewCell()
   var cell1 = UITableViewCell()
   var cell2 = RequestCreateAddressCell()
@@ -102,10 +104,10 @@ class RestroomCreateViewController: UIViewController {
     NetworkService.createRequest(data: requestData) {
       if $0 {
         DispatchQueue.main.async {
-          if let navi = self.navigationController {
-            navi.popViewController(animated: true)
-          } else {
+          if self.fromMap {
             self.dismiss(animated: true)
+          } else {
+            self.navigationController?.popViewController(animated: true)
           }
         }
       }

@@ -8,11 +8,16 @@
 
 import UIKit
 import SnapKit
+import NMapsMap
+import MapKit
 
 // MARK: - LocationWithAddVC
 
 class LocationWithAddVC: UIViewController {
   
+  var location = NMGLatLng()
+  
+  let locationManager = CLLocationManager()
 
   lazy var tableView: UITableView = {
     let tb = UITableView()
@@ -81,6 +86,8 @@ class LocationWithAddVC: UIViewController {
     super.viewDidLoad()
     self.view.backgroundColor = .white
     self.tableView.backgroundColor = .white
+    locationManager.delegate = self
+    checkAuthorizationStatus()
     addSubViews()
     setupSNP()
     setupNavigation()
@@ -104,11 +111,19 @@ class LocationWithAddVC: UIViewController {
   
   
   @objc private func editingChanged(_ sender: UITextField) {
-
+    NetworkService.searchAddress(query: sender.text ?? "", location: location) { (result) in
+      switch result {
+      case .success(let data):
+        print(data)
+      case .failure(let err):
+        dump(err)
+      }
+    }
   }
   
   // MARK: -  searchTablCell 의 Button 클릭했을때 alert 띄우기
   @objc func didTapButton(_ sender: UIButton) {
+    
     let alert = UIAlertController(title: "상세주소 입력", message: "성동구 성수이로22길", preferredStyle: .alert)
     let enter = UIAlertAction(title: "입력", style: .default)
     let cancel = UIAlertAction(title: "취소", style: .destructive)
@@ -161,6 +176,29 @@ class LocationWithAddVC: UIViewController {
     
   }
   
+  func checkAuthorizationStatus() {
+    switch CLLocationManager.authorizationStatus() {
+    case .notDetermined:
+      locationManager.requestWhenInUseAuthorization()
+    case .restricted, .denied:
+      // Disable location features
+      break
+    case .authorizedWhenInUse:
+      fallthrough
+    case .authorizedAlways:
+      startUpdatingLocation()
+    @unknown default:
+      break
+    }
+  }
+  
+  func startUpdatingLocation() {
+    let status = CLLocationManager.authorizationStatus()
+    guard status == .authorizedAlways || status == .authorizedWhenInUse, CLLocationManager.locationServicesEnabled() else { return }
+    locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation // 정확도
+    locationManager.distanceFilter = 5.0 // x 미터마다 체크
+    locationManager.startUpdatingLocation()
+  }
   
   private func setupNavigation() {
     let barButton = UIBarButtonItem(image: nil, style: .done, target: nil, action: nil)
@@ -200,4 +238,15 @@ extension LocationWithAddVC: UITableViewDataSource {
 extension LocationWithAddVC: UITableViewDelegate {
   
 }
+
+// MARK:- CLLocationManagerDelegate Extension
+extension LocationWithAddVC: CLLocationManagerDelegate {
+  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    if let coor = manager.location?.coordinate {
+      self.location = NMGLatLng(from: coor)
+    }
+  }
+}
+
+
 
