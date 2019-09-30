@@ -213,8 +213,27 @@ extension MapViewController: MapViewDelegate {
       self.view.layoutIfNeeded()
   }
   
+  private func needLogin() {
+    let alert = UIAlertController(title: "알림", message: "로그인이 필요한 서비스입니다", preferredStyle: .actionSheet)
+    let login = UIAlertAction(title: "로그인", style: .default) { (action) in
+      let loginVC = UINavigationController(rootViewController: LoginVC())
+      
+      self.present(loginVC, animated: true)
+    }
+    let cancel = UIAlertAction(title: "취소", style: .cancel) { (action) in
+      
+    }
+    alert.addAction(login)
+    alert.addAction(cancel)
+    present(alert, animated: true)
+  }
+  
   // 의뢰하기 버튼을 눌렀을 때 의뢰하기 VC를 띄우는 역할을 함
   func touchUpRegisterButton() {
+    guard let _ = UserDefaults.standard.object(forKey: "Token") as? String else {
+      needLogin()
+      return
+    }
     UIAlertController.registerShowMap(categoryList: categoryList, title: "의뢰하기", message: "아래 목록중 하나를 선택하세요", from: self)
   }
   
