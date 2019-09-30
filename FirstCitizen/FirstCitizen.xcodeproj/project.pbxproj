@@ -43,6 +43,7 @@
 		527E38F62332958700C01EC7 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E38F52332958700C01EC7 /* TestData.swift */; };
 		52E4AC7823416BB800D3F427 /* SearchTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4AC7723416BB800D3F427 /* SearchTableCell.swift */; };
 		52E4AC7A23416BD400D3F427 /* LocationWithAddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4AC7923416BD400D3F427 /* LocationWithAddVC.swift */; };
+		52E4AC7C23417FD000D3F427 /* NaverAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4AC7B23417FD000D3F427 /* NaverAdd.swift */; };
 		52EA1ABD233E8E0900244D29 /* RequestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EA1ABC233E8E0900244D29 /* RequestData.swift */; };
 		52EA1AD3233FDE7300244D29 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EA1AD2233FDE7300244D29 /* ImageCell.swift */; };
 		6B36858508F29EBE5EFE4F77 /* Pods_FirstCitizen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50CCF6F72520B16B5901678A /* Pods_FirstCitizen.framework */; };
@@ -123,6 +124,7 @@
 		527E38F52332958700C01EC7 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		52E4AC7723416BB800D3F427 /* SearchTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableCell.swift; sourceTree = "<group>"; };
 		52E4AC7923416BD400D3F427 /* LocationWithAddVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationWithAddVC.swift; sourceTree = "<group>"; };
+		52E4AC7B23417FD000D3F427 /* NaverAdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverAdd.swift; sourceTree = "<group>"; };
 		52EA1ABC233E8E0900244D29 /* RequestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestData.swift; sourceTree = "<group>"; };
 		52EA1AD2233FDE7300244D29 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		80EA8319B751197666F7ABE9 /* Pods-FirstCitizen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstCitizen.release.xcconfig"; path = "Target Support Files/Pods-FirstCitizen/Pods-FirstCitizen.release.xcconfig"; sourceTree = "<group>"; };
@@ -413,6 +415,7 @@
 				52EA1ABC233E8E0900244D29 /* RequestData.swift */,
 				CF58BA1B2340DC4C00389D54 /* UserInfoData.swift */,
 				CF58BA1D234131A900389D54 /* UserInfoManager.swift */,
+				52E4AC7B23417FD000D3F427 /* NaverAdd.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -620,6 +623,7 @@
 				4FF9669C230C032600E869FF /* AppDelegate.swift in Sources */,
 				CFC1731E233F359A0053872B /* ExtensionDate.swift in Sources */,
 				52EA1ABD233E8E0900244D29 /* RequestData.swift in Sources */,
+				52E4AC7C23417FD000D3F427 /* NaverAdd.swift in Sources */,
 				CF6879A7233B20DF00F2A159 /* ExtraInformationCell.swift in Sources */,
 				4FF966C4230C28E800E869FF /* PointView.swift in Sources */,
 				CF388F81232FCD0000DA6A1C /* ApiUrl.swift in Sources */,
@@ -808,7 +812,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 5W72YMDK56;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -860,7 +864,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 5W72YMDK56;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
