@@ -40,7 +40,7 @@ class SettingProfileCell: UITableViewCell {
   private func configure() {
     self.selectionStyle = .none
     
-    topImageView.contentMode = .scaleAspectFill
+    topImageView.contentMode = .scaleAspectFit
     topImageView.layer.masksToBounds = true
     contentView.addSubview(topImageView)
     

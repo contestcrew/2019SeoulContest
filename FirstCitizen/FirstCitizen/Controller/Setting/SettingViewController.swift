@@ -87,7 +87,7 @@ extension SettingViewController: UITableViewDataSource {
         let creditPoint = userShared.userInfo?.mannerScore ?? 0
         let point = userShared.userInfo?.citizenScore ?? 0
         
-        cell.setting(imageName: "leaf", nickName: nickname, creditPoint: creditPoint, point: point)
+        cell.setting(imageName: "level0", nickName: nickname, creditPoint: creditPoint, point: point)
         
         return cell
         
@@ -121,7 +121,7 @@ extension SettingViewController: UITableViewDataSource {
       case 0:
         let cell = SettingProfileCell()
         
-        cell.setting(imageName: "leaf", nickName: "-", creditPoint: 0, point: 0)
+        cell.setting(imageName: "mainimage", nickName: "-", creditPoint: 0, point: 0)
         
         return cell
         
