@@ -31,12 +31,19 @@ class MapViewController: UIViewController {
     
     extractCategory()
     attribute()
+    
   }
   
-  override func viewDidLayoutSubviews() {
-    super.viewDidLayoutSubviews()
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
     
     showMarkers()
+    
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    
     layout()
   }
   
@@ -100,12 +107,12 @@ class MapViewController: UIViewController {
     var markersImgDic = [Int: NMFOverlayImage]()
     
     // 핀 이미지가 들어간 NMFOverlayImage 생성
-    self.pinIconImgDic.forEach {
-      let key = $0.key
-      if markersImgDic[key] == nil {
-        markersImgDic[key] = NMFOverlayImage(image: $0.value)
+      pinIconImgDic.forEach {
+        let key = $0.key
+        if markersImgDic[key] == nil {
+          markersImgDic[key] = NMFOverlayImage(image: $0.value)
+        }
       }
-    }
     
     DispatchQueue.global(qos: .default).async {
       homeIncidentDatas.forEach {
@@ -113,7 +120,9 @@ class MapViewController: UIViewController {
         let lat = $0.latitude ?? 0
         let lng = $0.longitude ?? 0
         
-        let marker = NMFMarker(position: NMGLatLng(lat: lat, lng: lng), iconImage: markersImgDic[$0.category]!)
+        let marker = NMFMarker()
+        marker.position = NMGLatLng(lat: lat, lng: lng)
+        marker.iconImage = markersImgDic[$0.category]!
         marker.captionPerspectiveEnabled = true
         marker.iconPerspectiveEnabled = true
         marker.isHideCollidedSymbols = true
@@ -196,14 +205,12 @@ class MapViewController: UIViewController {
 // MARK:- MapViewDelegate Extension
 extension MapViewController: MapViewDelegate {
   func touchUpRefreshButton(coordinate: CLLocationCoordinate2D) {
-    DispatchQueue.main.async {
       self.getCategoryList()
       self.getIncidentDatas(lat: coordinate.latitude, lng: coordinate.longitude)
       self.extractCategory()
       self.showMarkers()
       self.touchUpLocationButton(coordinate: coordinate)
       self.view.layoutIfNeeded()
-    }
   }
   
   // 의뢰하기 버튼을 눌렀을 때 의뢰하기 VC를 띄우는 역할을 함
