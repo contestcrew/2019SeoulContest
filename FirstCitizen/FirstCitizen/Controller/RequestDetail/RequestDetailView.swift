@@ -12,6 +12,7 @@ import NMapsMap
 
 protocol RequestDetailViewDelegate: class {
   func touchUpBackButton()
+  func touchUpShowButton(tag: Int)
 }
 
 class RequestDetailView: UIView {
@@ -147,9 +148,15 @@ extension RequestDetailView: UITableViewDataSource {
       return cell
     } else {
       let cell = tableView.dequeueReusableCell(withIdentifier: RequestDetailCell.identifier, for: indexPath) as! RequestDetailCell
-      
+      cell.delegate = self
       return cell
     }
+  }
+}
+
+extension RequestDetailView: RequestDetailCellDelegate {
+  func touchUpShowButton(tag: Int) {
+    delegate?.touchUpShowButton(tag: tag)
   }
 }
 

@@ -8,9 +8,14 @@
 
 import UIKit
 
+protocol RequestDetailCellDelegate: class {
+  func touchUpShowButton(tag: Int)
+}
+
 class RequestDetailCell: UITableViewCell {
   
   static let identifier = "RequestDetailCell"
+  weak var delegate: RequestDetailCellDelegate?
   
   let reportShared = ReportDataManager.shared
   
@@ -23,6 +28,10 @@ class RequestDetailCell: UITableViewCell {
     
     attribute()
     layout()
+  }
+  
+  @objc private func touchUpShowButton(_ sender: UIButton) {
+    delegate?.touchUpShowButton(tag: sender.tag)
   }
   
   private func attribute() {
@@ -81,10 +90,14 @@ extension RequestDetailCell: UITableViewDataSource {
     let cell = tableView.dequeueReusableCell(withIdentifier: RequestDetailHelpCell.identifier, for: indexPath) as! RequestDetailHelpCell
     NetworkService.getUserMannerScore(userID: reportShared.reportDatas[indexPath.row].author.id) { score in
       cell.cellModify(reliablity: score, reportData: self.reportShared.reportDatas[indexPath.row])
+      cell.acceptButton.tag = indexPath.row
+      cell.acceptButton.addTarget(self, action: #selector(self.touchUpShowButton(_:)), for: .touchUpInside)
     }
     cell.selectionStyle = .none
     return cell
   }
+  
+  
 }
 
 extension RequestDetailCell: UITableViewDelegate {

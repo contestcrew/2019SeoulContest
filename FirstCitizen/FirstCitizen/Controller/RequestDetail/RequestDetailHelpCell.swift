@@ -13,13 +13,12 @@ class RequestDetailHelpCell: UITableViewCell {
   let reportShared = ReportDataManager.shared
   
   var category = ""
-  var isAcceptOneThins: Bool = false
   
   private let nicknameLabel = UILabel()
   private let reliabilityLabel = UILabel()
   private let attachFileCountLabel = UILabel()
   
-  private let acceptButton = UIButton()
+  let acceptButton = UIButton()
   private let denyButton = UIButton()
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -69,14 +68,6 @@ class RequestDetailHelpCell: UITableViewCell {
     
   }
   
-  @objc private func touchUpDenyButton() {
-    
-  }
-  
-  @objc private func touchUpShowButton() {
-    
-  }
-  
   func cellModify(reliablity: Int, reportData: ReportData) {
     nicknameLabel.text = "\(reportData.author.nickname)"
         reliabilityLabel.text = "신뢰도 : \(reliablity)"
@@ -117,7 +108,6 @@ class RequestDetailHelpCell: UITableViewCell {
       acceptButton.setImage(#imageLiteral(resourceName: "arrow"), for: .normal)
       acceptButton.contentMode = .scaleAspectFit
       acceptButton.titleLabel?.dynamicFont(fontSize: 14, weight: .medium)
-      acceptButton.addTarget(self, action: #selector(touchUpShowButton), for: .touchUpInside)
     }
   }
   
@@ -158,7 +148,7 @@ class RequestDetailHelpCell: UITableViewCell {
         $0.top.equalTo(nicknameLabel.snp.bottom).offset(margin.dynamic(1))
         $0.leading.equalTo(reliabilityLabel.snp.trailing)
         $0.trailing.equalTo(acceptButton.snp.leading)
-        $0.bottom.equalTo(contentView)
+        $0.bottom.equalToSuperview().offset(-margin.dynamic(1))
         $0.width.equalTo(reliabilityLabel.snp.width)
       }
     }
