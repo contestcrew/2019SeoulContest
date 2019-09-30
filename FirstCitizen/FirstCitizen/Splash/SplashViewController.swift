@@ -24,7 +24,6 @@ class SplashViewController: UIViewController {
     locationManager.delegate = self
     getUserInfo()
     getLocationPermission()
-    
   }
   
   private func getUserInfo() {

@@ -12,7 +12,7 @@ class SettingViewController: UIViewController {
   
   let tableView = UITableView()
   
-  var userInfo: UserInfoData?
+  let userShared = UserInfoManager.shared
   
   private let inDocument = ["의뢰", "도움", "공지사항", "이용약관", "내 정보"]
   private let outDocument = ["공지사항", "이용약관"]
@@ -27,7 +27,7 @@ class SettingViewController: UIViewController {
   }
   
   override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(true)
+    super.viewWillAppear(animated)
     
     navigationController?.navigationBar.isHidden = true
     
@@ -35,8 +35,15 @@ class SettingViewController: UIViewController {
       isSign = true
       tableView.reloadData()
     } else {
+      isSign = false
       tableView.reloadData()
     }
+  }
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    
+    
   }
   
   private func configure() {
@@ -76,11 +83,11 @@ extension SettingViewController: UITableViewDataSource {
       switch indexPath.row {
       case 0:
         let cell = SettingProfileCell()
-        let nickname = userInfo?.username ?? ""
-        let creditPoint = userInfo?.mannerScore ?? 0
-        let point = userInfo?.citizenScore ?? 0
+        let nickname = userShared.userInfo?.username ?? ""
+        let creditPoint = userShared.userInfo?.mannerScore ?? 0
+        let point = userShared.userInfo?.citizenScore ?? 0
         
-        cell.setting(imageName: "leaf", nickName: nickname, creditPoint: creditPoint, point: point)
+        cell.setting(imageName: "level0", nickName: nickname, creditPoint: creditPoint, point: point)
         
         return cell
         
@@ -91,7 +98,7 @@ extension SettingViewController: UITableViewDataSource {
         
         if indexPath.row == 1 {
           cell.countLabel.isHidden = false
-          cell.countLabel.text = "\(userInfo?.requestCount ?? 0)"
+          cell.countLabel.text = "\(userShared.userInfo?.requestCount ?? 0)"
         }
         
         return cell
@@ -114,7 +121,7 @@ extension SettingViewController: UITableViewDataSource {
       case 0:
         let cell = SettingProfileCell()
         
-        cell.setting(imageName: "leaf", nickName: "-", creditPoint: 0, point: 0)
+        cell.setting(imageName: "mainimage", nickName: "-", creditPoint: 0, point: 0)
         
         return cell
         

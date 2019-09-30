@@ -29,9 +29,6 @@ class MapViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    guard let token = UserDefaults.standard.string(forKey: "Token") else { return }
-    print("[Token] :", token)
-    
     extractCategory()
     attribute()
   }

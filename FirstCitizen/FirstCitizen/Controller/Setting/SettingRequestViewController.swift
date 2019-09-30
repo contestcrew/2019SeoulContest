@@ -130,6 +130,9 @@ extension SettingRequestViewController: UITableViewDelegate {
       // 기록
     default:
       let requestDetailVC = RequestDetailViewController()
+      let reportShared = ReportDataManager.shared
+      reportShared.relatedRequestData = requestIncidentDatas[indexPath.row - 1]
+      reportShared.relatedRequestIdx = requestIncidentDatas[indexPath.row - 1].id
       NetworkService.getRequestHelpData(requestID: requestIncidentDatas[indexPath.row - 1].id) { [weak self] result in
         switch result {
         case .success(let data):
