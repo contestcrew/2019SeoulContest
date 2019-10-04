@@ -46,7 +46,7 @@ class MainTabBarController: UITabBarController {
     let alert = UIAlertController(title: tilte, message: message, preferredStyle: .actionSheet)
     let login = UIAlertAction(title: "로그인", style: .default) { (action) in
       let loginVC = UINavigationController(rootViewController: LoginVC())
-      
+      loginVC.modalPresentationStyle = .fullScreen
       self.present(loginVC, animated: true)
     }
     let cancel = UIAlertAction(title: "취소", style: .cancel) { (action) in

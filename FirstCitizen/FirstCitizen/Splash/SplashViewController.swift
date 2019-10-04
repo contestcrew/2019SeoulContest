@@ -62,6 +62,7 @@ class SplashViewController: UIViewController {
       case .success(let data):
         self.incidentShared.incidentDatas = data
         let mainTabBarVC = MainTabBarController()
+        mainTabBarVC.modalPresentationStyle = .fullScreen
         DispatchQueue.main.async {
           self.present(mainTabBarVC, animated: false, completion: nil)
         }
@@ -69,6 +70,7 @@ class SplashViewController: UIViewController {
       case .failure(let err):
         // MARK: - 우선 실행은 가능하도록 함!!!
         let mainTabBarVC = MainTabBarController()
+        mainTabBarVC.modalPresentationStyle = .fullScreen
         DispatchQueue.main.async {
           self.present(mainTabBarVC, animated: false, completion: nil)
         }

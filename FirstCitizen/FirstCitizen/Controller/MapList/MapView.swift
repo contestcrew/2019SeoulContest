@@ -162,6 +162,7 @@ class MapView: UIView {
   
   private func firstAttribute() {
     firstExplainLabel.text = "곤경에 빠진 시민을 도와주세요"
+    firstExplainLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     firstExplainLabel.textAlignment = .center
     firstExplainLabel.dynamicFont(fontSize: 24, weight: .bold)
   }

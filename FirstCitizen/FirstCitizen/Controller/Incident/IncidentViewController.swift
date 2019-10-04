@@ -39,7 +39,8 @@ class IncidentViewController: UIViewController {
     self.view.addSubview(incidentView)
 
     incidentView.snp.makeConstraints {
-      $0.top.leading.trailing.bottom.equalToSuperview()
+      $0.top.leading.trailing.equalToSuperview()
+      $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
     }
   }
 }
@@ -55,6 +56,7 @@ extension IncidentViewController: IncidentViewDelegate {
       )
     } else {
       let reportVC = ReportViewController()
+      reportVC.modalPresentationStyle = .fullScreen
       reportVC.detailIncidentData = detailIncidentData
       self.present(reportVC, animated: true, completion: nil)
     }

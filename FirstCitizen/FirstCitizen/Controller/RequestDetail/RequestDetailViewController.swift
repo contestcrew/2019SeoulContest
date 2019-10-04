@@ -48,6 +48,7 @@ extension RequestDetailViewController: RequestDetailViewDelegate {
   func touchUpShowButton(tag: Int) {
     let shared = ReportDataManager.shared
     let reportHelpDetailVC = ReportHelpDetailViewController()
+    reportHelpDetailVC.modalPresentationStyle = .fullScreen
     reportHelpDetailVC.reportHelpDetailData = shared.reportDatas[tag]
     self.present(reportHelpDetailVC, animated: true, completion: nil)
   }

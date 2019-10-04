@@ -217,7 +217,7 @@ extension MapViewController: MapViewDelegate {
     let alert = UIAlertController(title: "알림", message: "로그인이 필요한 서비스입니다", preferredStyle: .actionSheet)
     let login = UIAlertAction(title: "로그인", style: .default) { (action) in
       let loginVC = UINavigationController(rootViewController: LoginVC())
-      
+      loginVC.modalPresentationStyle = .fullScreen
       self.present(loginVC, animated: true)
     }
     let cancel = UIAlertAction(title: "취소", style: .cancel) { (action) in
@@ -240,6 +240,7 @@ extension MapViewController: MapViewDelegate {
   // Preview를 클릭했을 때, 상세 화면으로 이동하는 역할을 함
   func touchUpPreview() {
     let incidentVC = IncidentViewController()
+    incidentVC.modalPresentationStyle = .fullScreen
     if homeIncidentShared.incidentDatas?.count == 0 { return }
     
     incidentVC.category = categoryList[(selectedIncidentData?.category)! - 1]

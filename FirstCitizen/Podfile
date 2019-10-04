@@ -7,8 +7,8 @@ target 'FirstCitizen' do
   # Pods for FirstCitizen
   pod 'Alamofire'
   pod 'Kingfisher', '~> 5.0'
-  pod 'SnapKit'
   pod 'NMapsMap'
+  pod 'SnapKit'
   pod 'TLPhotoPicker'
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
