@@ -190,6 +190,7 @@ extension SettingViewController: UITableViewDelegate {
       default:
         // 로그인버튼
         let navigationController = UINavigationController(rootViewController: LoginVC())
+        navigationController.modalPresentationStyle = .fullScreen
         self.present(navigationController, animated: true)
       }
     }

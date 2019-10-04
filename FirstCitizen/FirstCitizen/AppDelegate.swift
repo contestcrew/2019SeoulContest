@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Firebase
+//import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,9 +17,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
-    FirebaseApp.configure()
+//    FirebaseApp.configure()
     
     runApp()
+    
+    // app DarkMode 대응
+    if #available(iOS 13.0, *) {
+      self.window?.overrideUserInterfaceStyle = .light
+    }
+    
     return true
   }
   

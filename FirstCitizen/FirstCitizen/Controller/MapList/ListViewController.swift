@@ -151,7 +151,7 @@ extension ListViewController: UITableViewDataSource {
 extension ListViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let incidentVC = IncidentViewController()
-    
+    incidentVC.modalPresentationStyle = .fullScreen
     let categoryNum = indexedIncidentData[indexPath.row].category
     incidentVC.category = categoryList[categoryNum]
     incidentVC.detailIncidentData = indexedIncidentData[indexPath.row]

@@ -64,6 +64,7 @@ class IncidentView: UIView {
     incidentTableView.separatorStyle = .none
     incidentTableView.dataSource = self
     incidentTableView.delegate = self
+    incidentTableView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     
     incidentTableView.register(MapCell.self, forCellReuseIdentifier: MapCell.identifier)
     incidentTableView.register(TitleCell.self, forCellReuseIdentifier: TitleCell.identifier)
@@ -121,13 +122,14 @@ extension IncidentView: UITableViewDataSource {
       return cell
     } else if indexPath.row == 1 {
       let cell = tableView.dequeueReusableCell(withIdentifier: TitleCell.identifier, for: indexPath) as! TitleCell
+      cell.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
       let urlStr = categoryShared.categoryData[(detailIncidentData?.category)! - 1].image
       cell.modifyProperties(detailIncidentData!.title, urlStr)
       
       return cell
     } else if indexPath.row == 2 {
       let cell = tableView.dequeueReusableCell(withIdentifier: ExtraInfomaitionCell.identifier, for: indexPath) as! ExtraInfomaitionCell
-      
+      cell.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
       let mainAddress = detailIncidentData?.mainAddress ?? ""
       let detailAddress = detailIncidentData?.detailAddress ?? ""
       let fullAddress = "\(mainAddress), \(detailAddress)"
@@ -141,6 +143,7 @@ extension IncidentView: UITableViewDataSource {
       return cell
     } else if indexPath.row == 3 {
       let cell = tableView.dequeueReusableCell(withIdentifier: OccurredTimeCell.identifier, for: indexPath) as! OccurredTimeCell
+      cell.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
       if category == "똥휴지" {
         cell.isHidden = true
       } else {
@@ -149,6 +152,7 @@ extension IncidentView: UITableViewDataSource {
       return cell
     } else if indexPath.row == 4 {
       let cell = tableView.dequeueReusableCell(withIdentifier: AttatchedFileCell.identifier, for: indexPath) as! AttatchedFileCell
+      cell.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
       if category == "똥휴지" {
         cell.isHidden = true
       } else {
@@ -157,6 +161,7 @@ extension IncidentView: UITableViewDataSource {
       return cell
     } else {
       let cell = tableView.dequeueReusableCell(withIdentifier: ContentsCell.identifier, for: indexPath) as! ContentsCell
+      cell.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
       cell.modifyProperties(detailIncidentData!.content)
       return cell
     }

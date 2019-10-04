@@ -130,6 +130,7 @@ extension SettingRequestViewController: UITableViewDelegate {
       // 기록
     default:
       let requestDetailVC = RequestDetailViewController()
+      requestDetailVC.modalPresentationStyle = .fullScreen
       let reportShared = ReportDataManager.shared
       reportShared.relatedRequestData = requestIncidentDatas[indexPath.row - 1]
       reportShared.relatedRequestIdx = requestIncidentDatas[indexPath.row - 1].id
