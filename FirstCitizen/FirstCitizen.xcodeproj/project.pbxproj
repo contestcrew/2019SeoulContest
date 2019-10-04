@@ -79,7 +79,6 @@
 		CF6879AB233B210000F2A159 /* AttatchedFileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6879AA233B210000F2A159 /* AttatchedFileCell.swift */; };
 		CF6879AD233B210B00F2A159 /* ContentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6879AC233B210B00F2A159 /* ContentsCell.swift */; };
 		CF79718A233D9CFF008DC550 /* ReportData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF797189233D9CFF008DC550 /* ReportData.swift */; };
-		CF7F91342341DDEC00ED1E52 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CF7F91332341DDEC00ED1E52 /* GoogleService-Info.plist */; };
 		CFC1731C233EF0A00053872B /* TestIncidentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC1731B233EF0A00053872B /* TestIncidentData.swift */; };
 		CFC1731E233F359A0053872B /* ExtensionDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC1731D233F359A0053872B /* ExtensionDate.swift */; };
 		CFC17320233F4B2C0053872B /* ExtensionString.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC1731F233F4B2C0053872B /* ExtensionString.swift */; };
@@ -163,7 +162,6 @@
 		CF6879AA233B210000F2A159 /* AttatchedFileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttatchedFileCell.swift; sourceTree = "<group>"; };
 		CF6879AC233B210B00F2A159 /* ContentsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsCell.swift; sourceTree = "<group>"; };
 		CF797189233D9CFF008DC550 /* ReportData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportData.swift; sourceTree = "<group>"; };
-		CF7F91332341DDEC00ED1E52 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CFC1731B233EF0A00053872B /* TestIncidentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestIncidentData.swift; sourceTree = "<group>"; };
 		CFC1731D233F359A0053872B /* ExtensionDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDate.swift; sourceTree = "<group>"; };
 		CFC1731F233F4B2C0053872B /* ExtensionString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionString.swift; sourceTree = "<group>"; };
@@ -224,7 +222,6 @@
 		4FF9669A230C032600E869FF /* FirstCitizen */ = {
 			isa = PBXGroup;
 			children = (
-				CF7F91332341DDEC00ED1E52 /* GoogleService-Info.plist */,
 				4FF9669B230C032600E869FF /* AppDelegate.swift */,
 				CF687996233B1ECD00F2A159 /* Splash */,
 				4FF966C0230C25EA00E869FF /* Extension */,
@@ -554,7 +551,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FF966A6230C032700E869FF /* LaunchScreen.storyboard in Resources */,
-				CF7F91342341DDEC00ED1E52 /* GoogleService-Info.plist in Resources */,
 				4FF966CE230C49AB00E869FF /* Assets.xcassets in Resources */,
 				4FF966A1230C032600E869FF /* Main.storyboard in Resources */,
 			);
@@ -885,7 +881,7 @@
 					"-framework",
 					"\"UIKit\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "github.com-kira1021.FirstCitizen";
+				PRODUCT_BUNDLE_IDENTIFIER = github.com.kira1021.FirstCitizen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
@@ -937,7 +933,7 @@
 					"-framework",
 					"\"UIKit\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "github.com-kira1021.FirstCitizen";
+				PRODUCT_BUNDLE_IDENTIFIER = github.com.kira1021.FirstCitizen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;

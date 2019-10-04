@@ -197,21 +197,11 @@ class NetworkService {
             return
           }
           
-          //        let test = result[0].createdAt ?? ""
-          //        print("[Log4] :", test)
-          //        let date = Date()
-          //        let date2 = date.convertDateFormatter(date: test)
-          //        print("[Log4] :", date2)
-          //
-          //        let dateFormatter = DateFormatter()
-          //        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-          //        let date3 = dateFormatter.date(from: date2)
-          
-          
-          
-          
+          let orderedResult = result.sorted(by: { arg0, arg1 in
+            arg0.createdAt! > arg1.createdAt!
+          })
         
-          completion(.success(result))
+          completion(.success(orderedResult))
         case .failure(_):
           print(ErrorType.networkErr)
         }
@@ -243,7 +233,11 @@ class NetworkService {
             return
           }
           
-          completion(.success(result))
+          let orderedResult = result.sorted(by: { arg0, arg1 in
+            arg0.createdAt! > arg1.createdAt!
+          })
+          
+          completion(.success(orderedResult))
           
         case .failure(_):
           print(ErrorType.networkErr)
@@ -276,7 +270,11 @@ class NetworkService {
             return
           }
           
-          completion(.success(result))
+          let orderedResult = result.sorted(by: { arg0, arg1 in
+            arg0.createdAt! > arg1.createdAt!
+          })
+          
+          completion(.success(orderedResult))
           
         case .failure(_):
           print(ErrorType.networkErr)

@@ -79,7 +79,6 @@ extension UIAlertController {
           requestCreateVC.root = .map
           
           let vc = UINavigationController(rootViewController: requestCreateVC)
-          
           controller.present(vc, animated: true, completion: nil)
         }))
       }

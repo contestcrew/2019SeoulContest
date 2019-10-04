@@ -2,12 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSCameraUsageDescription</key>
-	<string>카메라 좀 쓰자?</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>마이크 좀 쓰자?</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>사진 좀 쓰자?</string>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -44,10 +40,16 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>카메라 좀 쓰자?</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Always and When In Use</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>When In Use</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>마이크 좀 쓰자?</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>사진 좀 쓰자?</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
